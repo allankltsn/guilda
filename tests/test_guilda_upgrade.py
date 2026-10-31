@@ -76,7 +76,7 @@ class UpgradeTests(unittest.TestCase):
         return dest
 
     def snapshot(self):
-        return {str(p.relative_to(self.target)): p.read_bytes() for p in sorted(self.target.rglob("*")) if p.is_file()}
+        return {p.relative_to(self.target).as_posix(): p.read_bytes() for p in sorted(self.target.rglob("*")) if p.is_file()}
 
     def manifest(self):
         return json.loads((self.target / MANIFEST).read_text(encoding="utf-8"))
@@ -306,9 +306,55 @@ class UpgradeTests(unittest.TestCase):
         self.assertEqual(self.snapshot(), before)
 
     def test_package_manifest_is_not_upgradable(self):
-        self.set_manifest(package=True)
-        with self.assertRaises(ValueError):
-            upgrade.plan_upgrade(self.new_src, self.target)
+        package = self.root / "package"
+        engine.install(ROOT, package, ["claude"], ["base"], package=True)
+        before = {str(p.relative_to(package)): p.read_bytes() for p in package.rglob("*") if p.is_file()}
+        with self.assertRaisesRegex(ValueError, "package manifest is not a project install"):
+            upgrade.plan_upgrade(self.new_src, package)
+        after = {str(p.relative_to(package)): p.read_bytes() for p in package.rglob("*") if p.is_file()}
+        self.assertEqual(after, before)
+
+    def test_deleted_managed_file_is_restored(self):
+        (self.target / OTHER_OUT).unlink()
+        before = self.snapshot()
+        plan = upgrade.plan_upgrade(ROOT, self.target)
+        self.assertEqual(plan, upgrade.Plan([OTHER_OUT], [], [], [], False))
+        upgrade.apply_upgrade(ROOT, self.target, plan, approved=False)
+        _, desired = engine.render(ROOT, ["claude", "codex"], ["base"])
+        self.assertEqual((self.target / OTHER_OUT).read_bytes(), desired[OTHER_OUT])
+        self.assertEqual({k: v for k, v in self.snapshot().items() if k != OTHER_OUT}, before)
+
+    def test_lf_normalization_of_crlf_install_is_not_a_modification(self):
+        path = self.target / CHANGED_OUT
+        text = path.read_bytes().replace(b"\r\n", b"\n")
+        crlf = text.replace(b"\n", b"\r\n")
+        files = self.manifest()["files"]
+        files[CHANGED_OUT] = engine.digest(crlf)  # installed on Windows with autocrlf
+        self.set_manifest(files=files)
+        path.write_bytes(text)  # later normalized to LF
+        plan = upgrade.plan_upgrade(self.new_src, self.target)
+        self.assertIn(CHANGED_OUT, plan.write)  # template changed, user did not
+        self.assertNotIn(CHANGED_OUT, plan.conflicts)
+        self.assertEqual(plan.conflicts, [])
+
+    def test_failed_rollback_is_reported_on_the_original_exception(self):
+        plan = upgrade.plan_upgrade(self.new_src, self.target)
+        first = plan.write[0]
+        flaky, _ = self.flaky_write(3)
+        real_open = open
+
+        def bad_open(file, *args, **kwargs):
+            if Path(file) == self.target / first:
+                raise OSError("locked")
+            return real_open(file, *args, **kwargs)
+
+        with mock.patch.object(Path, "write_bytes", flaky), mock.patch.object(upgrade, "open", bad_open, create=True):
+            with self.assertRaises(OSError) as ctx:
+                upgrade.apply_upgrade(self.new_src, self.target, plan, approved=False)
+        self.assertEqual(str(ctx.exception), "disk full")
+        notes = "\n".join(getattr(ctx.exception, "__notes__", []))
+        self.assertIn(first, notes)
+        self.assertNotIn(plan.write[1], notes)
 
     def test_stale_plan_is_rejected(self):
         plan = upgrade.plan_upgrade(self.new_src, self.target)

@@ -95,8 +95,9 @@ def _analyze(source, target):
 
 
 def _unmodified(local: bytes, recorded: str) -> bool:
-    # Only the hash of the installed version is known, so tolerate a CRLF conversion by git/editors.
-    return engine.digest(local) == recorded or engine.digest(local.replace(b"\r\n", b"\n")) == recorded
+    # Only the hash of the installed version is known, so tolerate CRLF<->LF conversion by git/editors.
+    lf = local.replace(b"\r\n", b"\n")
+    return recorded in (engine.digest(local), engine.digest(lf), engine.digest(lf.replace(b"\n", b"\r\n")))
 
 
 def plan_upgrade(source, target) -> Plan:
@@ -108,8 +109,10 @@ def _write(path: Path, data: bytes):
     path.write_bytes(data)
 
 
-def _restore(target: Path, originals: dict, created_dirs: list):
+def _restore(target: Path, originals: dict, created_dirs: list) -> list:
+    """Best-effort rollback; returns the paths that could not be restored."""
     # Deliberately independent of _write/Path.write_bytes: rollback must not share the failing path.
+    failed = []
     for name, data in originals.items():
         dest = target / name
         try:
@@ -121,12 +124,13 @@ def _restore(target: Path, originals: dict, created_dirs: list):
                 with open(dest, "wb") as handle:
                     handle.write(data)
         except OSError:
-            pass
+            failed.append(name)
     for directory in sorted(created_dirs, key=lambda d: len(d.parts), reverse=True):
         try:
             directory.rmdir()
         except OSError:
             pass
+    return failed
 
 
 def apply_upgrade(source, target, plan: Plan, approved: bool) -> dict:
@@ -158,8 +162,10 @@ def apply_upgrade(source, target, plan: Plan, approved: bool) -> dict:
             _write(target / name, desired[name])
         if originals[MANIFEST] != new_manifest:
             _write(target / MANIFEST, new_manifest)  # last
-    except BaseException:
-        _restore(target, originals, created_dirs)
+    except BaseException as exc:
+        failed = _restore(target, originals, created_dirs)
+        if failed:
+            exc.add_note("upgrade rollback incomplete; the project may be in a mixed state. Not restored: " + ", ".join(failed))
         raise
     finally:
         originals.clear()
