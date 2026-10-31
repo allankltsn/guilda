@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.27"]
 build-backend = "hatchling.build"
 
 [project]
@@ -20,11 +20,8 @@ path = "guilda/__version__.py"
 [tool.hatch.build.targets.wheel]
 packages = ["guilda"]
 
-# Task 3 replaces these static directory entries with a build hook driven by guilda/payload.txt.
+[tool.hatch.build.targets.wheel.hooks.custom]
+path = "hatch_build.py"
+
 [tool.hatch.build.targets.wheel.force-include]
-"core" = "guilda/_data/core"
-"profiles" = "guilda/_data/profiles"
-"adapters" = "guilda/_data/adapters"
-"integrations" = "guilda/_data/integrations"
-"template.json" = "guilda/_data/template.json"
 "LICENSE" = "LICENSE"

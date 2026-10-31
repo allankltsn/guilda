@@ -12,7 +12,7 @@ import shutil
 import sys
 import tomllib
 
-from guilda import paths
+from guilda import paths, payload
 
 SOURCE = paths.data_root()
 ID = re.compile(r"[a-z][a-z0-9-]*\Z")
@@ -54,21 +54,22 @@ def relative(value):
     return p
 
 
+class PayloadFiles(dict):
+    """Source files keyed by relative path; asking for an unlisted one is an error."""
+
+    def __missing__(self, key):
+        raise ValueError(f"file outside payload: {key}")
+
+
 def load_source(source):
     source = safe_path(source)
-    files = {}
-    for directory in ("core", "profiles", "adapters", "integrations"):
-        root = safe_path(source / directory)
-        if directory == "integrations" and not root.exists():
-            continue
-        if not root.is_dir():
-            raise ValueError(f"missing source directory: {root}")
-        for current, dirs, names in os.walk(root, followlinks=False):
-            for name in dirs + names:
-                safe_path(Path(current) / name)
-            for name in names:
-                p = Path(current) / name
-                files[p.relative_to(source).as_posix()] = p.read_bytes()
+    files = PayloadFiles()
+    listed = payload.read(source)
+    for name in listed:
+        p = safe_path(source / relative(name))
+        if not p.is_file():
+            raise ValueError(f"payload file missing: {name}")
+        files[name] = p.read_bytes()
     config = json.loads(safe_path(source / "template.json").read_text(encoding="utf-8"))
     if config.get("name") != "engineering-template" or not re.fullmatch(r"\d+\.\d+\.\d+(?:[-+][a-zA-Z0-9.-]+)?", str(config.get("version", ""))):
         raise ValueError("unsupported template name/version")
