@@ -14,7 +14,6 @@ Opções (todas opcionais):
     --mod-scope s    project (padrão: só este projeto) ou global (todos os projetos do usuário)
 """
 import argparse
-import importlib.util
 import json
 import sys
 from pathlib import Path
@@ -25,17 +24,17 @@ DEFAULT_PROVIDERS = "claude,codex"
 
 
 def load_mods():
-    spec = importlib.util.spec_from_file_location("template_mods", ROOT / "scripts" / "mods.py")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+    sys.path.insert(0, str(ROOT))
+    import guilda.mods
+
+    return guilda.mods
 
 
 def load_cli():
-    spec = importlib.util.spec_from_file_location("template_cli", ROOT / "scripts" / "template.py")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+    sys.path.insert(0, str(ROOT))
+    import guilda.engine
+
+    return guilda.engine
 
 
 def main(argv=None):

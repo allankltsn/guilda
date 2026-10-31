@@ -11,12 +11,11 @@ import unittest
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("template", ROOT / "scripts/template.py")
-template = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(template)
-spec = importlib.util.spec_from_file_location("mods", ROOT / "scripts/mods.py")
-mods = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(mods)
+import sys
+sys.path.insert(0, str(ROOT))
+
+import guilda.engine as template  # noqa: E402
+import guilda.mods as mods  # noqa: E402
 
 
 class TemplateTests(unittest.TestCase):
