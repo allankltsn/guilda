@@ -3,10 +3,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import sys
 from pathlib import Path
 
-from guilda import engine, mods, upgrade
+from guilda import engine, mods, promote, upgrade
+from guilda.prompt import YES, confirm  # noqa: F401  (confirm é reexportado)
 
 DEFAULT_PROFILES = "base,product-team,github-projects"
 DEFAULT_PROVIDERS = "claude,codex"
@@ -25,21 +27,6 @@ Opções (todas opcionais):
     --mod nome       instala um mod do Claude Code de integrations/mod (repetível); ex.: --mod token-handoff
     --mod-scope s    project (padrão: só este projeto) ou global (todos os projetos do usuário)
 """
-YES = {"s", "sim", "y", "yes"}
-
-
-def confirm(prompt: str, stdin=None, stdout=None) -> bool:
-    """Pergunta s/n. Sem TTY devolve False sem ler nada."""
-    stdin = sys.stdin if stdin is None else stdin
-    stdout = sys.stdout if stdout is None else stdout
-    isatty = getattr(stdin, "isatty", None)
-    if not callable(isatty) or not isatty():
-        return False
-    stdout.write(prompt)
-    stdout.flush()
-    return stdin.readline().strip().lower() in YES
-
-
 def print_mod(name: str, scope: str, target: Path, dry_run: bool) -> int:
     """Instala um mod e imprime o resumo (usado por `install --mod` e por `mod`)."""
     try:
@@ -156,6 +143,19 @@ def run_upgrade(args) -> int:
     return 0
 
 
+def run_promote(args, runner) -> int:
+    try:
+        result = promote.promote(engine.SOURCE, args.target.resolve(), args.title, args.description, assume_yes=args.yes, runner=runner, stdin=sys.stdin, stdout=sys.stdout)
+    except promote.PromoteError as exc:
+        print(f"erro: {exc}", file=sys.stderr)
+        if exc.gist_url and exc.gist_url not in str(exc):
+            print(f"gist: {exc.gist_url}", file=sys.stderr)
+        return 1
+    print(f"gist (secreto): {result['gist']}")
+    print(f"issue: {result['issue']}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="guilda", description="Template de engenharia: instala, atualiza e verifica projetos.")
     sub = parser.add_subparsers(dest="command", required=True, metavar="comando")
@@ -178,6 +178,12 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--dry-run", action="store_true", help="só mostra o plano")
     p.add_argument("--yes", action="store_true", help="aprova a sobrescrita de arquivos com alteração local")
 
+    p = sub.add_parser("promote", help="propõe suas alterações locais como feature (gist secreto + issue)")
+    p.add_argument("target", type=Path, metavar="projeto")
+    p.add_argument("--title", required=True)
+    p.add_argument("--description", required=True)
+    p.add_argument("--yes", action="store_true", help="envia sem perguntar (a varredura de segredos continua obrigatória)")
+
     p = sub.add_parser("mod", help="instala um mod do Claude Code")
     p.add_argument("name", metavar="nome")
     p.add_argument("--scope", choices=("project", "global"), default="project")
@@ -186,7 +192,8 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: list[str] | None = None) -> int:
+def main(argv: list[str] | None = None, runner=subprocess.run) -> int:
+    """`runner` é o gancho de teste para os comandos `gh` do promote (padrão: subprocess.run)."""
     for stream in (sys.stdout, sys.stderr):
         reconfigure = getattr(stream, "reconfigure", None)
         if reconfigure:
@@ -199,4 +206,6 @@ def main(argv: list[str] | None = None) -> int:
         return run_install(args)
     if args.command == "upgrade":
         return run_upgrade(args)
+    if args.command == "promote":
+        return run_promote(args, runner)
     return print_mod(args.name, args.scope, args.target.resolve(), args.dry_run)
