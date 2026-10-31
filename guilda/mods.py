@@ -18,7 +18,7 @@ from pathlib import Path
 from guilda import paths
 
 SOURCE = paths.data_root()
-MARKETPLACE = "engineering-template-mods"
+MARKETPLACE = "guilda-mods"
 SCOPES = ("project", "global")
 CLAUDE_SCOPE = {"project": "project", "global": "user"}
 # Arquivos de desenvolvimento que não viajam para o projeto do usuário.
@@ -109,7 +109,7 @@ def install_mod(name, scope, target, dry_run=False, home=None, run=subprocess.ru
     path, plugins = _marketplace(mods_root)
     plugins[name] = {"name": name, "source": f"./{name}", "description": spec["summary"], "version": version}
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps({"name": MARKETPLACE, "owner": {"name": "engineering-template"}, "plugins": list(plugins.values())}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.write_text(json.dumps({"name": MARKETPLACE, "owner": {"name": "guilda"}, "plugins": list(plugins.values())}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     results = []
     ok = shutil.which("claude") is not None

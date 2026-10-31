@@ -15,6 +15,8 @@ import tomllib
 from guilda import paths, payload
 
 SOURCE = paths.data_root()
+TEMPLATE_NAME = "guilda"
+LEGACY_NAMES = ("engineering-template",)
 ID = re.compile(r"[a-z][a-z0-9-]*\Z")
 MODES = ("implementer", "qa", "review", "diagnostic", "author")
 BASE_ROLES = {"architect", "backend", "python", "aws", "hosting", "qa", "security", "kubernetes", "docker", "cicd", "devsecops-infra", "finops", "sre", "cloud", "ingress", "orchestration", "deployment", "reviewer"}
@@ -71,7 +73,7 @@ def load_source(source):
             raise ValueError(f"payload file missing: {name}")
         files[name] = p.read_bytes()
     config = json.loads(safe_path(source / "template.json").read_text(encoding="utf-8"))
-    if config.get("name") != "engineering-template" or not re.fullmatch(r"\d+\.\d+\.\d+(?:[-+][a-zA-Z0-9.-]+)?", str(config.get("version", ""))):
+    if config.get("name") != TEMPLATE_NAME or not re.fullmatch(r"\d+\.\d+\.\d+(?:[-+][a-zA-Z0-9.-]+)?", str(config.get("version", ""))):
         raise ValueError("unsupported template name/version")
     for kind in ("roles", "actions"):
         ids = [x["id"] for x in config[kind]]
@@ -221,8 +223,8 @@ def render(source, providers, profiles, package=False, tiers=None):
         if provider == "codex":
             output[".codex/config.toml"] = b"[agents]\nenabled = true\n"
     if package:
-        output[".claude-plugin/plugin.json"] = json_bytes({"name": config["name"], "version": config["version"], "description": "Portable engineering specialist contracts", "author": {"name": "Engineering template maintainers"}, "agents": [f"./agents/{r['id']}.md" for r in config["roles"]], "commands": "./commands", "skills": ["./skills"]})
-        output[".claude-plugin/marketplace.json"] = json_bytes({"name": "engineering-template-marketplace", "description": "Portable engineering contracts and provider adapters", "owner": {"name": "Engineering template maintainers"}, "plugins": [{"name": config["name"], "source": "./", "description": "Portable engineering specialist contracts"}]})
+        output[".claude-plugin/plugin.json"] = json_bytes({"name": config["name"], "version": config["version"], "description": "Portable engineering specialist contracts", "author": {"name": "guilda"}, "agents": [f"./agents/{r['id']}.md" for r in config["roles"]], "commands": "./commands", "skills": ["./skills"]})
+        output[".claude-plugin/marketplace.json"] = json_bytes({"name": "guilda-marketplace", "description": "Portable engineering contracts and provider adapters", "owner": {"name": "guilda"}, "plugins": [{"name": config["name"], "source": "./", "description": "Portable engineering specialist contracts"}]})
         output["PLUGIN_SETUP.md"] = files["adapters/claude/README.md"]
         output["BOOTSTRAP.md"] = ("# Plugin runtime precondition\n\nBefore starting work, the consuming project must already contain the complete shared .engineering tree exported from this package, excluding its root manifest.json. First-use onboarding is documented separately in PLUGIN_SETUP.md in the plugin package; these setup steps are not runtime instructions. The exported consumer contracts are not managed by check/sync.\n\n" + bootstrap).encode()
     return config, output
@@ -242,7 +244,7 @@ def install(source, target, providers, profiles, dry_run=False, sync=False, pack
     manifest_path = safe_path(target / ".engineering/manifest.json")
     old = None
     if manifest_path.exists():
-        old = json.loads(manifest_path.read_text(encoding="utf-8"))
+        old = read_manifest(target)
         validate_manifest(source, old)
     if sync and old is None:
         raise ValueError("sync requires installed manifest")
@@ -283,9 +285,22 @@ def install(source, target, providers, profiles, dry_run=False, sync=False, pack
     return {"write": changes, "remove": removals, "dry_run": False}
 
 
-def validate_manifest(source, manifest):
+def read_manifest(target):
+    path = safe_path(Path(target) / ".engineering/manifest.json")
+    if not path.exists():
+        raise ValueError("no manifest: run guilda init")
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        raise ValueError(f"manifest unreadable: {path}") from None
+
+
+def validate_manifest(source, manifest, allow_legacy=False):
     """Manifest metadata is untrusted and cannot expand managed ownership."""
-    if not isinstance(manifest, dict) or manifest.get("name") != "engineering-template":
+    name = manifest.get("name") if isinstance(manifest, dict) else None
+    if not allow_legacy and name in LEGACY_NAMES:
+        raise ValueError("legacy manifest name; run guilda upgrade")
+    if not isinstance(manifest, dict) or name not in (TEMPLATE_NAME, *(LEGACY_NAMES if allow_legacy else ())):
         raise ValueError("invalid manifest identity")
     if not isinstance(manifest.get("version"), str) or not re.fullmatch(r"\d+\.\d+\.\d+(?:[-+][a-zA-Z0-9.-]+)?", manifest["version"]):
         raise ValueError("invalid manifest version")
@@ -329,7 +344,7 @@ def check(source, target=None):
             json.loads(data)
     if target is not None:
         target = safe_path(target)
-        manifest = json.loads(safe_path(target / ".engineering/manifest.json").read_text(encoding="utf-8"))
+        manifest = read_manifest(target)
         validate_manifest(source, manifest)
         for name, expected in manifest["files"].items():
             p = safe_path(target / relative(name))
