@@ -1,13 +1,15 @@
-"""Comando `guilda`: init, sync, check, doctor, package, install, upgrade e mod."""
+"""Comando `guilda`: init, sync, check, doctor, package, install, upgrade, mod, promote, self-update e config."""
 from __future__ import annotations
 
 import argparse
 import json
 import subprocess
 import sys
+import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
-from guilda import engine, mods, promote, upgrade
+from guilda import __version__, config, engine, mods, promote, selfupdate, upgrade
 from guilda.prompt import YES, confirm  # noqa: F401  (confirm é reexportado)
 
 DEFAULT_PROFILES = "base,product-team,github-projects"
@@ -156,6 +158,62 @@ def run_promote(args, runner) -> int:
     return 0
 
 
+def run_self_update(args, runner) -> int:
+    command = selfupdate.upgrade_command()
+    if args.dry_run:
+        print("executaria: " + " ".join(command))
+        return 0
+    if not args.yes:
+        print("self-update INSTALA software: " + " ".join(command), file=sys.stderr)
+        if not confirm("Continuar? [s/N] ", sys.stdin, sys.stdout):
+            print("erro: self-update cancelado; nada foi executado (use --yes para aprovar).", file=sys.stderr)
+            return 1
+    code = selfupdate.upgrade_self(runner)
+    if code:
+        print(f"erro: a atualização do guilda falhou (código {code})", file=sys.stderr)
+        return 1
+    print("guilda atualizado.")
+    return 0
+
+
+def run_config(args) -> int:
+    cfg = config.load()
+    if args.config_action == "get":
+        print(json.dumps(cfg, indent=2))
+        return 0
+    try:
+        cfg["update_check"] = args.value
+        config.save(cfg)
+    except (ValueError, OSError) as exc:
+        print(f"erro: {exc}", file=sys.stderr)
+        return 1
+    print(f"update-check = {args.value}")
+    return 0
+
+
+def startup_check(opener, runner) -> None:
+    """Verificação automática opcional no início; NUNCA falha nem interrompe o comando."""
+    try:
+        cfg = config.load()
+        if cfg["update_check"] == "off":
+            return
+        now = datetime.now(timezone.utc)
+        if not selfupdate.is_due(now, cfg):
+            return
+        # Grava antes de consultar: no máximo uma consulta por dia, mesmo se a rede falhar.
+        config.save({**cfg, "last_check": now.isoformat()})
+        newest = selfupdate.check_if_due(now, cfg, opener)
+        if not newest:
+            return
+        if cfg["update_check"] == "notify":
+            print(f"guilda {newest} disponível (instalada: {__version__}). Rode: guilda self-update", file=sys.stderr)
+        else:
+            code = selfupdate.upgrade_self(runner)
+            print(f"guilda {newest}: atualização automática " + ("concluída." if code == 0 else f"falhou (código {code})."), file=sys.stderr)
+    except Exception:  # noqa: BLE001 - a verificação nunca derruba o comando
+        return
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="guilda", description="Template de engenharia: instala, atualiza e verifica projetos.")
     sub = parser.add_subparsers(dest="command", required=True, metavar="comando")
@@ -184,6 +242,17 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--description", required=True)
     p.add_argument("--yes", action="store_true", help="envia sem perguntar (a varredura de segredos continua obrigatória)")
 
+    p = sub.add_parser("self-update", help="atualiza o próprio guilda (pip ou uv)")
+    p.add_argument("--dry-run", action="store_true", help="só mostra o comando que rodaria")
+    p.add_argument("--yes", action="store_true", help="não pergunta antes de instalar")
+
+    p = sub.add_parser("config", help="mostra ou altera a configuração do usuário")
+    csub = p.add_subparsers(dest="config_action", required=True, metavar="ação")
+    csub.add_parser("get", help="mostra a configuração efetiva (JSON)")
+    p = csub.add_parser("set", help="altera um valor")
+    p.add_argument("key", choices=("update-check",))
+    p.add_argument("value", choices=config.UPDATE_CHECK_VALUES)
+
     p = sub.add_parser("mod", help="instala um mod do Claude Code")
     p.add_argument("name", metavar="nome")
     p.add_argument("--scope", choices=("project", "global"), default="project")
@@ -192,16 +261,23 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: list[str] | None = None, runner=subprocess.run) -> int:
-    """`runner` é o gancho de teste para os comandos `gh` do promote (padrão: subprocess.run)."""
+def main(argv: list[str] | None = None, runner=subprocess.run, opener=urllib.request.urlopen) -> int:
+    """`runner` e `opener` são ganchos de teste (gh/pip/uv e consulta ao PyPI)."""
     for stream in (sys.stdout, sys.stderr):
         reconfigure = getattr(stream, "reconfigure", None)
         if reconfigure:
             reconfigure(encoding="utf-8")
     argv = sys.argv[1:] if argv is None else list(argv)
     if argv and argv[0] in ENGINE_COMMANDS:
+        if "-h" not in argv and "--help" not in argv:
+            startup_check(opener, runner)
         return engine.main(argv)  # mesmos parâmetros do motor, sem reinterpretar
-    args = build_parser().parse_args(argv)
+    args = build_parser().parse_args(argv)  # --help e erros de uso saem aqui, antes da verificação
+    if args.command == "self-update":
+        return run_self_update(args, runner)
+    startup_check(opener, runner)
+    if args.command == "config":
+        return run_config(args)
     if args.command == "install":
         return run_install(args)
     if args.command == "upgrade":
