@@ -398,9 +398,9 @@ class TemplateTests(unittest.TestCase):
         offenders = []
         for path in ROOT.rglob("*"):
             rel = path.relative_to(ROOT)
-            if ".git" in rel.parts or ".worktrees" in rel.parts or ".dev" in rel.parts or "__pycache__" in rel.parts or not path.is_file() or path.suffix in (".png", ".pyc"):
+            if ".git" in rel.parts or ".worktrees" in rel.parts or ".dev" in rel.parts or ".superpowers" in rel.parts or "__pycache__" in rel.parts or not path.is_file() or path.suffix in (".png", ".pyc"):
                 continue
-            if rel.as_posix() in ("tests/test_template.py", "integrations/plugins/curated.json", "LICENSE", "guilda/promote.py", "tests/test_guilda_promote.py"):  # promote targets the maintainer's repo
+            if rel.as_posix() in ("tests/test_template.py", "integrations/plugins/curated.json", "LICENSE", "guilda/promote.py"):  # promote targets the maintainer's repo
                 continue
             if banned.search(path.read_text(encoding="utf-8", errors="ignore")):
                 offenders.append(rel.as_posix())

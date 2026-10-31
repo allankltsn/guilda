@@ -31,15 +31,41 @@ MAX_BYTES = 1024 * 1024
 ACCEPTANCE = "Concedo ao mantenedor uma licença ampla para usar, modificar e relicenciar esta contribuição."
 
 _TOKENS = re.compile(
-    rb"(?:gh[pos]_|github_pat_)\w{20,}|AKIA[0-9A-Z]{16}|xox[bpars]-[\w-]{6,}|sk-\w{20,}"
-    rb"|-----BEGIN [A-Z ]*PRIVATE KEY-----"
+    rb"gh[pousr]_\w{20,}|github_pat_\w{20,}|AKIA[0-9A-Z]{16}|xox[bpars]-[\w-]{6,}"
+    rb"|(?<![A-Za-z0-9])sk-[\w-]{20,}|sk_(?:live|test)_\w{16,}|AIza[\w-]{35}"
+    rb"|eyJ[\w-]+\.[\w-]+\.[\w-]+|(?i:authorization:\s*bearer\s+)[\w.~+/=-]{20,}"
+    rb"|https://hooks\.slack\.com/services/\S+"
+    rb"|-----BEGIN [A-Z ]*PRIVATE KEY(?: BLOCK)?-----"
 )
-_ASSIGN = re.compile(rb"(?i)(?:password|passwd|secret|token|api[_-]?key)[\w-]*[\"']?\s*[:=]\s*[\"']?(\S{8,})")
-_PLACEHOLDER = re.compile(rb"(?i)^<|^\$\{|^\$\(|^\{\{|^%|changeme|x{4}|\.{3}")
+_NAMES = rb"(?:password|passwd|secret|token|api[_-]?key|db_pass|credentials)[\w-]*|(?<![A-Za-z])(?:pwd|auth)(?![A-Za-z])"
+_ASSIGN = re.compile(rb"(?i)(?:" + _NAMES + rb")[\"']?\s*[:=]\s*[\"']?(\S{8,})")
+_URL_CREDS = re.compile(rb"(?i)(?<![a-z0-9+.-])[a-z][a-z0-9+.-]*://[^\s/:@]+:([^\s/@]+)@")
+# Placeholder only when the WHOLE value is one (never a value that merely contains such a word).
+_PLACEHOLDER = re.compile(
+    rb"<[^>]*>|\$\{[^}]*\}|\$\([^)]*\)|\$\w+|%\w+%|\{\{[^}]*\}\}|change[-_]?me|x+|\*+|\.+|your[-_][\w-]+",
+    re.IGNORECASE,
+)
 _PATHS = (
     re.compile(rb"(?i)[a-z]:[\\/]+Users[\\/]+[^\\/\s<>%$\"'`]+"),
     re.compile(rb"(?<![\w.<>$%-])/(?:home|Users)/[A-Za-z0-9._-]+"),
 )
+
+
+def _is_placeholder(value: bytes) -> bool:
+    return _PLACEHOLDER.fullmatch(value.strip(b"\"',;")) is not None
+
+
+def _line_kinds(line: bytes) -> list[str]:
+    kinds = []
+    if (
+        _TOKENS.search(line)
+        or any(not _is_placeholder(m[1]) for m in _ASSIGN.finditer(line))
+        or any(not _is_placeholder(m[1]) for m in _URL_CREDS.finditer(line))
+    ):
+        kinds.append("secret")
+    if any(p.search(line) for p in _PATHS):
+        kinds.append("personal-path")
+    return kinds
 
 
 class PromoteError(Exception):
@@ -91,18 +117,17 @@ def scan(files: dict[str, bytes]) -> list[Finding]:
         if b"\x00" in data:
             findings.append(Finding(path, 0, "binary"))
             continue
-        seen = set()
-        for number, line in enumerate(data.splitlines(), 1):
-            kinds = []
-            if _TOKENS.search(line) or any(not _PLACEHOLDER.search(m[1].strip(b"\"'")) for m in _ASSIGN.finditer(line)):
-                kinds.append("secret")
-            if any(p.search(line) for p in _PATHS):
-                kinds.append("personal-path")
-            for kind in kinds:
-                if (number, kind) not in seen:
-                    seen.add((number, kind))
-                    findings.append(Finding(path, number, kind))
+        findings.extend(scan_text(path, data))
     return findings
+
+
+def scan_text(label: str, text) -> list[Finding]:
+    """Secrets and personal paths in text that will be public (title, description, file names).
+
+    `label` names the source (e.g. `<title>`); the value itself is never reported.
+    """
+    data = text.encode("utf-8") if isinstance(text, str) else text
+    return [Finding(label, number, kind) for number, line in enumerate(data.splitlines(), 1) for kind in _line_kinds(line)]
 
 
 def gist_name(path: str) -> str:
@@ -166,7 +191,13 @@ def promote(source, target, title, description, assume_yes=False, runner=subproc
         raise PromoteError(str(exc)) from None
     if not files:
         raise PromoteError("nenhum arquivo adicionado ou modificado para enviar.")
+    prefix = f"[{LABEL}] "
+    public_title = title if title.startswith(prefix) else prefix + title
+    # Everything that becomes public is scanned: file contents (gist), title, description, paths.
     findings = scan(files)
+    findings += scan_text("<title>", public_title) + scan_text("<description>", description)
+    for number, path in enumerate(files, 1):
+        findings += scan_text(f"<caminho {number}>", path)
     if findings:
         lines = "\n".join(f"  {f.path}:{f.line} {f.kind}" for f in findings)
         raise PromoteError(f"nada foi publicado; {len(findings)} achado(s) bloqueiam o envio (valores omitidos de propósito):\n{lines}")
@@ -174,9 +205,12 @@ def promote(source, target, title, description, assume_yes=False, runner=subproc
     if len(names) != len(files):
         raise PromoteError("nomes de arquivo colidem no gist; renomeie um dos arquivos.")
 
+    _, preview = build_issue(public_title, description, "<URL do gist, criado após a confirmação>", list(files), version)
     stdout.write("Arquivos que serão enviados a um gist secreto (quem tem o link pode ler):\n")
     for path, data in files.items():
         stdout.write(f"  {path} ({len(data)} bytes)\n")
+    stdout.write("\nISTO SERÁ PÚBLICO: a issue em " + REPO + " terá exatamente este título e corpo:\n")
+    stdout.write(f"--- título ---\n{public_title}\n--- corpo ---\n{preview}--- fim ---\n")
     if not assume_yes and not confirm("Enviar e abrir a issue? [s/N] ", stdin, stdout):
         raise PromoteError("envio cancelado; nada foi publicado (use --yes para aprovar sem perguntar).")
 
@@ -184,15 +218,17 @@ def promote(source, target, title, description, assume_yes=False, runner=subproc
     try:
         for path, data in files.items():
             (tmp / gist_name(path)).write_bytes(data)
-        gist = _gh(runner, ["gh", "gist", "create", "--desc", title, "--", *names], cwd=str(tmp))
+        gist = _gh(runner, ["gh", "gist", "create", "--desc", public_title, "--", *names], cwd=str(tmp))
         if gist.returncode != 0:
             raise PromoteError("falha ao criar o gist; nada foi publicado: " + (gist.stderr or "").strip())
         gist_url = _url(gist, "gist")
+
+        issue_title, body = build_issue(public_title, description, gist_url, list(files), version)
+        body_file = tmp / "issue-body.md"  # --body-file: o corpo pode estourar o limite de argv do Windows
+        body_file.write_text(body, encoding="utf-8")
+        issue = _gh(runner, ["gh", "issue", "create", "--repo", REPO, "--title", issue_title, "--body-file", str(body_file)])
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
-
-    issue_title, body = build_issue(title, description, gist_url, list(files), version)
-    issue = _gh(runner, ["gh", "issue", "create", "--repo", REPO, "--title", issue_title, "--body", body, "--label", LABEL])
     if issue.returncode != 0:
         raise PromoteError(
             f"o gist foi criado ({gist_url}) mas a issue falhou: {(issue.stderr or '').strip()}. "

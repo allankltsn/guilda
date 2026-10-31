@@ -19,7 +19,7 @@ import tests.test_guilda_cli as tc  # noqa: E402
 CHANGED_OUT = ".engineering/roles/architect.md"
 ADDED = ".claude/custom-note.md"
 GIST = "https://gist.github.com/someone/abc123def456"
-ISSUE = "https://github.com/allankltsn/guilda/issues/7"
+ISSUE = f"https://github.com/{promote.REPO}/issues/7"
 ACCEPT = "Concedo ao mantenedor uma licença ampla para usar, modificar e relicenciar esta contribuição."
 SECRET_VALUE = "ghp_" + "A1b2C3d4E5f6G7h8I9j0K1l2"
 
@@ -33,6 +33,8 @@ class FakeRunner:
         self.auth_ok = auth_ok
         self.gist_files = None
         self.gist_cwd = None
+        self.issue_body = None
+        self.issue_dir = None
 
     @staticmethod
     def key(argv):
@@ -45,6 +47,10 @@ class FakeRunner:
         if key == "gist create":
             self.gist_cwd = Path(kwargs["cwd"])
             self.gist_files = {name: (self.gist_cwd / name).read_bytes() for name in os.listdir(self.gist_cwd)}
+        if key == "issue create" and "--body-file" in argv:
+            body_file = Path(argv[argv.index("--body-file") + 1])
+            self.issue_dir = body_file.parent
+            self.issue_body = body_file.read_text(encoding="utf-8")
         if key == "auth status":
             return SimpleNamespace(returncode=0 if self.auth_ok else 1, stdout="", stderr="not logged in")
         if self.fail == key:
@@ -121,6 +127,22 @@ class PromoteTests(unittest.TestCase):
             (b"AKIA" + b"ABCDEFGHIJKLMNOP", "secret"),
             (b"xoxb-123456-abcdef", "secret"),
             (b"sk-" + b"a" * 24, "secret"),
+            (b"sk-proj-abcDEF123_ghiJKL456-mnoPQR789", "secret"),
+            (b"sk-ant-api03-abcDEF123ghiJKL456-mnoPQR", "secret"),
+            (b"Authorization: Bearer abcdefghijklmnopqrstuvwx", "secret"),
+            (b"eyJhbGciOiJI.eyJzdWIiOiIx.SflKxwRJSMeKKF2QT4", "secret"),
+            (b"postgres://admin:s3cretpass@db.example.com/x", "secret"),
+            (b"sk_" + b"live_" + b"a" * 20, "secret"),
+            (b"sk_" + b"test_" + b"a" * 20, "secret"),
+            (b"AIza" + b"A" * 35, "secret"),
+            (b"https://hooks.slack.com/services/T000/B000/XXXXabc", "secret"),
+            (b"-----BEGIN PGP PRIVATE KEY BLOCK-----", "secret"),
+            (b"ghu_" + b"a" * 24, "secret"),
+            (b"ghr_" + b"a" * 24, "secret"),
+            (b"pwd = realvalue123", "secret"),
+            (b"DB_PASS: realvalue123", "secret"),
+            (b"credentials: realvalue123", "secret"),
+            (b"auth: realvalue123", "secret"),
             (b"password: hunter2hunter2", "secret"),
             (b"API_KEY = 'abcd1234efgh'", "secret"),
             (b"C:\\Users\\allan\\proj", "personal-path"),
@@ -139,12 +161,32 @@ class PromoteTests(unittest.TestCase):
 
     def test_scan_ignores_placeholders(self):
         for text in (
-            b"password: <your-password>", b"token = ${GITHUB_TOKEN}", b"secret: changeme12345",
+            b"password: <your-password>", b"token = ${GITHUB_TOKEN}", b"secret: changeme",
             b"api_key: xxxxxxxxxxxx", b"token: ...........", b"password: short",
             b"C:\\Users\\<user>\\x", b"/home/<name>/x", b"%USERNAME%", b"$HOME/x", b"C:\\Users\\%USERNAME%\\x",
+            b"task-management-system-design-overview", b"author: somebodyelse",
+            b"postgres://admin:${DB_PASS}@db/x", b"Authorization: Bearer ${TOKEN}", b"https://example.com/a/b",
             b"nothing here", b"sk-short", b"ghp_short",
         ):
             self.assertEqual(promote.scan({"a.md": text}), [], text)
+
+    def test_scan_does_not_treat_values_that_merely_contain_a_placeholder_word_as_placeholders(self):
+        for text in (b"password: realsecretchangeme", b"token: abXXXXcd1234567", b"password: hunter2...x"):
+            self.assertEqual(self.kinds(text), ["secret"], text)
+
+    def test_scan_text_flags_without_echoing_the_value(self):
+        found = promote.scan_text("<title>", f"oi {SECRET_VALUE}\nC:\\Users\\zelda\\x")
+        self.assertEqual(found, [promote.Finding("<title>", 1, "secret"), promote.Finding("<title>", 2, "personal-path")])
+        self.assertNotIn(SECRET_VALUE, repr(found))
+
+    def test_scan_flags_secret_in_file_name_without_echoing_it(self):
+        name = f".claude/{SECRET_VALUE}.md"
+        self.edit(name, b"hi\n")
+        runner = FakeRunner()
+        with self.assertRaises(promote.PromoteError) as ctx:
+            self.run_promote(runner)
+        self.assertNotIn(SECRET_VALUE, str(ctx.exception))
+        self.assertEqual(runner.keys(), ["auth status"])
 
     def test_findings_never_contain_the_secret_value(self):
         text = f"password: hunter2hunter2\nkey {SECRET_VALUE}\nC:\\Users\\zelda\\a\n".encode()
@@ -163,6 +205,35 @@ class PromoteTests(unittest.TestCase):
         self.assertIn(CHANGED_OUT, str(ctx.exception))
         self.assertNotIn(SECRET_VALUE, str(ctx.exception))
         self.assertEqual(runner.keys(), ["auth status"])
+
+    def test_secret_in_description_blocks_even_with_yes(self):
+        self.edit()
+        runner = FakeRunner()
+        with self.assertRaises(promote.PromoteError) as ctx:
+            promote.promote(ROOT, self.target, "T", f"minha chave {SECRET_VALUE}", assume_yes=True, runner=runner, stdout=io.StringIO())
+        self.assertIn("<description>", str(ctx.exception))
+        self.assertNotIn(SECRET_VALUE, str(ctx.exception))
+        self.assertEqual(runner.keys(), ["auth status"])
+
+    def test_personal_path_in_title_blocks(self):
+        self.edit()
+        runner = FakeRunner()
+        with self.assertRaises(promote.PromoteError) as ctx:
+            promote.promote(ROOT, self.target, "veja C:\\Users\\zelda\\x", "D", assume_yes=True, runner=runner, stdout=io.StringIO())
+        self.assertIn("<title>", str(ctx.exception))
+        self.assertNotIn("zelda", str(ctx.exception))
+        self.assertEqual(runner.keys(), ["auth status"])
+
+    def test_confirmation_output_shows_the_public_title_and_body(self):
+        self.edit()
+        out = io.StringIO()
+        with self.assertRaises(promote.PromoteError):
+            self.run_promote(FakeRunner(), assume_yes=False, stdin=FakeTTY("n\n"), stdout=out)
+        text = out.getvalue()
+        self.assertIn("[proposta] Título", text)
+        self.assertIn("Descrição", text)
+        self.assertIn(ACCEPT, text)
+        self.assertIn("PÚBLICO", text)
 
     def test_declined_confirmation_publishes_nothing(self):
         self.edit()
@@ -217,6 +288,7 @@ class PromoteTests(unittest.TestCase):
         self.assertIn("gh gist delete abc123def456", str(ctx.exception))
         self.assertEqual(runner.keys().count("issue create"), 1)
         self.assertFalse(runner.gist_cwd.exists())  # temp dir removed
+        self.assertFalse(runner.issue_dir.exists())
 
     def test_gist_failure_removes_temp_dir_and_has_no_gist_url(self):
         self.edit()
@@ -245,9 +317,19 @@ class PromoteTests(unittest.TestCase):
         self.assertEqual(sorted(runner.gist_files), sorted([".engineering__roles__architect.md", ".claude__custom-note.md"]))
         self.assertEqual(runner.gist_files[".claude__custom-note.md"], b"note\n")
         issue = runner.argv_of("issue create")[0]
-        self.assertEqual(issue[issue.index("--repo") + 1], "allankltsn/guilda")
-        self.assertEqual(issue[issue.index("--label") + 1], "proposta")
+        self.assertEqual(issue[issue.index("--repo") + 1], promote.REPO)
+        self.assertIn("--body-file", issue)
+        self.assertNotIn("--body", issue)
+        self.assertNotIn("--label", issue)
+        self.assertEqual(issue[issue.index("--title") + 1], "[proposta] Título")
         self.assertEqual(runner.keys(), ["auth status", "gist create", "issue create"])
+
+    def test_title_prefix_is_not_duplicated(self):
+        self.edit()
+        runner = FakeRunner()
+        promote.promote(ROOT, self.target, "[proposta] Já tem", "D", assume_yes=True, runner=runner, stdout=io.StringIO())
+        issue = runner.argv_of("issue create")[0]
+        self.assertEqual(issue[issue.index("--title") + 1], "[proposta] Já tem")
 
     # --- build_issue ---
     def test_issue_body_contains_gist_link_paths_and_acceptance(self):
@@ -263,6 +345,7 @@ class PromoteTests(unittest.TestCase):
         self.run_promote(runner)
         issue = runner.argv_of("issue create")[0]
         self.assertNotIn("UNIQUE-CONTENT-MARKER-12345", " ".join(issue))
+        self.assertNotIn("UNIQUE-CONTENT-MARKER-12345", runner.issue_body)
         self.assertIn(b"UNIQUE-CONTENT-MARKER-12345", b"".join(runner.gist_files.values()))
 
     # --- CLI ---
