@@ -18,10 +18,34 @@ Formato baseado em Keep a Changelog. Versões seguem `template.json`.
 | [1.1.0](#110---2026-10-19) | 2026-10-19 | Generalização, 28 papéis e gestão de produto |
 | [1.0.0](#100) | n/d | Template portátil com 18 especialistas |
 
+## [Não lançado]
+
+### Alterado
+- **Documentação revista contra o código da 2.0.0:** nova referência do comando em `docs/cli.md` (flags reais,
+  mensagens, códigos de saída, `upgrade`, `promote`, `self-update`, `config`, `mod` e limitações conhecidas); README,
+  `docs/compatibility.md` (distribuição, CI e release), `docs/validation.md` (verificação real da 2.0.0),
+  `docs/diagramas.md`, adapter Claude e READMEs de `integrations/mod` e `integrations/token-milestones` passam a citar
+  os comandos `guilda`, mantendo os atalhos do checkout. O adapter Claude deixa de exigir o RTK para rodar a receita de
+  cópia dos contratos.
+
 ## [2.0.0] - 2026-11-03
 
-Primeira versão distribuída como pacote Python `guilda` (`pip install guilda` ou `uv tool install guilda`, depois da
-publicação no PyPI).
+Primeira versão distribuída como pacote Python `guilda` (`pip install guilda` ou `uv tool install guilda`).
+Referência completa do comando em [docs/cli.md](docs/cli.md).
+
+### Nota de lançamento
+- Tag `v2.0.0` criada em 2026-11-03; `guilda` 2.0.0 publicado no PyPI no mesmo dia.
+- Antes da publicação, a CI do pull request da 2.0.0 passou na matriz Linux e Windows × Python 3.11, 3.12 e 3.13 e
+  construiu e conferiu o wheel. O que segue não verificado está em [docs/validation.md](docs/validation.md).
+- Limitações conhecidas desta versão:
+  - `check --target` e `install` acusam `installed drift` num arquivo que o `upgrade` manteve de propósito; para
+    resolver, guarde a alteração, apague o arquivo e rode `guilda upgrade` de novo.
+  - Com `update-check auto`, a atualização roda logo antes do comando em andamento, que continua com o código antigo
+    e pode ler os arquivos novos do template.
+  - `guilda sync` usa as opções passadas no comando (sem `--profiles`, só `base`), não as registradas na instalação.
+  - `promote` só considera `.engineering/`, `.claude/`, `.codex/` e `.agents/` (não `CLAUDE.md` nem `AGENTS.md`) e
+    trata como adicionado qualquer arquivo novo nessas pastas, inclusive um mod instalado.
+  - A linha que os mods gravam no registro de instalações sempre diz `via install.py --mod`.
 
 ### Quebras de compatibilidade
 - **Nome do manifesto:** `.engineering/manifest.json` passa de `name: engineering-template` para `name: guilda`.
@@ -49,11 +73,14 @@ publicação no PyPI).
   você pede.
 - **`guilda config get` e `guilda config set update-check <off|notify|auto>`:** configuração do usuário. A verificação
   de versão nova é opcional e vem desligada (`off`); `notify` avisa no máximo uma vez por dia e `auto` também instala.
-  A variável `GUILDA_CONFIG` aponta o arquivo de configuração e existe só para testes.
-- **Pacote e licença:** `pyproject.toml` (hatchling), publicação por tag `vX.Y.Z` com aprovação manual do mantenedor,
-  `LICENSE` Apache-2.0 e modelo de issue para propostas.
-- **Instalação de mods (`install.py --mod <nome> [--mod-scope project|global]`):** `integrations/mod/` guarda
-  mods do Claude Code; `scripts/mods.py` copia o mod e seus scripts para `.claude/` do projeto ou do usuário, registra
+  A variável `GUILDA_CONFIG` aponta outro arquivo de configuração (a suíte de testes a usa para não tocar o config
+  real).
+- **Pacote e licença:** `pyproject.toml` (hatchling), publicação por tag `vX.Y.Z` com aprovação manual do mantenedor
+  no ambiente `pypi` e *trusted publishing*, actions fixadas por SHA, `LICENSE` Apache-2.0 e modelo de issue para
+  propostas.
+- **Instalação de mods (`guilda mod <nome>` e `guilda install --mod <nome> [--mod-scope project|global]`; no
+  checkout, `install.py --mod`):** `integrations/mod/` guarda mods do Claude Code; `guilda/mods.py` (reexportado por
+  `scripts/mods.py`) copia o mod e seus scripts para `.claude/` do projeto ou do usuário, registra
   um marketplace local, instala o plugin pelo `claude plugin` e acrescenta a linha em
   `docs/operations/registro-instalacoes.md`. Aceita `--dry-run`. Os mods ficam fora de `.engineering/`.
 - **Mod `token-handoff`:** só o marco de 400k (sem marcos de 100k/200k/300k e sem perguntas ao humano). Aos 400k
