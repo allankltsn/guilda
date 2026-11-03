@@ -431,7 +431,7 @@ class TemplateTests(unittest.TestCase):
 
     def test_operating_practices_are_rendered(self):
         config, output = template.render(ROOT, ["claude", "codex"], ["base"])
-        self.assertEqual(config["version"], "1.3.0")
+        self.assertEqual(config["version"], "2.0.0")
         for path in self.NEW_IN_1_2_0:
             self.assertIn(f".engineering/{path}", output, path)
         economy = output[".engineering/workflow/economy.md"].decode()
