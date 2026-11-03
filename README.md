@@ -55,6 +55,7 @@ O agente principal é o **gestor dos especialistas**: entende a demanda, escreve
     <td colspan="2" valign="top">
       <h3><img src="assets/icons/teal/file-text.svg" width="20" align="top"> Documentação</h3>
       <ul>
+        <li><a href="docs/cli.md">Referência do comando <code>guilda</code></a>: flags, mensagens, códigos de saída e limitações conhecidas</li>
         <li><a href="docs/diagramas.md">Guia dos diagramas</a>: fluxo de implementação e regras dos agentes, com os 18 diagramas na página</li>
         <li><a href="docs/compatibility.md">Compatibilidade</a>: o que foi e o que não foi verificado em cada ferramenta</li>
         <li><a href="docs/validation.md">Validação</a>: evidências executadas e limites</li>
@@ -111,11 +112,9 @@ O agente principal é o **gestor dos especialistas**: entende a demanda, escreve
 
 ## <img src="assets/icons/teal/rocket.svg" width="22" align="top"> Começar
 
-Requer Python 3.11 ou superior e nenhuma outra dependência. O caminho recomendado é o pacote `guilda`; a partir do checkout existem o instalador simples (`install.py`) e a CLI completa (`scripts/template.py`). Ambas gravam os mesmos arquivos; o instalador é só um atalho com padrões sensatos.
+Requer Python 3.11 ou superior e nenhuma outra dependência. O caminho recomendado é o pacote `guilda`, publicado no PyPI. Quem usa este repositório diretamente tem dois atalhos finos para o mesmo código: `install.py` e `scripts/template.py`.
 
 ### Pacote `guilda` (recomendado)
-
-Instale o comando `guilda` com `pip` ou `uv`. O pacote só usa a biblioteca padrão.
 
 ```sh
 pip install guilda
@@ -123,42 +122,45 @@ pip install guilda
 uv tool install guilda
 ```
 
-O comando funciona em qualquer pasta. `guilda install` equivale ao `install.py` e `guilda init|sync|check|doctor|package` equivalem a `scripts/template.py`.
+O pacote traz o template dentro dele, então o comando funciona em qualquer pasta. `install` e `init` só gravam na pasta do projeto ([O que é gravado no projeto](#o-que-é-gravado-no-projeto)): nada é instalado no computador. A referência completa, com flags, mensagens, códigos de saída e limitações, está em **[docs/cli.md](docs/cli.md)**.
 
 | Comando | O que faz |
 | --- | --- |
-| `guilda init` | Primeira instalação num projeto (`--target`, `--providers`, `--profiles`, `--tier`, `--dry-run`). |
-| `guilda sync` | Refaz a instalação com o template atual; avisa em vez de sobrescrever arquivos editados à mão. |
-| `guilda check` | Sem `--target`, valida o template; com `--target`, confere a instalação do projeto. |
-| `guilda doctor` | Diagnóstico do computador (Python, `claude`, `codex`, `git`, `rtk`, `serena`). Não instala nada. |
-| `guilda package` | Gera o plugin do Claude numa pasta separada (`--provider claude`). |
-| `guilda install [projeto]` | Instala ou atualiza com padrões sensatos (`--profiles`, `--providers`, `--tier`, `--mod`, `--mod-scope`, `--dry-run`). |
-| `guilda upgrade [projeto]` | Atualiza um projeto instalado para o template atual, arquivo por arquivo. `--dry-run` só mostra o plano; havendo conflito, pergunta no terminal antes de sobrescrever, e `--yes` aprova sem perguntar. |
-| `guilda mod <nome>` | Instala um mod do Claude Code (`--scope project\|global`, `--target`, `--dry-run`). |
-| `guilda promote <projeto>` | Propõe suas alterações locais como feature: varre segredos e caminhos pessoais, mostra o que será enviado, pede confirmação, sobe um gist secreto e abre uma issue (`--title` e `--description` obrigatórios; `--yes` pula a pergunta, não a varredura). Nunca envia arquivos `*.local.*`, `.claude/worktrees/` nem `.claude/projects/`. Exige o `gh` autenticado. |
+| `guilda install [projeto]` | Instala ou, se já instalado, atualiza com os perfis e provedores registrados (`--profiles`, `--providers`, `--tier`, `--mod`, `--mod-scope`, `--dry-run`). Padrão: `base,product-team,github-projects` para Claude e Codex. |
+| `guilda init` | Primeira instalação com controle total (`--target` obrigatório, `--providers`, `--profiles`, `--tier`, `--dry-run`). Padrão de perfil: só `base`. |
+| `guilda sync` | Refaz uma instalação com as opções **passadas** (sem `--profiles`, vale `base`). Arquivo editado à mão faz o comando parar com `installed drift`, sem gravar nada. |
+| `guilda check` | Não grava nada. Sem `--target`, valida o template; com `--target`, confere cada arquivo instalado e avisa se há template mais novo. |
+| `guilda doctor` | Mostra o Python e se `claude`, `codex`, `git`, `rtk` e `serena` estão no PATH. Não executa nem instala nada. |
+| `guilda package` | Gera o plugin do Claude numa pasta separada (`--provider claude --target <pasta>`). |
+| `guilda upgrade [projeto]` | Atualiza o projeto para o template do `guilda` instalado, arquivo por arquivo, mantendo suas edições quando o template não mudou o arquivo. `--dry-run` só mostra o plano; conflito pede confirmação no terminal ou `--yes`. |
+| `guilda mod <nome>` | Instala um mod do Claude Code (`--scope project\|global`, `--target`, `--dry-run`); o `token-handoff` só no Windows. |
+| `guilda promote <projeto>` | Propõe suas alterações locais: varre segredos, mostra tudo o que será público, pede confirmação, sobe um gist secreto e abre uma issue (`--title` e `--description` obrigatórios; `--yes` pula a pergunta, não a varredura). Exige o `gh` autenticado. |
 | `guilda self-update` | Atualiza o próprio `guilda` com `pip` ou `uv` (`--dry-run`, `--yes`). Só roda quando você pede. |
-| `guilda config get` e `guilda config set update-check <off\|notify\|auto>` | Mostra ou altera a configuração do usuário. |
+| `guilda config get` / `config set update-check off\|notify\|auto` | Mostra ou altera a configuração do usuário. |
 
-A verificação de versão nova é **opcional e vem desligada** (`off`). Com `notify`, o `guilda` avisa, no máximo uma vez por dia, que há versão nova; com `auto`, também a instala. Esse é o único aviso de versão: o `upgrade` não consulta o PyPI por conta própria, então sem a verificação ligada ele atualiza o projeto para o template da versão instalada sem avisar que há outra mais nova (use `guilda self-update` antes). A variável `GUILDA_CONFIG` (caminho do arquivo de configuração) existe só para testes.
+A verificação de versão nova é **opcional e vem desligada** (`off`). Com `notify`, o `guilda` avisa no máximo uma vez por dia que há versão nova; com `auto`, também a instala, sem perguntar, logo antes do comando em andamento (veja a limitação em [docs/cli.md](docs/cli.md#self-update)). O `upgrade` não consulta o PyPI: com a verificação desligada, ele usa o template da versão instalada sem avisar que existe outra (rode `guilda self-update` antes). A variável `GUILDA_CONFIG` aponta outro arquivo de configuração; a suíte de testes a usa para não tocar o config real.
 
-#### Projetos instalados com o nome antigo
+#### Atualizar e migrar projetos antigos
 
-Projetos instalados antes da 2.0.0 têm o manifesto com o nome `engineering-template`. Só o `upgrade` aceita esse nome e o reescreve na mesma operação; `sync` e `check` o recusam e pedem o `upgrade`. A pasta `.engineering/` não muda.
+Projetos instalados antes da 2.0.0 têm o manifesto com o nome `engineering-template`. Só o `upgrade` aceita esse nome e o reescreve na mesma operação; `sync`, `check` e `install` o recusam e pedem o `upgrade`. A pasta `.engineering/` não muda.
 
 ```sh
 guilda upgrade <projeto> --dry-run   # 1. veja o plano, sem gravar nada
 guilda upgrade <projeto>             # 2. aplique
 ```
 
-Arquivo que você editou e que o template não mudou continua como está. Arquivo editado que o template também mudou é conflito: só é sobrescrito com aprovação explícita, respondendo sim à pergunta no terminal ou com `--yes`; sem terminal interativo (script, CI), só `--yes` aprova. Instalações 1.3.0 feitas a partir de um checkout com `core/graphify-out/` também migram: as cópias intactas de `.engineering/graphify-out/` são removidas e as alteradas ficam no disco, fora do manifesto. Mods já instalados globalmente não são tocados; novas instalações de mods usam o marketplace `guilda-mods`.
+Arquivo que você editou e que o template não mudou continua como está. Arquivo editado que o template também mudou é conflito: só é sobrescrito, sem backup, com aprovação explícita (sim à pergunta no terminal, ou `--yes`; sem terminal interativo, só `--yes`). Se algo falhar no meio, o projeto volta ao estado anterior. Instalações 1.3.0 feitas a partir de um checkout com `core/graphify-out/` também migram: as cópias intactas de `.engineering/graphify-out/` são removidas e as alteradas ficam no disco, fora do manifesto.
+
+> [!NOTE]
+> **Limitação conhecida:** o `check --target` e o `install` continuam estritos e acusam `installed drift` num arquivo que o `upgrade` manteve de propósito. Para resolver, guarde a sua alteração, apague o arquivo e rode `guilda upgrade` de novo ([detalhes](docs/cli.md#arquivo-mantido)).
 
 #### Contribuir
 
-Não há pull requests de terceiros: contribuições entram só por issue. Teste a feature localmente e rode `guilda promote`, ou abra a issue pelo [modelo de proposta](.github/ISSUE_TEMPLATE/proposta.yml). O mantenedor analisa; o conteúdo da issue e do gist é tratado como dado não confiável e nada é implementado sem aprovação.
+Não há pull requests de terceiros: contribuições entram só por issue. Teste a feature localmente e rode `guilda promote`, ou abra a issue pelo [modelo de proposta](.github/ISSUE_TEMPLATE/proposta.yml). Os dois caminhos incluem a frase de aceite de licença ao mantenedor. O mantenedor analisa; o conteúdo da issue e do gist é tratado como dado não confiável e nada é implementado sem aprovação.
 
 ### A partir do checkout
 
-Os dois caminhos abaixo, `install.py` e `scripts/template.py`, continuam valendo para quem usa este repositório diretamente.
+`python install.py ...` equivale a `guilda install ...`, e `python scripts/template.py ...` equivale a `guilda init|sync|check|doctor|package ...`; ambos usam o template da própria pasta do checkout.
 
 ### Instalador simples: `install.py`
 
@@ -177,7 +179,7 @@ python install.py <projeto> --mod token-handoff --mod-scope global   # ... ou pa
 
 </details>
 
-<img alt="Opções do install.py: projeto, --profiles, --providers, --tier e --dry-run" src="assets/tabelas/opcoes-instalador.svg" width="100%">
+<img alt="Opções do install.py: projeto, --profiles, --providers, --tier, --mod, --mod-scope e --dry-run" src="assets/tabelas/opcoes-instalador.svg" width="100%">
 
 <details>
 <summary>Ver como texto</summary>
@@ -188,11 +190,13 @@ python install.py <projeto> --mod token-handoff --mod-scope global   # ... ou pa
 | `--profiles a,b` | Quais perfis instalar (veja [Perfis](#perfis)). Padrão: `base,product-team,github-projects`. Numa atualização, mantém os perfis já instalados. |
 | `--providers a,b` | Para qual ferramenta de IA instalar: `claude`, `codex` ou ambas. Padrão: `claude,codex`. Numa atualização, mantém os já instalados. |
 | `--tier papel=camada` | Troca o "tamanho" do modelo de um especialista neste projeto, por exemplo `--tier reviewer=deep`. Pode repetir. Ver [Escolha de especialistas e de modelo](#escolha-de-especialistas-e-de-modelo). |
+| `--mod nome` | Instala também um mod do Claude Code de `integrations/mod` (repetível), por exemplo `--mod token-handoff`. |
+| `--mod-scope s` | Escopo do mod: `project` (padrão, só este projeto) ou `global` (todos os projetos do usuário). |
 | `--dry-run` | Simulação: lista quantos arquivos seriam gravados ou removidos e não altera nada. |
 
 </details>
 
-Ao terminar, o instalador roda a verificação (`check`) sozinho. Se algum arquivo do projeto conflitar com o template, ele para com uma mensagem e não grava nada pela metade.
+Ao terminar, o instalador roda a verificação (`check`) sozinho. Se algum arquivo do projeto conflitar com o template, inclusive um arquivo gerenciado que você editou, ele para com uma mensagem e não grava nada pela metade.
 
 **Instalar tudo.** Não existe uma opção `--all`, porque dois perfis são alternativas entre si: `hosting-managed` (hospedagem gerenciada) e `vps-k3s` (servidor próprio com containers). Escolha um dos dois e instale todo o resto:
 
@@ -204,7 +208,7 @@ Na prática, instale só os perfis de stack (`nestjs-mikroorm`, `python`, `aws-s
 
 ### CLI completa: `scripts/template.py`
 
-Execute a partir da raiz deste pacote. Cada comando tem um propósito:
+Execute a partir do checkout (é o mesmo motor de `guilda init|sync|check|doctor|package`). Cada comando tem um propósito:
 
 <img alt="Comandos da CLI: init, sync, check, doctor e package" src="assets/tabelas/comandos-cli.svg" width="100%">
 
@@ -214,7 +218,7 @@ Execute a partir da raiz deste pacote. Cada comando tem um propósito:
 | Comando | O que faz, em linguagem simples |
 | --- | --- |
 | `init` | **Primeira instalação** num projeto: copia as regras, especialistas e comandos para a pasta de destino e cria o registro (`manifest.json`) do que foi copiado. Falha se já existir um arquivo seu com o mesmo nome e conteúdo diferente. |
-| `sync` | **Atualização**: refaz a instalação com uma versão nova do template. Só mexe nos arquivos que o template gerou; se você editou um deles à mão, avisa (`installed drift`) em vez de sobrescrever. Exige uma instalação prévia. |
+| `sync` | **Atualização**: refaz a instalação com uma versão nova do template, usando as opções passadas no comando (repita `--profiles`, `--providers` e `--tier`; o padrão é só `base`). Só mexe nos arquivos que o template gerou; se você editou um deles à mão, para com o erro `installed drift` em vez de sobrescrever. Exige uma instalação prévia. |
 | `check` | **Conferência**: sem `--target`, valida que o próprio template está íntegro. Com `--target`, confirma que o projeto está instalado corretamente, que nenhum arquivo gerenciado foi alterado e se há versão nova a sincronizar. |
 | `doctor` | **Diagnóstico do computador**: informa a versão do Python e se `claude`, `codex`, `git`, `rtk` e `serena` estão instalados. Não instala nem executa nada. |
 | `package` | **Gera um plugin do Claude** numa pasta separada, para distribuir o template como plugin em vez de copiar para um projeto. Só funciona com `--provider claude`. |
@@ -263,9 +267,9 @@ Revise sempre `--dry-run` primeiro; conflitos locais devem ser resolvidos explic
 - `.engineering/`: o conhecimento compartilhado (papéis, ações, políticas, workflow, modelos de documento, perfis e integrações), mais `project.json` (suas escolhas) e `manifest.json` (a lista do que foi instalado, com impressão digital de cada arquivo).
 - `CLAUDE.md` e `AGENTS.md`: instruções de partida para o Claude Code e para o Codex.
 - `.claude/agents`, `.claude/commands` e `.claude/skills`: especialistas (com o modelo de cada um), comandos `/qa`, `/security`, `/story`… e skills do Claude.
-- `.codex/agents` (TOML, com esforço de raciocínio) e `.agents/skills`: o equivalente para o Codex.
+- `.codex/agents` (TOML, com esforço de raciocínio), `.codex/config.toml` e `.agents/skills`: o equivalente para o Codex.
 
-Nada é instalado no computador nem em configurações globais, e integrações externas não são ativadas. Consulte [compatibilidade](docs/compatibility.md) antes de habilitar e a [receita do adapter Claude](adapters/claude/README.md) para consumir o plugin.
+Nada é instalado no computador nem em configurações globais, e integrações externas não são ativadas. As exceções são explícitas: `guilda mod` (ou `--mod`) grava em `.claude/` do projeto ou do usuário, roda `claude plugin` e registra a instalação em `docs/operations/registro-instalacoes.md`; `guilda self-update` e `update-check auto` atualizam o próprio `guilda`. Consulte [compatibilidade](docs/compatibility.md) antes de habilitar e a [receita do adapter Claude](adapters/claude/README.md) para consumir o plugin.
 
 <a id="como-funciona"></a>
 
@@ -404,7 +408,7 @@ São 28 papéis e 11 ações rápidas: qa, security, aws, hosting, kubernetes, s
   <tr>
     <td width="50%" valign="top">
       <h3><img src="assets/icons/teal/package.svg" width="20" align="top"> Continuidade de sessão</h3>
-      <p>Perfil opcional <code>session-continuity</code> (<code>core/workflow/session-continuity.md</code>): marcos de tokens configuráveis, diário de eventos só de acréscimo, estado vivo curto e retomada após queda (agente em andamento é dado por perdido, nunca retomado). <code>core/policies/communication.md</code>: IDs com link para arquivo e linha, nome por extenso, frase simples e perguntas sempre com recomendação. O contador automático é opcional e instalado só com <code>--mod token-handoff</code> (<a href="integrations/mod/token-handoff/README.md">token-handoff</a>: age só aos 400k, sem perguntas, abre a sessão nova e encerra a atual; testado por unidade, não verificado em sessão real). A especificação original está em <a href="integrations/token-milestones/README.md">token-milestones</a>.</p>
+      <p>Perfil opcional <code>session-continuity</code> (<code>core/workflow/session-continuity.md</code>): marcos de tokens configuráveis, diário de eventos só de acréscimo, estado vivo curto e retomada após queda (agente em andamento é dado por perdido, nunca retomado). <code>core/policies/communication.md</code>: IDs com link para arquivo e linha, nome por extenso, frase simples e perguntas sempre com recomendação. O contador automático é opcional e instalado só com <code>guilda mod token-handoff</code> (ou <code>--mod token-handoff</code>) (<a href="integrations/mod/token-handoff/README.md">token-handoff</a>: age só aos 400k, sem perguntas, abre a sessão nova e encerra a atual; testado por unidade, não verificado em sessão real). A especificação original está em <a href="integrations/token-milestones/README.md">token-milestones</a>.</p>
     </td>
     <td width="50%" valign="top">
       <h3><img src="assets/icons/teal/shield-check.svg" width="20" align="top"> Qualidade de entrega</h3>
@@ -423,7 +427,7 @@ São 28 papéis e 11 ações rápidas: qa, security, aws, hosting, kubernetes, s
 - [Superpowers](integrations/superpowers/README.md): mapeamento das skills de workflow, sem redistribuir plugin.
 - [Voltagent](integrations/voltagent/README.md): catálogo de pacotes de agentes, configured_not_verified.
 - [GitHub Projects](integrations/github-projects/README.md): scripts para criar o Project com os campos do contrato e os labels padrão; workflows automáticos desligados na interface.
-- [Mods do Claude Code](integrations/mod/README.md): `install.py --mod <nome>`; o primeiro é o `token-handoff`.
+- [Mods do Claude Code](integrations/mod/README.md): `guilda mod <nome>` ou `guilda install --mod <nome>`; o primeiro é o `token-handoff` (só Windows).
 - [Configuração Claude](integrations/claude/settings.json): worktree.baseRef=head, sem permissões de commit pré-concedidas.
 
 > [!WARNING]
@@ -436,26 +440,33 @@ São 28 papéis e 11 ações rápidas: qa, security, aws, hosting, kubernetes, s
 <details>
 <summary><b>Árvore do template</b></summary>
 
-<img alt="Árvore do repositório engineering-template: install.py, template.json, assets, scripts, tests, core, profiles, adapters, integrations e docs" src="assets/codigo/arvore-template.svg" width="100%">
+<img alt="Árvore do repositório guilda: pyproject.toml, install.py, template.json, assets, .github, guilda, scripts, tests, core, profiles, adapters, integrations e docs" src="assets/codigo/arvore-template.svg" width="100%">
 
 <details>
 <summary>Copiar árvore</summary>
 
 ```
-engineering-template/
-├── install.py                  Instalador simples: um comando instala ou atualiza o template num projeto
+guilda/
+├── pyproject.toml              Pacote Python guilda (hatchling); comando `guilda`
+├── hatch_build.py              Embute no wheel os arquivos listados em guilda/payload.txt
+├── install.py                  Atalho do checkout para `guilda install`
 ├── README.md                   Guia de uso: comandos, perfis e glossário
 ├── CHANGELOG.md                Histórico de versões
+├── LICENSE                     Apache-2.0
 ├── template.json               Catálogo canônico: 28 papéis, 11 ações, 3 skills, camadas de modelo
 ├── assets/                     Guia visual: 17 diagramas animados do passo a passo, fluxo macro e índice (.xlsx)
 │   ├── diagramas/              Os mesmos diagramas em SVG puro, exibidos em docs/diagramas.md
 │   └── icons/                  Biblioteca Lucide (2275 SVGs) e conjunto padrão por assunto
 ├── .gitignore                  Ignora caches, segredos e arquivos locais
+├── .github/                    CI (ci.yml), publicação no PyPI (release.yml) e modelo de issue de proposta
 │
+├── guilda/                     Código do comando: cli, engine (motor), upgrade, promote, selfupdate,
+│                               config, mods e payload.txt (allowlist do que vai no pacote)
 ├── scripts/
-│   └── template.py             CLI completa (init, sync, check, doctor, package); é o motor do install.py
-├── tests/
-│   └── test_template.py        Testes automatizados da CLI
+│   ├── template.py             Atalho do checkout para o motor (init, sync, check, doctor, package)
+│   ├── mods.py                 Reexporta guilda.mods
+│   └── check_release.py, check_dist.py   Conferências do fluxo de release
+├── tests/                      Testes automatizados (unittest): template, CLI, upgrade, promote, release…
 │
 ├── core/                       Fonte canônica do conhecimento, sem sintaxe de Claude nem de Codex
 │   ├── catalog.md              Matriz de preservação: de onde veio cada papel
@@ -518,10 +529,11 @@ engineering-template/
 │   ├── superpowers/            Mapa das skills de workflow do plugin Superpowers
 │   ├── voltagent/              Catálogo de pacotes de agentes externos
 │   ├── plugins/                Lista curada de plugins (curated.json)
-│   ├── mod/                    Mods do Claude Code, instalados com install.py --mod
+│   ├── mod/                    Mods do Claude Code, instalados com guilda mod (ou --mod)
 │   └── token-milestones/       Especificação, não verificada, de um contador de tokens
 │
 └── docs/
+    ├── cli.md                  Referência do comando guilda: flags, saídas e limitações
     ├── diagramas.md            Guia aprofundado dos 18 diagramas: fluxo de implementação e regras dos agentes
     ├── compatibility.md        O que foi e o que não foi verificado em cada ferramenta
     └── validation.md           Como validar o template

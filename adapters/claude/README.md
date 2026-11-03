@@ -1,6 +1,7 @@
 # Adapter Claude
 
-A instalação de projeto é preferencial: init --providers claude materializa
+A instalação de projeto é preferencial: guilda init --target <projeto> --providers claude (ou
+guilda install) materializa
 .claude/agents, comandos, skills, CLAUDE.md e .engineering gerenciada.
 Não instala configurações globais nem permissões de bypass. Agentes de revisão
 omitem Write/Edit; Bash diagnóstico é contrato de leitura, não sandbox de
@@ -9,7 +10,8 @@ permissões reais dependem do host de destino.
 
 ## Consumo do plugin com contratos compartilhados
 
-package --provider claude --target <diretorio-separado> gera agents/, commands/,
+guilda package --provider claude --target <diretorio-separado> (no checkout:
+python scripts/template.py package ...) gera agents/, commands/,
 skills/, .claude-plugin/plugin.json, metadados de marketplace, .engineering/ e
 BOOTSTRAP.md na raiz do pacote. Gerar ou copiar esses arquivos não instala nem
 habilita o plugin. Os agentes nativos continuam no plugin; não são copiados
@@ -59,7 +61,7 @@ shutil.copytree(
     ignore=lambda folder, names: {"manifest.json"} if Path(folder) == common else set(),
 )
 print("Contratos copiados; agora revise e mescle BOOTSTRAP.md em CLAUDE.md.")
-'@ | rtk proxy python - 'C:\caminho\plugin-revisado' 'C:\caminho\projeto-consumidor'
+'@ | python - 'C:\caminho\plugin-revisado' 'C:\caminho\projeto-consumidor'
 ```
 
 Essa cópia é uma exportação de contratos para leitura, não uma instalação

@@ -112,7 +112,7 @@ flowchart LR
 
 **O que o diagrama mostra:** pré-requisitos → instalar → provedores → perfis → estrutura de pastas → validação.
 
-**Regra real** ([README](../README.md), [scripts/template.py](../scripts/template.py)):
+**Regra real** ([README](../README.md#começar), [referência do comando](cli.md), [guilda/engine.py](../guilda/engine.py)):
 
 <img alt="Tabela Etapa 01 · Instalação: colunas Passo, Como é de verdade" src="../assets/tabelas/diagramas-02-etapa-01-instalacao.svg" width="100%">
 
@@ -122,16 +122,16 @@ flowchart LR
 | Passo | Como é de verdade |
 |---|---|
 | Pré-requisito | Python 3.11+. Nenhuma outra dependência. |
-| Instalar | `python install.py <projeto>` (atalho com padrões) ou `python scripts/template.py init --target <pasta>`. Sempre rode `--dry-run` antes. |
+| Instalar | `pip install guilda` ou `uv tool install guilda`, depois `guilda install <projeto>` (atalho com padrões) ou `guilda init --target <pasta>`. No checkout, `python install.py <projeto>` e `python scripts/template.py init --target <pasta>` fazem o mesmo. Sempre rode `--dry-run` antes. |
 | Padrões do instalador | Perfis `base,product-team,github-projects`; provedores `claude,codex`. Em atualização mantém o que já estava instalado. |
-| O que grava | `.engineering/` (conhecimento + `project.json` + `manifest.json` com impressão digital de cada arquivo), `CLAUDE.md`, `AGENTS.md`, `.claude/` (agents, commands, skills), `.codex/agents`, `.agents/skills`. |
-| Atualizar | `sync` refaz a instalação; se você editou um arquivo gerenciado, avisa `installed drift` em vez de sobrescrever. |
+| O que grava | `.engineering/` (conhecimento + `project.json` + `manifest.json` com impressão digital de cada arquivo), `CLAUDE.md`, `AGENTS.md`, `.claude/` (agents, commands, skills), `.codex/` (agents e `config.toml`), `.agents/skills`. |
+| Atualizar | `guilda upgrade` atualiza arquivo por arquivo, mantém suas edições quando o template não mudou o arquivo e pede aprovação para conflitos. `sync` refaz a instalação e, se você editou um arquivo gerenciado, para com `installed drift` em vez de sobrescrever. |
 | Conferir | `check` valida o template; com `--target`, valida o projeto instalado. |
 | Segurança | Nada é instalado no computador nem em configuração global; conflito de arquivo aborta **sem gravar nada pela metade**. |
 
 </details>
 
-**Só no desenho:** `pip install engineering-template`, exigência de Node.js, chaves `ANTHROPIC_API_KEY`/`OPENAI_API_KEY`, "wizard interativo", `config.yaml`, pastas `/agents` em YAML, `/worktrees`, `template.py validate` (o comando real é `check`), prioridade entre provedores com fallback, "budget por wave" e concorrência. Nada disso existe no template.
+**Só no desenho:** `python template.py init` na raiz (o real é `guilda init` ou `python scripts/template.py init`), `pip ≥ 23`, exigência de Node.js, chaves `ANTHROPIC_API_KEY`/`OPENAI_API_KEY`, "wizard interativo", `config.yaml`, pastas `/agents` em YAML, `/worktrees`, `template.py validate` (o comando real é `check`), prioridade entre provedores com fallback, "budget por wave" e concorrência. Nada disso existe no template.
 
 ---
 
@@ -690,7 +690,7 @@ Exemplo avulso de como um texto vira vetor e é buscado em um banco vetorial. **
 | Diagrama | Leia as regras em |
 |---|---|
 | Macro | [engineering.md](../core/workflow/engineering.md), [economy.md](../core/workflow/economy.md) |
-| 01 Instalação | [README](../README.md#começar), [scripts/template.py](../scripts/template.py), [docs/validation.md](validation.md) |
+| 01 Instalação | [README](../README.md#começar), [docs/cli.md](cli.md), [guilda/engine.py](../guilda/engine.py), [docs/validation.md](validation.md) |
 | 02 Perfis | [profiles/](../profiles/), [README](../README.md#perfis) |
 | 03 Brainstorm | [staffing.md](../core/workflow/staffing.md), [engineering.md](../core/workflow/engineering.md) |
 | 04 Requisitos | [user-stories.md](../core/workflow/user-stories.md), [templates/user-story.md](../core/templates/user-story.md) |

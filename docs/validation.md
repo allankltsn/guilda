@@ -1,14 +1,14 @@
 # <img src="../assets/icons/teal/shield-check.svg" width="28" align="top"> Validação da entrega
 
 <p align="center">
-  <img src="https://img.shields.io/badge/testes-158_ok_·_3_ignorados-16a34a?style=flat-square" alt="158 testes, 3 ignorados">
+  <img src="https://img.shields.io/badge/testes-160_ok_·_3_ignorados-16a34a?style=flat-square" alt="160 testes, 3 ignorados">
   <img src="https://img.shields.io/badge/papéis-28-a78bfa?style=flat-square" alt="28 papéis">
   <img src="https://img.shields.io/badge/ações-11-0ea5a4?style=flat-square" alt="11 ações">
   <img src="https://img.shields.io/badge/perfis-10-60a5fa?style=flat-square" alt="10 perfis">
   <img src="https://img.shields.io/badge/runtime-não_executado-f59e0b?style=flat-square" alt="Runtime não executado">
 </p>
 
-[← Voltar ao README](../README.md#sumario) · [Compatibilidade](compatibility.md) · [Guia dos diagramas](diagramas.md)
+[← Voltar ao README](../README.md#sumario) · [Comando guilda](cli.md) · [Compatibilidade](compatibility.md) · [Guia dos diagramas](diagramas.md)
 
 ## <img src="../assets/icons/teal/list-checks.svg" width="24" align="top"> Escopo
 
@@ -25,7 +25,7 @@
 | Workflows novos | 6: staffing, histórias, usabilidade, polyrepo, economia, continuidade de sessão |
 | Políticas novas | 4: modelos, princípios de qualidade, instalações, comunicação |
 | Skills | `drawio-diagram`, `dark-pipeline-svg` e `readme-styling` |
-| Instalador e adapters | `install.py` (1.3.0) e adapters Claude e Codex |
+| Comando e adapters | Pacote `guilda` (2.0.0), com `install.py` e `scripts/template.py` como atalhos do checkout; adapters Claude e Codex |
 | Camadas de modelo | Por papel, com override por projeto |
 | Integrações | Opcionais, com configuração sanitizada e instruções próprias |
 
@@ -38,16 +38,27 @@ A versão 1.2.0 acrescentou economia, continuidade de sessão e comunicação (t
 
 ## <img src="../assets/icons/teal/package.svg" width="24" align="top"> Pacote guilda (2.0.0)
 
+**Verificado:**
+
 - **Versão:** `template.json` e `guilda/__version__.py` em 2.0.0; um teste confere que as duas coincidem.
-- **Allowlist do payload:** `python -m guilda.payload --check` passa; o teste de neutralidade vale também para o pacote.
-- **Smoke test do comando:** `check` do template e `init --dry-run` num diretório temporário, com `GUILDA_CONFIG` apontando para um arquivo descartável (verificação de versão desligada).
-- **Migração e contribuição:** `upgrade` (classificação por arquivo, arquivo mantido, migração do nome do manifesto e de instalação 1.3.0 com `.engineering/graphify-out/`, esta também pelo instalador real da tag `v1.3.0` quando a tag existe), `promote` (varredura de segredos com teste de tempo contra ReDoS, exclusão de `*.local.*`, `.claude/worktrees/` e `.claude/projects/`, gist e issue), `self-update` e `config` são cobertos por testes de unidade com executores simulados.
-- **Não executado:** `python -m build`, instalação do wheel em ambiente virtual limpo, publicação no PyPI, a matriz de CI e uma promoção ou atualização real contra o GitHub.
+- **CI do pull request da 2.0.0 (#3), verde:** a suíte na matriz Linux e Windows × Python 3.11, 3.12 e 3.13, a conferência do payload, a busca de material interno versionado e a construção do sdist e do wheel (`python -m build`) seguida de `tests.test_guilda_wheel`. O wheel foi construído e conferido pela CI, não localmente.
+- **Publicação:** `guilda` 2.0.0 publicado no PyPI em 2026-11-03, a partir da tag `v2.0.0`.
+- **Local (Windows, Python 3.13, 2026-11-03):** a suíte completa (160 testes, 3 ignorados: o de symlink, por privilégio do Windows, e os dois do wheel, porque o módulo `build` não está instalado) e `python -m guilda.payload --check`.
+- **Smoke test local da CLI** (`python -m guilda` num diretório temporário, com `GUILDA_CONFIG` apontando para um arquivo descartável com a verificação desligada): `check`; `install --dry-run` e `install` (252 arquivos com os perfis padrão, `check` ok); `upgrade --dry-run` com plano vazio; `check --target`; `doctor`; `self-update --dry-run` e `self-update` sem terminal (cancela com código 1, nada executado); `config get`; `mod token-handoff --dry-run`; o arquivo mantido (o `upgrade` o mantém, `check --target` e `install` acusam `installed drift`, e apagar o arquivo e rodar `upgrade` de novo resolve); `sync` sem `--profiles` numa instalação com três perfis (remove os outros dois perfis); erros de uso com código 2.
+- **Testes de unidade com executores simulados:** `upgrade` (classificação por arquivo, arquivo mantido, conflitos com e sem terminal, rollback, plano velho, migração do nome do manifesto e de instalação 1.3.0 com `.engineering/graphify-out/`, esta também pelo instalador real da tag `v1.3.0`), `promote` (varredura de segredos com teste de tempo contra ReDoS, exclusões, confirmação, gist secreto e issue), `self-update` e `config`, e `mod`.
+
+**Não verificado:**
+
+- Instalação a partir do PyPI (`pip install guilda` ou `uv tool install guilda`) num ambiente limpo, nesta revisão.
+- `promote` real contra o GitHub (nenhum gist nem issue foi criado), `self-update` real com `pip` e com `uv`, a detecção do `uv` numa instalação real e o modo `auto` (inclusive a troca do executável em uso no Windows).
+- `mod` com o `claude` real (`claude plugin marketplace add` e `install`) e o `token-handoff` numa sessão real.
+- macOS e versões de Python fora de 3.11 a 3.13.
+- O conteúdo do sdist publicado, além da inspeção automática de `scripts/check_dist.py` no fluxo de release.
 
 ## <img src="../assets/icons/teal/terminal.svg" width="24" align="top"> Evidências executadas
 
 - **CLI:** `check`, `doctor`, `init`, `sync` e `package` exercitados em fixtures locais.
-- **Suíte Python** (`python -m unittest discover -s tests`): 158 testes, 3 ignorados (entre eles o de symlink, por privilégio Windows); proteção contra junction validada. Novos testes cobrem camadas de modelo por papel, overrides validados e persistidos no manifesto, papéis de produto e UX (ferramentas e sandbox), usuário leigo somente leitura na camada leve, presença dos workflows, políticas e templates, neutralidade (nenhuma referência a projeto específico) e curadoria de plugins sem instalação.
+- **Suíte Python** (`python -m unittest discover -s tests`): 160 testes, 3 ignorados (o de symlink, por privilégio do Windows, e os dois do wheel, sem o módulo `build`); proteção contra junction validada. Novos testes cobrem camadas de modelo por papel, overrides validados e persistidos no manifesto, papéis de produto e UX (ferramentas e sandbox), usuário leigo somente leitura na camada leve, presença dos workflows, políticas e templates, neutralidade (nenhuma referência a projeto específico) e curadoria de plugins sem instalação.
 - **Claude 2.1.294:** validação nativa estrita do plugin e manifesto aprovada após correções.
 - **Codex 0.156.1:** `features list` executado; TOML gerado analisado com `tomllib`. A opção `strict-config` não é suportada por esse comando.
 - **Onboarding do plugin:** receita documentada executada, contratos disponíveis no consumidor, manifesto não copiado e conflito preservando arquivos.

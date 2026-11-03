@@ -1,7 +1,8 @@
 # Token milestones: optional automatic mechanism (specification)
 
 Status: **not verified in this template.** A reference implementation exists as the optional mod
-[token-handoff](../mod/token-handoff/README.md) (`python install.py <project> --mod token-handoff`). It is
+[token-handoff](../mod/token-handoff/README.md) (`guilda mod token-handoff --target <project>`, or
+`python install.py <project> --mod token-handoff` from a checkout; Windows only). It is
 unit-tested but has not been verified in a real session, and it simplifies this specification: a single
 mandatory milestone at 400k tokens, no ask milestones and no question to the user, and it opens the new
 session and ends the old one by itself. The text below remains the original specification.

@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 434" width="920" height="434" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" role="img" aria-label="Escopo: 9 linhas, colunas Item, Quantidade ou detalhe">
-<rect width="920" height="434" rx="10" fill="#0b0f17"/>
-<rect x="0.5" y="0.5" width="919" height="433" rx="10" fill="#111827" stroke="#1f2937"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 453" width="920" height="453" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" role="img" aria-label="Escopo: 9 linhas, colunas Item, Quantidade ou detalhe">
+<rect width="920" height="453" rx="10" fill="#0b0f17"/>
+<rect x="0.5" y="0.5" width="919" height="452" rx="10" fill="#111827" stroke="#1f2937"/>
 <text x="16" y="24" font-size="14" font-weight="700" fill="#e6edf3">Escopo</text>
 <rect x="16" y="31" width="28" height="2" rx="1" fill="#2dd4bf"/>
 <rect x="1" y="36" width="918" height="40" fill="#0b0f17"/>
@@ -29,13 +29,14 @@
 <text x="16" y="304" xml:space="preserve"><tspan fill="#c9d4e3">Skills</tspan></text>
 <text x="213" y="304" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">drawio-diagram</tspan><tspan fill="#c9d4e3">, </tspan><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">dark-pipeline-svg</tspan><tspan fill="#c9d4e3"> e </tspan><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">readme-styling</tspan></text>
 <line x1="16" y1="317" x2="904" y2="317" stroke="#1f2937"/>
-<text x="16" y="341" xml:space="preserve"><tspan fill="#c9d4e3">Instalador </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">adapters</tspan></text>
-<text x="213" y="341" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">install.py</tspan><tspan fill="#c9d4e3"> (1.3.0) </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">adapters </tspan><tspan fill="#c9d4e3">Claude </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">Codex</tspan></text>
-<line x1="16" y1="354" x2="904" y2="354" stroke="#1f2937"/>
-<rect x="1" y="354" width="918" height="37" fill="#0f1623"/>
-<text x="16" y="378" xml:space="preserve"><tspan fill="#c9d4e3">Camadas </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">modelo</tspan></text>
-<text x="213" y="378" xml:space="preserve"><tspan fill="#c9d4e3">Por </tspan><tspan fill="#c9d4e3">papel, </tspan><tspan fill="#c9d4e3">com </tspan><tspan fill="#c9d4e3">override </tspan><tspan fill="#c9d4e3">por </tspan><tspan fill="#c9d4e3">projeto</tspan></text>
-<line x1="16" y1="391" x2="904" y2="391" stroke="#1f2937"/>
-<text x="16" y="415" xml:space="preserve"><tspan fill="#c9d4e3">Integrações</tspan></text>
-<text x="213" y="415" xml:space="preserve"><tspan fill="#c9d4e3">Opcionais, </tspan><tspan fill="#c9d4e3">com </tspan><tspan fill="#c9d4e3">configuração </tspan><tspan fill="#c9d4e3">sanitizada </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">instruções </tspan><tspan fill="#c9d4e3">próprias</tspan></text>
+<text x="16" y="341" xml:space="preserve"><tspan fill="#c9d4e3">Comando </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">adapters</tspan></text>
+<text x="213" y="341" xml:space="preserve"><tspan fill="#c9d4e3">Pacote </tspan><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">guilda</tspan><tspan fill="#c9d4e3"> (2.0.0), </tspan><tspan fill="#c9d4e3">com </tspan><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">install.py</tspan><tspan fill="#c9d4e3"> e </tspan><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">scripts/template.py</tspan><tspan fill="#c9d4e3"> como </tspan><tspan fill="#c9d4e3">atalhos </tspan><tspan fill="#c9d4e3">do </tspan><tspan fill="#c9d4e3">checkout; </tspan></text>
+<text x="213" y="360" xml:space="preserve"><tspan fill="#c9d4e3">adapters </tspan><tspan fill="#c9d4e3">Claude </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">Codex</tspan></text>
+<line x1="16" y1="373" x2="904" y2="373" stroke="#1f2937"/>
+<rect x="1" y="373" width="918" height="37" fill="#0f1623"/>
+<text x="16" y="397" xml:space="preserve"><tspan fill="#c9d4e3">Camadas </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">modelo</tspan></text>
+<text x="213" y="397" xml:space="preserve"><tspan fill="#c9d4e3">Por </tspan><tspan fill="#c9d4e3">papel, </tspan><tspan fill="#c9d4e3">com </tspan><tspan fill="#c9d4e3">override </tspan><tspan fill="#c9d4e3">por </tspan><tspan fill="#c9d4e3">projeto</tspan></text>
+<line x1="16" y1="410" x2="904" y2="410" stroke="#1f2937"/>
+<text x="16" y="434" xml:space="preserve"><tspan fill="#c9d4e3">Integrações</tspan></text>
+<text x="213" y="434" xml:space="preserve"><tspan fill="#c9d4e3">Opcionais, </tspan><tspan fill="#c9d4e3">com </tspan><tspan fill="#c9d4e3">configuração </tspan><tspan fill="#c9d4e3">sanitizada </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">instruções </tspan><tspan fill="#c9d4e3">próprias</tspan></text>
 </svg>
