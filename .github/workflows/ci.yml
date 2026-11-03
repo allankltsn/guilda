@@ -37,7 +37,7 @@ jobs:
         run: python -m guilda.payload --check
       - name: Nada de material interno versionado
         run: |
-          proibidos=$(git ls-files | grep -E '^(docs/superpowers/|plans/|specs/|graphify-out/|\.worktrees/)' || true)
+          proibidos=$(git ls-files | grep -E '(^|/)(docs/superpowers/|plans/|specs/|graphify-out/|\.worktrees/|\.dev/)' || true)
           if [ -n "$proibidos" ]; then
             echo "Caminhos proibidos versionados:"
             echo "$proibidos"

@@ -68,7 +68,7 @@ class CheckReleaseTest(unittest.TestCase):
 
 
 class CheckDistTest(unittest.TestCase):
-    BOM_WHEEL = ["guilda/_data/template.json", "guilda/_data/core/a.md", "guilda-1.0.0.dist-info/LICENSE"]
+    BOM_WHEEL = ["guilda/_data/template.json", "guilda/_data/core/a.md", "guilda-1.0.0.dist-info/licenses/LICENSE"]
 
     def _dist(self, tmp, wheel, sdist):
         d = Path(tmp)
@@ -103,6 +103,22 @@ class CheckDistTest(unittest.TestCase):
             self.assertTrue(any("core" in p for p in problemas))
             self.assertTrue(any("LICENSE" in p for p in problemas))
 
+    def test_licenca_so_em_dist_info_licenses(self):
+        cd = _carrega("check_dist")
+        sdist = ["guilda-1.0.0/PKG-INFO"]
+        casos = {
+            # LICENSE na raiz do wheel iria para site-packages/LICENSE.
+            "raiz": (self.BOM_WHEEL + ["LICENSE"], "raiz"),
+            # Só dist-info/LICENSE (sem licenses/) não é o lugar do PEP 639.
+            "dist-info": (self.BOM_WHEEL[:2] + ["guilda-1.0.0.dist-info/LICENSE"], "licenses/LICENSE"),
+            "ausente": (self.BOM_WHEEL[:2], "licenses/LICENSE"),
+        }
+        for nome, (wheel, trecho) in casos.items():
+            with self.subTest(nome), tempfile.TemporaryDirectory() as tmp:
+                problemas = cd.check(self._dist(tmp, wheel, sdist))
+                self.assertEqual(len(problemas), 1, problemas)
+                self.assertIn(trecho, problemas[0])
+
     def test_sdist_rejeita_docs_superpowers(self):
         cd = _carrega("check_dist")
         with tempfile.TemporaryDirectory() as tmp:
@@ -115,6 +131,21 @@ class CheckDistTest(unittest.TestCase):
         cd = _carrega("check_dist")
         with tempfile.TemporaryDirectory() as tmp:
             self.assertEqual(len(cd.check(Path(tmp))), 2)
+
+
+class CiWorkflowTest(unittest.TestCase):
+    def test_guarda_de_material_interno_casa_por_segmento(self):
+        texto = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+        padrao = re.search(r"git ls-files \| grep -E '([^']+)'", texto).group(1)
+        proibidos = [
+            "docs/superpowers/a.md", "plans/x.md", "specs/x.md", "graphify-out/g.json", ".worktrees/a", ".dev/a",
+            "core/graphify-out/g.json", "x/.dev/b", "a/plans/b.md", "a/docs/superpowers/b.md", "x/.worktrees/y",
+        ]
+        legitimos = ["integrations/superpowers/README.md", "myplans/a.md", "docs/specsheet.md", ".devcontainer/a", "tests/fixtures/manifest-1.3.0-dirty-checkout.json"]
+        for nome in proibidos:
+            self.assertRegex(nome, padrao)
+        for nome in legitimos:
+            self.assertNotRegex(nome, padrao)
 
 
 class ReleaseWorkflowTest(unittest.TestCase):

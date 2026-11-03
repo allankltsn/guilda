@@ -1,5 +1,6 @@
 """Confere o conteúdo do wheel do guilda. Pulado quando o módulo `build` não está instalado."""
 import importlib.util
+import re
 import subprocess
 import sys
 import tempfile
@@ -32,7 +33,9 @@ class WheelTest(unittest.TestCase):
     def test_inclui_payload_e_licenca(self):
         self.assertIn("guilda/_data/template.json", self.nomes)
         self.assertTrue(any(n.startswith("guilda/_data/core/") for n in self.nomes))
-        self.assertTrue(any(n.split("/")[-1] == "LICENSE" for n in self.nomes))
+        # license-files (PEP 639): só em *.dist-info/licenses/, nunca na raiz (site-packages/LICENSE).
+        self.assertTrue(any(re.fullmatch(r"[^/]+\.dist-info/licenses/LICENSE", n) for n in self.nomes), self.nomes)
+        self.assertNotIn("LICENSE", self.nomes)
 
     def test_nao_inclui_material_interno(self):
         for nome in self.nomes:

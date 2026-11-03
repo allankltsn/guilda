@@ -1,4 +1,5 @@
 """Inspeciona os arquivos reais de dist/ (wheel e sdist) antes da publicação (só stdlib)."""
+import re
 import sys
 import tarfile
 import zipfile
@@ -9,6 +10,7 @@ PROIBIDOS_WHEEL = ("docs", "assets", "tests", ".github", "graphify-out", ".dev",
 # Sequências de segmentos (como guilda/payload.py:FORBIDDEN); "superpowers" sozinho é legítimo
 # (integrations/superpowers), só a sequência docs/superpowers é proibida.
 PROIBIDOS_SDIST = ("docs/superpowers", "plans", "specs", "graphify-out", ".worktrees", ".dev")
+LICENCA = re.compile(r"[^/]+\.dist-info/licenses/LICENSE")
 
 
 def _proibidos(nomes, proibidos, rotulo):
@@ -40,8 +42,12 @@ def check(dist: Path) -> list[str]:
             problemas.append("O wheel não contém guilda/_data/template.json.")
         if not any(n.startswith("guilda/_data/core/") for n in nomes):
             problemas.append("O wheel não contém guilda/_data/core/.")
-        if not any(n.split("/")[-1] == "LICENSE" for n in nomes):
-            problemas.append("O wheel não contém LICENSE.")
+        # license-files (PEP 639) põe a licença em *.dist-info/licenses/; na raiz do wheel ela
+        # iria parar em site-packages/LICENSE.
+        if not any(LICENCA.fullmatch(n) for n in nomes):
+            problemas.append("O wheel não contém *.dist-info/licenses/LICENSE.")
+        if "LICENSE" in nomes:
+            problemas.append("O wheel tem LICENSE na raiz (iria para site-packages/LICENSE).")
         problemas += _proibidos(nomes, PROIBIDOS_WHEEL, "O wheel")
     for sdist in sdists[:1]:
         with tarfile.open(sdist) as t:
