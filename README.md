@@ -133,13 +133,13 @@ O comando funciona em qualquer pasta. `guilda install` equivale ao `install.py` 
 | `guilda doctor` | Diagnóstico do computador (Python, `claude`, `codex`, `git`, `rtk`, `serena`). Não instala nada. |
 | `guilda package` | Gera o plugin do Claude numa pasta separada (`--provider claude`). |
 | `guilda install [projeto]` | Instala ou atualiza com padrões sensatos (`--profiles`, `--providers`, `--tier`, `--mod`, `--mod-scope`, `--dry-run`). |
-| `guilda upgrade [projeto]` | Atualiza um projeto instalado para o template atual, arquivo por arquivo. `--dry-run` só mostra o plano; `--yes` aprova a sobrescrita de arquivos com alteração local. |
+| `guilda upgrade [projeto]` | Atualiza um projeto instalado para o template atual, arquivo por arquivo. `--dry-run` só mostra o plano; havendo conflito, pergunta no terminal antes de sobrescrever, e `--yes` aprova sem perguntar. |
 | `guilda mod <nome>` | Instala um mod do Claude Code (`--scope project\|global`, `--target`, `--dry-run`). |
-| `guilda promote <projeto>` | Propõe suas alterações locais como feature: varre segredos e caminhos pessoais, mostra o que será enviado, pede confirmação, sobe um gist secreto e abre uma issue (`--title` e `--description` obrigatórios; `--yes` pula a pergunta, não a varredura). Exige o `gh` autenticado. |
+| `guilda promote <projeto>` | Propõe suas alterações locais como feature: varre segredos e caminhos pessoais, mostra o que será enviado, pede confirmação, sobe um gist secreto e abre uma issue (`--title` e `--description` obrigatórios; `--yes` pula a pergunta, não a varredura). Nunca envia arquivos `*.local.*`, `.claude/worktrees/` nem `.claude/projects/`. Exige o `gh` autenticado. |
 | `guilda self-update` | Atualiza o próprio `guilda` com `pip` ou `uv` (`--dry-run`, `--yes`). Só roda quando você pede. |
 | `guilda config get` e `guilda config set update-check <off\|notify\|auto>` | Mostra ou altera a configuração do usuário. |
 
-A verificação de versão nova é **opcional e vem desligada** (`off`). Com `notify`, o `guilda` avisa, no máximo uma vez por dia, que há versão nova; com `auto`, também a instala. A variável `GUILDA_CONFIG` (caminho do arquivo de configuração) existe só para testes.
+A verificação de versão nova é **opcional e vem desligada** (`off`). Com `notify`, o `guilda` avisa, no máximo uma vez por dia, que há versão nova; com `auto`, também a instala. Esse é o único aviso de versão: o `upgrade` não consulta o PyPI por conta própria, então sem a verificação ligada ele atualiza o projeto para o template da versão instalada sem avisar que há outra mais nova (use `guilda self-update` antes). A variável `GUILDA_CONFIG` (caminho do arquivo de configuração) existe só para testes.
 
 #### Projetos instalados com o nome antigo
 
@@ -150,7 +150,7 @@ guilda upgrade <projeto> --dry-run   # 1. veja o plano, sem gravar nada
 guilda upgrade <projeto>             # 2. aplique
 ```
 
-Arquivo que você editou e que o template não mudou continua como está. Arquivo editado que o template também mudou é conflito: só é sobrescrito com `--yes`. Mods já instalados globalmente não são tocados; novas instalações de mods usam o marketplace `guilda-mods`.
+Arquivo que você editou e que o template não mudou continua como está. Arquivo editado que o template também mudou é conflito: só é sobrescrito com aprovação explícita, respondendo sim à pergunta no terminal ou com `--yes`; sem terminal interativo (script, CI), só `--yes` aprova. Instalações 1.3.0 feitas a partir de um checkout com `core/graphify-out/` também migram: as cópias intactas de `.engineering/graphify-out/` são removidas e as alteradas ficam no disco, fora do manifesto. Mods já instalados globalmente não são tocados; novas instalações de mods usam o marketplace `guilda-mods`.
 
 #### Contribuir
 

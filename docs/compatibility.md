@@ -86,9 +86,9 @@ O principal pode sobrescrever o modelo por despacho. Nos agentes de plugin o cam
 - **Requisitos:** Python 3.11 ou superior, só biblioteca padrão. Instalação por `pip install guilda` ou `uv tool install guilda`; a partir do checkout, `install.py` e `scripts/template.py` seguem válidos.
 - **Matriz de CI:** Python 3.11, 3.12 e 3.13, em Windows e Linux, definida nos fluxos `ci` e `release`. A matriz foi **configurada**; os resultados dela só existem depois que o fluxo roda no GitHub.
 - **Executado localmente:** a suíte (`python -m unittest discover -s tests`) e a conferência da allowlist (`python -m guilda.payload --check`) em um único ambiente (Windows, Python 3.13).
-- **Contrato com projetos instalados:** o manifesto passa a se chamar `guilda`; projetos antigos migram com `guilda upgrade --dry-run` e depois `guilda upgrade`. Mods novos usam o marketplace `guilda-mods`.
+- **Contrato com projetos instalados:** o manifesto passa a se chamar `guilda`; projetos antigos migram com `guilda upgrade --dry-run` e depois `guilda upgrade`, inclusive instalações 1.3.0 feitas de um checkout com `core/graphify-out/` (testado com o instalador real da tag `v1.3.0` quando a tag está disponível). Mods novos usam o marketplace `guilda-mods`.
 - **Comandos que dependem de terceiros:** `promote` exige o `gh` autenticado e `self-update` exige `pip` ou `uv`. Nos testes esses comandos usam executores simulados; **nenhuma issue, gist ou atualização real foi criada**.
-- **Verificação automática de versão:** opcional e desligada por padrão (`guilda config set update-check off|notify|auto`).
+- **Verificação automática de versão:** opcional e desligada por padrão (`guilda config set update-check off|notify|auto`). É o único aviso de versão nova: o `upgrade` não consulta o PyPI e, com a verificação desligada, atualiza o projeto para o template da versão instalada sem avisar que existe outra.
 
 > [!WARNING]
 > Não foram executados: construção do wheel e do sdist, instalação em ambiente virtual limpo, publicação no PyPI e a matriz de CI. A publicação depende de aprovação manual do mantenedor no GitHub.
