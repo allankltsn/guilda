@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-teal" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#2dd4bf"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#4ade80"/>
+    </marker>
+
+    <!-- Paths para dots animados -->
+    <path id="path-a1" d="M290,232 L430,232" fill="none"/>
+    <path id="path-a2" d="M570,232 L710,232" fill="none"/>
+    <path id="path-a3" d="M860,232 L1000,232" fill="none"/>
+    <path id="path-a4" d="M1140,232 L1280,232" fill="none"/>
+    <path id="path-a5" d="M1420,232 L1560,232" fill="none"/>
+
+    <path id="path-b1" d="M510,396 L510,450" fill="none"/>
+    <path id="path-b2" d="M910,396 L910,450" fill="none"/>
+    <path id="path-b3" d="M1310,396 L1310,450" fill="none"/>
+  </defs>
+
+  <rect width="1800" height="800" fill="#0b0f17"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="1760" height="48" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="16" width="6" height="48" rx="3" fill="#2dd4bf"/>
+  <text x="44" y="37" font-size="15" font-weight="700" fill="#e6edf3">07 — Execução e Git Worktrees</text>
+  <text x="44" y="55" font-size="11" fill="#8b96a8">worktree isolado por agente · brief → implementação → handoff → PR · padrões de projeto · fluxo git completo</text>
+  <text x="1760" y="37" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 07/17</text>
+  <text x="1760" y="52" font-size="9.5" fill="#2dd4bf" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">execução paralela · git</text>
+
+  <!-- ══ SEÇÃO 1: PIPELINE DE EXECUÇÃO (fluxo horizontal principal) ══ -->
+  <rect x="20" y="80" width="1760" height="40" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+  <text x="40" y="105" font-size="10" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">PIPELINE DE EXECUÇÃO POR AGENTE  ·  ciclo completo de uma tarefa</text>
+
+  <!-- Step 1: Tarefa despachada -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.4s" fill="freeze"/>
+    <rect x="30" y="140" width="260" height="110" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="2"/>
+    <text x="160" y="162" font-size="10" fill="#f59e0b" font-weight="700" text-anchor="middle">① TAREFA DESPACHADA</text>
+    <text x="160" y="178" font-size="9" fill="#8b96a8" text-anchor="middle">orchestrator envia brief</text>
+    <line x1="40" y1="184" x2="280" y2="184" stroke="#1f2937" stroke-width="1"/>
+    <text x="42" y="198" font-size="8.5" fill="#4b5563">agente: backend-agent</text>
+    <text x="42" y="212" font-size="8.5" fill="#4b5563">tarefa: S-042 implementar</text>
+    <text x="42" y="226" font-size="8.5" fill="#4b5563">endpoint POST /api/users</text>
+    <text x="42" y="240" font-size="8.5" fill="#4b5563">tier: standard</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <line x1="290" y1="195" x2="428" y2="195" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+  <circle r="3.5" fill="#f59e0b" opacity="0">
+    <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.5s"><mpath href="#path-a1"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" begin="0.5s"/>
+  </circle>
+
+  <!-- Step 2: Criar worktree -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.3s" dur="0.4s" fill="freeze"/>
+    <rect x="430" y="140" width="260" height="110" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.35;1;0.35" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="560" y="162" font-size="10" fill="#2dd4bf" font-weight="700" text-anchor="middle">② CRIAR WORKTREE</text>
+    <text x="560" y="178" font-size="9" fill="#8b96a8" text-anchor="middle">branch isolada criada</text>
+    <line x1="440" y1="184" x2="680" y2="184" stroke="#1f2937" stroke-width="1"/>
+    <text x="442" y="198" font-size="8" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">git worktree add</text>
+    <text x="442" y="212" font-size="8" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  ../worktrees/backend-S-042</text>
+    <text x="442" y="226" font-size="8" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  -b feat/backend-S-042</text>
+    <text x="442" y="242" font-size="8.5" fill="#4b5563">pasta isolada do main branch</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <line x1="690" y1="195" x2="858" y2="195" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <circle r="3.5" fill="#2dd4bf" opacity="0">
+    <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s"><mpath href="#path-a2"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" begin="0.9s"/>
+  </circle>
+
+  <!-- Step 3: Implementação -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.5s" dur="0.4s" fill="freeze"/>
+    <rect x="860" y="140" width="260" height="110" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.35;1;0.35" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="990" y="162" font-size="10" fill="#2dd4bf" font-weight="700" text-anchor="middle">③ IMPLEMENTAÇÃO</text>
+    <text x="990" y="178" font-size="9" fill="#8b96a8" text-anchor="middle">agente escreve o código</text>
+    <line x1="870" y1="184" x2="1110" y2="184" stroke="#1f2937" stroke-width="1"/>
+    <text x="872" y="198" font-size="8.5" fill="#4b5563">· segue padrões do projeto</text>
+    <text x="872" y="212" font-size="8.5" fill="#4b5563">· usa estrutura existente</text>
+    <text x="872" y="226" font-size="8.5" fill="#4b5563">· escreve testes (80% cov)</text>
+    <text x="872" y="240" font-size="8.5" fill="#4b5563">· commita incrementalmente</text>
+  </g>
+
+  <!-- Arrow 3→4 -->
+  <line x1="1120" y1="195" x2="1278" y2="195" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <circle r="3.5" fill="#2dd4bf" opacity="0">
+    <animateMotion dur="1.8s" repeatCount="indefinite" begin="1.3s"><mpath href="#path-a3"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" begin="1.3s"/>
+  </circle>
+
+  <!-- Step 4: Handoff -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.7s" dur="0.4s" fill="freeze"/>
+    <rect x="1280" y="140" width="220" height="110" rx="8" fill="#0d1117" stroke="#3b82f6" stroke-width="2"/>
+    <text x="1390" y="162" font-size="10" fill="#3b82f6" font-weight="700" text-anchor="middle">④ HANDOFF</text>
+    <text x="1390" y="178" font-size="9" fill="#8b96a8" text-anchor="middle">entrega ao gate</text>
+    <line x1="1290" y1="184" x2="1490" y2="184" stroke="#1f2937" stroke-width="1"/>
+    <text x="1292" y="198" font-size="8.5" fill="#4b5563">· diff do worktree</text>
+    <text x="1292" y="212" font-size="8.5" fill="#4b5563">· evidências dos testes</text>
+    <text x="1292" y="226" font-size="8.5" fill="#4b5563">· notas de decisão</text>
+    <text x="1292" y="240" font-size="8.5" fill="#4b5563">· checklist DoD</text>
+  </g>
+
+  <!-- Arrow 4→5 -->
+  <line x1="1500" y1="195" x2="1558" y2="195" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+  <circle r="3.5" fill="#3b82f6" opacity="0">
+    <animateMotion dur="1.8s" repeatCount="indefinite" begin="1.7s"><mpath href="#path-a4"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" begin="1.7s"/>
+  </circle>
+
+  <!-- Step 5: PR -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.9s" dur="0.4s" fill="freeze"/>
+    <rect x="1560" y="140" width="220" height="110" rx="8" fill="#0d1117" stroke="#4ade80" stroke-width="2"/>
+    <text x="1670" y="162" font-size="10" fill="#4ade80" font-weight="700" text-anchor="middle">⑤ PULL REQUEST</text>
+    <text x="1670" y="178" font-size="9" fill="#8b96a8" text-anchor="middle">merge ao main</text>
+    <line x1="1570" y1="184" x2="1770" y2="184" stroke="#1f2937" stroke-width="1"/>
+    <text x="1572" y="198" font-size="8.5" fill="#4b5563">· PR feat/backend-S-042</text>
+    <text x="1572" y="212" font-size="8.5" fill="#4b5563">· 4-eyes aprovado</text>
+    <text x="1572" y="226" font-size="8.5" fill="#4b5563">· CI/CD verde</text>
+    <text x="1572" y="240" font-size="8.5" fill="#4ade80">· worktree removido</text>
+  </g>
+
+  <!-- ══ SEÇÃO 2: WORKTREES PARALELOS (visualização) ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.1s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="270" width="1760" height="40" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="40" y="295" font-size="10" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">EXECUÇÃO PARALELA  ·  múltiplos worktrees simultâneos, sem conflito</text>
+
+    <!-- Main branch (base) -->
+    <rect x="30" y="326" width="1740" height="26" rx="4" fill="#111827" stroke="#3b82f6" stroke-width="1"/>
+    <circle cx="50" cy="339" r="6" fill="#3b82f6"/>
+    <text x="65" y="343" font-size="9.5" fill="#3b82f6" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">main</text>
+    <text x="125" y="343" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">────────────────────────────────────────────────────────────── HEAD</text>
+    <circle cx="1740" cy="339" r="6" fill="#4ade80"/>
+
+    <!-- Worktree A: backend -->
+    <line x1="360" y1="339" x2="360" y2="370" stroke="#2dd4bf" stroke-width="1.5"/>
+    <line x1="360" y1="370" x2="510" y2="370" stroke="#2dd4bf" stroke-width="1.5"/>
+    <rect x="510" y="362" width="280" height="32" rx="4" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="520" y="376" font-size="8.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">feat/backend-S-042</text>
+    <text x="520" y="389" font-size="8" fill="#4b5563">../worktrees/backend-S-042/</text>
+    <line x1="790" y1="378" x2="900" y2="378" stroke="#2dd4bf" stroke-width="1"/>
+    <line x1="900" y1="378" x2="900" y2="339" stroke="#2dd4bf" stroke-width="1.5"/>
+    <line x1="900" y1="339" x2="950" y2="339" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-green)"/>
+
+    <!-- Worktree B: frontend -->
+    <line x1="560" y1="339" x2="560" y2="415" stroke="#f472b6" stroke-width="1.5"/>
+    <line x1="560" y1="415" x2="710" y2="415" stroke="#f472b6" stroke-width="1.5"/>
+    <rect x="710" y="406" width="280" height="32" rx="4" fill="#1a0d14" stroke="#f472b6" stroke-width="1"/>
+    <text x="720" y="420" font-size="8.5" fill="#f472b6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">feat/frontend-S-043</text>
+    <text x="720" y="433" font-size="8" fill="#4b5563">../worktrees/frontend-S-043/</text>
+    <line x1="990" y1="422" x2="1150" y2="422" stroke="#f472b6" stroke-width="1"/>
+    <line x1="1150" y1="422" x2="1150" y2="339" stroke="#f472b6" stroke-width="1.5"/>
+    <line x1="1150" y1="339" x2="1200" y2="339" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-green)"/>
+
+    <!-- Worktree C: security (em andamento, sem merge) -->
+    <line x1="760" y1="339" x2="760" y2="460" stroke="#ef4444" stroke-width="1.5"/>
+    <line x1="760" y1="460" x2="910" y2="460" stroke="#ef4444" stroke-width="1.5"/>
+    <rect x="910" y="452" width="280" height="32" rx="4" fill="#1a0a0a" stroke="#ef4444" stroke-width="1">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="920" y="466" font-size="8.5" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">feat/security-S-044  ⟨ em andamento</text>
+    <text x="920" y="479" font-size="8" fill="#4b5563">../worktrees/security-S-044/</text>
+
+    <text x="40" y="500" font-size="9" fill="#4b5563">Cada worktree é uma pasta separada no sistema de arquivos — o agente trabalha nela sem interferir nos outros. Ao terminar, o PR é aberto e o worktree é removido com</text>
+    <text x="40" y="514" font-size="9" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">git worktree remove ../worktrees/backend-S-042</text>
+  </g>
+
+  <!-- ══ SEÇÃO 3: PADRÕES DE PROJETO ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.3s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="530" width="860" height="150" rx="8" fill="#0d1117" stroke="#3b82f6" stroke-width="1"/>
+    <text x="38" y="550" font-size="10" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">PADRÕES OBRIGATÓRIOS NO WORKTREE</text>
+    <line x1="30" y1="556" x2="870" y2="556" stroke="#1f2937" stroke-width="1"/>
+
+    <text x="40" y="572" font-size="9.5" fill="#8b96a8">① Leia o README e os arquivos de configuração antes de codar</text>
+    <text x="40" y="588" font-size="9.5" fill="#8b96a8">② Siga a estrutura de pastas existente (não invente novas)</text>
+    <text x="40" y="604" font-size="9.5" fill="#8b96a8">③ Reutilize funções e classes já escritas (evite duplicação)</text>
+    <text x="40" y="620" font-size="9.5" fill="#8b96a8">④ Nomeação: snake_case (Python/SQL), camelCase (JS/TS), PascalCase (classes)</text>
+    <text x="40" y="636" font-size="9.5" fill="#8b96a8">⑤ Todo commit inclui mensagem descritiva + referência S-NNN</text>
+    <text x="40" y="652" font-size="9.5" fill="#8b96a8">⑥ Nunca commitar secrets, .env ou credenciais</text>
+    <text x="40" y="668" font-size="9.5" fill="#8b96a8">⑦ Diff final deve cobrir apenas a tarefa despachada, nada além</text>
+  </g>
+
+  <!-- ══ SEÇÃO 4: MENSAGEM DE COMMIT ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.5s" dur="0.4s" fill="freeze"/>
+    <rect x="896" y="530" width="884" height="150" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="914" y="550" font-size="10" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">ANATOMIA DE UM COMMIT</text>
+    <line x1="906" y1="556" x2="1770" y2="556" stroke="#1f2937" stroke-width="1"/>
+
+    <rect x="912" y="562" width="860" height="106" rx="4" fill="#060a0f"/>
+    <text x="924" y="578" font-size="8.5" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">feat(api): POST /api/users endpoint — S-042</text>
+    <text x="924" y="596" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"> </text>
+    <text x="924" y="612" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- Valida body com Zod schema</text>
+    <text x="924" y="626" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- Hash de senha com bcrypt (salt 12)</text>
+    <text x="924" y="640" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- Testes unitários: 14 casos (100% branch cov.)</text>
+    <text x="924" y="654" font-size="8.5" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Refs: S-042  Worktree: feat/backend-S-042</text>
+
+    <text x="914" y="674" font-size="8.5" fill="#4b5563">tipo: feat/fix/docs/test/refactor/chore  ·  escopo: módulo  ·  referência obrigatória S-NNN</text>
+  </g>
+
+  <!-- ══ STATUS BAR ══ -->
+  <rect x="20" y="700" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="711" r="4" fill="#2dd4bf">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="715" font-size="9.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 07</text>
+  <text x="108" y="715" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="118" y="715" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">worktree isolado · brief → impl → handoff → PR · padrões obrigatórios · formato de commit</text>
+  <text x="1770" y="715" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">GIT WORKTREES</text>
+
+  <!-- ══ LEGENDA ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.7s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="736" width="1760" height="50" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="752" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA</text>
+    <line x1="30" y1="756" x2="1770" y2="756" stroke="#1f2937" stroke-width="1"/>
+    <rect x="38" y="762" width="10" height="10" rx="2" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="55" y="772" font-size="9.5" fill="#8b96a8">worktree ativo (em execução)</text>
+    <rect x="230" y="762" width="10" height="10" rx="2" fill="#1a0a0a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="247" y="772" font-size="9.5" fill="#8b96a8">worktree em andamento (gate pendente)</text>
+    <rect x="490" y="762" width="10" height="10" rx="2" fill="#0d1117" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="507" y="772" font-size="9.5" fill="#8b96a8">merge concluído (worktree removido)</text>
+    <text x="730" y="772" font-size="9.5" fill="#4b5563">worktree: pasta git isolada criada com <tspan font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" fill="#2dd4bf">git worktree add</tspan> — permite múltiplos agentes trabalharem em paralelo sem conflito de branch</text>
+  </g>
+</svg>

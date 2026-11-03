@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 872" width="920" height="872" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" role="img" aria-label="Princípios que valem em todo o fluxo: 8 linhas, colunas Princípio, O que significa na prática, Onde está escrito">
+<rect width="920" height="872" rx="10" fill="#0b0f17"/>
+<rect x="0.5" y="0.5" width="919" height="871" rx="10" fill="#111827" stroke="#1f2937"/>
+<text x="16" y="24" font-size="14" font-weight="700" fill="#e6edf3">Princípios que valem em todo o fluxo</text>
+<rect x="16" y="31" width="28" height="2" rx="1" fill="#2dd4bf"/>
+<rect x="1" y="36" width="918" height="40" fill="#0b0f17"/>
+<text x="16" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">PRINCÍPIO</text>
+<text x="317" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">O QUE SIGNIFICA NA PRÁTICA</text>
+<text x="618.5" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">ONDE ESTÁ ESCRITO</text>
+<line x1="0" y1="76" x2="920" y2="76" stroke="#2dd4bf" stroke-opacity="0.5"/>
+<text x="16" y="100" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">O </tspan><tspan fill="#e6edf3" font-weight="700">principal </tspan><tspan fill="#e6edf3" font-weight="700">coordena </tspan><tspan fill="#e6edf3" font-weight="700">e </tspan><tspan fill="#e6edf3" font-weight="700">nunca </tspan><tspan fill="#e6edf3" font-weight="700">implementa</tspan></text>
+<text x="317" y="100" xml:space="preserve"><tspan fill="#c9d4e3">O </tspan><tspan fill="#c9d4e3">agente </tspan><tspan fill="#c9d4e3">principal </tspan><tspan fill="#c9d4e3">recebe </tspan><tspan fill="#c9d4e3">a </tspan><tspan fill="#c9d4e3">demanda, </tspan></text>
+<text x="317" y="119" xml:space="preserve"><tspan fill="#c9d4e3">escolhe </tspan><tspan fill="#c9d4e3">especialistas, </tspan><tspan fill="#c9d4e3">roteia </tspan></text>
+<text x="317" y="138" xml:space="preserve"><tspan fill="#c9d4e3">mensagens, </tspan><tspan fill="#c9d4e3">confere </tspan><tspan fill="#c9d4e3">evidências </tspan><tspan fill="#c9d4e3">e </tspan></text>
+<text x="317" y="157" xml:space="preserve"><tspan fill="#c9d4e3">comunica </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">resultado. </tspan><tspan fill="#c9d4e3">Implementar, </tspan></text>
+<text x="317" y="176" xml:space="preserve"><tspan fill="#c9d4e3">diagnosticar </tspan><tspan fill="#c9d4e3">domínio </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">dar </tspan><tspan fill="#c9d4e3">parecer </tspan></text>
+<text x="317" y="195" xml:space="preserve"><tspan fill="#c9d4e3">técnico </tspan><tspan fill="#c9d4e3">é </tspan><tspan fill="#c9d4e3">dos </tspan><tspan fill="#c9d4e3">especialistas. </tspan><tspan fill="#c9d4e3">Não </tspan><tspan fill="#c9d4e3">existe </tspan></text>
+<text x="317" y="214" xml:space="preserve"><tspan fill="#c9d4e3">um </tspan><tspan fill="#c9d4e3">"subagente </tspan><tspan fill="#c9d4e3">coordenador" </tspan><tspan fill="#c9d4e3">acima </tspan><tspan fill="#c9d4e3">deles.</tspan></text>
+<text x="618.5" y="100" xml:space="preserve"><tspan fill="#c9d4e3">engineering.md</tspan></text>
+<line x1="16" y1="227" x2="904" y2="227" stroke="#1f2937"/>
+<rect x="1" y="227" width="918" height="113" fill="#0f1623"/>
+<text x="16" y="251" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">Ninguém </tspan><tspan fill="#e6edf3" font-weight="700">aprova </tspan><tspan fill="#e6edf3" font-weight="700">o </tspan><tspan fill="#e6edf3" font-weight="700">próprio </tspan><tspan fill="#e6edf3" font-weight="700">trabalho</tspan></text>
+<text x="317" y="251" xml:space="preserve"><tspan fill="#c9d4e3">Um </tspan><tspan fill="#c9d4e3">especialista </tspan><tspan fill="#c9d4e3">pode </tspan><tspan fill="#c9d4e3">autorar </tspan><tspan fill="#c9d4e3">uma </tspan><tspan fill="#c9d4e3">tarefa </tspan></text>
+<text x="317" y="270" xml:space="preserve"><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">revisar </tspan><tspan fill="#c9d4e3">outra, </tspan><tspan fill="#c9d4e3">nunca </tspan><tspan fill="#c9d4e3">a </tspan><tspan fill="#c9d4e3">própria </tspan></text>
+<text x="317" y="289" xml:space="preserve"><tspan fill="#c9d4e3">entrega. </tspan><tspan fill="#c9d4e3">Os </tspan><tspan fill="#c9d4e3">gates </tspan><tspan fill="#c9d4e3">são </tspan><tspan fill="#c9d4e3">instâncias </tspan></text>
+<text x="317" y="308" xml:space="preserve"><tspan fill="#c9d4e3">distintas </tspan><tspan fill="#c9d4e3">do </tspan><tspan fill="#c9d4e3">autor, </tspan><tspan fill="#c9d4e3">registradas </tspan><tspan fill="#c9d4e3">no </tspan></text>
+<text x="317" y="327" xml:space="preserve"><tspan fill="#c9d4e3">brief.</tspan></text>
+<text x="618.5" y="251" xml:space="preserve"><tspan fill="#c9d4e3">engineering.md, </tspan><tspan fill="#c9d4e3">base.json</tspan></text>
+<line x1="16" y1="340" x2="904" y2="340" stroke="#1f2937"/>
+<text x="16" y="364" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">Os </tspan><tspan fill="#e6edf3" font-weight="700">gates </tspan><tspan fill="#e6edf3" font-weight="700">nunca </tspan><tspan fill="#e6edf3" font-weight="700">saem </tspan><tspan fill="#e6edf3" font-weight="700">para </tspan><tspan fill="#e6edf3" font-weight="700">economizar </tspan></text>
+<text x="16" y="383" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">tokens</tspan></text>
+<text x="317" y="364" xml:space="preserve"><tspan fill="#c9d4e3">QA, </tspan><tspan fill="#c9d4e3">revisão </tspan><tspan fill="#c9d4e3">técnica/conformidade </tspan><tspan fill="#c9d4e3">e </tspan></text>
+<text x="317" y="383" xml:space="preserve"><tspan fill="#c9d4e3">segurança </tspan><tspan fill="#c9d4e3">são </tspan><tspan fill="#c9d4e3">obrigatórios </tspan><tspan fill="#c9d4e3">para </tspan></text>
+<text x="317" y="402" xml:space="preserve"><tspan fill="#c9d4e3">implementação; </tspan><tspan fill="#c9d4e3">privacidade </tspan><tspan fill="#c9d4e3">quando </tspan><tspan fill="#c9d4e3">há </tspan></text>
+<text x="317" y="421" xml:space="preserve"><tspan fill="#c9d4e3">dados </tspan><tspan fill="#c9d4e3">pessoais. </tspan><tspan fill="#c9d4e3">Economia </tspan><tspan fill="#c9d4e3">muda </tspan><tspan fill="#c9d4e3">*como* </tspan><tspan fill="#c9d4e3">se </tspan></text>
+<text x="317" y="440" xml:space="preserve"><tspan fill="#c9d4e3">executa, </tspan><tspan fill="#c9d4e3">nunca </tspan><tspan fill="#c9d4e3">*se* </tspan><tspan fill="#c9d4e3">se </tspan><tspan fill="#c9d4e3">verifica.</tspan></text>
+<text x="618.5" y="364" xml:space="preserve"><tspan fill="#c9d4e3">economy.md, </tspan><tspan fill="#c9d4e3">models.md</tspan></text>
+<line x1="16" y1="453" x2="904" y2="453" stroke="#1f2937"/>
+<rect x="1" y="453" width="918" height="75" fill="#0f1623"/>
+<text x="16" y="477" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">Silêncio </tspan><tspan fill="#e6edf3" font-weight="700">não </tspan><tspan fill="#e6edf3" font-weight="700">é </tspan><tspan fill="#e6edf3" font-weight="700">aprovação</tspan></text>
+<text x="317" y="477" xml:space="preserve"><tspan fill="#c9d4e3">Timeout, </tspan><tspan fill="#c9d4e3">validador </tspan><tspan fill="#c9d4e3">ausente, </tspan><tspan fill="#c9d4e3">impasse </tspan><tspan fill="#c9d4e3">ou </tspan></text>
+<text x="317" y="496" xml:space="preserve"><tspan fill="#c9d4e3">orçamento </tspan><tspan fill="#c9d4e3">esgotado </tspan><tspan fill="#c9d4e3">nunca </tspan><tspan fill="#c9d4e3">contam </tspan><tspan fill="#c9d4e3">como </tspan></text>
+<text x="317" y="515" xml:space="preserve"><tspan fill="#c9d4e3">aprovado </tspan><tspan fill="#c9d4e3">nem </tspan><tspan fill="#c9d4e3">como </tspan><tspan fill="#c9d4e3">"sem </tspan><tspan fill="#c9d4e3">defeitos".</tspan></text>
+<text x="618.5" y="477" xml:space="preserve"><tspan fill="#c9d4e3">engineering.md</tspan></text>
+<line x1="16" y1="528" x2="904" y2="528" stroke="#1f2937"/>
+<text x="16" y="552" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">Evidência, </tspan><tspan fill="#e6edf3" font-weight="700">não </tspan><tspan fill="#e6edf3" font-weight="700">promessa</tspan></text>
+<text x="317" y="552" xml:space="preserve"><tspan fill="#c9d4e3">Resultado </tspan><tspan fill="#c9d4e3">só </tspan><tspan fill="#c9d4e3">vale </tspan><tspan fill="#c9d4e3">se </tspan><tspan fill="#c9d4e3">foi </tspan><tspan fill="#c9d4e3">executado </tspan><tspan fill="#c9d4e3">de </tspan></text>
+<text x="317" y="571" xml:space="preserve"><tspan fill="#c9d4e3">verdade: </tspan><tspan fill="#c9d4e3">comando, </tspan><tspan fill="#c9d4e3">diretório, </tspan><tspan fill="#c9d4e3">data </tspan><tspan fill="#c9d4e3">UTC, </tspan></text>
+<text x="317" y="590" xml:space="preserve"><tspan fill="#c9d4e3">código </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">saída, </tspan><tspan fill="#c9d4e3">SHA </tspan><tspan fill="#c9d4e3">do </tspan><tspan fill="#c9d4e3">Git, </tspan><tspan fill="#c9d4e3">snapshot </tspan></text>
+<text x="317" y="609" xml:space="preserve"><tspan fill="#c9d4e3">completo. </tspan><tspan fill="#c9d4e3">Build </tspan><tspan fill="#c9d4e3">verde </tspan><tspan fill="#c9d4e3">não </tspan><tspan fill="#c9d4e3">é </tspan><tspan fill="#c9d4e3">deploy.</tspan></text>
+<text x="618.5" y="552" xml:space="preserve"><tspan fill="#c9d4e3">evidence.md</tspan></text>
+<line x1="16" y1="622" x2="904" y2="622" stroke="#1f2937"/>
+<rect x="1" y="622" width="918" height="75" fill="#0f1623"/>
+<text x="16" y="646" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">Nada </tspan><tspan fill="#e6edf3" font-weight="700">se </tspan><tspan fill="#e6edf3" font-weight="700">instala </tspan><tspan fill="#e6edf3" font-weight="700">sem </tspan><tspan fill="#e6edf3" font-weight="700">proposta </tspan><tspan fill="#e6edf3" font-weight="700">aprovada</tspan></text>
+<text x="317" y="646" xml:space="preserve"><tspan fill="#c9d4e3">Ferramentas </tspan><tspan fill="#c9d4e3">externas </tspan><tspan fill="#c9d4e3">exigem </tspan><tspan fill="#c9d4e3">proposta, </tspan></text>
+<text x="317" y="665" xml:space="preserve"><tspan fill="#c9d4e3">critérios </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">segurança </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">popularidade, </tspan></text>
+<text x="317" y="684" xml:space="preserve"><tspan fill="#c9d4e3">aprovação </tspan><tspan fill="#c9d4e3">explícita </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">registro.</tspan></text>
+<text x="618.5" y="646" xml:space="preserve"><tspan fill="#c9d4e3">installations.md</tspan></text>
+<line x1="16" y1="697" x2="904" y2="697" stroke="#1f2937"/>
+<text x="16" y="721" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">Autorização </tspan><tspan fill="#e6edf3" font-weight="700">explícita </tspan><tspan fill="#e6edf3" font-weight="700">para </tspan><tspan fill="#e6edf3" font-weight="700">o </tspan></text>
+<text x="16" y="740" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">irreversível</tspan></text>
+<text x="317" y="721" xml:space="preserve"><tspan fill="#c9d4e3">Deploy </tspan><tspan fill="#c9d4e3">em </tspan><tspan fill="#c9d4e3">produção, </tspan><tspan fill="#c9d4e3">migração </tspan><tspan fill="#c9d4e3">em </tspan></text>
+<text x="317" y="740" xml:space="preserve"><tspan fill="#c9d4e3">produção, </tspan><tspan fill="#c9d4e3">mudança </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">IAM, </tspan><tspan fill="#c9d4e3">operação </tspan></text>
+<text x="317" y="759" xml:space="preserve"><tspan fill="#c9d4e3">destrutiva </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">rotação </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">segredo </tspan><tspan fill="#c9d4e3">exigem </tspan></text>
+<text x="317" y="778" xml:space="preserve"><tspan fill="#c9d4e3">autorização; </tspan><tspan fill="#c9d4e3">planos </tspan><tspan fill="#c9d4e3">não </tspan><tspan fill="#c9d4e3">autorizam.</tspan></text>
+<text x="618.5" y="721" xml:space="preserve"><tspan fill="#c9d4e3">safety.md</tspan></text>
+<line x1="16" y1="791" x2="904" y2="791" stroke="#1f2937"/>
+<rect x="1" y="791" width="918" height="75" fill="#0f1623"/>
+<text x="16" y="815" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">`completed` </tspan><tspan fill="#e6edf3" font-weight="700">é </tspan><tspan fill="#e6edf3" font-weight="700">do </tspan><tspan fill="#e6edf3" font-weight="700">principal; </tspan><tspan fill="#e6edf3" font-weight="700">`accepted` </tspan></text>
+<text x="16" y="834" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">é </tspan><tspan fill="#e6edf3" font-weight="700">do </tspan><tspan fill="#e6edf3" font-weight="700">humano</tspan></text>
+<text x="317" y="815" xml:space="preserve"><tspan fill="#c9d4e3">Concluir </tspan><tspan fill="#c9d4e3">tecnicamente </tspan><tspan fill="#c9d4e3">(com </tspan><tspan fill="#c9d4e3">evidência </tspan></text>
+<text x="317" y="834" xml:space="preserve"><tspan fill="#c9d4e3">reexecutada) </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">aceitar </tspan><tspan fill="#c9d4e3">são </tspan><tspan fill="#c9d4e3">atos </tspan></text>
+<text x="317" y="853" xml:space="preserve"><tspan fill="#c9d4e3">separados, </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">pessoas </tspan><tspan fill="#c9d4e3">diferentes.</tspan></text>
+<text x="618.5" y="815" xml:space="preserve"><tspan fill="#c9d4e3">github-projects.md</tspan></text>
+</svg>

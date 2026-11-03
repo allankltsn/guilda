@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1072 216" width="1072" height="216" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" role="img" aria-label="scripts/template.py: 7 linhas de bash">
+<rect width="1072" height="216" rx="10" fill="#0b0f17"/>
+<rect x="0.5" y="0.5" width="1071" height="215" rx="10" fill="#111827" stroke="#1f2937"/>
+<path d="M0.5 40 V10.5 a10 10 0 0 1 10 -10 H1061.5 a10 10 0 0 1 10 10 V40 Z" fill="#0b0f17"/>
+<line x1="0" y1="40" x2="1072" y2="40" stroke="#1f2937"/>
+<circle cx="20" cy="20" r="5" fill="#ef4444" opacity="0.85"/>
+<circle cx="38" cy="20" r="5" fill="#f59e0b" opacity="0.85"/>
+<circle cx="56" cy="20" r="5" fill="#4ade80" opacity="0.85"/>
+<text x="536" y="24" text-anchor="middle" font-size="12" fill="#8b96a8">scripts/template.py</text>
+<text x="1056" y="24" text-anchor="end" font-size="11" fill="#4b5563">bash</text>
+<text x="20" y="70" font-size="14" xml:space="preserve" opacity="1"><tspan fill="#60a5fa">python scripts/template.py init </tspan><tspan fill="#f59e0b">--target</tspan><tspan fill="#e6edf3"> </tspan><tspan fill="#a78bfa">&lt;diretorio&gt;</tspan><tspan fill="#e6edf3"> </tspan><tspan fill="#f59e0b">--providers</tspan><tspan fill="#e6edf3"> claude,codex </tspan><tspan fill="#f59e0b">--profiles</tspan><tspan fill="#e6edf3"> base </tspan><tspan fill="#f59e0b">--dry-run</tspan></text>
+<text x="20" y="92" font-size="14" xml:space="preserve" opacity="1"><tspan fill="#60a5fa">python scripts/template.py init </tspan><tspan fill="#f59e0b">--target</tspan><tspan fill="#e6edf3"> </tspan><tspan fill="#a78bfa">&lt;diretorio&gt;</tspan><tspan fill="#e6edf3"> </tspan><tspan fill="#f59e0b">--providers</tspan><tspan fill="#e6edf3"> claude,codex </tspan><tspan fill="#f59e0b">--profiles</tspan><tspan fill="#e6edf3"> base,product-team,github-projects</tspan></text>
+<text x="20" y="114" font-size="14" xml:space="preserve" opacity="1"><tspan fill="#60a5fa">python scripts/template.py sync </tspan><tspan fill="#f59e0b">--target</tspan><tspan fill="#e6edf3"> </tspan><tspan fill="#a78bfa">&lt;diretorio&gt;</tspan><tspan fill="#e6edf3"> </tspan><tspan fill="#f59e0b">--providers</tspan><tspan fill="#e6edf3"> claude,codex </tspan><tspan fill="#f59e0b">--profiles</tspan><tspan fill="#e6edf3"> base,product-team,github-projects</tspan></text>
+<text x="20" y="136" font-size="14" xml:space="preserve" opacity="1"><tspan fill="#60a5fa">python scripts/template.py check </tspan><tspan fill="#f59e0b">--target</tspan><tspan fill="#e6edf3"> </tspan><tspan fill="#a78bfa">&lt;diretorio&gt;</tspan></text>
+<text x="20" y="158" font-size="14" xml:space="preserve" opacity="1"><tspan fill="#60a5fa">python scripts/template.py doctor</tspan></text>
+<text x="20" y="180" font-size="14" xml:space="preserve" opacity="1"><tspan fill="#60a5fa">python scripts/template.py package </tspan><tspan fill="#f59e0b">--target</tspan><tspan fill="#e6edf3"> </tspan><tspan fill="#a78bfa">&lt;diretorio-de-saida&gt;</tspan><tspan fill="#e6edf3"> </tspan><tspan fill="#f59e0b">--provider</tspan><tspan fill="#e6edf3"> claude</tspan></text>
+<text x="20" y="202" font-size="14" xml:space="preserve" opacity="1"><tspan fill="#60a5fa">python scripts/template.py init </tspan><tspan fill="#f59e0b">--target</tspan><tspan fill="#e6edf3"> </tspan><tspan fill="#a78bfa">&lt;diretorio&gt;</tspan><tspan fill="#e6edf3"> </tspan><tspan fill="#f59e0b">--profiles</tspan><tspan fill="#e6edf3"> base </tspan><tspan fill="#f59e0b">--tier</tspan><tspan fill="#e6edf3"> reviewer=deep </tspan><tspan fill="#f59e0b">--tier</tspan><tspan fill="#e6edf3"> finops=light</tspan></text>
+</svg>

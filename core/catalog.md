@@ -70,3 +70,12 @@ Choice recorded: economy and communication are core because they are low-frictio
 gate; session continuity is a profile because it interrupts the user at thresholds and
 mandates a stop, which not every project wants. The continuity workflow file is still rendered
 in the core tree (all core files are), but it binds the project only when the profile is selected.
+
+## Additions after 1.3.0 (diagram skill)
+| Origin | Canonical target | Notes |
+|---|---|---|
+| Animated architecture/flow diagrams for the template walkthrough (assets/) | skills/dark-pipeline-svg/SKILL.md | Dark design system (palette per group, SMIL patterns, header/status/legend layout); self-contained HTML, provider-neutral output step |
+| README/markdown styling (banner, badges, grids, code blocks, Lucide icons) | skills/readme-styling/SKILL.md | Orchestrates dark-pipeline-svg for banner/diagrams/charts; Lucide set in assets/icons/lucide with recolor script |
+| Board freshness, dual validation, review with each crash-safety record | workflow/github-projects.md, workflow/economy.md, workflow/session-continuity.md | Boards went stale because nothing moves cards automatically; adds windows, two owners and an independent cross-check |
+| SemVer tag before any change lands on main | policies/versioning.md | Tag first, code second; always; principal or designated release specialist tags; no authorization is granted by the rule |
+| Secret scans report location, never value | policies/safety.md | File-list/count output only (`files_with_matches`, `rg -l/-c`); mask to confirm; full read needs per-file user authorization; ignore rules can hide `.env` |

@@ -1,0 +1,17 @@
+{
+  "title": "Loja Verde",
+  "tagline": ["E-commerce de produtos orgânicos", {"text": "· deploy contínuo", "accent": true}],
+  "palette": {"accent": "#22c55e", "accent2": "#14b8a6", "bg": "#0a120d", "surface": "#0f1a13", "border": "#1c2b21"},
+  "stack": ["Next.js", "Vercel", "Stripe", "Supabase", "GitHub Actions"],
+  "panel": {
+    "type": "pipeline",
+    "title": "ci / main",
+    "stages": [
+      {"label": "lint", "status": "ok", "detail": "4s"},
+      {"label": "test", "status": "ok", "detail": "31s"},
+      {"label": "build", "status": "ok", "detail": "48s"},
+      {"label": "deploy · vercel", "status": "run", "detail": "..."},
+      {"label": "smoke test", "status": "pending"}
+    ]
+  }
+}

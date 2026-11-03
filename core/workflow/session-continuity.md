@@ -51,6 +51,9 @@ resumes without losing direction:
   at most 25 lines: current phase, current snapshot hashes, agents in progress, next step, pending
   items for the user. Update at each phase or gate change, writing a temporary file first and
   renaming it over the old one (atomic replace), so a crash never leaves a half-written state.
+- **Board review with every record.** Each diary entry and live-state update is followed by the board
+  review in workflow/github-projects.md (board freshness and dual validation), so a crash never leaves
+  cards ahead of or behind the real state.
 - **Project memory only at milestones** (end of a round, a user decision, token milestones), not at
   every event, to save tokens.
 - **Mechanical records by direct append** (`echo >>`), without an agent; use the scribe only for
@@ -64,6 +67,8 @@ resumes without losing direction:
 4. Revalidate the snapshot hash in `live-state.md` against the working tree before trusting any
    earlier gate verdict; a changed snapshot needs gate impact analysis.
 5. Add a diary line stating the resume and what was found.
+6. Review the board (workflow/github-projects.md, board freshness): an agent given up as LOST must not
+   leave its card `in-progress`.
 
 ## Privacy of the records
 Diary and live state hold event types, times, statuses and paths relative to the project root

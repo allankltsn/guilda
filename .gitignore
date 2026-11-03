@@ -18,3 +18,10 @@ credentials*.json
 dist/
 build/
 node_modules/
+
+# Documentos de desenvolvimento (specs, planos): branch dev-docs montado aqui; nunca entra na main nem na develop.
+.dev/
+
+# Saida de ferramentas (grafo de conhecimento)
+core/graphify-out/
+graphify-out/

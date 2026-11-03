@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 289" width="920" height="289" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" role="img" aria-label="Etapa 14 · Continuidade de sessão: 2 linhas, colunas Marco, Padrão, Ação">
+<rect width="920" height="289" rx="10" fill="#0b0f17"/>
+<rect x="0.5" y="0.5" width="919" height="288" rx="10" fill="#111827" stroke="#1f2937"/>
+<text x="16" y="24" font-size="14" font-weight="700" fill="#e6edf3">Etapa 14 · Continuidade de sessão</text>
+<rect x="16" y="31" width="28" height="2" rx="1" fill="#2dd4bf"/>
+<rect x="1" y="36" width="918" height="40" fill="#0b0f17"/>
+<text x="16" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">MARCO</text>
+<text x="146" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">PADRÃO</text>
+<text x="533.0" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">AÇÃO</text>
+<line x1="0" y1="76" x2="920" y2="76" stroke="#2dd4bf" stroke-opacity="0.5"/>
+<text x="16" y="100" xml:space="preserve"><tspan fill="#c9d4e3">Perguntar</tspan></text>
+<text x="146" y="100" xml:space="preserve"><tspan fill="#c9d4e3">100k, </tspan><tspan fill="#c9d4e3">200k, </tspan><tspan fill="#c9d4e3">300k</tspan></text>
+<text x="533.0" y="100" xml:space="preserve"><tspan fill="#c9d4e3">Termina </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">passo </tspan><tspan fill="#c9d4e3">em </tspan><tspan fill="#c9d4e3">andamento </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#e6edf3" font-weight="700">pergunta</tspan><tspan fill="#c9d4e3"> ao </tspan><tspan fill="#c9d4e3">usuário </tspan></text>
+<text x="533.0" y="119" xml:space="preserve"><tspan fill="#c9d4e3">se </tspan><tspan fill="#c9d4e3">encerra </tspan><tspan fill="#c9d4e3">a </tspan><tspan fill="#c9d4e3">sessão, </tspan><tspan fill="#c9d4e3">com </tspan><tspan fill="#c9d4e3">recomendação </tspan><tspan fill="#c9d4e3">primeiro. </tspan><tspan fill="#c9d4e3">O </tspan></text>
+<text x="533.0" y="138" xml:space="preserve"><tspan fill="#c9d4e3">usuário </tspan><tspan fill="#c9d4e3">decide.</tspan></text>
+<line x1="16" y1="151" x2="904" y2="151" stroke="#1f2937"/>
+<rect x="1" y="151" width="918" height="132" fill="#0f1623"/>
+<text x="16" y="175" xml:space="preserve"><tspan fill="#c9d4e3">Obrigatório</tspan></text>
+<text x="146" y="175" xml:space="preserve"><tspan fill="#c9d4e3">400k</tspan></text>
+<text x="533.0" y="175" xml:space="preserve"><tspan fill="#c9d4e3">Sem </tspan><tspan fill="#c9d4e3">perguntar: </tspan><tspan fill="#c9d4e3">não </tspan><tspan fill="#c9d4e3">despacha </tspan><tspan fill="#c9d4e3">novo </tspan><tspan fill="#c9d4e3">agente, </tspan><tspan fill="#c9d4e3">deixa </tspan><tspan fill="#c9d4e3">os </tspan><tspan fill="#c9d4e3">em </tspan></text>
+<text x="533.0" y="194" xml:space="preserve"><tspan fill="#c9d4e3">curso </tspan><tspan fill="#c9d4e3">terminarem, </tspan><tspan fill="#c9d4e3">registra </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">necessário </tspan><tspan fill="#c9d4e3">na </tspan><tspan fill="#c9d4e3">memória </tspan></text>
+<text x="533.0" y="213" xml:space="preserve"><tspan fill="#c9d4e3">do </tspan><tspan fill="#c9d4e3">projeto, </tspan><tspan fill="#c9d4e3">escreve </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">prompt </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">continuação </tspan><tspan fill="#c9d4e3">em </tspan></text>
+<text x="533.0" y="232" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">docs/operations/continuation-prompt-&lt;data&gt;.md</tspan></text>
+<text x="533.0" y="251" xml:space="preserve"><tspan fill="#c9d4e3"> e </tspan><tspan fill="#e6edf3" font-weight="700">para</tspan><tspan fill="#c9d4e3">. </tspan><tspan fill="#c9d4e3">O </tspan><tspan fill="#c9d4e3">agente </tspan><tspan fill="#c9d4e3">não </tspan><tspan fill="#c9d4e3">consegue </tspan><tspan fill="#c9d4e3">fechar </tspan><tspan fill="#c9d4e3">a </tspan><tspan fill="#c9d4e3">sessão </tspan></text>
+<text x="533.0" y="270" xml:space="preserve"><tspan fill="#c9d4e3">sozinho.</tspan></text>
+</svg>

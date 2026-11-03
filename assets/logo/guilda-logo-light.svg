@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" width="640" height="200" role="img" aria-label="guilda: time de agentes especialistas">
+<title>guilda</title>
+<g>
+<path d="M169.3 100 V140 L100 180 L30.7 140 V60 L100 20 L169.3 60" fill="none" stroke="#0f766e" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="169.3" y1="100" x2="116" y2="100" stroke="#0f766e" stroke-width="9" stroke-linecap="round"/>
+<line x1="100.0" y1="81.0" x2="100.0" y2="54.0" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/><line x1="116.5" y1="90.5" x2="139.8" y2="77.0" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/><line x1="116.5" y1="109.5" x2="139.8" y2="123.0" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/><line x1="100.0" y1="119.0" x2="100.0" y2="146.0" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/><line x1="83.5" y1="109.5" x2="60.2" y2="123.0" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/><line x1="83.5" y1="90.5" x2="60.2" y2="77.0" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/>
+<circle cx="100.0" cy="54.0" r="8.5" fill="#0f766e"/><circle cx="139.8" cy="77.0" r="8.5" fill="#0f766e"/><circle cx="139.8" cy="123.0" r="8.5" fill="#0f766e"/><circle cx="100.0" cy="146.0" r="8.5" fill="#0f766e"/><circle cx="60.2" cy="123.0" r="8.5" fill="#0f766e"/><circle cx="60.2" cy="77.0" r="8.5" fill="#0f766e"/>
+<circle cx="100" cy="100" r="13" fill="none" stroke="#0f766e" stroke-width="6"/>
+</g>
+<text x="226" y="112" font-family="ui-rounded, 'Segoe UI', -apple-system, Helvetica, Arial, sans-serif" font-size="84" font-weight="700" letter-spacing="-1" fill="#0f766e">guilda</text>
+<text x="230" y="160" font-family="ui-rounded, 'Segoe UI', -apple-system, Helvetica, Arial, sans-serif" font-size="20" letter-spacing="1.5" fill="#0f766e" fill-opacity="0.75">time de agentes especialistas</text>
+</svg>

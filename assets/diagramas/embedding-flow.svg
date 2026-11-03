@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1900 980"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-teal" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#2dd4bf"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arr-violet" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#a78bfa"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#4ade80"/>
+    </marker>
+    <marker id="arr-pink" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f472b6"/>
+    </marker>
+
+    <!-- Glow -->
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-sm" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Dot paths — INDEXAÇÃO -->
+    <path id="idx-p1" d="M 195,195 L 305,195" fill="none"/>
+    <path id="idx-p2" d="M 530,195 L 640,195" fill="none"/>
+    <path id="idx-p3" d="M 870,195 L 980,195" fill="none"/>
+    <path id="idx-p4" d="M 1190,195 L 1305,195" fill="none"/>
+    <path id="idx-p5" d="M 1530,195 L 1640,195" fill="none"/>
+    <!-- BUSCA -->
+    <path id="srch-p1" d="M 195,590 L 305,590" fill="none"/>
+    <path id="srch-p2" d="M 530,590 L 640,590" fill="none"/>
+    <path id="srch-p3" d="M 870,590 L 980,590" fill="none"/>
+    <path id="srch-p4" d="M 1190,590 L 1305,590" fill="none"/>
+    <path id="srch-p5" d="M 1530,590 L 1640,590" fill="none"/>
+  </defs>
+
+  <rect width="1900" height="980" fill="#0b0f17"/>
+
+  <!-- ══════════ HEADER ══════════ -->
+  <text x="30" y="38" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+        font-size="11" fill="#8b96a8" letter-spacing="1.2">
+    RAG · VECTOR DATABASE · PGVECTOR · OPENROUTER EMBEDDINGS
+  </text>
+  <text x="1870" y="38" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+        font-size="11" fill="#4b5563" text-anchor="end">
+    text-embedding-3-small · 1536 dimensões · similaridade cosseno
+  </text>
+
+  <rect x="20" y="50" width="1860" height="46" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="50" width="6" height="46" rx="3" fill="#2dd4bf"/>
+  <text x="44" y="71" font-size="16" font-weight="700" fill="#e6edf3">Fluxo de Embedding para Banco Vetorial</text>
+  <text x="44" y="88" font-size="11.5" fill="#8b96a8">
+    Como texto vira vetor numérico, como vetores são armazenados em PostgreSQL com pgvector, e como a busca semântica funciona
+  </text>
+
+  <!-- ══════════════════════════════════════════════════════
+       SEÇÃO 1: INDEXAÇÃO (lado de cima)
+  ══════════════════════════════════════════════════════ -->
+
+  <!-- Banda de fundo INDEXAÇÃO -->
+  <rect x="20" y="108" width="1860" height="290" rx="8" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+  <text x="38" y="126" font-size="9.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1.2">
+    FASE 1 — INDEXAÇÃO  ·  addDocuments()  ·  acontece uma vez, quando os documentos são carregados
+  </text>
+
+  <!-- Fase dividers -->
+  <line x1="300" y1="130" x2="300" y2="390" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="635" y1="130" x2="635" y2="390" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="975" y1="130" x2="975" y2="390" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="1300" y1="130" x2="1300" y2="390" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="1635" y1="130" x2="1635" y2="390" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <text x="160" y="140" font-size="8.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">DOCUMENTO</text>
+  <text x="467" y="140" font-size="8.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">CHUNKING</text>
+  <text x="805" y="140" font-size="8.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">MODELO DE EMBEDDING</text>
+  <text x="1137" y="140" font-size="8.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">VETOR NUMÉRICO</text>
+  <text x="1467" y="140" font-size="8.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">BANCO VETORIAL</text>
+  <text x="1747" y="140" font-size="8.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">GRAVADO</text>
+
+  <!-- NODE A1: Documento de origem -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.4s" fill="freeze"/>
+    <rect x="30" y="155" width="270" height="90" rx="8" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="165" y="176" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">📄 Document</text>
+    <text x="165" y="193" font-size="9.5" fill="#3b82f6" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">{ pageContent, metadata }</text>
+    <line x1="40" y1="200" x2="290" y2="200" stroke="#1f2937" stroke-width="1"/>
+    <text x="40" y="215" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">pageContent: "O embedding..."</text>
+    <text x="40" y="230" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">metadata: &#123; source, page &#125;</text>
+    <text x="40" y="238" font-size="8.5" fill="#4b5563">só carrega o texto — sem vetor ainda</text>
+  </g>
+
+  <!-- Arrow A1→A2 -->
+  <line x1="300" y1="200" x2="315" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr-blue)" opacity="0.8"/>
+
+  <!-- NODE A2: Chunking -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.3s" dur="0.4s" fill="freeze"/>
+    <rect x="315" y="155" width="320" height="90" rx="8" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="475" y="175" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">✂️ Chunking / Split</text>
+    <text x="475" y="191" font-size="9.5" fill="#8b96a8" text-anchor="middle">RecursiveCharacterTextSplitter</text>
+    <line x1="325" y1="198" x2="625" y2="198" stroke="#1f2937" stroke-width="1"/>
+    <text x="325" y="213" font-size="9.5" fill="#8b96a8">chunkSize: 1000 chars</text>
+    <text x="325" y="227" font-size="9.5" fill="#8b96a8">chunkOverlap: 200 (contexto entre chunks)</text>
+    <text x="325" y="241" font-size="9.5" fill="#4b5563">1 doc → N trechos menores</text>
+  </g>
+
+  <!-- Arrow A2→A3 -->
+  <line x1="635" y1="200" x2="650" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr-blue)" opacity="0.8"/>
+
+  <!-- NODE A3: OpenRouter / Embedding Model -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.5s" dur="0.4s" fill="freeze"/>
+    <rect x="650" y="148" width="330" height="105" rx="8" fill="#111827" stroke="#a78bfa" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.35;1;0.35" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="815" y="168" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🤖 createEmbeddings()</text>
+    <text x="815" y="183" font-size="9.5" fill="#a78bfa" text-anchor="middle">OpenAI via OpenRouter</text>
+    <line x1="660" y1="190" x2="970" y2="190" stroke="#1f2937" stroke-width="1"/>
+    <text x="660" y="205" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">model: text-embedding-3-small</text>
+    <text x="660" y="220" font-size="9.5" fill="#8b96a8">recebe: string (pageContent do chunk)</text>
+    <text x="660" y="235" font-size="9.5" fill="#8b96a8">retorna: número[] com 1536 valores</text>
+    <text x="660" y="247" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">POST /v1/embeddings → &#123;"embedding":[...]&#125;</text>
+  </g>
+
+  <!-- Arrow A3→A4 -->
+  <line x1="980" y1="200" x2="995" y2="200" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr-violet)" opacity="0.8"/>
+
+  <!-- NODE A4: Vetor Numérico -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.7s" dur="0.4s" fill="freeze"/>
+    <rect x="995" y="148" width="310" height="105" rx="8" fill="#111827" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="1150" y="168" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🔢 Vetor 1536-D</text>
+    <text x="1150" y="183" font-size="9.5" fill="#a78bfa" text-anchor="middle">representação semântica do texto</text>
+    <line x1="1005" y1="190" x2="1295" y2="190" stroke="#1f2937" stroke-width="1"/>
+    <!-- Mini vector visualization -->
+    <text x="1005" y="205" font-size="9" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">[0.023, -0.417, 0.891, 0.104,</text>
+    <text x="1005" y="219" font-size="9" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"> 0.332, -0.076, 0.558, ...,</text>
+    <text x="1005" y="233" font-size="9" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"> /* 1536 números no total */]</text>
+    <text x="1005" y="247" font-size="8.5" fill="#4b5563">cada número = 1 dimensão do espaço semântico</text>
+  </g>
+
+  <!-- Arrow A4→A5 -->
+  <line x1="1305" y1="200" x2="1320" y2="200" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr-violet)" opacity="0.8"/>
+
+  <!-- NODE A5: PGVectorStore -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.9s" dur="0.4s" fill="freeze"/>
+    <rect x="1320" y="148" width="315" height="105" rx="8" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="1477" y="168" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🗄 PGVectorStore</text>
+    <text x="1477" y="183" font-size="9.5" fill="#f59e0b" text-anchor="middle">.initialize(client, embeddings)</text>
+    <line x1="1330" y1="190" x2="1625" y2="190" stroke="#1f2937" stroke-width="1"/>
+    <text x="1330" y="205" font-size="9.5" fill="#8b96a8">guarda o cliente (embeddings)</text>
+    <text x="1330" y="220" font-size="9.5" fill="#8b96a8">conecta ao PostgreSQL via pool</text>
+    <text x="1330" y="235" font-size="9.5" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">tableName: "rag_trechos"</text>
+    <text x="1330" y="247" font-size="8.5" fill="#4b5563">armazena client para reuso na busca</text>
+  </g>
+
+  <!-- Arrow A5→A6 -->
+  <line x1="1635" y1="200" x2="1650" y2="200" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)" opacity="0.8"/>
+
+  <!-- NODE A6: Row gravada -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.1s" dur="0.4s" fill="freeze"/>
+    <rect x="1650" y="148" width="220" height="105" rx="8" fill="#111827" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1760" y="168" font-size="11" font-weight="600" fill="#e6edf3" text-anchor="middle">💾 rag_trechos</text>
+    <text x="1760" y="183" font-size="9.5" fill="#4ade80" text-anchor="middle">INSERT INTO</text>
+    <line x1="1660" y1="190" x2="1860" y2="190" stroke="#1f2937" stroke-width="1"/>
+    <text x="1660" y="205" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">id: uuid</text>
+    <text x="1660" y="219" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">content: "O embed..."</text>
+    <text x="1660" y="233" font-size="9" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">embedding: [0.023,...]</text>
+    <text x="1660" y="247" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">metadata: &#123;source&#125;</text>
+  </g>
+
+  <!-- ANIMATED DOTS — INDEXAÇÃO -->
+  <circle r="4" fill="#3b82f6">
+    <animateMotion dur="2s" begin="0.3s" repeatCount="indefinite"><mpath href="#idx-p1"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="4" fill="#3b82f6">
+    <animateMotion dur="2s" begin="1.0s" repeatCount="indefinite"><mpath href="#idx-p2"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="1.0s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="4" fill="#a78bfa">
+    <animateMotion dur="2s" begin="1.7s" repeatCount="indefinite"><mpath href="#idx-p3"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="1.7s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="4" fill="#a78bfa">
+    <animateMotion dur="2s" begin="2.4s" repeatCount="indefinite"><mpath href="#idx-p4"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="2.4s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="4" fill="#4ade80">
+    <animateMotion dur="2s" begin="3.1s" repeatCount="indefinite"><mpath href="#idx-p5"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="3.1s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ══════════ DETALHE: ESPAÇO VETORIAL (entre as duas fases) ══════════ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.3s" dur="0.5s" fill="freeze"/>
+    <!-- Bloco central explicativo: o que é um espaço vetorial -->
+    <rect x="20" y="408" width="1860" height="90" rx="6" fill="#0d1117" stroke="#a78bfa" stroke-width="1" stroke-dasharray="6,4"/>
+    <text x="40" y="428" font-size="9.5" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">💡 O QUE É O ESPAÇO VETORIAL?</text>
+    <text x="40" y="446" font-size="10" fill="#8b96a8">Cada texto é transformado em um ponto num espaço de 1536 dimensões. Textos com significado similar ficam próximos nesse espaço — independentemente das palavras exatas usadas.</text>
+    <text x="40" y="462" font-size="10" fill="#8b96a8">Ex: "cão" e "cachorro" ficam próximos. "cão" e "banco de dados" ficam distantes. A distância é medida pelo ângulo entre os vetores — isso é a <tspan fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">similaridade cosseno</tspan>.</text>
+
+    <!-- Mini visual: cosine similarity -->
+    <line x1="1450" y1="420" x2="1580" y2="430" stroke="#4ade80" stroke-width="2" marker-end="url(#arr-green)"/>
+    <line x1="1450" y1="420" x2="1560" y2="445" stroke="#3b82f6" stroke-width="2" marker-end="url(#arr-blue)"/>
+    <line x1="1450" y1="420" x2="1520" y2="475" stroke="#ef4444" stroke-width="2" marker-end="url(#arr-teal)"/>
+    <text x="1585" y="433" font-size="9" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">"cachorro" (similar)</text>
+    <text x="1565" y="450" font-size="9" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">"cão" (origem)</text>
+    <text x="1527" y="483" font-size="9" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">"banco de dados" (distante)</text>
+    <text x="1395" y="425" font-size="9" fill="#4b5563">ângulo ≈ 5°</text>
+    <text x="1395" y="440" font-size="9" fill="#4b5563">cos ≈ 0.99</text>
+    <text x="1395" y="480" font-size="9" fill="#4b5563">ângulo ≈ 75°</text>
+    <text x="1395" y="493" font-size="9" fill="#4b5563">cos ≈ 0.26</text>
+    <text x="1830" y="460" font-size="8.5" fill="#4b5563" text-anchor="end">cos(θ) = 1 → idêntico</text>
+    <text x="1830" y="474" font-size="8.5" fill="#4b5563" text-anchor="end">cos(θ) = 0 → sem relação</text>
+    <text x="1830" y="488" font-size="8.5" fill="#4b5563" text-anchor="end">cos(θ) = -1 → opostos</text>
+  </g>
+
+  <!-- ══════════════════════════════════════════════════════
+       SEÇÃO 2: BUSCA (lado de baixo)
+  ══════════════════════════════════════════════════════ -->
+
+  <rect x="20" y="510" width="1860" height="290" rx="8" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+  <text x="38" y="528" font-size="9.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1.2">
+    FASE 2 — BUSCA SEMÂNTICA  ·  similaritySearchWithScore()  ·  acontece a cada consulta do usuário
+  </text>
+
+  <!-- Phase dividers busca -->
+  <line x1="300" y1="532" x2="300" y2="792" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="635" y1="532" x2="635" y2="792" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="975" y1="532" x2="975" y2="792" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="1300" y1="532" x2="1300" y2="792" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="1635" y1="532" x2="1635" y2="792" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <text x="160" y="542" font-size="8.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">PERGUNTA</text>
+  <text x="467" y="542" font-size="8.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">MESMO MODELO</text>
+  <text x="805" y="542" font-size="8.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">VETOR DA QUERY</text>
+  <text x="1137" y="542" font-size="8.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">COMPARAÇÃO pgvector</text>
+  <text x="1467" y="542" font-size="8.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">TOP-K RESULTS</text>
+  <text x="1747" y="542" font-size="8.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">RESPOSTA</text>
+
+  <!-- NODE B1: Pergunta do usuário -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.5s" dur="0.4s" fill="freeze"/>
+    <rect x="30" y="555" width="270" height="90" rx="8" fill="#111827" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="165" y="574" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">💬 Pergunta do Usuário</text>
+    <text x="165" y="589" font-size="9.5" fill="#2dd4bf" text-anchor="middle">string de texto livre</text>
+    <line x1="40" y1="596" x2="290" y2="596" stroke="#1f2937" stroke-width="1"/>
+    <text x="40" y="611" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">"Como funciona o</text>
+    <text x="40" y="625" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"> embedding vetorial?"</text>
+    <text x="40" y="638" font-size="8.5" fill="#4b5563">passa direto para embeddings</text>
+  </g>
+
+  <!-- Arrow B1→B2 -->
+  <line x1="300" y1="600" x2="315" y2="600" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)" opacity="0.8"/>
+
+  <!-- NODE B2: Mesmo modelo de embedding -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.7s" dur="0.4s" fill="freeze"/>
+    <rect x="315" y="548" width="320" height="105" rx="8" fill="#111827" stroke="#a78bfa" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.35;1;0.35" dur="2.5s" begin="1s" repeatCount="indefinite"/>
+    </rect>
+    <text x="475" y="568" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🤖 createEmbeddings()</text>
+    <text x="475" y="583" font-size="9.5" fill="#a78bfa" text-anchor="middle">MESMO cliente da indexação</text>
+    <line x1="325" y1="590" x2="625" y2="590" stroke="#1f2937" stroke-width="1"/>
+    <text x="325" y="605" font-size="9.5" fill="#f59e0b">⚠ obrigatório usar o mesmo modelo!</text>
+    <text x="325" y="620" font-size="9.5" fill="#8b96a8">vetores de modelos diferentes</text>
+    <text x="325" y="635" font-size="9.5" fill="#8b96a8">não são comparáveis entre si</text>
+    <text x="325" y="646" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">text-embedding-3-small → 1536-D</text>
+  </g>
+
+  <!-- Arrow B2→B3 -->
+  <line x1="635" y1="600" x2="650" y2="600" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr-violet)" opacity="0.8"/>
+
+  <!-- NODE B3: Vetor da query -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.9s" dur="0.4s" fill="freeze"/>
+    <rect x="650" y="548" width="330" height="105" rx="8" fill="#111827" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="815" y="568" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🔢 Vetor da Query</text>
+    <text x="815" y="583" font-size="9.5" fill="#a78bfa" text-anchor="middle">mesmas 1536 dimensões</text>
+    <line x1="660" y1="590" x2="970" y2="590" stroke="#1f2937" stroke-width="1"/>
+    <text x="660" y="605" font-size="9" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">query_vec = [-0.112, 0.834,</text>
+    <text x="660" y="619" font-size="9" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  0.203, -0.551, 0.717,...]</text>
+    <text x="660" y="633" font-size="9.5" fill="#8b96a8">representa o "significado" da pergunta</text>
+    <text x="660" y="646" font-size="8.5" fill="#4b5563">no mesmo espaço dos docs indexados</text>
+  </g>
+
+  <!-- Arrow B3→B4 -->
+  <line x1="980" y1="600" x2="995" y2="600" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr-violet)" opacity="0.8"/>
+
+  <!-- NODE B4: pgvector comparison -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="2.1s" dur="0.4s" fill="freeze"/>
+    <rect x="995" y="548" width="310" height="105" rx="8" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="1150" y="568" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🔍 pgvector</text>
+    <text x="1150" y="583" font-size="9.5" fill="#f59e0b" text-anchor="middle">1 - (embedding &lt;=&gt; query_vec)</text>
+    <line x1="1005" y1="590" x2="1295" y2="590" stroke="#1f2937" stroke-width="1"/>
+    <text x="1005" y="604" font-size="9.5" fill="#8b96a8">operador &lt;=&gt; = distância cosseno</text>
+    <text x="1005" y="618" font-size="9.5" fill="#8b96a8">compara query_vec com TODOS os</text>
+    <text x="1005" y="632" font-size="9.5" fill="#8b96a8">embeddings da tabela rag_trechos</text>
+    <text x="1005" y="646" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ORDER BY dist LIMIT k</text>
+  </g>
+
+  <!-- Arrow B4→B5 -->
+  <line x1="1305" y1="600" x2="1320" y2="600" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)" opacity="0.8"/>
+
+  <!-- NODE B5: Top-K Results -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="2.3s" dur="0.4s" fill="freeze"/>
+    <rect x="1320" y="548" width="315" height="105" rx="8" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="1477" y="568" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">📊 Top-K Resultados</text>
+    <text x="1477" y="583" font-size="9.5" fill="#f59e0b" text-anchor="middle">[Document, score][]</text>
+    <line x1="1330" y1="590" x2="1625" y2="590" stroke="#1f2937" stroke-width="1"/>
+    <text x="1330" y="604" font-size="9.5" fill="#4ade80">1. score: 0.94 — trecho mais próximo</text>
+    <text x="1330" y="618" font-size="9.5" fill="#8b96a8">2. score: 0.87 — segundo mais próximo</text>
+    <text x="1330" y="632" font-size="9.5" fill="#8b96a8">3. score: 0.81 — terceiro mais próximo</text>
+    <text x="1330" y="646" font-size="8.5" fill="#4b5563">k=4 por padrão · filtrável por threshold</text>
+  </g>
+
+  <!-- Arrow B5→B6 -->
+  <line x1="1635" y1="600" x2="1650" y2="600" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-green)" opacity="0.8"/>
+
+  <!-- NODE B6: Resposta final -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="2.5s" dur="0.4s" fill="freeze"/>
+    <rect x="1650" y="548" width="220" height="105" rx="8" fill="#111827" stroke="#4ade80" stroke-width="2"/>
+    <text x="1760" y="568" font-size="11" font-weight="600" fill="#e6edf3" text-anchor="middle">✅ Contexto + LLM</text>
+    <text x="1760" y="583" font-size="9.5" fill="#4ade80" text-anchor="middle">RAG completo</text>
+    <line x1="1660" y1="590" x2="1860" y2="590" stroke="#1f2937" stroke-width="1"/>
+    <text x="1660" y="604" font-size="9.5" fill="#8b96a8">trechos relevantes →</text>
+    <text x="1660" y="618" font-size="9.5" fill="#8b96a8">injetados no prompt</text>
+    <text x="1660" y="632" font-size="9.5" fill="#4ade80">LLM responde com</text>
+    <text x="1660" y="646" font-size="9.5" fill="#4ade80">contexto real do doc</text>
+  </g>
+
+  <!-- ANIMATED DOTS — BUSCA -->
+  <circle r="4" fill="#2dd4bf">
+    <animateMotion dur="2s" begin="1.8s" repeatCount="indefinite"><mpath href="#srch-p1"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="1.8s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="4" fill="#a78bfa">
+    <animateMotion dur="2s" begin="2.5s" repeatCount="indefinite"><mpath href="#srch-p2"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="4" fill="#a78bfa">
+    <animateMotion dur="2s" begin="3.2s" repeatCount="indefinite"><mpath href="#srch-p3"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="3.2s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="4" fill="#f59e0b">
+    <animateMotion dur="2s" begin="3.9s" repeatCount="indefinite"><mpath href="#srch-p4"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="3.9s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="4" fill="#4ade80">
+    <animateMotion dur="2s" begin="4.6s" repeatCount="indefinite"><mpath href="#srch-p5"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="4.6s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ══════════ BOTTOM: SQL + Código + Legenda ══════════ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="2.7s" dur="0.5s" fill="freeze"/>
+
+    <!-- SQL query box -->
+    <rect x="20" y="810" width="560" height="130" rx="6" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="30" y="828" font-size="9.5" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">SQL GERADO PELO pgvector</text>
+    <text x="30" y="847" font-size="10" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">SELECT content, metadata,</text>
+    <text x="30" y="863" font-size="10" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  1 - (embedding &lt;=&gt; '[0.023,...]'::vector) AS score</text>
+    <text x="30" y="879" font-size="10" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">FROM rag_trechos</text>
+    <text x="30" y="895" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ORDER BY embedding &lt;=&gt; '[0.023,...]'::vector</text>
+    <text x="30" y="911" font-size="10" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LIMIT 4;</text>
+    <text x="30" y="930" font-size="9" fill="#8b96a8">&lt;=&gt; é o operador de distância cosseno do pgvector · IVFFlat index acelera a busca</text>
+
+    <!-- Schema da tabela -->
+    <rect x="600" y="810" width="420" height="130" rx="6" fill="#0d1117" stroke="#a78bfa" stroke-width="1"/>
+    <text x="610" y="828" font-size="9.5" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">SCHEMA DA TABELA rag_trechos</text>
+    <text x="610" y="847" font-size="10" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">id         UUID PRIMARY KEY</text>
+    <text x="610" y="863" font-size="10" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">content    TEXT</text>
+    <text x="610" y="879" font-size="10" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">embedding  VECTOR(1536)   ← pgvector</text>
+    <text x="610" y="895" font-size="10" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">metadata   JSONB</text>
+    <text x="610" y="911" font-size="10" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">created_at TIMESTAMPTZ DEFAULT now()</text>
+    <text x="610" y="930" font-size="9" fill="#8b96a8">CREATE INDEX ON rag_trechos USING ivfflat (embedding vector_cosine_ops)</text>
+
+    <!-- Legenda -->
+    <rect x="1040" y="810" width="840" height="130" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="1050" y="828" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA E CONCEITOS-CHAVE</text>
+    <line x1="1050" y1="835" x2="1870" y2="835" stroke="#1f2937" stroke-width="1"/>
+    <!-- Row 1 -->
+    <rect x="1050" y="845" width="10" height="10" rx="2" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="1065" y="855" font-size="9.5" fill="#8b96a8">Documento de entrada</text>
+    <rect x="1210" y="845" width="10" height="10" rx="2" fill="#111827" stroke="#a78bfa" stroke-width="2"/>
+    <text x="1225" y="855" font-size="9.5" fill="#8b96a8">Modelo de embedding (OpenRouter)</text>
+    <rect x="1490" y="845" width="10" height="10" rx="2" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="1505" y="855" font-size="9.5" fill="#8b96a8">pgvector / PGVectorStore</text>
+    <rect x="1700" y="845" width="10" height="10" rx="2" fill="#111827" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1715" y="855" font-size="9.5" fill="#8b96a8">Resultado / RAG completo</text>
+    <!-- Row 2 -->
+    <text x="1050" y="876" font-size="9.5" fill="#a78bfa" font-weight="600">Embedding:</text>
+    <text x="1120" y="876" font-size="9.5" fill="#8b96a8">vetor de floats que representa o significado semântico de um texto</text>
+    <text x="1050" y="893" font-size="9.5" fill="#f59e0b" font-weight="600">Similaridade cosseno:</text>
+    <text x="1175" y="893" font-size="9.5" fill="#8b96a8">cos(θ) entre dois vetores · 1 = idêntico · 0 = sem relação · -1 = oposto</text>
+    <text x="1050" y="910" font-size="9.5" fill="#2dd4bf" font-weight="600">RAG:</text>
+    <text x="1080" y="910" font-size="9.5" fill="#8b96a8">Retrieval-Augmented Generation — LLM responde com contexto recuperado do banco vetorial</text>
+    <text x="1050" y="927" font-size="9.5" fill="#4b5563" font-weight="600">Chunking:</text>
+    <text x="1110" y="927" font-size="9.5" fill="#8b96a8">divisão do doc em trechos menores (chunk) para granularidade fina na busca</text>
+    <text x="1050" y="934" font-size="8.5" fill="#4b5563">⚠ indexação e busca DEVEM usar o mesmo modelo — vetores de modelos distintos não são comparáveis</text>
+  </g>
+
+  <!-- Status bar -->
+  <rect x="20" y="952" width="1860" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="963" r="4" fill="#a78bfa">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="967" font-size="9.5" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">EMBEDDING FLOW</text>
+  <text x="148" y="967" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="158" y="967" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">text → vector(1536) → pgvector → similaritySearchWithScore → RAG</text>
+  <text x="1870" y="967" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">OpenRouter · text-embedding-3-small · PostgreSQL + pgvector</text>
+</svg>

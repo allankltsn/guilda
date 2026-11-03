@@ -229,7 +229,9 @@
     }
   ],
   "skills": [
-    "drawio-diagram"
+    "drawio-diagram",
+    "dark-pipeline-svg",
+    "readme-styling"
   ],
   "model_tiers": {
     "deep": {

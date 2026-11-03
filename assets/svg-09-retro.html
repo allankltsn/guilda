@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVG 09 — Retropropagação e Ciclo de Correção</title>
+<style>
+  :root { color-scheme: dark }
+  body {
+    margin: 0; background: #0b0f17;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100%; padding: 40px 16px; box-sizing: border-box;
+  }
+  svg { width: 100%; max-width: 1800px; height: auto; display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-red" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#ef4444"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arr-teal" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#2dd4bf"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#4ade80"/>
+    </marker>
+
+    <path id="p1" d="M310,290 L440,290" fill="none"/>
+    <path id="p2" d="M700,290 L830,290" fill="none"/>
+    <path id="p3" d="M1090,290 L1220,290" fill="none"/>
+    <path id="p4" d="M1480,290 L1580,290" fill="none"/>
+    <!-- Loop de retorno -->
+    <path id="ploop" d="M1580,390 C1580,480 440,480 440,390" fill="none"/>
+  </defs>
+
+  <rect width="1800" height="800" fill="#0b0f17"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="1760" height="48" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="16" width="6" height="48" rx="3" fill="#ef4444"/>
+  <text x="44" y="37" font-size="15" font-weight="700" fill="#e6edf3">09 — Retropropagação e Ciclo de Correção</text>
+  <text x="44" y="55" font-size="11" fill="#8b96a8">gate rejeita → causa documentada → novo agente → revalidação → evidência obrigatória · máx 3 tentativas</text>
+  <text x="1760" y="37" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 09/17</text>
+  <text x="1760" y="52" font-size="9.5" fill="#ef4444" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">retropropagação · correção</text>
+
+  <!-- ══ FLUXO PRINCIPAL (caminho feliz no topo, rejeição abaixo) ══ -->
+
+  <!-- Step 1: Gate rejeita -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.4s" fill="freeze"/>
+    <rect x="30" y="240" width="280" height="120" rx="8" fill="#1a0a0a" stroke="#ef4444" stroke-width="2.5">
+      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="170" y="264" font-size="10" fill="#ef4444" font-weight="700" text-anchor="middle">① GATE REJEITA</text>
+    <text x="170" y="280" font-size="8.5" fill="#8b96a8" text-anchor="middle">report com causa explícita</text>
+    <line x1="40" y1="288" x2="300" y2="288" stroke="#1f2937" stroke-width="1"/>
+    <text x="42" y="303" font-size="8.5" fill="#4b5563">tipo: tech | security | privacy</text>
+    <text x="42" y="317" font-size="8.5" fill="#ef4444">causa: SQL injection em query.ts:34</text>
+    <text x="42" y="331" font-size="8.5" fill="#4b5563">tentativa: 1 de 3</text>
+    <text x="42" y="347" font-size="8.5" fill="#4b5563">agente que falhou: backend-agent</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <line x1="310" y1="300" x2="438" y2="300" stroke="#ef4444" stroke-width="2" marker-end="url(#arr-red)"/>
+  <circle r="3.5" fill="#ef4444" opacity="0">
+    <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.5s"><mpath href="#p1"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+  </circle>
+
+  <!-- Step 2: Orchestrator recebe e documenta -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.3s" dur="0.4s" fill="freeze"/>
+    <rect x="440" y="240" width="260" height="120" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="570" y="264" font-size="10" fill="#f59e0b" font-weight="700" text-anchor="middle">② ORCHESTRATOR</text>
+    <text x="570" y="280" font-size="8.5" fill="#8b96a8" text-anchor="middle">documenta e planeja correção</text>
+    <line x1="450" y1="288" x2="690" y2="288" stroke="#1f2937" stroke-width="1"/>
+    <text x="452" y="303" font-size="8.5" fill="#4b5563">· registra causa no issue</text>
+    <text x="452" y="317" font-size="8.5" fill="#4b5563">· seleciona novo agente</text>
+    <text x="452" y="331" font-size="8.5" fill="#f59e0b">· escala tier se necessário</text>
+    <text x="452" y="347" font-size="8.5" fill="#4b5563">· atualiza tentativa (n+1)</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <line x1="700" y1="300" x2="828" y2="300" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+  <circle r="3.5" fill="#f59e0b" opacity="0">
+    <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.8s"><mpath href="#p2"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="0.8s"/>
+  </circle>
+
+  <!-- Step 3: Novo agente (diferente) -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.5s" dur="0.4s" fill="freeze"/>
+    <rect x="830" y="240" width="260" height="120" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="960" y="264" font-size="10" fill="#2dd4bf" font-weight="700" text-anchor="middle">③ NOVO AGENTE</text>
+    <text x="960" y="280" font-size="8.5" fill="#8b96a8" text-anchor="middle">diferente do que falhou</text>
+    <line x1="840" y1="288" x2="1080" y2="288" stroke="#1f2937" stroke-width="1"/>
+    <text x="842" y="303" font-size="8.5" fill="#4b5563">· recebe brief + causa da falha</text>
+    <text x="842" y="317" font-size="8.5" fill="#4b5563">· novo worktree isolado</text>
+    <text x="842" y="331" font-size="8.5" fill="#2dd4bf">· foco explícito no ponto falho</text>
+    <text x="842" y="347" font-size="8.5" fill="#4b5563">· 4-eyes rule mantida</text>
+  </g>
+
+  <!-- Arrow 3→4 -->
+  <line x1="1090" y1="300" x2="1218" y2="300" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <circle r="3.5" fill="#2dd4bf" opacity="0">
+    <animateMotion dur="1.5s" repeatCount="indefinite" begin="1.0s"><mpath href="#p3"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="1.0s"/>
+  </circle>
+
+  <!-- Step 4: Revalidação -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.7s" dur="0.4s" fill="freeze"/>
+    <rect x="1220" y="240" width="260" height="120" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2.2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="1350" y="264" font-size="10" fill="#f59e0b" font-weight="700" text-anchor="middle">④ REVALIDAÇÃO</text>
+    <text x="1350" y="280" font-size="8.5" fill="#8b96a8" text-anchor="middle">gates rodam novamente</text>
+    <line x1="1230" y1="288" x2="1470" y2="288" stroke="#1f2937" stroke-width="1"/>
+    <text x="1232" y="303" font-size="8.5" fill="#4b5563">· mesmos 3 gates</text>
+    <text x="1232" y="317" font-size="8.5" fill="#4b5563">· agente independente</text>
+    <text x="1232" y="331" font-size="8.5" fill="#4b5563">· foco no ponto reportado</text>
+    <text x="1232" y="347" font-size="8.5" fill="#f59e0b">· evidência obrigatória</text>
+  </g>
+
+  <!-- Arrow 4→5 aprovado -->
+  <line x1="1480" y1="280" x2="1578" y2="260" stroke="#4ade80" stroke-width="2" marker-end="url(#arr-green)"/>
+  <!-- Arrow 4→5 rejeitado de novo -->
+  <line x1="1480" y1="310" x2="1578" y2="330" stroke="#ef4444" stroke-width="2" marker-end="url(#arr-red)"/>
+
+  <!-- Step 5a: Aprovado -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.9s" dur="0.4s" fill="freeze"/>
+    <rect x="1580" y="224" width="200" height="72" rx="8" fill="#0d1a0d" stroke="#4ade80" stroke-width="2"/>
+    <text x="1680" y="248" font-size="10" fill="#4ade80" font-weight="700" text-anchor="middle">✓ APROVADO</text>
+    <text x="1680" y="264" font-size="8.5" fill="#8b96a8" text-anchor="middle">correção aceita</text>
+    <text x="1590" y="283" font-size="8.5" fill="#4b5563">→ PR aberto normalmente</text>
+  </g>
+
+  <!-- Step 5b: Rejeitado de novo (loop ou escala) -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.0s" dur="0.4s" fill="freeze"/>
+    <rect x="1580" y="308" width="200" height="96" rx="8" fill="#1a0a0a" stroke="#ef4444" stroke-width="2"/>
+    <text x="1680" y="330" font-size="10" fill="#ef4444" font-weight="700" text-anchor="middle">✗ FALHA DE NOVO</text>
+    <text x="1680" y="346" font-size="8.5" fill="#8b96a8" text-anchor="middle">tentativa n+1</text>
+    <line x1="1590" y1="352" x2="1770" y2="352" stroke="#1f2937" stroke-width="1"/>
+    <text x="1592" y="367" font-size="8.5" fill="#ef4444">tent. 3: DEEP obrigatório</text>
+    <text x="1592" y="381" font-size="8.5" fill="#4b5563">tent. 4+: escalate humano</text>
+    <text x="1592" y="397" font-size="8.5" fill="#4b5563">ver regra de escalation</text>
+  </g>
+
+  <!-- Loop de retorno (seta curva de 5b → 2) -->
+  <path d="M1580,390 C1580,480 440,480 440,360" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arr-red)"/>
+  <text x="1010" y="474" font-size="9" fill="#ef4444" text-anchor="middle" font-style="italic">loop de correção (máx 3 tentativas antes de escalar ao humano)</text>
+
+  <!-- Dot animado no loop -->
+  <circle r="3.5" fill="#ef4444" opacity="0">
+    <animateMotion dur="2.5s" repeatCount="indefinite" begin="1.2s">
+      <mpath href="#ploop"/>
+    </animateMotion>
+    <animate attributeName="opacity" values="0;0.8;0.8;0" dur="2.5s" repeatCount="indefinite" begin="1.2s"/>
+  </circle>
+
+  <!-- ══ ESCALATION TABLE ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.1s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="510" width="860" height="168" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="38" y="530" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">ESCALONAMENTO POR TENTATIVA</text>
+    <line x1="30" y1="536" x2="870" y2="536" stroke="#1f2937" stroke-width="1"/>
+
+    <!-- Header row -->
+    <rect x="30" y="540" width="850" height="24" rx="3" fill="#111827"/>
+    <text x="70" y="556" font-size="9.5" fill="#4b5563" font-weight="600">TENTATIVA</text>
+    <text x="220" y="556" font-size="9.5" fill="#4b5563" font-weight="600">TIER</text>
+    <text x="360" y="556" font-size="9.5" fill="#4b5563" font-weight="600">AGENTE</text>
+    <text x="560" y="556" font-size="9.5" fill="#4b5563" font-weight="600">AÇÃO</text>
+
+    <text x="70" y="578" font-size="9.5" fill="#4ade80">1ª</text>
+    <text x="220" y="578" font-size="9.5" fill="#3b82f6">standard</text>
+    <text x="360" y="578" font-size="9.5" fill="#8b96a8">agente original (falhou)</text>
+    <text x="560" y="578" font-size="9.5" fill="#8b96a8">executa normalmente</text>
+
+    <text x="70" y="598" font-size="9.5" fill="#f59e0b">2ª</text>
+    <text x="220" y="598" font-size="9.5" fill="#3b82f6">standard</text>
+    <text x="360" y="598" font-size="9.5" fill="#8b96a8">novo agente (diferente)</text>
+    <text x="560" y="598" font-size="9.5" fill="#8b96a8">reescreve com foco na causa</text>
+
+    <text x="70" y="618" font-size="9.5" fill="#ef4444">3ª</text>
+    <text x="220" y="618" font-size="9.5" fill="#f59e0b">DEEP obrigatório</text>
+    <text x="360" y="618" font-size="9.5" fill="#8b96a8">agente deep especialista</text>
+    <text x="560" y="618" font-size="9.5" fill="#f59e0b">análise completa do contexto</text>
+
+    <text x="70" y="638" font-size="9.5" fill="#ef4444">4ª+</text>
+    <text x="220" y="638" font-size="9.5" fill="#ef4444">DEEP + HUMANO</text>
+    <text x="360" y="638" font-size="9.5" fill="#8b96a8">intervenção obrigatória</text>
+    <text x="560" y="638" font-size="9.5" fill="#ef4444">ALERTA_PERIGO emitido</text>
+
+    <line x1="30" y1="645" x2="870" y2="645" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="660" font-size="8.5" fill="#4b5563">Após 3 tentativas sem sucesso: issue marcada como "bloqueada" + notificação ao usuário + pausa da wave</text>
+    <text x="38" y="672" font-size="8.5" fill="#4b5563">A wave só retoma após decisão humana explícita documentada no GitHub Projects</text>
+  </g>
+
+  <!-- ══ EVIDÊNCIA OBRIGATÓRIA ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.3s" dur="0.4s" fill="freeze"/>
+    <rect x="896" y="510" width="884" height="168" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="914" y="530" font-size="10" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">EVIDÊNCIA OBRIGATÓRIA EM CADA TENTATIVA</text>
+    <line x1="906" y1="536" x2="1770" y2="536" stroke="#1f2937" stroke-width="1"/>
+
+    <text x="914" y="556" font-size="9.5" fill="#8b96a8">O agente não pode declarar "corrigido" sem evidência. O gate verifica antes de aprovar:</text>
+    <text x="914" y="576" font-size="9.5" fill="#4b5563">① Output de teste mostrando o ponto que estava falhando agora passando</text>
+    <text x="914" y="594" font-size="9.5" fill="#4b5563">② Diff do arquivo corrigido (antes/depois da linha problemática)</text>
+    <text x="914" y="612" font-size="9.5" fill="#4b5563">③ Referência à linha exata apontada no report anterior</text>
+    <text x="914" y="630" font-size="9.5" fill="#4b5563">④ Cobertura de testes não pode ter regredido (≥80% mantida)</text>
+
+    <line x1="906" y1="638" x2="1770" y2="638" stroke="#1f2937" stroke-width="1"/>
+    <rect x="914" y="648" width="858" height="24" rx="4" fill="#060a0f"/>
+    <text x="924" y="664" font-size="8.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">PASSOU:  ✓ query.ts:34 — prepared statement implementado  |  tests: 14/14  |  coverage: 87%</text>
+  </g>
+
+  <!-- ══ STATUS BAR ══ -->
+  <rect x="20" y="698" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="709" r="4" fill="#ef4444">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="713" font-size="9.5" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 09</text>
+  <text x="108" y="713" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="118" y="713" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">gate rejeita → causa documentada → novo agente → revalida → evidência obrigatória · máx 3 tentativas automáticas</text>
+  <text x="1770" y="713" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">RETROPROPAGAÇÃO</text>
+
+  <!-- ══ LEGENDA ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.5s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="734" width="1760" height="50" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="750" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA</text>
+    <line x1="30" y1="754" x2="1770" y2="754" stroke="#1f2937" stroke-width="1"/>
+    <rect x="38" y="760" width="10" height="10" rx="2" fill="#1a0a0a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="55" y="770" font-size="9.5" fill="#8b96a8">rejeição com causa documentada (obrigatória)</text>
+    <rect x="320" y="760" width="10" height="10" rx="2" fill="#0d1117" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="337" y="770" font-size="9.5" fill="#8b96a8">orchestrator coordena — nunca implementa</text>
+    <rect x="590" y="760" width="10" height="10" rx="2" fill="#0d1117" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="607" y="770" font-size="9.5" fill="#8b96a8">novo agente (diferente do original, 4-eyes mantida)</text>
+    <rect x="890" y="760" width="10" height="10" rx="2" fill="#0d1a0d" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="907" y="770" font-size="9.5" fill="#8b96a8">aprovação após evidência verificada</text>
+    <text x="1100" y="770" font-size="9.5" fill="#4b5563">seta tracejada vermelha = loop de retrocorreção (3× automático, 4ª+ escala humano)</text>
+  </g>
+</svg>
+</body>
+</html>

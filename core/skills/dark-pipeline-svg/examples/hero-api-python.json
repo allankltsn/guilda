@@ -1,0 +1,18 @@
+{
+  "title": "Atlas API",
+  "tagline": ["API de catálogo geográfico", {"text": "· Python assíncrono", "accent": true}],
+  "palette": {"accent": "#ffd43b", "accent2": "#3776ab"},
+  "stack": ["Python", "FastAPI", "Pydantic", "PostgreSQL", "Docker"],
+  "panel": {
+    "type": "editor",
+    "title": "routes/cities.py",
+    "lines": [
+      [["@router", "fn"], ".get(", ["\"/cities/{id}\"", "str"], ")"],
+      [["async def", "kw"], " ", ["get_city", "fn"], "(id: ", ["int", "kw"], "):"],
+      ["    city = ", ["await", "kw"], " repo.find(id)"],
+      ["    ", ["if", "kw"], " city ", ["is None", "kw"], ":"],
+      ["        ", ["raise", "kw"], " HTTPException(", ["404", "num"], ")"],
+      ["    ", ["return", "kw"], " city"]
+    ]
+  }
+}

@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVG 04 — Requisitos e Histórias de Usuário</title>
+<style>
+  :root { color-scheme: dark }
+  body {
+    margin: 0; background: #0b0f17;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100%; padding: 40px 16px; box-sizing: border-box;
+  }
+  svg { width: 100%; max-width: 1800px; height: auto; display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 780"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-teal" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#2dd4bf"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#4ade80"/>
+    </marker>
+    <filter id="glow-sm" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Animated dot paths -->
+    <path id="p1" d="M 195,145 L 315,145" fill="none"/>
+    <path id="p2" d="M 530,145 L 650,145" fill="none"/>
+    <path id="p3" d="M 870,145 L 985,145" fill="none"/>
+    <path id="p4" d="M 1195,145 L 1310,145" fill="none"/>
+    <path id="p5" d="M 1515,145 L 1620,145" fill="none"/>
+  </defs>
+
+  <rect width="1800" height="780" fill="#0b0f17"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="1760" height="48" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="16" width="6" height="48" rx="3" fill="#3b82f6"/>
+  <text x="44" y="37" font-size="15" font-weight="700" fill="#e6edf3">04 — Requisitos e Histórias de Usuário</text>
+  <text x="44" y="55" font-size="11" fill="#8b96a8">story-agent → S-NNN · critério INVEST · BDD (Given/When/Then) · DoR 9 itens · DoD 12 itens</text>
+  <text x="1760" y="37" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 04/17</text>
+  <text x="1760" y="52" font-size="9.5" fill="#3b82f6" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">story-agent</text>
+
+  <!-- ══ FLOW: 5 nodes principais ══ -->
+
+  <!-- NODE 1: Demanda -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.4s" fill="freeze"/>
+    <rect x="30" y="100" width="185" height="90" rx="8" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="122" y="121" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">📋 Demanda</text>
+    <text x="122" y="136" font-size="9.5" fill="#3b82f6" text-anchor="middle">do Brainstorm</text>
+    <line x1="40" y1="143" x2="205" y2="143" stroke="#1f2937" stroke-width="1"/>
+    <text x="40" y="157" font-size="9.5" fill="#8b96a8">síntese aprovada</text>
+    <text x="40" y="171" font-size="9.5" fill="#8b96a8">pelo orchestrator</text>
+    <text x="40" y="184" font-size="8.5" fill="#4b5563">epics + features</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <line x1="215" y1="145" x2="300" y2="145" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr-blue)" opacity="0.8"/>
+
+  <!-- NODE 2: story-agent -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.3s" dur="0.4s" fill="freeze"/>
+    <rect x="310" y="93" width="230" height="105" rx="8" fill="#111827" stroke="#2dd4bf" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.35;1;0.35" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="425" y="114" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">✍ story-agent</text>
+    <text x="425" y="129" font-size="9.5" fill="#2dd4bf" text-anchor="middle">Especialista em Requisitos</text>
+    <line x1="320" y1="136" x2="530" y2="136" stroke="#1f2937" stroke-width="1"/>
+    <text x="320" y="150" font-size="9.5" fill="#8b96a8">cria histórias de usuário</text>
+    <text x="320" y="164" font-size="9.5" fill="#8b96a8">aplica INVEST em cada uma</text>
+    <text x="320" y="178" font-size="9.5" fill="#8b96a8">gera critérios de aceite BDD</text>
+    <text x="320" y="191" font-size="8.5" fill="#4b5563">tier: standard (Sonnet/medium)</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <line x1="540" y1="145" x2="630" y2="145" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)" opacity="0.8"/>
+
+  <!-- NODE 3: User Story -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.5s" dur="0.4s" fill="freeze"/>
+    <rect x="640" y="93" width="355" height="105" rx="8" fill="#111827" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="817" y="114" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">📝 User Story S-NNN</text>
+    <text x="817" y="129" font-size="9.5" fill="#2dd4bf" text-anchor="middle">estrutura obrigatória</text>
+    <line x1="650" y1="136" x2="985" y2="136" stroke="#1f2937" stroke-width="1"/>
+    <text x="650" y="150" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Como &lt;persona&gt;,</text>
+    <text x="650" y="164" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">quero &lt;ação&gt;,</text>
+    <text x="650" y="178" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">para &lt;benefício&gt;.</text>
+    <text x="820" y="150" font-size="9.5" fill="#f59e0b">prioridade: Must/Should/Could/Wont</text>
+    <text x="820" y="164" font-size="9.5" fill="#8b96a8">estimativa: story points (Fibonacci)</text>
+    <text x="820" y="178" font-size="9.5" fill="#4b5563">ID único incremental por sprint</text>
+    <text x="650" y="190" font-size="8.5" fill="#4b5563">Ao menos 1 AC por história antes de entrar no DoR</text>
+  </g>
+
+  <!-- Arrow 3→4 -->
+  <line x1="995" y1="145" x2="1175" y2="145" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)" opacity="0.8"/>
+
+  <!-- NODE 4: Critério BDD -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.7s" dur="0.4s" fill="freeze"/>
+    <rect x="1185" y="93" width="335" height="105" rx="8" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="1352" y="114" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🧪 Critério de Aceite BDD</text>
+    <text x="1352" y="129" font-size="9.5" fill="#f59e0b" text-anchor="middle">Given / When / Then</text>
+    <line x1="1195" y1="136" x2="1510" y2="136" stroke="#1f2937" stroke-width="1"/>
+    <text x="1195" y="150" font-size="9.5" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Given</text>
+    <text x="1240" y="150" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"> o usuário está autenticado</text>
+    <text x="1195" y="164" font-size="9.5" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">When</text>
+    <text x="1240" y="164" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"> clica em "Salvar"</text>
+    <text x="1195" y="178" font-size="9.5" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Then</text>
+    <text x="1240" y="178" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"> os dados são persistidos</text>
+    <text x="1195" y="191" font-size="8.5" fill="#4b5563">múltiplos ACs por história são permitidos</text>
+  </g>
+
+  <!-- Arrow 4→5 -->
+  <line x1="1520" y1="145" x2="1605" y2="145" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)" opacity="0.8"/>
+
+  <!-- NODE 5: Validado -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.9s" dur="0.4s" fill="freeze"/>
+    <rect x="1615" y="100" width="165" height="90" rx="8" fill="#111827" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1697" y="121" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">✅ Aprovado</text>
+    <text x="1697" y="136" font-size="9.5" fill="#4ade80" text-anchor="middle">DoR + DoD OK</text>
+    <line x1="1625" y1="143" x2="1770" y2="143" stroke="#1f2937" stroke-width="1"/>
+    <text x="1625" y="157" font-size="9.5" fill="#8b96a8">entra no backlog</text>
+    <text x="1625" y="171" font-size="9.5" fill="#8b96a8">sprint planning</text>
+    <text x="1625" y="184" font-size="8.5" fill="#4b5563">pronto para dev</text>
+  </g>
+
+  <!-- Animated dots -->
+  <circle r="3.5" fill="#3b82f6">
+    <animateMotion dur="1.8s" begin="0.2s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.2s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="3.5" fill="#2dd4bf">
+    <animateMotion dur="1.8s" begin="0.9s" repeatCount="indefinite"><mpath href="#p2"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.9s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="3.5" fill="#2dd4bf">
+    <animateMotion dur="1.8s" begin="1.6s" repeatCount="indefinite"><mpath href="#p3"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="1.6s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="3.5" fill="#f59e0b">
+    <animateMotion dur="1.8s" begin="2.3s" repeatCount="indefinite"><mpath href="#p4"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="2.3s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="3.5" fill="#4ade80">
+    <animateMotion dur="1.8s" begin="3.0s" repeatCount="indefinite"><mpath href="#p5"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="3.0s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ══ SEÇÃO: INVEST ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.0s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="218" width="860" height="175" rx="8" fill="#0d1117" stroke="#3b82f6" stroke-width="1"/>
+    <text x="38" y="237" font-size="10" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">CRITÉRIO INVEST — aplicado pelo story-agent em cada história</text>
+    <line x1="30" y1="244" x2="870" y2="244" stroke="#1f2937" stroke-width="1"/>
+
+    <!-- I -->
+    <rect x="38" y="252" width="108" height="56" rx="5" fill="#111827" stroke="#3b82f6" stroke-width="1"/>
+    <text x="92" y="270" font-size="18" font-weight="800" fill="#3b82f6" text-anchor="middle">I</text>
+    <text x="92" y="284" font-size="9" fill="#e6edf3" text-anchor="middle">Independent</text>
+    <text x="92" y="296" font-size="8.5" fill="#4b5563" text-anchor="middle">sem dependência</text>
+    <text x="92" y="305" font-size="8.5" fill="#4b5563" text-anchor="middle">de outras histórias</text>
+
+    <!-- N -->
+    <rect x="158" y="252" width="108" height="56" rx="5" fill="#111827" stroke="#3b82f6" stroke-width="1"/>
+    <text x="212" y="270" font-size="18" font-weight="800" fill="#3b82f6" text-anchor="middle">N</text>
+    <text x="212" y="284" font-size="9" fill="#e6edf3" text-anchor="middle">Negotiable</text>
+    <text x="212" y="296" font-size="8.5" fill="#4b5563" text-anchor="middle">detalhes abertos</text>
+    <text x="212" y="305" font-size="8.5" fill="#4b5563" text-anchor="middle">à conversa</text>
+
+    <!-- V -->
+    <rect x="278" y="252" width="108" height="56" rx="5" fill="#111827" stroke="#3b82f6" stroke-width="1"/>
+    <text x="332" y="270" font-size="18" font-weight="800" fill="#3b82f6" text-anchor="middle">V</text>
+    <text x="332" y="284" font-size="9" fill="#e6edf3" text-anchor="middle">Valuable</text>
+    <text x="332" y="296" font-size="8.5" fill="#4b5563" text-anchor="middle">entrega valor ao</text>
+    <text x="332" y="305" font-size="8.5" fill="#4b5563" text-anchor="middle">usuário ou negócio</text>
+
+    <!-- E -->
+    <rect x="398" y="252" width="108" height="56" rx="5" fill="#111827" stroke="#3b82f6" stroke-width="1"/>
+    <text x="452" y="270" font-size="18" font-weight="800" fill="#3b82f6" text-anchor="middle">E</text>
+    <text x="452" y="284" font-size="9" fill="#e6edf3" text-anchor="middle">Estimable</text>
+    <text x="452" y="296" font-size="8.5" fill="#4b5563" text-anchor="middle">pode ser estimada</text>
+    <text x="452" y="305" font-size="8.5" fill="#4b5563" text-anchor="middle">em story points</text>
+
+    <!-- S -->
+    <rect x="518" y="252" width="108" height="56" rx="5" fill="#111827" stroke="#3b82f6" stroke-width="1"/>
+    <text x="572" y="270" font-size="18" font-weight="800" fill="#3b82f6" text-anchor="middle">S</text>
+    <text x="572" y="284" font-size="9" fill="#e6edf3" text-anchor="middle">Small</text>
+    <text x="572" y="296" font-size="8.5" fill="#4b5563" text-anchor="middle">cabe em 1 sprint</text>
+    <text x="572" y="305" font-size="8.5" fill="#4b5563" text-anchor="middle">(max 2 semanas)</text>
+
+    <!-- T -->
+    <rect x="638" y="252" width="108" height="56" rx="5" fill="#111827" stroke="#3b82f6" stroke-width="1"/>
+    <text x="692" y="270" font-size="18" font-weight="800" fill="#3b82f6" text-anchor="middle">T</text>
+    <text x="692" y="284" font-size="9" fill="#e6edf3" text-anchor="middle">Testable</text>
+    <text x="692" y="296" font-size="8.5" fill="#4b5563" text-anchor="middle">critério de aceite</text>
+    <text x="692" y="305" font-size="8.5" fill="#4b5563" text-anchor="middle">verificável</text>
+
+    <text x="38" y="378" font-size="10" fill="#4b5563">Se algum critério falhar → story-agent refina antes de seguir</text>
+  </g>
+
+  <!-- ══ SEÇÃO: DoR — Definition of Ready ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.2s" dur="0.4s" fill="freeze"/>
+    <rect x="896" y="218" width="440" height="300" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="914" y="237" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">DoR — DEFINITION OF READY  ·  9 itens</text>
+    <text x="914" y="250" font-size="9" fill="#4b5563">história só entra no sprint quando todos marcados ✓</text>
+    <line x1="906" y1="256" x2="1326" y2="256" stroke="#1f2937" stroke-width="1"/>
+
+    <text x="916" y="273" font-size="9.5" fill="#8b96a8">① ID único atribuído (S-NNN)</text>
+    <text x="916" y="290" font-size="9.5" fill="#8b96a8">② User Story no formato padrão</text>
+    <text x="916" y="307" font-size="9.5" fill="#8b96a8">③ Todos os critérios INVEST atendidos</text>
+    <text x="916" y="324" font-size="9.5" fill="#8b96a8">④ Ao menos 1 critério de aceite (BDD)</text>
+    <text x="916" y="341" font-size="9.5" fill="#8b96a8">⑤ Dependências mapeadas e resolvidas</text>
+    <text x="916" y="358" font-size="9.5" fill="#8b96a8">⑥ Estimativa em story points</text>
+    <text x="916" y="375" font-size="9.5" fill="#8b96a8">⑦ Mockup ou wireframe referenciado</text>
+    <text x="916" y="392" font-size="9.5" fill="#8b96a8">⑧ Prioridade MoSCoW definida</text>
+    <text x="916" y="409" font-size="9.5" fill="#8b96a8">⑨ Revisado pelo Product Owner (humano)</text>
+
+    <rect x="906" y="420" width="420" height="84" rx="5" fill="#1a1200" stroke="#f59e0b" stroke-width="1"/>
+    <text x="916" y="437" font-size="9" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">⚠ GATE obrigatório</text>
+    <text x="916" y="453" font-size="9.5" fill="#8b96a8">O orchestrator bloqueia a execução se DoR ≠ 100%.</text>
+    <text x="916" y="469" font-size="9.5" fill="#8b96a8">Story incompleta volta para story-agent refinar.</text>
+    <text x="916" y="485" font-size="9.5" fill="#8b96a8">Nenhum agente de impl. recebe história sem DoR OK.</text>
+    <text x="916" y="499" font-size="8.5" fill="#4b5563">Regra: "nunca implementar o que não está definido"</text>
+  </g>
+
+  <!-- ══ SEÇÃO: DoD — Definition of Done ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.4s" dur="0.4s" fill="freeze"/>
+    <rect x="1352" y="218" width="428" height="300" rx="8" fill="#0d1117" stroke="#4ade80" stroke-width="1"/>
+    <text x="1370" y="237" font-size="10" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">DoD — DEFINITION OF DONE  ·  12 itens</text>
+    <text x="1370" y="250" font-size="9" fill="#4b5563">story só sai do sprint quando todos marcados ✓</text>
+    <line x1="1362" y1="256" x2="1770" y2="256" stroke="#1f2937" stroke-width="1"/>
+
+    <text x="1370" y="273" font-size="9.5" fill="#8b96a8">① Código implementado e revisado (4-eyes)</text>
+    <text x="1370" y="290" font-size="9.5" fill="#8b96a8">② Testes unitários ≥ 80% cobertura</text>
+    <text x="1370" y="307" font-size="9.5" fill="#8b96a8">③ Testes de integração passando</text>
+    <text x="1370" y="324" font-size="9.5" fill="#8b96a8">④ Critérios de aceite BDD verificados</text>
+    <text x="1370" y="341" font-size="9.5" fill="#8b96a8">⑤ Code review aprovado</text>
+    <text x="1370" y="358" font-size="9.5" fill="#8b96a8">⑥ Sem warnings/erros de lint</text>
+    <text x="1370" y="375" font-size="9.5" fill="#8b96a8">⑦ OWASP Top 10 verificado (security-agent)</text>
+    <text x="1370" y="392" font-size="9.5" fill="#8b96a8">⑧ LGPD/GDPR verificado (privacy-agent)</text>
+    <text x="1370" y="409" font-size="9.5" fill="#8b96a8">⑨ Documentação atualizada</text>
+    <text x="1370" y="426" font-size="9.5" fill="#8b96a8">⑩ PR merged na branch principal</text>
+    <text x="1370" y="443" font-size="9.5" fill="#8b96a8">⑪ CI/CD pipeline verde</text>
+    <text x="1370" y="460" font-size="9.5" fill="#8b96a8">⑫ GitHub Issue fechada com evidências</text>
+
+    <text x="1370" y="485" font-size="9" fill="#4b5563">Aprovação humana (lay-user) requerida para UX stories.</text>
+    <text x="1370" y="499" font-size="9" fill="#4b5563">Score mínimo de 7/10 no teste com lay-user.</text>
+    <text x="1370" y="513" font-size="9" fill="#4b5563">tech-review-agent valida ⑦ e ⑧ antes de merge.</text>
+  </g>
+
+  <!-- ══ SEÇÃO INFERIOR ══ -->
+
+  <!-- Card: Hierarquia de requisitos -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.6s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="408" width="430" height="165" rx="8" fill="#0d1117" stroke="#7c3aed" stroke-width="1"/>
+    <text x="38" y="427" font-size="10" fill="#7c3aed" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">HIERARQUIA DE REQUISITOS</text>
+    <line x1="30" y1="433" x2="440" y2="433" stroke="#1f2937" stroke-width="1"/>
+    <!-- Visual hierarquia -->
+    <rect x="160" y="440" width="120" height="28" rx="4" fill="#111827" stroke="#7c3aed" stroke-width="1"/>
+    <text x="220" y="458" font-size="9.5" fill="#e6edf3" text-anchor="middle">🎯 Epic</text>
+    <line x1="220" y1="468" x2="220" y2="480" stroke="#4b5563" stroke-width="1"/>
+    <line x1="100" y1="480" x2="340" y2="480" stroke="#4b5563" stroke-width="1"/>
+    <line x1="100" y1="480" x2="100" y2="492" stroke="#4b5563" stroke-width="1"/>
+    <line x1="220" y1="480" x2="220" y2="492" stroke="#4b5563" stroke-width="1"/>
+    <line x1="340" y1="480" x2="340" y2="492" stroke="#4b5563" stroke-width="1"/>
+    <rect x="40" y="492" width="118" height="24" rx="3" fill="#111827" stroke="#3b82f6" stroke-width="1"/>
+    <text x="99" y="507" font-size="9" fill="#e6edf3" text-anchor="middle">Feature</text>
+    <rect x="161" y="492" width="118" height="24" rx="3" fill="#111827" stroke="#3b82f6" stroke-width="1"/>
+    <text x="220" y="507" font-size="9" fill="#e6edf3" text-anchor="middle">Feature</text>
+    <rect x="282" y="492" width="118" height="24" rx="3" fill="#111827" stroke="#3b82f6" stroke-width="1"/>
+    <text x="341" y="507" font-size="9" fill="#e6edf3" text-anchor="middle">Feature</text>
+    <!-- User stories abaixo -->
+    <line x1="99" y1="516" x2="99" y2="528" stroke="#4b5563" stroke-width="1"/>
+    <rect x="38" y="528" width="122" height="20" rx="3" fill="#111827" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="99" y="541" font-size="8.5" fill="#2dd4bf" text-anchor="middle">S-001 · S-002 · S-003</text>
+
+    <text x="38" y="565" font-size="9" fill="#4b5563">1 Epic → N Features → N User Stories (S-NNN)</text>
+  </g>
+
+  <!-- Card: MoSCoW -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.8s" dur="0.4s" fill="freeze"/>
+    <rect x="466" y="408" width="430" height="165" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="484" y="427" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">PRIORIZAÇÃO MoSCoW</text>
+    <line x1="476" y1="433" x2="886" y2="433" stroke="#1f2937" stroke-width="1"/>
+
+    <rect x="484" y="440" width="95" height="52" rx="4" fill="#111827" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="531" y="457" font-size="10" font-weight="700" fill="#ef4444" text-anchor="middle">Must</text>
+    <text x="531" y="472" font-size="8.5" fill="#8b96a8" text-anchor="middle">obrigatório</text>
+    <text x="531" y="484" font-size="8.5" fill="#4b5563" text-anchor="middle">MVP</text>
+
+    <rect x="590" y="440" width="95" height="52" rx="4" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="637" y="457" font-size="10" font-weight="700" fill="#f59e0b" text-anchor="middle">Should</text>
+    <text x="637" y="472" font-size="8.5" fill="#8b96a8" text-anchor="middle">importante</text>
+    <text x="637" y="484" font-size="8.5" fill="#4b5563" text-anchor="middle">alta prioridade</text>
+
+    <rect x="696" y="440" width="95" height="52" rx="4" fill="#111827" stroke="#3b82f6" stroke-width="1"/>
+    <text x="743" y="457" font-size="10" font-weight="700" fill="#3b82f6" text-anchor="middle">Could</text>
+    <text x="743" y="472" font-size="8.5" fill="#8b96a8" text-anchor="middle">desejável</text>
+    <text x="743" y="484" font-size="8.5" fill="#4b5563" text-anchor="middle">se couber</text>
+
+    <rect x="802" y="440" width="72" height="52" rx="4" fill="#111827" stroke="#4b5563" stroke-width="1"/>
+    <text x="838" y="457" font-size="10" font-weight="700" fill="#4b5563" text-anchor="middle">Won't</text>
+    <text x="838" y="472" font-size="8.5" fill="#4b5563" text-anchor="middle">não neste</text>
+    <text x="838" y="484" font-size="8.5" fill="#4b5563" text-anchor="middle">ciclo</text>
+
+    <text x="484" y="512" font-size="9.5" fill="#8b96a8">Sprint só carrega Must + Should prioritários.</text>
+    <text x="484" y="528" font-size="9.5" fill="#8b96a8">Could entra se capacidade sobrar após planning.</text>
+    <text x="484" y="544" font-size="9.5" fill="#8b96a8">Won't documentado no backlog para sprints futuros.</text>
+    <text x="484" y="560" font-size="9" fill="#4b5563">story-agent define · orchestrator valida · PO aprova</text>
+  </g>
+
+  <!-- Card: Story Points -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="2.0s" dur="0.4s" fill="freeze"/>
+    <rect x="912" y="408" width="428" height="165" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="930" y="427" font-size="10" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">STORY POINTS  ·  Fibonacci</text>
+    <line x1="922" y1="433" x2="1330" y2="433" stroke="#1f2937" stroke-width="1"/>
+
+    <!-- Fibonacci visual -->
+    <text x="930" y="452" font-size="9.5" fill="#4b5563">escala de estimativa utilizada:</text>
+    <!-- bars -->
+    <rect x="930" y="458" width="18" height="30" rx="2" fill="#2dd4bf" opacity="0.3"/>
+    <text x="939" y="500" font-size="8.5" fill="#2dd4bf" text-anchor="middle">1</text>
+    <text x="939" y="512" font-size="7.5" fill="#4b5563" text-anchor="middle">trivial</text>
+
+    <rect x="956" y="450" width="18" height="38" rx="2" fill="#2dd4bf" opacity="0.45"/>
+    <text x="965" y="500" font-size="8.5" fill="#2dd4bf" text-anchor="middle">2</text>
+
+    <rect x="982" y="440" width="18" height="48" rx="2" fill="#2dd4bf" opacity="0.6"/>
+    <text x="991" y="500" font-size="8.5" fill="#2dd4bf" text-anchor="middle">3</text>
+    <text x="991" y="512" font-size="7.5" fill="#4b5563" text-anchor="middle">simples</text>
+
+    <rect x="1008" y="426" width="18" height="62" rx="2" fill="#2dd4bf" opacity="0.75"/>
+    <text x="1017" y="500" font-size="8.5" fill="#2dd4bf" text-anchor="middle">5</text>
+
+    <rect x="1034" y="406" width="18" height="82" rx="2" fill="#2dd4bf" opacity="0.9"/>
+    <text x="1043" y="500" font-size="8.5" fill="#2dd4bf" text-anchor="middle">8</text>
+    <text x="1043" y="512" font-size="7.5" fill="#4b5563" text-anchor="middle">médio</text>
+
+    <rect x="1060" y="382" width="18" height="106" rx="2" fill="#f59e0b" opacity="0.8"/>
+    <text x="1069" y="500" font-size="8.5" fill="#f59e0b" text-anchor="middle">13</text>
+    <text x="1069" y="512" font-size="7.5" fill="#4b5563" text-anchor="middle">complexo</text>
+
+    <rect x="1086" y="352" width="18" height="136" rx="2" fill="#ef4444" opacity="0.7"/>
+    <text x="1095" y="500" font-size="8.5" fill="#ef4444" text-anchor="middle">21</text>
+    <text x="1095" y="512" font-size="7.5" fill="#4b5563" text-anchor="middle">dividir!</text>
+
+    <text x="1120" y="452" font-size="9.5" fill="#8b96a8">≥ 13 pts → dividir em</text>
+    <text x="1120" y="468" font-size="9.5" fill="#8b96a8">histórias menores.</text>
+    <text x="1120" y="484" font-size="9.5" fill="#8b96a8">Velocidade do time</text>
+    <text x="1120" y="500" font-size="9.5" fill="#8b96a8">define capacidade</text>
+    <text x="1120" y="516" font-size="9.5" fill="#8b96a8">de sprint.</text>
+
+    <text x="930" y="540" font-size="9.5" fill="#8b96a8">Planning poker: story-agent propõe · tech-review revisa</text>
+    <text x="930" y="556" font-size="9" fill="#4b5563">Sem unidade de tempo — é esforço relativo, não horas</text>
+  </g>
+
+  <!-- Card: Output do story-agent -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="2.2s" dur="0.4s" fill="freeze"/>
+    <rect x="1356" y="408" width="424" height="165" rx="8" fill="#0d1117" stroke="#4ade80" stroke-width="1"/>
+    <text x="1374" y="427" font-size="10" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">OUTPUT DO STORY-AGENT</text>
+    <line x1="1366" y1="433" x2="1770" y2="433" stroke="#1f2937" stroke-width="1"/>
+
+    <text x="1374" y="450" font-size="9.5" fill="#8b96a8">📄 backlog.md</text>
+    <text x="1374" y="466" font-size="9" fill="#4b5563">  Todas as histórias S-NNN com prioridade e pontos</text>
+    <text x="1374" y="482" font-size="9.5" fill="#8b96a8">📄 sprint-planning.md</text>
+    <text x="1374" y="498" font-size="9" fill="#4b5563">  Histórias selecionadas para o sprint corrente</text>
+    <text x="1374" y="514" font-size="9.5" fill="#8b96a8">📄 acceptance-criteria.md</text>
+    <text x="1374" y="530" font-size="9" fill="#4b5563">  Todos os ACs em formato BDD por história</text>
+    <text x="1374" y="546" font-size="9.5" fill="#8b96a8">📄 dor-checklist.md</text>
+    <text x="1374" y="562" font-size="9" fill="#4b5563">  DoR validado ✓ para cada story do sprint</text>
+  </g>
+
+  <!-- ══ BOTTOM STATUS BAR ══ -->
+  <rect x="20" y="590" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="601" r="4" fill="#3b82f6">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="605" font-size="9.5" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 04</text>
+  <text x="108" y="605" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="118" y="605" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">story-agent → S-NNN · INVEST · BDD (Given/When/Then) · DoR 9 itens · DoD 12 itens · MoSCoW · Fibonacci</text>
+  <text x="1770" y="605" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">REQUISITOS E HISTÓRIAS</text>
+
+  <!-- ══ LEGENDA CORES ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="2.4s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="628" width="1760" height="130" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="648" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA · CONCEITOS</text>
+    <line x1="30" y1="653" x2="1770" y2="653" stroke="#1f2937" stroke-width="1"/>
+
+    <!-- Row 1 -->
+    <rect x="38" y="663" width="10" height="10" rx="2" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="55" y="673" font-size="9.5" fill="#8b96a8">Documento de entrada / saída</text>
+    <rect x="225" y="663" width="10" height="10" rx="2" fill="#111827" stroke="#2dd4bf" stroke-width="2"/>
+    <text x="242" y="673" font-size="9.5" fill="#8b96a8">story-agent (ativo)</text>
+    <rect x="380" y="663" width="10" height="10" rx="2" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="397" y="673" font-size="9.5" fill="#8b96a8">Gate / Critério obrigatório</text>
+    <rect x="560" y="663" width="10" height="10" rx="2" fill="#111827" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="577" y="673" font-size="9.5" fill="#8b96a8">Aprovado / Pronto para sprint</text>
+
+    <!-- Row 2 -->
+    <text x="38" y="696" font-size="9.5" fill="#2dd4bf" font-weight="600">DoR:</text>
+    <text x="68" y="696" font-size="9.5" fill="#8b96a8">Definition of Ready — pré-condições para a história entrar no sprint</text>
+    <text x="500" y="696" font-size="9.5" fill="#4ade80" font-weight="600">DoD:</text>
+    <text x="530" y="696" font-size="9.5" fill="#8b96a8">Definition of Done — critérios para considerar a história finalizada</text>
+    <text x="38" y="714" font-size="9.5" fill="#f59e0b" font-weight="600">INVEST:</text>
+    <text x="88" y="714" font-size="9.5" fill="#8b96a8">Independent · Negotiable · Valuable · Estimable · Small · Testable — qualidade da história</text>
+    <text x="38" y="732" font-size="9.5" fill="#a78bfa" font-weight="600">BDD:</text>
+    <text x="68" y="732" font-size="9.5" fill="#8b96a8">Behavior-Driven Development — critério de aceite em linguagem ubíqua: Given/When/Then</text>
+    <text x="38" y="750" font-size="9.5" fill="#3b82f6" font-weight="600">S-NNN:</text>
+    <text x="82" y="750" font-size="9.5" fill="#8b96a8">formato de ID único de story (ex: S-001, S-042) — rastreável no GitHub Projects e backlog.md</text>
+  </g>
+</svg>
+</body>
+</html>

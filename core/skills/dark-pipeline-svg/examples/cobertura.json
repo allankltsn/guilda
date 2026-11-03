@@ -1,0 +1,13 @@
+{
+  "title": "Cobertura por módulo",
+  "type": "bars",
+  "mode": "absolute",
+  "max": 100,
+  "unit": "%",
+  "items": [
+    {"label": "auth", "value": 92},
+    {"label": "billing", "value": 61, "color": "#f59e0b"},
+    {"label": "reports", "value": 34, "color": "#ef4444"},
+    {"label": "core", "value": 78}
+  ]
+}

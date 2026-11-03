@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVG 11 — Design, UX e Testes com Usuários Leigos</title>
+<style>
+  :root { color-scheme: dark }
+  body {
+    margin: 0; background: #0b0f17;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100%; padding: 40px 16px; box-sizing: border-box;
+  }
+  svg { width: 100%; max-width: 1800px; height: auto; display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-pink" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f472b6"/>
+    </marker>
+    <marker id="arr-teal" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#2dd4bf"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#4ade80"/>
+    </marker>
+
+    <path id="p1" d="M290,290 L400,290" fill="none"/>
+    <path id="p2" d="M640,290 L750,290" fill="none"/>
+    <path id="p3" d="M990,290 L1100,290" fill="none"/>
+    <path id="p4" d="M1340,290 L1450,290" fill="none"/>
+  </defs>
+
+  <rect width="1800" height="800" fill="#0b0f17"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="1760" height="48" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="16" width="6" height="48" rx="3" fill="#f472b6"/>
+  <text x="44" y="37" font-size="15" font-weight="700" fill="#e6edf3">11 — Design, UX e Testes com Usuários Leigos</text>
+  <text x="44" y="55" font-size="11" fill="#8b96a8">ux-agent · brand · accessibility · usability · design-system · IA de conteúdo · drawio skill · quick test</text>
+  <text x="1760" y="37" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 11/17</text>
+  <text x="1760" y="52" font-size="9.5" fill="#f472b6" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">grupo C · design &amp; UX</text>
+
+  <!-- ══ FLUXO PRINCIPAL ══ -->
+  <!-- Step 1: Requisito de tela/componente -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.4s" fill="freeze"/>
+    <rect x="30" y="240" width="260" height="112" rx="8" fill="#0d1117" stroke="#f472b6" stroke-width="2"/>
+    <text x="160" y="263" font-size="10" fill="#f472b6" font-weight="700" text-anchor="middle">REQUISITO</text>
+    <text x="160" y="279" font-size="8.5" fill="#8b96a8" text-anchor="middle">tela ou componente novo</text>
+    <line x1="40" y1="286" x2="280" y2="286" stroke="#1f2937" stroke-width="1"/>
+    <text x="42" y="301" font-size="8.5" fill="#4b5563">ex: tela de onboarding</text>
+    <text x="42" y="315" font-size="8.5" fill="#4b5563">ex: dashboard principal</text>
+    <text x="42" y="329" font-size="8.5" fill="#f472b6">→ grupo Design &amp; UX</text>
+    <text x="42" y="343" font-size="8.5" fill="#4b5563">personas definidas</text>
+  </g>
+
+  <!-- Seta 1→2 -->
+  <line x1="290" y1="296" x2="398" y2="296" stroke="#f472b6" stroke-width="1.5" marker-end="url(#arr-pink)"/>
+  <circle r="3.5" fill="#f472b6" opacity="0">
+    <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.3s"><mpath href="#p1"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="0.3s"/>
+  </circle>
+
+  <!-- Step 2: UX + IA de conteúdo -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.3s" dur="0.4s" fill="freeze"/>
+    <rect x="400" y="240" width="240" height="112" rx="8" fill="#0d1117" stroke="#f472b6" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="520" y="263" font-size="10" fill="#f472b6" font-weight="700" text-anchor="middle">UX + IA</text>
+    <text x="520" y="279" font-size="8.5" fill="#8b96a8" text-anchor="middle">fluxo + arquitetura de info</text>
+    <line x1="410" y1="286" x2="630" y2="286" stroke="#1f2937" stroke-width="1"/>
+    <text x="412" y="301" font-size="8.5" fill="#4b5563">ux-agent: jornada do usuário</text>
+    <text x="412" y="315" font-size="8.5" fill="#4b5563">ia-agent: hierarquia de info</text>
+    <text x="412" y="329" font-size="8.5" fill="#4b5563">wireframe em drawio/mermaid</text>
+    <text x="412" y="343" font-size="8.5" fill="#4b5563">copywriting: microcopy</text>
+  </g>
+
+  <!-- Seta 2→3 -->
+  <line x1="640" y1="296" x2="748" y2="296" stroke="#f472b6" stroke-width="1.5" marker-end="url(#arr-pink)"/>
+  <circle r="3.5" fill="#f472b6" opacity="0">
+    <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.6s"><mpath href="#p2"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="0.6s"/>
+  </circle>
+
+  <!-- Step 3: Brand + Design System -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.5s" dur="0.4s" fill="freeze"/>
+    <rect x="750" y="240" width="240" height="112" rx="8" fill="#0d1117" stroke="#f472b6" stroke-width="2"/>
+    <text x="870" y="263" font-size="10" fill="#f472b6" font-weight="700" text-anchor="middle">BRAND + DS</text>
+    <text x="870" y="279" font-size="8.5" fill="#8b96a8" text-anchor="middle">identidade + componentes</text>
+    <line x1="760" y1="286" x2="980" y2="286" stroke="#1f2937" stroke-width="1"/>
+    <text x="762" y="301" font-size="8.5" fill="#4b5563">brand-agent: paleta, tipog.</text>
+    <text x="762" y="315" font-size="8.5" fill="#4b5563">design-system: tokens CSS</text>
+    <text x="762" y="329" font-size="8.5" fill="#4b5563">componentes reutilizáveis</text>
+    <text x="762" y="343" font-size="8.5" fill="#4b5563">guia de estilo atualizado</text>
+  </g>
+
+  <!-- Seta 3→4 -->
+  <line x1="990" y1="296" x2="1098" y2="296" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <circle r="3.5" fill="#2dd4bf" opacity="0">
+    <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.9s"><mpath href="#p3"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="0.9s"/>
+  </circle>
+
+  <!-- Step 4: Accessibility -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.7s" dur="0.4s" fill="freeze"/>
+    <rect x="1100" y="240" width="240" height="112" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2.2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="1220" y="263" font-size="10" fill="#2dd4bf" font-weight="700" text-anchor="middle">ACESSIBILIDADE</text>
+    <text x="1220" y="279" font-size="8.5" fill="#8b96a8" text-anchor="middle">WCAG 2.1 AA</text>
+    <line x1="1110" y1="286" x2="1330" y2="286" stroke="#1f2937" stroke-width="1"/>
+    <text x="1112" y="301" font-size="8.5" fill="#4b5563">accessibility-agent</text>
+    <text x="1112" y="315" font-size="8.5" fill="#4b5563">contraste mín 4.5:1</text>
+    <text x="1112" y="329" font-size="8.5" fill="#4b5563">aria-labels + focus order</text>
+    <text x="1112" y="343" font-size="8.5" fill="#4b5563">teclado + leitor de tela</text>
+  </g>
+
+  <!-- Seta 4→5 -->
+  <line x1="1340" y1="296" x2="1448" y2="296" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+  <circle r="3.5" fill="#f59e0b" opacity="0">
+    <animateMotion dur="1.5s" repeatCount="indefinite" begin="1.2s"><mpath href="#p4"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="1.2s"/>
+  </circle>
+
+  <!-- Step 5: Usability Quick Test -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.9s" dur="0.4s" fill="freeze"/>
+    <rect x="1450" y="240" width="330" height="112" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="1615" y="263" font-size="10" fill="#f59e0b" font-weight="700" text-anchor="middle">USABILITY QUICK TEST</text>
+    <text x="1615" y="279" font-size="8.5" fill="#8b96a8" text-anchor="middle">usability-agent · persona leiga</text>
+    <line x1="1460" y1="286" x2="1770" y2="286" stroke="#1f2937" stroke-width="1"/>
+    <text x="1462" y="301" font-size="8.5" fill="#4b5563">simula usuário não-técnico</text>
+    <text x="1462" y="315" font-size="8.5" fill="#4b5563">testa fluxo de ponta a ponta</text>
+    <text x="1462" y="329" font-size="8.5" fill="#4b5563">aponta confusões e bloqueios</text>
+    <text x="1462" y="343" font-size="8.5" fill="#f59e0b">→ feedback → iterate</text>
+  </g>
+
+  <!-- ══ 7 AGENTES DO GRUPO C ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.1s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="376" width="1760" height="40" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="40" y="401" font-size="10" fill="#f472b6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">GRUPO C — DESIGN &amp; UX  ·  7 agentes especializados</text>
+
+    <!-- 7 agent cards -->
+    <rect x="20" y="430" width="238" height="86" rx="6" fill="#0d0a10" stroke="#f472b6" stroke-width="1"/>
+    <text x="139" y="450" font-size="9.5" fill="#f472b6" font-weight="700" text-anchor="middle">ux-agent</text>
+    <text x="139" y="466" font-size="8.5" fill="#8b96a8" text-anchor="middle">jornada · fluxo · wireframe</text>
+    <text x="30" y="482" font-size="8" fill="#4b5563">pesquisa de usuário, mapeamento</text>
+    <text x="30" y="494" font-size="8" fill="#4b5563">de jornada, wireframes em</text>
+    <text x="30" y="506" font-size="8" fill="#4b5563">Mermaid/drawio, protótipos</text>
+
+    <rect x="268" y="430" width="238" height="86" rx="6" fill="#0d0a10" stroke="#f472b6" stroke-width="1"/>
+    <text x="387" y="450" font-size="9.5" fill="#f472b6" font-weight="700" text-anchor="middle">brand-agent</text>
+    <text x="387" y="466" font-size="8.5" fill="#8b96a8" text-anchor="middle">identidade visual</text>
+    <text x="278" y="482" font-size="8" fill="#4b5563">paleta de cores, tipografia,</text>
+    <text x="278" y="494" font-size="8" fill="#4b5563">logotipo, tom de voz,</text>
+    <text x="278" y="506" font-size="8" fill="#4b5563">brand guidelines</text>
+
+    <rect x="516" y="430" width="238" height="86" rx="6" fill="#0d0a10" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="635" y="450" font-size="9.5" fill="#2dd4bf" font-weight="700" text-anchor="middle">accessibility-agent</text>
+    <text x="635" y="466" font-size="8.5" fill="#8b96a8" text-anchor="middle">WCAG 2.1 AA</text>
+    <text x="526" y="482" font-size="8" fill="#4b5563">contraste, foco, aria-labels,</text>
+    <text x="526" y="494" font-size="8" fill="#4b5563">leitor de tela, zoom, teclado,</text>
+    <text x="526" y="506" font-size="8" fill="#4b5563">alt-text em imagens</text>
+
+    <rect x="764" y="430" width="238" height="86" rx="6" fill="#0d0a10" stroke="#f472b6" stroke-width="1"/>
+    <text x="883" y="450" font-size="9.5" fill="#f472b6" font-weight="700" text-anchor="middle">copywriting-agent</text>
+    <text x="883" y="466" font-size="8.5" fill="#8b96a8" text-anchor="middle">microcopy · UX writing</text>
+    <text x="774" y="482" font-size="8" fill="#4b5563">labels, tooltips, mensagens</text>
+    <text x="774" y="494" font-size="8" fill="#4b5563">de erro, CTAs, onboarding,</text>
+    <text x="774" y="506" font-size="8" fill="#4b5563">tom consistente com brand</text>
+
+    <rect x="1012" y="430" width="238" height="86" rx="6" fill="#0d0a10" stroke="#f472b6" stroke-width="1"/>
+    <text x="1131" y="450" font-size="9.5" fill="#f472b6" font-weight="700" text-anchor="middle">design-system-agent</text>
+    <text x="1131" y="466" font-size="8.5" fill="#8b96a8" text-anchor="middle">tokens + componentes</text>
+    <text x="1022" y="482" font-size="8" fill="#4b5563">design tokens (CSS vars),</text>
+    <text x="1022" y="494" font-size="8" fill="#4b5563">Storybook, Tailwind config,</text>
+    <text x="1022" y="506" font-size="8" fill="#4b5563">componentes compartilhados</text>
+
+    <rect x="1260" y="430" width="238" height="86" rx="6" fill="#0d0a10" stroke="#f472b6" stroke-width="1"/>
+    <text x="1379" y="450" font-size="9.5" fill="#f472b6" font-weight="700" text-anchor="middle">ia-agent</text>
+    <text x="1379" y="466" font-size="8.5" fill="#8b96a8" text-anchor="middle">arquitetura da informação</text>
+    <text x="1270" y="482" font-size="8" fill="#4b5563">hierarquia de conteúdo,</text>
+    <text x="1270" y="494" font-size="8" fill="#4b5563">taxonomia, navegação,</text>
+    <text x="1270" y="506" font-size="8" fill="#4b5563">sitemap, card sorting</text>
+
+    <rect x="1508" y="430" width="272" height="86" rx="6" fill="#0d0a10" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="1644" y="450" font-size="9.5" fill="#f59e0b" font-weight="700" text-anchor="middle">usability-agent</text>
+    <text x="1644" y="466" font-size="8.5" fill="#8b96a8" text-anchor="middle">teste com persona leiga</text>
+    <text x="1518" y="482" font-size="8" fill="#4b5563">simula usuário não-técnico,</text>
+    <text x="1518" y="494" font-size="8" fill="#4b5563">5 tarefas comuns, tempo por</text>
+    <text x="1518" y="506" font-size="8" fill="#4b5563">tarefa, pontos de confusão</text>
+  </g>
+
+  <!-- ══ DRAWIO / WIREFRAME ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.3s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="534" width="580" height="148" rx="8" fill="#0d1117" stroke="#f472b6" stroke-width="1"/>
+    <text x="38" y="554" font-size="10" fill="#f472b6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">DRAWIO SKILL — WIREFRAMES</text>
+    <line x1="30" y1="560" x2="590" y2="560" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="578" font-size="9.5" fill="#8b96a8">O ux-agent usa a drawio skill para gerar wireframes como XML</text>
+    <text x="38" y="596" font-size="9.5" fill="#8b96a8">que abrem diretamente no draw.io (app.diagrams.net)</text>
+    <text x="38" y="618" font-size="9.5" fill="#4b5563">Alternativa: Mermaid (flowchart) para fluxos simples de navegação</text>
+    <text x="38" y="636" font-size="9.5" fill="#4b5563">Output: wireframe.drawio · sitemap.md · user-journey.md</text>
+    <text x="38" y="654" font-size="9.5" fill="#4b5563">Entregues no handoff para o dev-team como requisitos visuais</text>
+    <text x="38" y="672" font-size="8" fill="#f472b6">skill drawio: carregada antes da primeira geração de diagrama</text>
+  </g>
+
+  <!-- ══ USABILITY QUICK TEST ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.5s" dur="0.4s" fill="freeze"/>
+    <rect x="610" y="534" width="580" height="148" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="628" y="554" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">USABILITY QUICK TEST — 5 TAREFAS</text>
+    <line x1="620" y1="560" x2="1180" y2="560" stroke="#1f2937" stroke-width="1"/>
+    <text x="628" y="578" font-size="9.5" fill="#8b96a8">① Encontrar e usar a função principal (ex: criar conta)</text>
+    <text x="628" y="596" font-size="9.5" fill="#8b96a8">② Recuperar senha ou ajuda (suporte)</text>
+    <text x="628" y="614" font-size="9.5" fill="#8b96a8">③ Completar o fluxo mais comum sem instrução prévia</text>
+    <text x="628" y="632" font-size="9.5" fill="#8b96a8">④ Identificar o erro e corrigi-lo</text>
+    <text x="628" y="650" font-size="9.5" fill="#8b96a8">⑤ Sair / fechar sessão / cancelar operação</text>
+    <text x="628" y="672" font-size="8" fill="#f59e0b">Resultado: lista de problemas por severidade (crítico / moderado / leve)</text>
+  </g>
+
+  <!-- ══ ACESSIBILIDADE WCAG ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.7s" dur="0.4s" fill="freeze"/>
+    <rect x="1200" y="534" width="580" height="148" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="1218" y="554" font-size="10" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">WCAG 2.1 AA — REQUISITOS MÍNIMOS</text>
+    <line x1="1210" y1="560" x2="1770" y2="560" stroke="#1f2937" stroke-width="1"/>
+    <text x="1218" y="578" font-size="9.5" fill="#8b96a8">· Contraste texto/fundo: mín 4.5:1 (3:1 para texto grande)</text>
+    <text x="1218" y="596" font-size="9.5" fill="#8b96a8">· Todos elementos interativos acessíveis por teclado</text>
+    <text x="1218" y="614" font-size="9.5" fill="#8b96a8">· Imagens com alt-text descritivo</text>
+    <text x="1218" y="632" font-size="9.5" fill="#8b96a8">· Formulários com labels explícitos (não só placeholder)</text>
+    <text x="1218" y="650" font-size="9.5" fill="#8b96a8">· Focus visível em todos os estados</text>
+    <text x="1218" y="672" font-size="8" fill="#2dd4bf">accessibility-agent verifica automaticamente no lint phase (axe-core)</text>
+  </g>
+
+  <!-- ══ STATUS BAR ══ -->
+  <rect x="20" y="700" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="711" r="4" fill="#f472b6">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="715" font-size="9.5" fill="#f472b6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 11</text>
+  <text x="108" y="715" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="118" y="715" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">7 agentes Grupo C · drawio skill · WCAG 2.1 AA · usability quick test (5 tarefas) · persona leiga</text>
+  <text x="1770" y="715" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">DESIGN E UX</text>
+
+  <!-- ══ LEGENDA ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.9s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="736" width="1760" height="50" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="752" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA</text>
+    <line x1="30" y1="756" x2="1770" y2="756" stroke="#1f2937" stroke-width="1"/>
+    <rect x="38" y="762" width="10" height="10" rx="2" fill="#0d0a10" stroke="#f472b6" stroke-width="1.5"/>
+    <text x="55" y="772" font-size="9.5" fill="#8b96a8">Grupo C — Design &amp; UX (6 agentes principais)</text>
+    <rect x="340" y="762" width="10" height="10" rx="2" fill="#0d0a10" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="357" y="772" font-size="9.5" fill="#8b96a8">accessibility-agent (teal = validação WCAG)</text>
+    <rect x="620" y="762" width="10" height="10" rx="2" fill="#0d0a10" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="637" y="772" font-size="9.5" fill="#8b96a8">usability-agent (amber = gate de qualidade de UX)</text>
+    <text x="890" y="772" font-size="9.5" fill="#4b5563">IA = Arquitetura da Informação · drawio skill = gerador de wireframes XML · DSAR = pedido de acesso a dados</text>
+  </g>
+</svg>
+</body>
+</html>

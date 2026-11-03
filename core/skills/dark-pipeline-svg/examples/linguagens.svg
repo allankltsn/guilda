@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 173" width="400" height="173" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" role="img" aria-label="Top Languages">
+<style>.t{fill:#e6edf3;font-size:12px}.v{fill:#8b96a8;font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}</style>
+
+<text x="25" y="35" font-size="18" font-weight="600" fill="#2dd4bf">Top Languages</text>
+<defs><clipPath id="bar"><rect x="25" y="55" width="350" height="8" rx="4"/></clipPath></defs>
+<rect x="25" y="55" width="350" height="8" rx="4" fill="#1f2937"/>
+<g clip-path="url(#bar)">
+<rect x="25" y="55" width="0" height="8" fill="#3b82f6"><animate attributeName="width" to="169.55" begin="0.2s" dur="0.6s" fill="freeze"/></rect>
+<rect x="194.05" y="55" width="0" height="8" fill="#f59e0b"><animate attributeName="width" to="76.45" begin="0.35s" dur="0.6s" fill="freeze"/></rect>
+<rect x="270" y="55" width="0" height="8" fill="#4ade80"><animate attributeName="width" to="43.9" begin="0.5s" dur="0.6s" fill="freeze"/></rect>
+<rect x="313.4" y="55" width="0" height="8" fill="#ef4444"><animate attributeName="width" to="32.35" begin="0.65s" dur="0.6s" fill="freeze"/></rect>
+<rect x="345.25" y="55" width="0" height="8" fill="#2dd4bf"><animate attributeName="width" to="18.7" begin="0.8s" dur="0.6s" fill="freeze"/></rect>
+<rect x="363.45" y="55" width="0" height="8" fill="#a78bfa"><animate attributeName="width" to="12.05" begin="0.95s" dur="0.6s" fill="freeze"/></rect>
+</g>
+<g opacity="0"><animate attributeName="opacity" to="1" begin="0.4s" dur="0.4s" fill="freeze"/><circle cx="30" cy="89" r="5" fill="#3b82f6"/><text class="t" x="40" y="93">TypeScript:<tspan class="v" dx="6">48.30%</tspan></text></g>
+<g opacity="0"><animate attributeName="opacity" to="1" begin="0.5s" dur="0.4s" fill="freeze"/><circle cx="205" cy="89" r="5" fill="#f59e0b"/><text class="t" x="215" y="93">Python:<tspan class="v" dx="6">21.70%</tspan></text></g>
+<g opacity="0"><animate attributeName="opacity" to="1" begin="0.6s" dur="0.4s" fill="freeze"/><circle cx="30" cy="114" r="5" fill="#4ade80"/><text class="t" x="40" y="118">Shell:<tspan class="v" dx="6">12.40%</tspan></text></g>
+<g opacity="0"><animate attributeName="opacity" to="1" begin="0.7s" dur="0.4s" fill="freeze"/><circle cx="205" cy="114" r="5" fill="#ef4444"/><text class="t" x="215" y="118">HTML:<tspan class="v" dx="6">9.10%</tspan></text></g>
+<g opacity="0"><animate attributeName="opacity" to="1" begin="0.8s" dur="0.4s" fill="freeze"/><circle cx="30" cy="139" r="5" fill="#2dd4bf"/><text class="t" x="40" y="143">Dockerfile:<tspan class="v" dx="6">5.20%</tspan></text></g>
+<g opacity="0"><animate attributeName="opacity" to="1" begin="0.9s" dur="0.4s" fill="freeze"/><circle cx="205" cy="139" r="5" fill="#a78bfa"/><text class="t" x="215" y="143">Outros:<tspan class="v" dx="6">3.30%</tspan></text></g>
+</svg>

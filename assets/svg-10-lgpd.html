@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVG 10 — LGPD/GDPR e Conformidade de Privacidade</title>
+<style>
+  :root { color-scheme: dark }
+  body {
+    margin: 0; background: #0b0f17;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100%; padding: 40px 16px; box-sizing: border-box;
+  }
+  svg { width: 100%; max-width: 1800px; height: auto; display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-violet" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#a78bfa"/>
+    </marker>
+    <marker id="arr-teal" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#2dd4bf"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#4ade80"/>
+    </marker>
+    <marker id="arr-red" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#ef4444"/>
+    </marker>
+
+    <path id="p1" d="M310,280 L430,280" fill="none"/>
+    <path id="p2" d="M680,280 L800,280" fill="none"/>
+    <path id="p3" d="M1050,280 L1170,280" fill="none"/>
+    <path id="p4" d="M1400,280 L1520,280" fill="none"/>
+  </defs>
+
+  <rect width="1800" height="800" fill="#0b0f17"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="1760" height="48" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="16" width="6" height="48" rx="3" fill="#a78bfa"/>
+  <text x="44" y="37" font-size="15" font-weight="700" fill="#e6edf3">10 — LGPD/GDPR e Conformidade de Privacidade</text>
+  <text x="44" y="55" font-size="11" fill="#8b96a8">privacy-compliance agent · base legal · finalidade · minimização · retenção · direitos do titular</text>
+  <text x="1760" y="37" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 10/17</text>
+  <text x="1760" y="52" font-size="9.5" fill="#a78bfa" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">privacidade · LGPD · GDPR</text>
+
+  <!-- ══ FLUXO PRINCIPAL ══ -->
+  <!-- Step 1: Dado pessoal detectado -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.4s" fill="freeze"/>
+    <rect x="30" y="230" width="280" height="120" rx="8" fill="#0d1117" stroke="#a78bfa" stroke-width="2"/>
+    <text x="170" y="253" font-size="10" fill="#a78bfa" font-weight="700" text-anchor="middle">DADO PESSOAL</text>
+    <text x="170" y="269" font-size="8.5" fill="#8b96a8" text-anchor="middle">detectado no código</text>
+    <line x1="40" y1="276" x2="300" y2="276" stroke="#1f2937" stroke-width="1"/>
+    <text x="42" y="291" font-size="8.5" fill="#4b5563">ex: coleta de e-mail, CPF, IP</text>
+    <text x="42" y="305" font-size="8.5" fill="#4b5563">ex: geolocalização de usuário</text>
+    <text x="42" y="319" font-size="8.5" fill="#4b5563">ex: histórico de comportamento</text>
+    <text x="42" y="337" font-size="8.5" fill="#a78bfa">→ privacy-agent ativado</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <line x1="310" y1="290" x2="428" y2="290" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr-violet)"/>
+  <circle r="3.5" fill="#a78bfa" opacity="0">
+    <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.4s"><mpath href="#p1"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="0.4s"/>
+  </circle>
+
+  <!-- Step 2: Base legal -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.3s" dur="0.4s" fill="freeze"/>
+    <rect x="430" y="230" width="250" height="120" rx="8" fill="#0d1117" stroke="#a78bfa" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="555" y="253" font-size="10" fill="#a78bfa" font-weight="700" text-anchor="middle">BASE LEGAL</text>
+    <text x="555" y="269" font-size="8.5" fill="#8b96a8" text-anchor="middle">justificativa jurídica</text>
+    <line x1="440" y1="276" x2="670" y2="276" stroke="#1f2937" stroke-width="1"/>
+    <text x="442" y="291" font-size="8.5" fill="#4b5563">· consentimento explícito</text>
+    <text x="442" y="305" font-size="8.5" fill="#4b5563">· legítimo interesse</text>
+    <text x="442" y="319" font-size="8.5" fill="#4b5563">· obrigação legal</text>
+    <text x="442" y="337" font-size="8.5" fill="#f59e0b">deve estar documentada</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <line x1="680" y1="290" x2="798" y2="290" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr-violet)"/>
+  <circle r="3.5" fill="#a78bfa" opacity="0">
+    <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.8s"><mpath href="#p2"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="0.8s"/>
+  </circle>
+
+  <!-- Step 3: Finalidade -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.5s" dur="0.4s" fill="freeze"/>
+    <rect x="800" y="230" width="250" height="120" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="2"/>
+    <text x="925" y="253" font-size="10" fill="#2dd4bf" font-weight="700" text-anchor="middle">FINALIDADE</text>
+    <text x="925" y="269" font-size="8.5" fill="#8b96a8" text-anchor="middle">para que o dado é usado</text>
+    <line x1="810" y1="276" x2="1040" y2="276" stroke="#1f2937" stroke-width="1"/>
+    <text x="812" y="291" font-size="8.5" fill="#4b5563">· específica e clara</text>
+    <text x="812" y="305" font-size="8.5" fill="#4b5563">· não pode ser alterada</text>
+    <text x="812" y="319" font-size="8.5" fill="#4b5563">· declarada no momento</text>
+    <text x="812" y="337" font-size="8.5" fill="#f59e0b">da coleta (obrigatório)</text>
+  </g>
+
+  <!-- Arrow 3→4 -->
+  <line x1="1050" y1="290" x2="1168" y2="290" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <circle r="3.5" fill="#2dd4bf" opacity="0">
+    <animateMotion dur="1.5s" repeatCount="indefinite" begin="1.0s"><mpath href="#p3"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="1.0s"/>
+  </circle>
+
+  <!-- Step 4: Retenção -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.7s" dur="0.4s" fill="freeze"/>
+    <rect x="1170" y="230" width="230" height="120" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="2"/>
+    <text x="1285" y="253" font-size="10" fill="#f59e0b" font-weight="700" text-anchor="middle">RETENÇÃO</text>
+    <text x="1285" y="269" font-size="8.5" fill="#8b96a8" text-anchor="middle">tempo de armazenamento</text>
+    <line x1="1180" y1="276" x2="1390" y2="276" stroke="#1f2937" stroke-width="1"/>
+    <text x="1182" y="291" font-size="8.5" fill="#4b5563">· prazo máximo definido</text>
+    <text x="1182" y="305" font-size="8.5" fill="#4b5563">· job de limpeza configurado</text>
+    <text x="1182" y="319" font-size="8.5" fill="#4b5563">· logs de expiração</text>
+    <text x="1182" y="337" font-size="8.5" fill="#f59e0b">ex: 90d / 2y / sessão</text>
+  </g>
+
+  <!-- Arrow 4→5 -->
+  <line x1="1400" y1="290" x2="1518" y2="290" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+  <circle r="3.5" fill="#f59e0b" opacity="0">
+    <animateMotion dur="1.5s" repeatCount="indefinite" begin="1.2s"><mpath href="#p4"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="1.2s"/>
+  </circle>
+
+  <!-- Step 5: Gate de privacidade -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.9s" dur="0.4s" fill="freeze"/>
+    <rect x="1520" y="230" width="260" height="120" rx="8" fill="#0d1117" stroke="#4ade80" stroke-width="2"/>
+    <text x="1650" y="253" font-size="10" fill="#4ade80" font-weight="700" text-anchor="middle">PRIVACY GATE</text>
+    <text x="1650" y="269" font-size="8.5" fill="#8b96a8" text-anchor="middle">checklist completo</text>
+    <line x1="1530" y1="276" x2="1770" y2="276" stroke="#1f2937" stroke-width="1"/>
+    <text x="1532" y="291" font-size="8.5" fill="#4b5563">✓ base legal definida</text>
+    <text x="1532" y="305" font-size="8.5" fill="#4b5563">✓ finalidade declarada</text>
+    <text x="1532" y="319" font-size="8.5" fill="#4b5563">✓ minimização aplicada</text>
+    <text x="1532" y="337" font-size="8.5" fill="#4ade80">✓ aprovado → continua</text>
+  </g>
+
+  <!-- ══ 6 PRINCÍPIOS LGPD/GDPR ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.1s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="380" width="1760" height="40" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="40" y="405" font-size="10" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">6 PRINCÍPIOS LGPD / GDPR  ·  aplicados pelo privacy-agent em cada coleta de dado</text>
+
+    <!-- Cards dos princípios -->
+    <rect x="20" y="432" width="278" height="100" rx="6" fill="#0d0a14" stroke="#a78bfa" stroke-width="1"/>
+    <text x="159" y="454" font-size="10" fill="#a78bfa" font-weight="700" text-anchor="middle">① Finalidade</text>
+    <text x="159" y="470" font-size="8.5" fill="#8b96a8" text-anchor="middle">propósito específico</text>
+    <text x="30" y="488" font-size="8.5" fill="#4b5563">dado coletado só para fim declarado.</text>
+    <text x="30" y="502" font-size="8.5" fill="#4b5563">uso secundário = nova base legal.</text>
+    <text x="30" y="516" font-size="8.5" fill="#4b5563">ex: e-mail para login ≠ marketing</text>
+    <text x="30" y="525" font-size="8" fill="#a78bfa">LGPD art.6 I · GDPR art.5(1)(b)</text>
+
+    <rect x="308" y="432" width="278" height="100" rx="6" fill="#0d0a14" stroke="#a78bfa" stroke-width="1"/>
+    <text x="447" y="454" font-size="10" fill="#a78bfa" font-weight="700" text-anchor="middle">② Adequação</text>
+    <text x="447" y="470" font-size="8.5" fill="#8b96a8" text-anchor="middle">compatível com a finalidade</text>
+    <text x="318" y="488" font-size="8.5" fill="#4b5563">tratamento coerente com o que foi</text>
+    <text x="318" y="502" font-size="8.5" fill="#4b5563">informado ao titular.</text>
+    <text x="318" y="516" font-size="8.5" fill="#4b5563">ex: não vender dados de saúde</text>
+    <text x="318" y="525" font-size="8" fill="#a78bfa">LGPD art.6 II · GDPR art.5(1)(b)</text>
+
+    <rect x="596" y="432" width="278" height="100" rx="6" fill="#0d0a14" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="735" y="454" font-size="10" fill="#2dd4bf" font-weight="700" text-anchor="middle">③ Minimização</text>
+    <text x="735" y="470" font-size="8.5" fill="#8b96a8" text-anchor="middle">apenas o necessário</text>
+    <text x="606" y="488" font-size="8.5" fill="#4b5563">coletar só o que é estritamente</text>
+    <text x="606" y="502" font-size="8.5" fill="#4b5563">necessário para a finalidade.</text>
+    <text x="606" y="516" font-size="8.5" fill="#4b5563">ex: não pedir data de nascimento</text>
+    <text x="606" y="525" font-size="8" fill="#2dd4bf">LGPD art.6 III · GDPR art.5(1)(c)</text>
+
+    <rect x="884" y="432" width="278" height="100" rx="6" fill="#0d0a14" stroke="#f59e0b" stroke-width="1"/>
+    <text x="1023" y="454" font-size="10" fill="#f59e0b" font-weight="700" text-anchor="middle">④ Segurança</text>
+    <text x="1023" y="470" font-size="8.5" fill="#8b96a8" text-anchor="middle">proteção técnica</text>
+    <text x="894" y="488" font-size="8.5" fill="#4b5563">criptografia em repouso e trânsito.</text>
+    <text x="894" y="502" font-size="8.5" fill="#4b5563">controle de acesso mínimo.</text>
+    <text x="894" y="516" font-size="8.5" fill="#4b5563">ex: TLS 1.3, bcrypt, RBAC</text>
+    <text x="894" y="525" font-size="8" fill="#f59e0b">LGPD art.6 VII · GDPR art.5(1)(f)</text>
+
+    <rect x="1172" y="432" width="278" height="100" rx="6" fill="#0d0a14" stroke="#ef4444" stroke-width="1"/>
+    <text x="1311" y="454" font-size="10" fill="#ef4444" font-weight="700" text-anchor="middle">⑤ Não discriminação</text>
+    <text x="1311" y="470" font-size="8.5" fill="#8b96a8" text-anchor="middle">proibição de viés</text>
+    <text x="1182" y="488" font-size="8.5" fill="#4b5563">uso de dados não pode gerar</text>
+    <text x="1182" y="502" font-size="8.5" fill="#4b5563">discriminação ilícita ou abusiva.</text>
+    <text x="1182" y="516" font-size="8.5" fill="#4b5563">ex: não negar crédito por raça</text>
+    <text x="1182" y="525" font-size="8" fill="#ef4444">LGPD art.6 IX</text>
+
+    <rect x="1460" y="432" width="320" height="100" rx="6" fill="#0d0a14" stroke="#4ade80" stroke-width="1"/>
+    <text x="1620" y="454" font-size="10" fill="#4ade80" font-weight="700" text-anchor="middle">⑥ Direitos do Titular</text>
+    <text x="1620" y="470" font-size="8.5" fill="#8b96a8" text-anchor="middle">acesso, correção, exclusão</text>
+    <text x="1470" y="488" font-size="8.5" fill="#4b5563">endpoint obrigatório para exercício</text>
+    <text x="1470" y="502" font-size="8.5" fill="#4b5563">dos direitos (DSAR — 15 dias).</text>
+    <text x="1470" y="516" font-size="8.5" fill="#4b5563">ex: DELETE /api/me/data</text>
+    <text x="1470" y="525" font-size="8" fill="#4ade80">LGPD art.18 · GDPR art.15-22</text>
+  </g>
+
+  <!-- ══ CHECKLIST DO AGENTE ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.3s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="550" width="870" height="136" rx="8" fill="#0d1117" stroke="#a78bfa" stroke-width="1"/>
+    <text x="38" y="570" font-size="10" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">CHECKLIST DO PRIVACY-AGENT</text>
+    <line x1="30" y1="576" x2="880" y2="576" stroke="#1f2937" stroke-width="1"/>
+    <text x="40" y="594" font-size="9.5" fill="#8b96a8">① Base legal mapeada para cada dado coletado (consentimento ou outro)</text>
+    <text x="40" y="612" font-size="9.5" fill="#8b96a8">② Finalidade declarada no código e na política de privacidade</text>
+    <text x="40" y="630" font-size="9.5" fill="#8b96a8">③ Dados minimizados — nada além do necessário é persistido</text>
+    <text x="40" y="648" font-size="9.5" fill="#8b96a8">④ Prazo de retenção configurado com job automático de limpeza</text>
+    <text x="40" y="666" font-size="9.5" fill="#8b96a8">⑤ Endpoint de direitos do titular implementado (acesso, correção, exclusão)</text>
+    <text x="40" y="678" font-size="8" fill="#a78bfa">lgpd-agent · privacy-agent · compliance-agent trabalham em conjunto nesta etapa</text>
+  </g>
+
+  <!-- ══ LGPD vs GDPR ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.5s" dur="0.4s" fill="freeze"/>
+    <rect x="904" y="550" width="876" height="136" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="922" y="570" font-size="10" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">LGPD × GDPR — DIFERENÇAS PRÁTICAS</text>
+    <line x1="914" y1="576" x2="1770" y2="576" stroke="#1f2937" stroke-width="1"/>
+
+    <text x="924" y="594" font-size="9.5" fill="#4b5563">JURISDIÇÃO</text>
+    <text x="1100" y="594" font-size="9.5" fill="#8b96a8">LGPD: dados de cidadãos brasileiros</text>
+    <text x="1370" y="594" font-size="9.5" fill="#8b96a8">GDPR: dados de cidadãos europeus</text>
+
+    <text x="924" y="612" font-size="9.5" fill="#4b5563">PRAZO DSAR</text>
+    <text x="1100" y="612" font-size="9.5" fill="#8b96a8">LGPD: 15 dias corridos</text>
+    <text x="1370" y="612" font-size="9.5" fill="#8b96a8">GDPR: 30 dias (prorrogável 60)</text>
+
+    <text x="924" y="630" font-size="9.5" fill="#4b5563">MULTA MÁXIMA</text>
+    <text x="1100" y="630" font-size="9.5" fill="#8b96a8">LGPD: 2% faturamento, máx R$50M</text>
+    <text x="1370" y="630" font-size="9.5" fill="#8b96a8">GDPR: 4% faturamento global</text>
+
+    <text x="924" y="648" font-size="9.5" fill="#4b5563">DPO</text>
+    <text x="1100" y="648" font-size="9.5" fill="#8b96a8">LGPD: sempre obrigatório</text>
+    <text x="1370" y="648" font-size="9.5" fill="#8b96a8">GDPR: obrigatório para certas orgs</text>
+
+    <text x="924" y="666" font-size="9.5" fill="#4b5563">CONSENTIMENTO</text>
+    <text x="1100" y="666" font-size="9.5" fill="#8b96a8">LGPD: opt-in + revogável</text>
+    <text x="1370" y="666" font-size="9.5" fill="#8b96a8">GDPR: opt-in + granular + revogável</text>
+
+    <text x="924" y="678" font-size="8" fill="#2dd4bf">Se o app coleta dados de BR e EU: ambas as leis se aplicam — usar a mais restritiva em cada ponto</text>
+  </g>
+
+  <!-- ══ STATUS BAR ══ -->
+  <rect x="20" y="700" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="711" r="4" fill="#a78bfa">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="715" font-size="9.5" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 10</text>
+  <text x="108" y="715" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="118" y="715" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">base legal · finalidade · minimização · retenção · direitos do titular · 6 princípios LGPD/GDPR</text>
+  <text x="1770" y="715" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">PRIVACIDADE</text>
+
+  <!-- ══ LEGENDA ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.7s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="736" width="1760" height="50" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="752" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">AGENTES ENVOLVIDOS</text>
+    <line x1="30" y1="756" x2="1770" y2="756" stroke="#1f2937" stroke-width="1"/>
+    <rect x="38" y="762" width="10" height="10" rx="2" fill="#0d0a14" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="55" y="772" font-size="9.5" fill="#8b96a8">privacy-agent — análise geral de privacidade</text>
+    <rect x="310" y="762" width="10" height="10" rx="2" fill="#0d0a14" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="327" y="772" font-size="9.5" fill="#8b96a8">lgpd-agent — conformidade com a lei brasileira</text>
+    <rect x="620" y="762" width="10" height="10" rx="2" fill="#0d0a14" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="637" y="772" font-size="9.5" fill="#8b96a8">compliance-agent — verificação de requisitos legais gerais</text>
+    <text x="950" y="772" font-size="9.5" fill="#4b5563">DSAR = Data Subject Access Request · DPO = Data Protection Officer · opt-in = consentimento ativo</text>
+  </g>
+</svg>
+</body>
+</html>

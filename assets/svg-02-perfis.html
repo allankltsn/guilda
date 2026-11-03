@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVG 02 — Seleção de Perfis</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  :root { color-scheme: dark }
+  body {
+    margin: 0; background: #0b0f17;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100%;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 40px; box-sizing: border-box;
+  }
+  svg { width: 100%; max-width: 1800px; height: auto; display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 720"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-teal" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#2dd4bf" opacity="0.9"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#3b82f6" opacity="0.9"/>
+    </marker>
+    <marker id="arr-violet" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#7c3aed" opacity="0.9"/>
+    </marker>
+    <marker id="arr-green" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#4ade80" opacity="0.9"/>
+    </marker>
+    <!-- Animated paths for dots -->
+    <path id="d1" d="M 200,145 L 370,145" fill="none"/>
+    <path id="d2" d="M 540,145 L 710,145" fill="none"/>
+    <path id="d3" d="M 880,145 L 1050,145" fill="none"/>
+    <path id="d4" d="M 1220,145 L 1390,145" fill="none"/>
+    <path id="d5" d="M 1560,145 L 1690,145" fill="none"/>
+  </defs>
+
+  <rect width="1800" height="720" fill="#0b0f17"/>
+
+  <!-- HEADER -->
+  <text x="30" y="38" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+        font-size="11" fill="#8b96a8" letter-spacing="1.2">
+    ENGINEERING TEMPLATE · MICRO FLOW · ETAPA 02 / 17
+  </text>
+  <text x="1770" y="38" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+        font-size="11" fill="#4b5563" letter-spacing="0.8" text-anchor="end">
+    10 perfis empilháveis · composição modular · herança de configuração
+  </text>
+
+  <!-- Title bar -->
+  <rect x="20" y="50" width="1760" height="44" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="50" width="6" height="44" rx="3" fill="#2dd4bf"/>
+  <text x="44" y="70" font-size="15" font-weight="700" fill="#e6edf3">Seleção de Perfis — Composição Modular do Sistema</text>
+  <text x="44" y="86" font-size="11.5" fill="#8b96a8">
+    Perfis são empilháveis e aditivos · cada novo perfil estende o anterior · base é sempre obrigatório
+  </text>
+
+  <!-- ═══════════════════ STACK CONCEPT (left column) ═══════════════════ -->
+  <!-- Stack illustration -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.5s" fill="freeze"/>
+    <text x="30" y="116" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="0.8">MODELO DE EMPILHAMENTO</text>
+
+    <!-- Layer 4 top (stacks) -->
+    <rect x="20" y="122" width="170" height="34" rx="6" fill="#1e1b4b" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="105" y="135" font-size="10" font-weight="600" fill="#a78bfa" text-anchor="middle">🔧 stacks</text>
+    <text x="105" y="149" font-size="9" fill="#7c3aed" text-anchor="middle">infra · cloud · CI/CD</text>
+
+    <!-- Layer 3 (product-team) -->
+    <rect x="20" y="158" width="170" height="34" rx="6" fill="#1f2937" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="105" y="171" font-size="10" font-weight="600" fill="#2dd4bf" text-anchor="middle">👥 product-team</text>
+    <text x="105" y="185" font-size="9" fill="#8b96a8" text-anchor="middle">28 agentes especialistas</text>
+
+    <!-- Layer 2 (github-projects) -->
+    <rect x="20" y="194" width="170" height="34" rx="6" fill="#1f2937" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="105" y="207" font-size="10" font-weight="600" fill="#3b82f6" text-anchor="middle">📋 github-projects</text>
+    <text x="105" y="221" font-size="9" fill="#8b96a8" text-anchor="middle">tracker oficial · 9 statuses</text>
+
+    <!-- Layer 1 base (always) -->
+    <rect x="20" y="230" width="170" height="34" rx="6" fill="#1f2937" stroke="#4ade80" stroke-width="2"/>
+    <text x="105" y="243" font-size="10" font-weight="600" fill="#4ade80" text-anchor="middle">⚡ base</text>
+    <text x="105" y="257" font-size="9" fill="#4ade80" text-anchor="middle">sempre ativo · obrigatório</text>
+
+    <!-- Stack arrows -->
+    <text x="105" y="274" font-size="9.5" fill="#4b5563" text-anchor="middle">↑ empilha sobre ↑</text>
+    <text x="105" y="288" font-size="9" fill="#4b5563" text-anchor="middle">herança aditiva de config</text>
+  </g>
+
+  <!-- ═══════════════════ PROFILE NODES (5 cols horizontal flow) ═══════════════════ -->
+  <line x1="200" y1="108" x2="200" y2="310" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="540" y1="108" x2="540" y2="310" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="880" y1="108" x2="880" y2="310" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="1220" y1="108" x2="1220" y2="310" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="1560" y1="108" x2="1560" y2="310" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <text x="370" y="112" font-size="9.5" fill="#4b5563" text-anchor="middle" letter-spacing="0.8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">PERFIL BASE</text>
+  <text x="710" y="112" font-size="9.5" fill="#4b5563" text-anchor="middle" letter-spacing="0.8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">GITHUB-PROJECTS</text>
+  <text x="1050" y="112" font-size="9.5" fill="#4b5563" text-anchor="middle" letter-spacing="0.8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">PRODUCT-TEAM</text>
+  <text x="1390" y="112" font-size="9.5" fill="#4b5563" text-anchor="middle" letter-spacing="0.8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">STACKS</text>
+  <text x="1625" y="112" font-size="9.5" fill="#4b5563" text-anchor="middle" letter-spacing="0.8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">RESULTADO</text>
+
+  <!-- Profile: base -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.2s" dur="0.4s" fill="freeze"/>
+    <rect x="210" y="120" width="320" height="170" rx="8" fill="#111827" stroke="#4ade80" stroke-width="2"/>
+    <text x="370" y="140" font-size="12" font-weight="700" fill="#4ade80" text-anchor="middle">⚡ base</text>
+    <text x="370" y="155" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">SEMPRE ATIVO · OBRIGATÓRIO</text>
+    <line x1="220" y1="162" x2="520" y2="162" stroke="#1f2937" stroke-width="1"/>
+    <text x="225" y="177" font-size="10" fill="#8b96a8">• orchestrator agent (principal)</text>
+    <text x="225" y="192" font-size="10" fill="#8b96a8">• token-economy (12 regras)</text>
+    <text x="225" y="207" font-size="10" fill="#8b96a8">• session-continuity (milestones)</text>
+    <text x="225" y="222" font-size="10" fill="#8b96a8">• git-worktree manager</text>
+    <text x="225" y="237" font-size="10" fill="#8b96a8">• tier-selector (deep/std/light)</text>
+    <text x="225" y="252" font-size="10" fill="#8b96a8">• config.yaml base</text>
+    <text x="225" y="267" font-size="10" fill="#8b96a8">• logging · retry · error-handler</text>
+    <text x="225" y="281" font-size="9" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">agents: 3 · token budget: on</text>
+  </g>
+
+  <!-- Arrow base → github-projects -->
+  <line x1="530" y1="205" x2="550" y2="205" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr-blue)" opacity="0.7"/>
+  <text x="537" y="196" font-size="8.5" fill="#3b82f6" text-anchor="middle">+</text>
+
+  <!-- Profile: github-projects -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.4s" dur="0.4s" fill="freeze"/>
+    <rect x="560" y="120" width="310" height="170" rx="8" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="715" y="140" font-size="12" font-weight="700" fill="#3b82f6" text-anchor="middle">📋 github-projects</text>
+    <text x="715" y="155" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">TRACKER OFICIAL</text>
+    <line x1="570" y1="162" x2="860" y2="162" stroke="#1f2937" stroke-width="1"/>
+    <text x="575" y="177" font-size="10" fill="#8b96a8">• github-projects-agent</text>
+    <text x="575" y="192" font-size="10" fill="#8b96a8">• 9 statuses (Backlog→Done)</text>
+    <text x="575" y="207" font-size="10" fill="#8b96a8">• campos customizados: Tier, Wave</text>
+    <text x="575" y="222" font-size="10" fill="#8b96a8">• issues: DECISAO · LOG_EVENTO</text>
+    <text x="575" y="237" font-size="10" fill="#8b96a8">• milestones automáticos</text>
+    <text x="575" y="252" font-size="10" fill="#8b96a8">• PR templates + checklists</text>
+    <text x="575" y="267" font-size="10" fill="#8b96a8">• labels padronizadas</text>
+    <text x="575" y="281" font-size="9" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">requer: GitHub token · org/repo</text>
+  </g>
+
+  <!-- Arrow github → product-team -->
+  <line x1="870" y1="205" x2="890" y2="205" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)" opacity="0.7"/>
+  <text x="877" y="196" font-size="8.5" fill="#2dd4bf" text-anchor="middle">+</text>
+
+  <!-- Profile: product-team -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.6s" dur="0.4s" fill="freeze"/>
+    <rect x="900" y="120" width="310" height="170" rx="8" fill="#111827" stroke="#2dd4bf" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="1055" y="140" font-size="12" font-weight="700" fill="#2dd4bf" text-anchor="middle">👥 product-team</text>
+    <text x="1055" y="155" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">28 ESPECIALISTAS · 4 GRUPOS</text>
+    <line x1="910" y1="162" x2="1200" y2="162" stroke="#1f2937" stroke-width="1"/>
+    <text x="915" y="177" font-size="10" fill="#8b96a8">• Grupo 1: Demanda (4 agentes)</text>
+    <text x="915" y="192" font-size="10" fill="#8b96a8">• Grupo 2: Execução (16 agentes)</text>
+    <text x="915" y="207" font-size="10" fill="#8b96a8">• Grupo 3: Gates (4 agentes)</text>
+    <text x="915" y="222" font-size="10" fill="#8b96a8">• Grupo 4: Suporte (4 agentes)</text>
+    <text x="915" y="237" font-size="10" fill="#8b96a8">• 4-eyes rule em todos os gates</text>
+    <text x="915" y="252" font-size="10" fill="#8b96a8">• principal NUNCA implementa</text>
+    <text x="915" y="267" font-size="10" fill="#8b96a8">• dispatch por sinal de tier</text>
+    <text x="915" y="281" font-size="9" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">requer: github-projects + base</text>
+  </g>
+
+  <!-- Arrow product-team → stacks -->
+  <line x1="1210" y1="205" x2="1228" y2="205" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arr-violet)" opacity="0.7"/>
+  <text x="1217" y="196" font-size="8.5" fill="#7c3aed" text-anchor="middle">+</text>
+
+  <!-- Profile: stacks -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.8s" dur="0.4s" fill="freeze"/>
+    <rect x="1238" y="120" width="310" height="170" rx="8" fill="#111827" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="1393" y="140" font-size="12" font-weight="700" fill="#a78bfa" text-anchor="middle">🔧 stacks</text>
+    <text x="1393" y="155" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">INFRA · CLOUD · DEVOPS</text>
+    <line x1="1248" y1="162" x2="1538" y2="162" stroke="#1f2937" stroke-width="1"/>
+    <text x="1253" y="177" font-size="10" fill="#8b96a8">• aws-architect agent</text>
+    <text x="1253" y="192" font-size="10" fill="#8b96a8">• kubernetes / hosting agent</text>
+    <text x="1253" y="207" font-size="10" fill="#8b96a8">• sre · cicd · devsecops-infra</text>
+    <text x="1253" y="222" font-size="10" fill="#8b96a8">• cloud cost optimizer</text>
+    <text x="1253" y="237" font-size="10" fill="#8b96a8">• IAC: Terraform / Pulumi</text>
+    <text x="1253" y="252" font-size="10" fill="#8b96a8">• secrets: Vault / AWS Secrets</text>
+    <text x="1253" y="267" font-size="10" fill="#8b96a8">• monitoring: Grafana / Datadog</text>
+    <text x="1253" y="281" font-size="9" fill="#7c3aed" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">opcional · requer product-team</text>
+  </g>
+
+  <!-- Arrow stacks → resultado -->
+  <line x1="1548" y1="205" x2="1568" y2="205" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-green)" opacity="0.7"/>
+
+  <!-- Resultado -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.0s" dur="0.4s" fill="freeze"/>
+    <rect x="1578" y="120" width="202" height="170" rx="8" fill="#111827" stroke="#4ade80" stroke-width="2"/>
+    <text x="1679" y="140" font-size="12" font-weight="700" fill="#4ade80" text-anchor="middle">🚀 Sistema</text>
+    <text x="1679" y="155" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">TOTALMENTE MONTADO</text>
+    <line x1="1588" y1="162" x2="1770" y2="162" stroke="#1f2937" stroke-width="1"/>
+    <text x="1593" y="177" font-size="10" fill="#4ade80">✓ 28 agentes ativos</text>
+    <text x="1593" y="192" font-size="10" fill="#4ade80">✓ tracker configurado</text>
+    <text x="1593" y="207" font-size="10" fill="#4ade80">✓ infra conectada</text>
+    <text x="1593" y="222" font-size="10" fill="#4ade80">✓ gates habilitados</text>
+    <text x="1593" y="237" font-size="10" fill="#4ade80">✓ economia ativa</text>
+    <text x="1593" y="252" font-size="10" fill="#4ade80">✓ sessão configurada</text>
+    <text x="1593" y="267" font-size="10" fill="#4ade80">✓ git worktrees ok</text>
+    <text x="1593" y="281" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">→ etapa 03: Brainstorm</text>
+  </g>
+
+  <!-- ═══════════════════ ANIMATED DOTS ═══════════════════ -->
+  <circle r="3.5" fill="#4ade80" opacity="0.9">
+    <animateMotion dur="2.2s" begin="0.3s" repeatCount="indefinite">
+      <mpath href="#d1"/>
+    </animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin="0.3s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="3.5" fill="#3b82f6" opacity="0.9">
+    <animateMotion dur="2.2s" begin="0.9s" repeatCount="indefinite">
+      <mpath href="#d2"/>
+    </animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin="0.9s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="3.5" fill="#2dd4bf" opacity="0.9">
+    <animateMotion dur="2.2s" begin="1.5s" repeatCount="indefinite">
+      <mpath href="#d3"/>
+    </animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="3.5" fill="#7c3aed" opacity="0.9">
+    <animateMotion dur="2.2s" begin="2.1s" repeatCount="indefinite">
+      <mpath href="#d4"/>
+    </animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin="2.1s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="3.5" fill="#4ade80" opacity="0.9">
+    <animateMotion dur="2.2s" begin="2.7s" repeatCount="indefinite">
+      <mpath href="#d5"/>
+    </animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2.2s" begin="2.7s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ═══════════════════ ROW 3 — Outros Perfis Disponíveis ═══════════════════ -->
+  <line x1="20" y1="306" x2="1780" y2="306" stroke="#1f2937" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="30" y="322" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="0.8">OUTROS PERFIS DISPONÍVEIS (ativáveis individualmente)</text>
+
+  <!-- Additional profiles as smaller cards -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.2s" dur="0.5s" fill="freeze"/>
+    <rect x="20" y="330" width="195" height="90" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1.5"/>
+    <text x="117" y="348" font-size="10.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🛡️ security</text>
+    <text x="117" y="363" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">perfil adicional</text>
+    <text x="30" y="380" font-size="9.5" fill="#8b96a8">OWASP · secrets scan</text>
+    <text x="30" y="394" font-size="9.5" fill="#8b96a8">CVE monitoring · SAST</text>
+    <text x="30" y="408" font-size="9.5" fill="#8b96a8">ALERTA_PERIGO triggers</text>
+  </g>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.3s" dur="0.5s" fill="freeze"/>
+    <rect x="230" y="330" width="195" height="90" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1.5"/>
+    <text x="327" y="348" font-size="10.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🔒 privacy</text>
+    <text x="327" y="363" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">perfil adicional</text>
+    <text x="240" y="380" font-size="9.5" fill="#8b96a8">LGPD · GDPR compliance</text>
+    <text x="240" y="394" font-size="9.5" fill="#8b96a8">DPA · base legal · finalidade</text>
+    <text x="240" y="408" font-size="9.5" fill="#8b96a8">retenção · consentimento</text>
+  </g>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.4s" dur="0.5s" fill="freeze"/>
+    <rect x="440" y="330" width="195" height="90" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1.5"/>
+    <text x="537" y="348" font-size="10.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🎨 design</text>
+    <text x="537" y="363" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">perfil adicional</text>
+    <text x="450" y="380" font-size="9.5" fill="#8b96a8">UX · brand · drawio</text>
+    <text x="450" y="394" font-size="9.5" fill="#8b96a8">usability testing</text>
+    <text x="450" y="408" font-size="9.5" fill="#8b96a8">lay-user validation</text>
+  </g>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.5s" dur="0.5s" fill="freeze"/>
+    <rect x="650" y="330" width="195" height="90" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1.5"/>
+    <text x="747" y="348" font-size="10.5" font-weight="600" fill="#e6edf3" text-anchor="middle">📊 analytics</text>
+    <text x="747" y="363" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">perfil adicional</text>
+    <text x="660" y="380" font-size="9.5" fill="#8b96a8">data pipeline agents</text>
+    <text x="660" y="394" font-size="9.5" fill="#8b96a8">SQL · BI · dashboards</text>
+    <text x="660" y="408" font-size="9.5" fill="#8b96a8">ETL · metrics tracking</text>
+  </g>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.6s" dur="0.5s" fill="freeze"/>
+    <rect x="860" y="330" width="195" height="90" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1.5"/>
+    <text x="957" y="348" font-size="10.5" font-weight="600" fill="#e6edf3" text-anchor="middle">📱 mobile</text>
+    <text x="957" y="363" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">perfil adicional</text>
+    <text x="870" y="380" font-size="9.5" fill="#8b96a8">iOS · Android · Flutter</text>
+    <text x="870" y="394" font-size="9.5" fill="#8b96a8">React Native · Expo</text>
+    <text x="870" y="408" font-size="9.5" fill="#8b96a8">app store · TestFlight</text>
+  </g>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.7s" dur="0.5s" fill="freeze"/>
+    <rect x="1070" y="330" width="195" height="90" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1.5"/>
+    <text x="1167" y="348" font-size="10.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🤖 ai-ml</text>
+    <text x="1167" y="363" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">perfil adicional</text>
+    <text x="1080" y="380" font-size="9.5" fill="#8b96a8">ML · LLM integration</text>
+    <text x="1080" y="394" font-size="9.5" fill="#8b96a8">embeddings · RAG</text>
+    <text x="1080" y="408" font-size="9.5" fill="#8b96a8">fine-tuning · evals</text>
+  </g>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.8s" dur="0.5s" fill="freeze"/>
+    <rect x="1280" y="330" width="195" height="90" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1.5"/>
+    <text x="1377" y="348" font-size="10.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🏢 enterprise</text>
+    <text x="1377" y="363" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">perfil adicional</text>
+    <text x="1290" y="380" font-size="9.5" fill="#8b96a8">LDAP · SSO · SOC2</text>
+    <text x="1290" y="394" font-size="9.5" fill="#8b96a8">auditoria · compliance</text>
+    <text x="1290" y="408" font-size="9.5" fill="#8b96a8">multi-tenant · RBAC</text>
+  </g>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.9s" dur="0.5s" fill="freeze"/>
+    <rect x="1490" y="330" width="195" height="90" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="1587" y="348" font-size="10.5" font-weight="600" fill="#e6edf3" text-anchor="middle">➕ custom</text>
+    <text x="1587" y="363" font-size="9.5" fill="#4b5563" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">perfil customizado</text>
+    <text x="1500" y="380" font-size="9.5" fill="#8b96a8">qualquer agente YAML</text>
+    <text x="1500" y="394" font-size="9.5" fill="#8b96a8">override de config</text>
+    <text x="1500" y="408" font-size="9.5" fill="#8b96a8">extends: [base, ...]</text>
+  </g>
+
+  <!-- ═══════════════════ ROW 4 — Regras de Composição ═══════════════════ -->
+  <line x1="20" y1="436" x2="1780" y2="436" stroke="#1f2937" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="30" y="452" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="0.8">REGRAS DE COMPOSIÇÃO DE PERFIS</text>
+
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="2.0s" dur="0.5s" fill="freeze"/>
+    <rect x="20" y="460" width="380" height="100" rx="6" fill="#0d1117" stroke="#4ade80" stroke-width="1"/>
+    <text x="30" y="477" font-size="9.5" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ORDEM DE RESOLUÇÃO</text>
+    <text x="30" y="493" font-size="10" fill="#8b96a8">1. base (sempre primeiro)</text>
+    <text x="30" y="508" font-size="10" fill="#8b96a8">2. perfis de plataforma (github-projects)</text>
+    <text x="30" y="523" font-size="10" fill="#8b96a8">3. perfis de equipe (product-team)</text>
+    <text x="30" y="538" font-size="10" fill="#8b96a8">4. perfis de infra (stacks)</text>
+    <text x="30" y="553" font-size="10" fill="#8b96a8">5. perfis customizados (sobrescrevem tudo)</text>
+
+    <rect x="420" y="460" width="380" height="100" rx="6" fill="#0d1117" stroke="#3b82f6" stroke-width="1"/>
+    <text x="430" y="477" font-size="9.5" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">HERANÇA DE CONFIG (yaml merge)</text>
+    <text x="430" y="493" font-size="10" fill="#8b96a8">• listas: append (não substituem)</text>
+    <text x="430" y="508" font-size="10" fill="#8b96a8">• scalars: override pelo último</text>
+    <text x="430" y="523" font-size="10" fill="#8b96a8">• dicts: deep merge recursivo</text>
+    <text x="430" y="538" font-size="10" fill="#8b96a8">• null: remove a chave herdada</text>
+    <text x="430" y="553" font-size="10" fill="#8b96a8">• !override: força substituição</text>
+
+    <rect x="820" y="460" width="380" height="100" rx="6" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="830" y="477" font-size="9.5" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ATIVAÇÃO VIA CLI</text>
+    <text x="830" y="493" font-size="10" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">--profiles base,github-projects</text>
+    <text x="830" y="508" font-size="10" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">--profiles all  # ativa todos</text>
+    <text x="830" y="523" font-size="10" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">--exclude stacks  # remove um</text>
+    <text x="830" y="538" font-size="10" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">config.yaml → profiles: [...]</text>
+    <text x="830" y="553" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">validate antes de usar: --dry-run</text>
+
+    <rect x="1220" y="460" width="560" height="100" rx="6" fill="#0d1117" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="1230" y="477" font-size="9.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">EXEMPLO DE config.yaml COM PERFIS</text>
+    <text x="1230" y="493" font-size="10" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">profiles:</text>
+    <text x="1230" y="507" font-size="10" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  - base          # obrigatório</text>
+    <text x="1230" y="521" font-size="10" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  - github-projects</text>
+    <text x="1230" y="535" font-size="10" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  - product-team</text>
+    <text x="1230" y="549" font-size="10" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  - security      # se necessário</text>
+  </g>
+
+  <!-- ═══════════════════ STATUS + FOOTER ═══════════════════ -->
+  <rect x="20" y="578" width="1760" height="44" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <text x="30" y="594" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">PRÓX.</text>
+  <text x="70" y="594" font-size="10" fill="#8b96a8">→  Etapa 03: Planejamento e Brainstorm — demanda → orchestrator → story → usability → lay-user testing ×2</text>
+  <text x="30" y="612" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA</text>
+  <rect x="82" y="604" width="10" height="10" rx="2" fill="#111827" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="97" y="614" font-size="10" fill="#8b96a8">Obrigatório</text>
+  <rect x="180" y="604" width="10" height="10" rx="2" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="195" y="614" font-size="10" fill="#8b96a8">Plataforma</text>
+  <rect x="270" y="604" width="10" height="10" rx="2" fill="#111827" stroke="#2dd4bf" stroke-width="2"/>
+  <text x="285" y="614" font-size="10" fill="#8b96a8">Execução</text>
+  <rect x="355" y="604" width="10" height="10" rx="2" fill="#111827" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="370" y="614" font-size="10" fill="#8b96a8">Infra</text>
+  <rect x="408" y="604" width="10" height="10" rx="2" fill="#111827" stroke="#1f2937" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="423" y="614" font-size="10" fill="#8b96a8">Customizado</text>
+
+  <!-- Status bar -->
+  <rect x="20" y="635" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="646" r="4" fill="#2dd4bf">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="650" font-size="9.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 02/17</text>
+  <text x="130" y="650" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="140" y="650" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Seleção de Perfis — Composição Modular</text>
+  <text x="1770" y="650" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">10 perfis · empilhável · herança yaml · dry-run</text>
+</svg>
+</body>
+</html>

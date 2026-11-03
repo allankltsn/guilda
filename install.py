@@ -10,6 +10,8 @@ Opções (todas opcionais):
     --profiles a,b   perfis (padrão: base,product-team,github-projects; em atualização, os já instalados)
     --providers a,b  claude,codex (padrão: claude,codex; em atualização, os já instalados)
     --tier papel=camada   repetível; ex.: --tier reviewer=deep
+    --mod nome       instala um mod do Claude Code de integrations/mod (repetível); ex.: --mod token-handoff
+    --mod-scope s    project (padrão: só este projeto) ou global (todos os projetos do usuário)
 """
 import argparse
 import importlib.util
@@ -20,6 +22,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 DEFAULT_PROFILES = "base,product-team,github-projects"
 DEFAULT_PROVIDERS = "claude,codex"
+
+
+def load_mods():
+    spec = importlib.util.spec_from_file_location("template_mods", ROOT / "scripts" / "mods.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def load_cli():
@@ -37,6 +46,8 @@ def main(argv=None):
     parser.add_argument("--profiles")
     parser.add_argument("--providers")
     parser.add_argument("--tier", action="append", default=None, metavar="PAPEL=CAMADA")
+    parser.add_argument("--mod", action="append", default=[], metavar="NOME", help="mod de integrations/mod; repetível")
+    parser.add_argument("--mod-scope", choices=("project", "global"), default="project")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
 
@@ -88,6 +99,22 @@ def main(argv=None):
         print("  rode sem --dry-run para aplicar.")
     else:
         print("  verificação (check): ok")
+    for name in args.mod:
+        try:
+            mod = load_mods().install_mod(name, args.mod_scope, target, args.dry_run)
+        except (ValueError, OSError) as exc:
+            print(f"erro: mod {name}: {exc}", file=sys.stderr)
+            return 1
+        print(f"mod {name} {mod['version']} ({args.mod_scope}) — ATENÇÃO: {mod['warning']}")
+        if args.dry_run:
+            print("  seriam gravados: " + "; ".join(mod["write"]))
+            print("  comandos: " + "; ".join(mod["commands"]))
+        elif mod["installed"]:
+            print(f"  instalado e registrado em {mod['registry']}")
+        else:
+            print(f"  arquivos copiados, mas o plugin NÃO foi instalado ({mod.get('claude_error', 'claude ausente do PATH')}).")
+            print("  rode à mão: " + "; ".join(mod["commands"]))
+            print(f"  registrado como não verificado em {mod['registry']}")
     return 0
 
 

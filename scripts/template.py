@@ -22,6 +22,7 @@ TIER_ORDER = ("light", "standard", "deep")
 COMMON = """The main session ALWAYS orchestrates: consult and delegate implementation and specialized judgments. Separate expertise from task function. Never approve your own work. Independent QA, conformity review, technical review and security must report explicitly on the same reproducible snapshot. Return stable finding IDs to the author; require correction evidence and independent confirmation, and revalidate affected gates after every delta. Silence, timeout, disagreement and exhausted budget never approve. Human acceptance is separate. Without delegation, coordinate verified independent sessions or report blocked; the main session never substitutes for specialists. Read .engineering/workflow/ and .engineering/policies/ explicitly relative to the project root before work. Respect actual permissions; textual scope is not a filesystem sandbox."""
 COMMON += " Staff specialists per workflow/staffing.md, choose the model tier per dispatch per policies/models.md and record both in the brief; hold plans and deliveries to policies/quality-principles.md; install nothing without policies/installations.md, and record every installation of any kind (plugin, agent, skill, MCP, package, tool, image, extension) in docs/operations/registro-instalacoes.md in the same turn."
 COMMON += " Spend tokens per workflow/economy.md without removing any gate, keep continuity records per workflow/session-continuity.md when its profile is selected, and communicate per policies/communication.md."
+COMMON += " Tag every change that lands on the main branch with a SemVer tag before the code itself, per policies/versioning.md, when it is within your scope and authorized. Keep the board true: stale cards, dual validation and the board review that accompanies each handoff follow workflow/github-projects.md."
 COMMON += " Start in the consuming project root. Before any task, explicitly read .engineering/project.json, .engineering/catalog.json, and each .engineering/profiles/<id>.json selected by project.json, then the relevant role/action contracts. Do not rely on inherited context or automatic discovery. For plugin use, the consuming project must have the shared .engineering tree installed or its verified location explicitly supplied; missing project context blocks execution."
 
 
@@ -160,7 +161,7 @@ def render(source, providers, profiles, package=False, tiers=None):
     output = {".engineering/" + name[5:]: data for name, data in files.items() if name.startswith("core/")}
     output[".engineering/catalog.json"] = json_bytes(config)
     for name, data in files.items():
-        if name.startswith("integrations/"):
+        if name.startswith("integrations/") and not name.startswith("integrations/mod/"):
             output[".engineering/" + name] = data
     for name, value in selected.items():
         output[f".engineering/profiles/{name}.json"] = json_bytes(value)

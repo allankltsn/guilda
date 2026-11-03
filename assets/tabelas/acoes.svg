@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 508" width="920" height="508" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" role="img" aria-label="Comandos rápidos: 11 linhas, colunas Ação, O que faz">
+<rect width="920" height="508" rx="10" fill="#0b0f17"/>
+<rect x="0.5" y="0.5" width="919" height="507" rx="10" fill="#111827" stroke="#1f2937"/>
+<text x="16" y="24" font-size="14" font-weight="700" fill="#e6edf3">Comandos rápidos</text>
+<rect x="16" y="31" width="28" height="2" rx="1" fill="#2dd4bf"/>
+<rect x="1" y="36" width="918" height="40" fill="#0b0f17"/>
+<text x="16" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">AÇÃO</text>
+<text x="174" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">O QUE FAZ</text>
+<line x1="0" y1="76" x2="920" y2="76" stroke="#2dd4bf" stroke-opacity="0.5"/>
+<text x="16" y="100" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">/qa</tspan></text>
+<text x="174" y="100" xml:space="preserve"><tspan fill="#c9d4e3">Procura </tspan><tspan fill="#c9d4e3">falhas </tspan><tspan fill="#c9d4e3">nas </tspan><tspan fill="#c9d4e3">mudanças </tspan><tspan fill="#c9d4e3">atuais </tspan><tspan fill="#c9d4e3">como </tspan><tspan fill="#c9d4e3">um </tspan><tspan fill="#c9d4e3">testador </tspan><tspan fill="#c9d4e3">adversário: </tspan><tspan fill="#c9d4e3">casos </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">borda, </tspan><tspan fill="#c9d4e3">contratos </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">API, </tspan></text>
+<text x="174" y="119" xml:space="preserve"><tspan fill="#c9d4e3">regressões.</tspan></text>
+<line x1="16" y1="132" x2="904" y2="132" stroke="#1f2937"/>
+<rect x="1" y="132" width="918" height="37" fill="#0f1623"/>
+<text x="16" y="156" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">/security</tspan></text>
+<text x="174" y="156" xml:space="preserve"><tspan fill="#c9d4e3">Auditoria </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">segurança </tspan><tspan fill="#c9d4e3">focada </tspan><tspan fill="#c9d4e3">nas </tspan><tspan fill="#c9d4e3">mudanças: </tspan><tspan fill="#c9d4e3">autenticação, </tspan><tspan fill="#c9d4e3">permissões, </tspan><tspan fill="#c9d4e3">injeções, </tspan><tspan fill="#c9d4e3">segredos.</tspan></text>
+<line x1="16" y1="169" x2="904" y2="169" stroke="#1f2937"/>
+<text x="16" y="193" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">/privacy</tspan></text>
+<text x="174" y="193" xml:space="preserve"><tspan fill="#c9d4e3">Revisão </tspan><tspan fill="#c9d4e3">rápida </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">LGPD/GDPR, </tspan><tspan fill="#c9d4e3">consumo </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">saúde </tspan><tspan fill="#c9d4e3">do </tspan><tspan fill="#c9d4e3">usuário </tspan><tspan fill="#c9d4e3">num </tspan><tspan fill="#c9d4e3">fluxo, </tspan><tspan fill="#c9d4e3">texto </tspan><tspan fill="#c9d4e3">ou </tspan><tspan fill="#c9d4e3">modelo </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">dados.</tspan></text>
+<line x1="16" y1="206" x2="904" y2="206" stroke="#1f2937"/>
+<rect x="1" y="206" width="918" height="37" fill="#0f1623"/>
+<text x="16" y="230" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">/story</tspan></text>
+<text x="174" y="230" xml:space="preserve"><tspan fill="#c9d4e3">Escreve </tspan><tspan fill="#c9d4e3">ou </tspan><tspan fill="#c9d4e3">refina </tspan><tspan fill="#c9d4e3">uma </tspan><tspan fill="#c9d4e3">história </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">usuário </tspan><tspan fill="#c9d4e3">ou </tspan><tspan fill="#c9d4e3">épico, </tspan><tspan fill="#c9d4e3">pronta </tspan><tspan fill="#c9d4e3">para </tspan><tspan fill="#c9d4e3">virar </tspan><tspan fill="#c9d4e3">issue </tspan><tspan fill="#c9d4e3">no </tspan><tspan fill="#c9d4e3">quadro.</tspan></text>
+<line x1="16" y1="243" x2="904" y2="243" stroke="#1f2937"/>
+<text x="16" y="267" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">/usability</tspan></text>
+<text x="174" y="267" xml:space="preserve"><tspan fill="#c9d4e3">Roda </tspan><tspan fill="#c9d4e3">uma </tspan><tspan fill="#c9d4e3">rodada </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">usabilidade </tspan><tspan fill="#c9d4e3">com </tspan><tspan fill="#c9d4e3">duas </tspan><tspan fill="#c9d4e3">pessoas </tspan><tspan fill="#c9d4e3">leigas </tspan><tspan fill="#c9d4e3">simuladas </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">prepara </tspan><tspan fill="#c9d4e3">a </tspan><tspan fill="#c9d4e3">decisão </tspan><tspan fill="#c9d4e3">do </tspan><tspan fill="#c9d4e3">que </tspan><tspan fill="#c9d4e3">corrigir.</tspan></text>
+<line x1="16" y1="280" x2="904" y2="280" stroke="#1f2937"/>
+<rect x="1" y="280" width="918" height="37" fill="#0f1623"/>
+<text x="16" y="304" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">/aws</tspan></text>
+<text x="174" y="304" xml:space="preserve"><tspan fill="#c9d4e3">Revisão </tspan><tspan fill="#c9d4e3">ou </tspan><tspan fill="#c9d4e3">proposta </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">infraestrutura </tspan><tspan fill="#c9d4e3">na </tspan><tspan fill="#c9d4e3">AWS.</tspan></text>
+<line x1="16" y1="317" x2="904" y2="317" stroke="#1f2937"/>
+<text x="16" y="341" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">/hosting</tspan></text>
+<text x="174" y="341" xml:space="preserve"><tspan fill="#c9d4e3">Revisão </tspan><tspan fill="#c9d4e3">ou </tspan><tspan fill="#c9d4e3">configuração </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">hospedagem </tspan><tspan fill="#c9d4e3">gerenciada.</tspan></text>
+<line x1="16" y1="354" x2="904" y2="354" stroke="#1f2937"/>
+<rect x="1" y="354" width="918" height="37" fill="#0f1623"/>
+<text x="16" y="378" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">/kubernetes</tspan></text>
+<text x="174" y="378" xml:space="preserve"><tspan fill="#c9d4e3">Diagnóstico </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">cluster </tspan><tspan fill="#c9d4e3">Kubernetes.</tspan></text>
+<line x1="16" y1="391" x2="904" y2="391" stroke="#1f2937"/>
+<text x="16" y="415" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">/sre</tspan></text>
+<text x="174" y="415" xml:space="preserve"><tspan fill="#c9d4e3">Apoio </tspan><tspan fill="#c9d4e3">em </tspan><tspan fill="#c9d4e3">incidentes, </tspan><tspan fill="#c9d4e3">metas </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">disponibilidade </tspan><tspan fill="#c9d4e3">(SLO) </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">roteiros </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">operação </tspan><tspan fill="#c9d4e3">(runbooks).</tspan></text>
+<line x1="16" y1="428" x2="904" y2="428" stroke="#1f2937"/>
+<rect x="1" y="428" width="918" height="37" fill="#0f1623"/>
+<text x="16" y="452" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">/cicd</tspan></text>
+<text x="174" y="452" xml:space="preserve"><tspan fill="#c9d4e3">Diagnóstico </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">falha </tspan><tspan fill="#c9d4e3">ou </tspan><tspan fill="#c9d4e3">risco </tspan><tspan fill="#c9d4e3">numa </tspan><tspan fill="#c9d4e3">pipeline </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">integração </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">entrega.</tspan></text>
+<line x1="16" y1="465" x2="904" y2="465" stroke="#1f2937"/>
+<text x="16" y="489" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">/devsecops-infra</tspan></text>
+<text x="174" y="489" xml:space="preserve"><tspan fill="#c9d4e3">Auditoria </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">segurança </tspan><tspan fill="#c9d4e3">em </tspan><tspan fill="#c9d4e3">arquivos </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">infraestrutura </tspan><tspan fill="#c9d4e3">como </tspan><tspan fill="#c9d4e3">código </tspan><tspan fill="#c9d4e3">(Terraform, </tspan><tspan fill="#c9d4e3">Helm…).</tspan></text>
+</svg>
