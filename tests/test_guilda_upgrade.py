@@ -19,6 +19,10 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
+from tests import guilda_test_isolation  # noqa: E402,F401  (isola o config do usuário)
 import guilda.engine as engine  # noqa: E402
 import guilda.payload as payload  # noqa: E402
 import guilda.upgrade as upgrade  # noqa: E402

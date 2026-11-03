@@ -208,8 +208,8 @@ def startup_check(opener, runner) -> None:
         if cfg["update_check"] == "notify":
             print(f"guilda {newest} disponível (instalada: {__version__}). Rode: guilda self-update", file=sys.stderr)
         else:
-            code = selfupdate.upgrade_self(runner)
-            print(f"guilda {newest}: atualização automática " + ("concluída." if code == 0 else f"falhou (código {code})."), file=sys.stderr)
+            code = selfupdate.upgrade_self(runner, capture=True)
+            print(f"guilda atualizado para {newest}" if code == 0 else "guilda: falha ao atualizar automaticamente (veja: guilda self-update)", file=sys.stderr)
     except Exception:  # noqa: BLE001 - a verificação nunca derruba o comando
         return
 
@@ -275,9 +275,9 @@ def main(argv: list[str] | None = None, runner=subprocess.run, opener=urllib.req
     args = build_parser().parse_args(argv)  # --help e erros de uso saem aqui, antes da verificação
     if args.command == "self-update":
         return run_self_update(args, runner)
-    startup_check(opener, runner)
     if args.command == "config":
-        return run_config(args)
+        return run_config(args)  # sem verificação: não polui o JSON de `get` nem age antes de `set`
+    startup_check(opener, runner)
     if args.command == "install":
         return run_install(args)
     if args.command == "upgrade":

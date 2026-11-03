@@ -98,9 +98,13 @@ def upgrade_command(executable: str | None = None, prefix: str | None = None, en
     return [executable or sys.executable, "-m", "pip", "install", "--upgrade", "guilda"]
 
 
-def upgrade_self(runner=subprocess.run, executable: str | None = None, prefix: str | None = None, environ=None) -> int:
-    """Roda o comando de atualização (sem shell) e devolve o código de saída."""
+def upgrade_self(runner=subprocess.run, executable: str | None = None, prefix: str | None = None, environ=None, capture: bool = False) -> int:
+    """Roda o comando de atualização (sem shell) e devolve o código de saída.
+
+    Com `capture`, a saída do pip/uv é capturada (não vaza para o comando do usuário).
+    """
+    extra = {"capture_output": True, "text": True} if capture else {}
     try:
-        return int(runner(upgrade_command(executable, prefix, environ)).returncode)
+        return int(runner(upgrade_command(executable, prefix, environ), **extra).returncode)
     except OSError:
         return 1

@@ -18,6 +18,10 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
+from tests import guilda_test_isolation  # noqa: E402,F401  (isola o config do usuário)
 import guilda.cli as cli  # noqa: E402
 import guilda.config as config  # noqa: E402
 import guilda.selfupdate as selfupdate  # noqa: E402
@@ -114,7 +118,8 @@ class SelfUpdateTests(unittest.TestCase):
         self.root.mkdir()
         self.addCleanup(rmtree, self.root)
         home = str(self.root / "home")
-        env = {"APPDATA": home, "XDG_CONFIG_HOME": home, "HOME": home, "USERPROFILE": home}
+        env = {"APPDATA": home, "XDG_CONFIG_HOME": home, "HOME": home, "USERPROFILE": home,
+               "GUILDA_CONFIG": str(Path(home) / "guilda" / "config.json")}
         patcher = mock.patch.dict(os.environ, env)
         patcher.start()
         self.addCleanup(patcher.stop)
@@ -161,14 +166,15 @@ class SelfUpdateTests(unittest.TestCase):
     def test_auto_runs_upgrade_self_once(self):
         self.write_config(update_check="auto", last_check=None)
         opener, runner = FakeOpener(), FakeRunner()
-        code, _out, err = self.run_cli(["config", "get"], runner=runner, opener=opener)
-        self.assertEqual(code, 0)
+        project = self.root / "proj"
+        project.mkdir()
+        argv = ["doctor", "--target", str(project)]
+        self.run_cli(argv, runner=runner, opener=opener)
         self.assertEqual(len(runner.calls), 1)
         self.assertEqual(len(opener.calls), 1)
-        self.assertIn(NEWER, err)
         self.assertIsNotNone(config.load()["last_check"])
         # Second command within 24 h: no query, no upgrade.
-        self.run_cli(["config", "get"], runner=runner, opener=opener)
+        self.run_cli(argv, runner=runner, opener=opener)
         self.assertEqual(len(runner.calls), 1)
         self.assertEqual(len(opener.calls), 1)
 
@@ -217,21 +223,25 @@ class SelfUpdateTests(unittest.TestCase):
         self.assertEqual(selfupdate.upgrade_self(FakeRunner(code=3), executable=py, prefix="/x", environ={}), 3)
 
     def test_startup_check_never_fails_the_command(self):
+        project = self.root / "proj"
+        project.mkdir()
+        argv = ["doctor", "--target", str(project)]
+        baseline = self.run_cli(argv)[0]  # exit code with the check off
         self.write_config(update_check="notify", last_check=None)
-        opener = FakeOpener(error=OSError("offline"))
-        code, _out, err = self.run_cli(["config", "get"], opener=opener)
-        self.assertEqual(code, 0)
-        self.assertEqual(err, "")
+        code, _out, err = self.run_cli(argv, opener=FakeOpener(error=OSError("offline")))
+        self.assertEqual(code, baseline)
+        self.assertNotIn("disponível", err)
         # Even an unwritable config must not break the command.
         self.write_config(update_check="notify", last_check=None)
         with mock.patch.object(config, "save", side_effect=OSError("disk full")):
-            code, _out, err = self.run_cli(["config", "get"], opener=FakeOpener())
-        self.assertEqual(code, 0)
+            code, _out, err = self.run_cli(argv, opener=FakeOpener())
+        self.assertEqual(code, baseline)
         # Notify prints exactly one line to stderr.
         self.write_config(update_check="notify", last_check=None)
-        code, _out, err = self.run_cli(["config", "get"], opener=FakeOpener())
-        self.assertEqual(code, 0)
-        self.assertEqual(err.strip(), f"guilda {NEWER} disponível (instalada: {__version__}). Rode: guilda self-update")
+        code, _out, err = self.run_cli(argv, opener=FakeOpener())
+        self.assertEqual(code, baseline)
+        line = f"guilda {NEWER} disponível (instalada: {__version__}). Rode: guilda self-update"
+        self.assertEqual(err.count(line), 1)
 
     def test_startup_check_skipped_for_self_update_and_help(self):
         self.write_config(update_check="notify", last_check=None)
@@ -243,6 +253,42 @@ class SelfUpdateTests(unittest.TestCase):
         with self.assertRaises(SystemExit):
             self.run_cli(["doctor", "--help"], opener=opener)
         self.assertEqual(opener.calls, 0)
+
+    def test_config_command_skips_startup_check(self):
+        stale = (NOW - timedelta(days=3)).isoformat()
+        self.write_config(update_check="auto", last_check=stale)
+        opener, runner = ForbiddenOpener(), FakeRunner()
+        code, out, err = self.run_cli(["config", "get"], runner=runner, opener=opener)
+        self.assertEqual(code, 0)
+        self.assertEqual(json.loads(out)["update_check"], "auto")
+        self.assertEqual(err, "")
+        code, _out, err = self.run_cli(["config", "set", "update-check", "off"], runner=runner, opener=opener)
+        self.assertEqual(code, 0)
+        self.assertEqual(config.load()["update_check"], "off")
+        self.assertEqual((opener.calls, runner.calls), (0, []))
+
+    def test_auto_upgrade_is_captured_and_reports_one_line(self):
+        self.write_config(update_check="auto", last_check=None)
+        runner = FakeRunner()
+        project = self.root / "proj"
+        project.mkdir()
+        code, out, err = self.run_cli(["doctor", "--target", str(project)], runner=runner, opener=FakeOpener())
+        kwargs = runner.calls[0][1]
+        self.assertTrue(kwargs.get("capture_output"))
+        self.assertTrue(kwargs.get("text"))
+        self.assertFalse(kwargs.get("shell", False))
+        self.assertEqual(err.strip().splitlines()[-1], f"guilda atualizado para {NEWER}")
+        self.write_config(update_check="auto", last_check=None)
+        failing = FakeRunner(code=2)
+        _code, _out, err = self.run_cli(["doctor", "--target", str(project)], runner=failing, opener=FakeOpener())
+        self.assertIn("guilda: falha ao atualizar automaticamente (veja: guilda self-update)", err)
+
+    def test_explicit_self_update_does_not_capture_output(self):
+        runner = FakeRunner()
+        self.assertEqual(self.run_cli(["self-update", "--yes"], runner=runner)[0], 0)
+        self.assertFalse(runner.calls[0][1].get("capture_output", False))
+        selfupdate.upgrade_self(runner, capture=True)
+        self.assertTrue(runner.calls[-1][1]["capture_output"])
 
     # --- self-update command ---
 
@@ -321,6 +367,35 @@ class SelfUpdateTests(unittest.TestCase):
         with self.assertRaises(SystemExit):
             self.run_cli(["config", "set", "update-check", "sometimes"])
         self.assertEqual(config.load()["update_check"], "notify")
+
+
+class IsolationTests(unittest.TestCase):
+    def test_suite_config_is_isolated_from_the_real_user_config(self):
+        import tests.guilda_test_isolation as iso
+        self.assertEqual(config.path(), iso.CONFIG_PATH)
+        self.assertEqual(config.path().parent, iso.DIR)
+        with tempfile_dir() as real_home:
+            auto = Path(real_home) / "guilda" / "config.json"
+            auto.parent.mkdir(parents=True)
+            auto.write_text('{"update_check": "auto", "last_check": null}', encoding="utf-8")
+            env = {"HOME": real_home, "USERPROFILE": real_home, "APPDATA": real_home, "XDG_CONFIG_HOME": real_home}
+            with mock.patch.dict(os.environ, env):
+                self.assertEqual(config.path(), iso.CONFIG_PATH)
+                self.assertEqual(config.load()["update_check"], "off")
+            self.assertEqual(config.path(environ={**env}, platform="linux"), auto)  # without the override the real one would win
+
+    def test_guilda_config_override_wins(self):
+        self.assertEqual(config.path(environ={"GUILDA_CONFIG": "/x/y.json", "HOME": "/h"}, platform="linux"), Path("/x/y.json"))
+
+
+@contextlib.contextmanager
+def tempfile_dir():
+    path = ROOT.parent / ("template-test-" + uuid.uuid4().hex)
+    path.mkdir()
+    try:
+        yield str(path)
+    finally:
+        rmtree(path)
 
 
 if __name__ == "__main__":

@@ -11,6 +11,10 @@ from types import SimpleNamespace
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
+from tests import guilda_test_isolation  # noqa: E402,F401  (isola o config do usuário)
 import guilda.cli as cli  # noqa: E402
 import guilda.engine as engine  # noqa: E402
 import guilda.promote as promote  # noqa: E402

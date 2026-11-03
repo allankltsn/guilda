@@ -1,4 +1,9 @@
-"""Configuração do usuário do `guilda` (arquivo JSON fora de qualquer projeto)."""
+"""Configuração do usuário do `guilda` (arquivo JSON fora de qualquer projeto).
+
+Local do arquivo, em ordem: a variável de ambiente `GUILDA_CONFIG` (caminho completo do
+arquivo; usada pelos testes para nunca tocar o config real), `%APPDATA%/guilda/config.json`
+no Windows, `$XDG_CONFIG_HOME/guilda/config.json` ou `~/.config/guilda/config.json` nos demais.
+"""
 from __future__ import annotations
 
 import json
@@ -20,6 +25,8 @@ def path(environ=None, platform=None) -> Path:
     """Caminho do config.json. Lê o ambiente a cada chamada."""
     environ = os.environ if environ is None else environ
     platform = sys.platform if platform is None else platform
+    if environ.get("GUILDA_CONFIG"):
+        return Path(environ["GUILDA_CONFIG"])
     if platform.startswith("win"):
         base = environ.get("APPDATA") or str(_home(environ, True) / "AppData" / "Roaming")
         return Path(base) / "guilda" / "config.json"
