@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: ["feature/**", "release/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test (${{ matrix.os }}, py${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Testes
+        run: python -m unittest discover -s tests
+
+  payload-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Payload sincronizado
+        run: python -m guilda.payload --check
+      - name: Nada de material interno versionado
+        run: |
+          proibidos=$(git ls-files | grep -E '^(docs/superpowers/|plans/|specs/|graphify-out/|\.worktrees/)' || true)
+          if [ -n "$proibidos" ]; then
+            echo "Caminhos proibidos versionados:"
+            echo "$proibidos"
+            exit 1
+          fi
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instala build
+        run: python -m pip install build
+      - name: Gera sdist e wheel
+        run: python -m build
+      - name: Confere a distribuição
+        run: python -m unittest tests.test_guilda_wheel
