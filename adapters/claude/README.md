@@ -1,6 +1,6 @@
 # Adapter Claude
 
-A instalação de projeto é preferencial: guilda init --providers claude (ou
+A instalação de projeto é preferencial: guilda init --target <projeto> --providers claude (ou
 guilda install) materializa
 .claude/agents, comandos, skills, CLAUDE.md e .engineering gerenciada.
 Não instala configurações globais nem permissões de bypass. Agentes de revisão

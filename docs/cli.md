@@ -56,7 +56,7 @@ São repassados sem alteração ao motor (`guilda/engine.py`). Saída em JSON no
 - **`init`**: instala. Antes de gravar qualquer coisa, confere todos os caminhos; um arquivo seu com o mesmo nome e conteúdo diferente (`preexisting conflict`) aborta sem gravar nada. Saída: `{"write": [...], "remove": [...], "dry_run": ...}`.
 - **`sync`**: refaz uma instalação existente (sem manifesto: `sync requires installed manifest`). Usa as opções **passadas na linha de comando**, não as registradas: sem `--profiles`, vale `base`, e os arquivos dos outros perfis são removidos; sem `--tier`, os overrides somem. Passe as mesmas opções da instalação ou use `guilda install`/`guilda upgrade`, que reaproveitam as escolhas registradas. Arquivo gerenciado editado à mão faz o comando parar com `installed drift: <arquivo>`, sem gravar nada.
 - **`check`**: não grava nada. Sem `--target`, valida o template e mostra `{"valid": true, "roles": 28, "actions": 11}`. Com `--target`, confere o manifesto, o conteúdo de cada arquivo gerenciado (`installed drift`) e se o template é mais novo que a instalação (`source update available; run sync`).
-- **`doctor`**: mostra a versão do Python e, para `claude`, `codex`, `git`, `rtk` e `serena`, o caminho no PATH ou `absent`. Não executa nem instala nada.
+- **`doctor`**: mostra a versão do Python e, para `claude`, `codex`, `git`, `rtk` e `serena`, o caminho encontrado (ou `null`) e um estado (`detected; version/discovery unverified` ou `absent`). Não executa nem instala nada.
 - **`package --provider claude --target <pasta-separada>`**: gera o plugin do Claude (`agents/`, `commands/`, `skills/`, `.claude-plugin/`, `.engineering/`, `BOOTSTRAP.md`, `PLUGIN_SETUP.md`). Não instala nem habilita o plugin; veja o [adapter Claude](../adapters/claude/README.md).
 
 Manifesto com o nome antigo (`engineering-template`, de antes da 2.0.0): `sync` e `check` recusam com `legacy manifest name; run guilda upgrade`.
@@ -93,7 +93,7 @@ instalação (concluída) em /caminho/meu-projeto
 
 ## `guilda upgrade [projeto] [--dry-run] [--yes]`
 
-Atualiza um projeto instalado para o template da versão do `guilda` em uso, arquivo por arquivo, com os mesmos perfis, provedores e camadas registrados no manifesto (não há opção para mudá-los aqui). Não consulta o PyPI: para ter um template mais novo, atualize o `guilda` antes (`guilda self-update`).
+Atualiza um projeto instalado para o template da versão do `guilda` em uso, arquivo por arquivo, com os mesmos perfis, provedores e camadas registrados no manifesto (não há opção para mudá-los aqui). Não consulta o PyPI (só a verificação automática opcional, `update_check` em `notify` ou `auto`, consulta antes de qualquer comando): para ter um template mais novo, atualize o `guilda` antes (`guilda self-update`).
 
 Cada caminho gerenciado é classificado comparando o arquivo no disco com a impressão digital do manifesto e com o template novo. Conversão de fim de linha (CRLF/LF) não conta como edição.
 
