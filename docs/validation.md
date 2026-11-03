@@ -1,7 +1,7 @@
 # <img src="../assets/icons/teal/shield-check.svg" width="28" align="top"> Validação da entrega
 
 <p align="center">
-  <img src="https://img.shields.io/badge/testes-34_ok_·_1_ignorado-16a34a?style=flat-square" alt="34 testes, 1 ignorado">
+  <img src="https://img.shields.io/badge/testes-146_ok_·_3_ignorados-16a34a?style=flat-square" alt="146 testes, 3 ignorados">
   <img src="https://img.shields.io/badge/papéis-28-a78bfa?style=flat-square" alt="28 papéis">
   <img src="https://img.shields.io/badge/ações-11-0ea5a4?style=flat-square" alt="11 ações">
   <img src="https://img.shields.io/badge/perfis-10-60a5fa?style=flat-square" alt="10 perfis">
@@ -47,7 +47,7 @@ A versão 1.2.0 acrescentou economia, continuidade de sessão e comunicação (t
 ## <img src="../assets/icons/teal/terminal.svg" width="24" align="top"> Evidências executadas
 
 - **CLI:** `check`, `doctor`, `init`, `sync` e `package` exercitados em fixtures locais.
-- **Suíte Python** (`python -m unittest discover -s tests`): 34 testes, 1 ignorado (um teste de symlink ignorado por privilégio Windows); proteção contra junction validada. Novos testes cobrem camadas de modelo por papel, overrides validados e persistidos no manifesto, papéis de produto e UX (ferramentas e sandbox), usuário leigo somente leitura na camada leve, presença dos workflows, políticas e templates, neutralidade (nenhuma referência a projeto específico) e curadoria de plugins sem instalação.
+- **Suíte Python** (`python -m unittest discover -s tests`): 146 testes, 3 ignorados (entre eles o de symlink, por privilégio Windows); proteção contra junction validada. Novos testes cobrem camadas de modelo por papel, overrides validados e persistidos no manifesto, papéis de produto e UX (ferramentas e sandbox), usuário leigo somente leitura na camada leve, presença dos workflows, políticas e templates, neutralidade (nenhuma referência a projeto específico) e curadoria de plugins sem instalação.
 - **Claude 2.1.294:** validação nativa estrita do plugin e manifesto aprovada após correções.
 - **Codex 0.156.1:** `features list` executado; TOML gerado analisado com `tomllib`. A opção `strict-config` não é suportada por esse comando.
 - **Onboarding do plugin:** receita documentada executada, contratos disponíveis no consumidor, manifesto não copiado e conflito preservando arquivos.
