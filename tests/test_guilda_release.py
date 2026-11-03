@@ -172,7 +172,7 @@ class ReleaseWorkflowTest(unittest.TestCase):
         self.assertRegex(publish, r"(?m)^    environment: pypi\s*$")
         self.assertRegex(publish, r"(?m)^    needs: build\s*$")
         self.assertRegex(publish, r"(?m)^      id-token: write\s*$")
-        self.assertIn("pypa/gh-action-pypi-publish@", publish)
+        self.assertRegex(publish, r"uses: pypa/gh-action-pypi-publish@[0-9a-f]{40} # release/v1")
         self.assertRegex(jobs["build"], r"(?m)^    needs: verify\s*$")
 
         # id-token aparece uma única vez no arquivo, no job que publica.
@@ -199,7 +199,15 @@ class ReleaseWorkflowTest(unittest.TestCase):
         self.assertIn("python -m unittest tests.test_guilda_wheel", build)
         self.assertIn('python -c "import build"', build)
         self.assertIn("scripts/check_dist.py dist", build)
-        self.assertEqual(texto.count("actions/checkout@v4"), texto.count("persist-credentials: false"))
+        self.assertEqual(len(re.findall(r"uses: actions/checkout@[0-9a-f]{40} # v4", texto)), texto.count("persist-credentials: false"))
+
+    def test_toda_action_esta_fixada_por_sha(self):
+        for wf in sorted((ROOT / ".github" / "workflows").glob("*.yml")):
+            usos = re.findall(r"(?m)^\s*(?:- )?uses:\s*(\S+)(.*)$", wf.read_text(encoding="utf-8"))
+            self.assertTrue(usos, wf.name)
+            for ref, resto in usos:
+                self.assertRegex(ref, r"^[\w.-]+/[\w./-]+@[0-9a-f]{40}$", f"{wf.name}: {ref}")
+                self.assertRegex(resto, r"^\s+# \S+", f"{wf.name}: {ref} sem comentário de tag")
 
 
 if __name__ == "__main__":
