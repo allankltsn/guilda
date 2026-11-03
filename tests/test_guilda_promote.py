@@ -3,6 +3,7 @@ import io
 import os
 import shutil
 import sys
+import time
 import unittest
 import uuid
 from pathlib import Path
@@ -113,6 +114,21 @@ class PromoteTests(unittest.TestCase):
         self.assertEqual(found, {CHANGED_OUT: b"my improved architect\n", ADDED: b"note\n"})
         self.assertNotIn(".engineering/manifest.json", found)
 
+    def test_changed_files_skips_personal_and_tool_state(self):
+        self.edit()
+        for name in (
+            ".claude/settings.local.json", ".codex/config.local.toml", ".agents/notes.local.md",
+            ".claude/worktrees/feature-x/README.md", ".claude/worktrees/feature-x/.claude/agents/a.md",
+            ".claude/projects/C--dev-x/memory.md",
+        ):
+            self.edit(name, b"personal\n")
+        # Segment matching, not substring: these are ordinary user files and must still be sent.
+        kept = (".claude/localnotes.md", ".claude/my-worktrees/a.md", ".claude/notes/projects/a.md", ".claude/local.md")
+        for name in kept:
+            self.edit(name, b"shared\n")
+        found = promote.changed_files(ROOT, self.target)
+        self.assertEqual(sorted(found), sorted([CHANGED_OUT, *kept]))
+
     def test_changed_files_tolerates_line_ending_conversion(self):
         original = (self.target / CHANGED_OUT).read_bytes().replace(b"\r\n", b"\n")
         self.edit(data=original.replace(b"\n", b"\r\n"))
@@ -177,6 +193,24 @@ class PromoteTests(unittest.TestCase):
     def test_scan_does_not_treat_values_that_merely_contain_a_placeholder_word_as_placeholders(self):
         for text in (b"password: realsecretchangeme", b"token: abXXXXcd1234567", b"password: hunter2...x"):
             self.assertEqual(self.kinds(text), ["secret"], text)
+
+    def test_scan_detects_names_after_an_underscore(self):
+        for text in (b"export GITHUB_TOKEN=abcdefgh123", b"AWS_SECRET_ACCESS_KEY=abcd1234efgh", b"DB_PASSWORD=hunter2hunter2"):
+            self.assertEqual(self.kinds(text), ["secret"], text)
+
+    def test_scan_jwt_still_detected_after_common_prefixes(self):
+        jwt = b"eyJhbGciOiJI.eyJzdWIiOiIx.SflKxwRJSMeKKF2QT4"
+        for text in (b"Bearer " + jwt, b'"token":"' + jwt + b'"', b"x=" + jwt, jwt):
+            self.assertEqual(self.kinds(text), ["secret"], text)
+
+    def test_scan_is_not_quadratic_on_crafted_single_line_files(self):
+        size = 256 * 1024
+        for unit in (b"password", b"token-", b"secret", b"eyJ", b"api_key", b"credentials"):
+            payload = unit * (size // len(unit))
+            with self.subTest(unit=unit):
+                start = time.perf_counter()
+                promote.scan({"a.md": payload})
+                self.assertLess(time.perf_counter() - start, 2.0, unit)
 
     def test_scan_text_flags_without_echoing_the_value(self):
         found = promote.scan_text("<title>", f"oi {SECRET_VALUE}\nC:\\Users\\zelda\\x")
@@ -308,6 +342,31 @@ class PromoteTests(unittest.TestCase):
         self.assertIsNone(ctx.exception.gist_url)
         self.assertNotIn("issue create", runner.keys())
         self.assertTrue(seen and not seen[0].exists())
+
+    def test_unparseable_gist_url_reports_gh_output(self):
+        self.edit()
+        runner = FakeRunner()
+
+        def wrapper(argv, **kwargs):
+            result = runner(argv, **kwargs)
+            if FakeRunner.key(argv) == "gist create":
+                return SimpleNamespace(returncode=0, stdout="- Creating gist... done gist.example/xyz\n", stderr="")
+            return result
+        with self.assertRaises(promote.PromoteError) as ctx:
+            self.run_promote(wrapper)
+        self.assertIn("gist.example/xyz", str(ctx.exception))
+        self.assertNotIn("issue create", runner.keys())
+
+    def test_preview_body_is_the_published_body(self):
+        self.edit()
+        self.edit(ADDED, b"note\n")
+        runner = FakeRunner()
+        out = io.StringIO()
+        self.run_promote(runner, assume_yes=False, stdin=FakeTTY("s\n"), stdout=out)
+        text = out.getvalue()
+        preview = text[text.index("--- corpo ---\n") + len("--- corpo ---\n"):text.index("--- fim ---\n")]
+        self.assertIn(promote.GIST_PLACEHOLDER, preview)
+        self.assertEqual(preview.replace(promote.GIST_PLACEHOLDER, GIST), runner.issue_body)
 
     def test_gist_is_secret(self):
         self.edit()

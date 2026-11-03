@@ -11,6 +11,8 @@ traz a tabela nome-no-gist -> caminho original, para o mantenedor restaurar a á
 """
 from __future__ import annotations
 
+import fnmatch
+import os
 import re
 import shutil
 import subprocess
@@ -28,16 +30,23 @@ LABEL = "proposta"
 MANAGED_DIRS = (".engineering/", ".claude/", ".codex/", ".agents/")
 MANIFEST = ".engineering/manifest.json"
 MAX_BYTES = 1024 * 1024
+GIST_PLACEHOLDER = "<URL do gist, criado após a confirmação>"
+# Personal or tool state never proposed: matched by whole path segment, not substring.
+SKIP_PREFIXES = ((".claude", "worktrees"), (".claude", "projects"))
+SKIP_SEGMENT = "*.local.*"
 ACCEPTANCE = "Concedo ao mantenedor uma licença ampla para usar, modificar e relicenciar esta contribuição."
 
 _TOKENS = re.compile(
     rb"gh[pousr]_\w{20,}|github_pat_\w{20,}|AKIA[0-9A-Z]{16}|xox[bpars]-[\w-]{6,}"
     rb"|(?<![A-Za-z0-9])sk-[\w-]{20,}|sk_(?:live|test)_\w{16,}|AIza[\w-]{35}"
-    rb"|eyJ[\w-]+\.[\w-]+\.[\w-]+|(?i:authorization:\s*bearer\s+)[\w.~+/=-]{20,}"
+    # Left boundary on the JWT: without it `eyJeyJeyJ...` (no dot) is quadratic.
+    rb"|(?<![\w-])eyJ[\w-]+\.[\w-]+\.[\w-]+|(?i:authorization:\s*bearer\s+)[\w.~+/=-]{20,}"
     rb"|https://hooks\.slack\.com/services/\S+"
     rb"|-----BEGIN [A-Z ]*PRIVATE KEY(?: BLOCK)?-----"
 )
-_NAMES = rb"(?:password|passwd|secret|token|api[_-]?key|db_pass|credentials)[\w-]*|(?<![A-Za-z])(?:pwd|auth)(?![A-Za-z])"
+# Bounded tail: `[\w-]*` made `secretsecret...` quadratic. No left boundary on purpose: the
+# name often follows `_` (GITHUB_TOKEN=, AWS_SECRET_ACCESS_KEY=).
+_NAMES = rb"(?:password|passwd|secret|token|api[_-]?key|db_pass|credentials)[\w-]{0,40}|(?<![A-Za-z])(?:pwd|auth)(?![A-Za-z])"
 _ASSIGN = re.compile(rb"(?i)(?:" + _NAMES + rb")[\"']?\s*[:=]\s*[\"']?(\S{8,})")
 _URL_CREDS = re.compile(rb"(?i)(?<![a-z0-9+.-])[a-z][a-z0-9+.-]*://[^\s/:@]+:([^\s/@]+)@")
 # Placeholder only when the WHOLE value is one (never a value that merely contains such a word).
@@ -81,6 +90,21 @@ class Finding:
     kind: str
 
 
+def _skipped(name: str) -> bool:
+    """Personal files (`*.local.*`), worktree copies and tool memories under `.claude/`."""
+    parts = tuple(name.split("/"))
+    return any(parts[: len(p)] == p for p in SKIP_PREFIXES) or any(fnmatch.fnmatchcase(s, SKIP_SEGMENT) for s in parts)
+
+
+def _walk(target: Path, base: Path):
+    """Files under `base`, pruning skipped directories (worktrees can hold whole repositories)."""
+    for root, dirs, files in os.walk(base):
+        rel = Path(root).relative_to(target).as_posix()
+        dirs[:] = sorted(d for d in dirs if not _skipped(f"{rel}/{d}"))
+        for name in files:
+            yield Path(root) / name
+
+
 def changed_files(source: Path, target: Path) -> dict[str, bytes]:
     """Arquivos adicionados ou modificados pelo usuário em diretórios gerenciados."""
     target = engine.safe_path(target)
@@ -92,11 +116,11 @@ def changed_files(source: Path, target: Path) -> dict[str, bytes]:
         base = target / top.rstrip("/")
         if not base.is_dir():
             continue
-        for path in sorted(base.rglob("*")):
+        for path in sorted(_walk(target, base)):
             if not path.is_file() or path.is_symlink():
                 continue
             name = path.relative_to(target).as_posix()
-            if name == MANIFEST:
+            if name == MANIFEST or _skipped(name):
                 continue
             data = path.read_bytes()
             if name in recorded:
@@ -176,7 +200,9 @@ def _gh(runner, argv, **kwargs):
 def _url(result, what: str, gist_url: str | None = None) -> str:
     lines = [ln.strip() for ln in (result.stdout or "").splitlines() if ln.strip().startswith("https://")]
     if not lines:
-        raise PromoteError(f"o gh não devolveu a URL do {what}.", gist_url)
+        output = (result.stdout or "").strip()[:500]
+        hint = " O gist pode ter sido criado; confira com `gh gist list`." if what == "gist" else ""
+        raise PromoteError(f"o gh não devolveu a URL do {what}.{hint} Saída do gh: {output or '(vazia)'}", gist_url)
     return lines[-1]
 
 
@@ -205,7 +231,7 @@ def promote(source, target, title, description, assume_yes=False, runner=subproc
     if len(names) != len(files):
         raise PromoteError("nomes de arquivo colidem no gist; renomeie um dos arquivos.")
 
-    _, preview = build_issue(public_title, description, "<URL do gist, criado após a confirmação>", list(files), version)
+    _, preview = build_issue(public_title, description, GIST_PLACEHOLDER, list(files), version)
     stdout.write("Arquivos que serão enviados a um gist secreto (quem tem o link pode ler):\n")
     for path, data in files.items():
         stdout.write(f"  {path} ({len(data)} bytes)\n")
