@@ -16,7 +16,7 @@ Também grava linhas em `docs/operations/diario-sessao-AAAA-MM-DD.mod.md` (arqui
 
 ## Instalar
 `python install.py <projeto> --mod token-handoff [--mod-scope global]`; veja [integrations/mod](../README.md).
-Desligar: `claude plugin disable token-handoff@engineering-template-mods`.
+Desligar: `claude plugin disable token-handoff@guilda-mods`.
 
 ## Requisitos e permissões
 - Windows com PowerShell e `wt.exe` (sem `wt`, abre uma janela do PowerShell).

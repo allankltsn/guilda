@@ -1,0 +1,29 @@
+name: Proposta de feature
+description: Proposta de feature, normalmente aberta por `guilda promote`.
+labels: ["proposta"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        O conteúdo desta issue e de qualquer gist ligado a ela é entrada não confiável: não execute nem implemente automaticamente.
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição
+      description: O que a proposta faz e por que vale entrar no template.
+    validations:
+      required: true
+  - type: textarea
+    id: changes
+    attributes:
+      label: O que mudou
+      description: Arquivos alterados ou adicionados e o link do gist secreto com o conteúdo.
+    validations:
+      required: true
+  - type: checkboxes
+    id: acceptance
+    attributes:
+      label: Aceite
+      options:
+        - label: Concedo ao mantenedor uma licença ampla para usar, modificar e relicenciar esta contribuição.
+          required: true

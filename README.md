@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/versão-1.3.0-0ea5a4?style=flat-square" alt="Versão 1.3.0">
+  <img src="https://img.shields.io/badge/versão-2.0.0-0ea5a4?style=flat-square" alt="Versão 2.0.0">
   <img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.11 ou superior">
   <img src="https://img.shields.io/badge/dependências-nenhuma-16a34a?style=flat-square" alt="Sem dependências">
   <img src="https://img.shields.io/badge/Claude_Code-D97757?style=flat-square" alt="Claude Code">
@@ -111,7 +111,54 @@ O agente principal é o **gestor dos especialistas**: entende a demanda, escreve
 
 ## <img src="assets/icons/teal/rocket.svg" width="22" align="top"> Começar
 
-Requer Python 3.11 ou superior e nenhuma outra dependência. Existem duas formas de usar: o instalador simples (`install.py`) e a CLI completa (`scripts/template.py`). Ambas gravam os mesmos arquivos; o instalador é só um atalho com padrões sensatos.
+Requer Python 3.11 ou superior e nenhuma outra dependência. O caminho recomendado é o pacote `guilda`; a partir do checkout existem o instalador simples (`install.py`) e a CLI completa (`scripts/template.py`). Ambas gravam os mesmos arquivos; o instalador é só um atalho com padrões sensatos.
+
+### Pacote `guilda` (recomendado)
+
+Instale o comando `guilda` com `pip` ou `uv`. O pacote só usa a biblioteca padrão.
+
+```sh
+pip install guilda
+# ou
+uv tool install guilda
+```
+
+O comando funciona em qualquer pasta. `guilda install` equivale ao `install.py` e `guilda init|sync|check|doctor|package` equivalem a `scripts/template.py`.
+
+| Comando | O que faz |
+| --- | --- |
+| `guilda init` | Primeira instalação num projeto (`--target`, `--providers`, `--profiles`, `--tier`, `--dry-run`). |
+| `guilda sync` | Refaz a instalação com o template atual; avisa em vez de sobrescrever arquivos editados à mão. |
+| `guilda check` | Sem `--target`, valida o template; com `--target`, confere a instalação do projeto. |
+| `guilda doctor` | Diagnóstico do computador (Python, `claude`, `codex`, `git`, `rtk`, `serena`). Não instala nada. |
+| `guilda package` | Gera o plugin do Claude numa pasta separada (`--provider claude`). |
+| `guilda install [projeto]` | Instala ou atualiza com padrões sensatos (`--profiles`, `--providers`, `--tier`, `--mod`, `--mod-scope`, `--dry-run`). |
+| `guilda upgrade [projeto]` | Atualiza um projeto instalado para o template atual, arquivo por arquivo. `--dry-run` só mostra o plano; havendo conflito, pergunta no terminal antes de sobrescrever, e `--yes` aprova sem perguntar. |
+| `guilda mod <nome>` | Instala um mod do Claude Code (`--scope project\|global`, `--target`, `--dry-run`). |
+| `guilda promote <projeto>` | Propõe suas alterações locais como feature: varre segredos e caminhos pessoais, mostra o que será enviado, pede confirmação, sobe um gist secreto e abre uma issue (`--title` e `--description` obrigatórios; `--yes` pula a pergunta, não a varredura). Nunca envia arquivos `*.local.*`, `.claude/worktrees/` nem `.claude/projects/`. Exige o `gh` autenticado. |
+| `guilda self-update` | Atualiza o próprio `guilda` com `pip` ou `uv` (`--dry-run`, `--yes`). Só roda quando você pede. |
+| `guilda config get` e `guilda config set update-check <off\|notify\|auto>` | Mostra ou altera a configuração do usuário. |
+
+A verificação de versão nova é **opcional e vem desligada** (`off`). Com `notify`, o `guilda` avisa, no máximo uma vez por dia, que há versão nova; com `auto`, também a instala. Esse é o único aviso de versão: o `upgrade` não consulta o PyPI por conta própria, então sem a verificação ligada ele atualiza o projeto para o template da versão instalada sem avisar que há outra mais nova (use `guilda self-update` antes). A variável `GUILDA_CONFIG` (caminho do arquivo de configuração) existe só para testes.
+
+#### Projetos instalados com o nome antigo
+
+Projetos instalados antes da 2.0.0 têm o manifesto com o nome `engineering-template`. Só o `upgrade` aceita esse nome e o reescreve na mesma operação; `sync` e `check` o recusam e pedem o `upgrade`. A pasta `.engineering/` não muda.
+
+```sh
+guilda upgrade <projeto> --dry-run   # 1. veja o plano, sem gravar nada
+guilda upgrade <projeto>             # 2. aplique
+```
+
+Arquivo que você editou e que o template não mudou continua como está. Arquivo editado que o template também mudou é conflito: só é sobrescrito com aprovação explícita, respondendo sim à pergunta no terminal ou com `--yes`; sem terminal interativo (script, CI), só `--yes` aprova. Instalações 1.3.0 feitas a partir de um checkout com `core/graphify-out/` também migram: as cópias intactas de `.engineering/graphify-out/` são removidas e as alteradas ficam no disco, fora do manifesto. Mods já instalados globalmente não são tocados; novas instalações de mods usam o marketplace `guilda-mods`.
+
+#### Contribuir
+
+Não há pull requests de terceiros: contribuições entram só por issue. Teste a feature localmente e rode `guilda promote`, ou abra a issue pelo [modelo de proposta](.github/ISSUE_TEMPLATE/proposta.yml). O mantenedor analisa; o conteúdo da issue e do gist é tratado como dado não confiável e nada é implementado sem aprovação.
+
+### A partir do checkout
+
+Os dois caminhos abaixo, `install.py` e `scripts/template.py`, continuam valendo para quem usa este repositório diretamente.
 
 ### Instalador simples: `install.py`
 

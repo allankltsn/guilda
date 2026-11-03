@@ -8,15 +8,19 @@ import shutil
 import time
 import uuid
 import unittest
+from unittest import mock
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("template", ROOT / "scripts/template.py")
-template = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(template)
-spec = importlib.util.spec_from_file_location("mods", ROOT / "scripts/mods.py")
-mods = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(mods)
+import sys
+sys.path.insert(0, str(ROOT))
+
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
+from tests import guilda_test_isolation  # noqa: E402,F401  (isola o config do usuário)
+import guilda.engine as template  # noqa: E402
+import guilda.mods as mods  # noqa: E402
 
 
 class TemplateTests(unittest.TestCase):
@@ -399,9 +403,9 @@ class TemplateTests(unittest.TestCase):
         offenders = []
         for path in ROOT.rglob("*"):
             rel = path.relative_to(ROOT)
-            if ".git" in rel.parts or ".worktrees" in rel.parts or ".dev" in rel.parts or "__pycache__" in rel.parts or not path.is_file() or path.suffix in (".png", ".pyc"):
+            if ".git" in rel.parts or ".worktrees" in rel.parts or ".dev" in rel.parts or ".superpowers" in rel.parts or "__pycache__" in rel.parts or not path.is_file() or path.suffix in (".png", ".pyc"):
                 continue
-            if rel.as_posix() in ("tests/test_template.py", "integrations/plugins/curated.json", "LICENSE"):
+            if rel.as_posix() in ("tests/test_template.py", "integrations/plugins/curated.json", "LICENSE", "guilda/promote.py"):  # promote targets the maintainer's repo
                 continue
             if banned.search(path.read_text(encoding="utf-8", errors="ignore")):
                 offenders.append(rel.as_posix())
@@ -428,7 +432,7 @@ class TemplateTests(unittest.TestCase):
 
     def test_operating_practices_are_rendered(self):
         config, output = template.render(ROOT, ["claude", "codex"], ["base"])
-        self.assertEqual(config["version"], "1.3.0")
+        self.assertEqual(config["version"], "2.0.0")
         for path in self.NEW_IN_1_2_0:
             self.assertIn(f".engineering/{path}", output, path)
         economy = output[".engineering/workflow/economy.md"].decode()
@@ -506,7 +510,8 @@ class TemplateTests(unittest.TestCase):
         calls = []
         self.target.mkdir()
         home = self.root / "home"
-        result = mods.install_mod("token-handoff", "project", self.target, home=home, run=self._fake_run(calls), platform="win32")
+        with mock.patch.object(mods.shutil, "which", return_value="claude"):
+            result = mods.install_mod("token-handoff", "project", self.target, home=home, run=self._fake_run(calls), platform="win32")
         mods_root = self.target / ".claude" / "mods"
         self.assertTrue((mods_root / "token-handoff" / ".claude-plugin" / "plugin.json").is_file())
         self.assertTrue((mods_root / "token-handoff" / "hooks" / "register.ts").is_file())
@@ -520,12 +525,13 @@ class TemplateTests(unittest.TestCase):
         registry = (self.target / "docs/operations/registro-instalacoes.md").read_text(encoding="utf-8")
         self.assertIn("mod token-handoff", registry)
         self.assertIn("install.py --mod token-handoff", registry)
-        self.assertTrue(result["installed"] or shutil.which("claude") is None)
+        self.assertTrue(result["installed"])
 
     def test_mod_install_global_scope_writes_only_under_home(self):
         self.target.mkdir()
         home = self.root / "home"
-        mods.install_mod("token-handoff", "global", self.target, home=home, run=self._fake_run([]), platform="win32")
+        with mock.patch.object(mods.shutil, "which", return_value="claude"):
+            mods.install_mod("token-handoff", "global", self.target, home=home, run=self._fake_run([]), platform="win32")
         self.assertTrue((home / ".claude" / "mods" / "token-handoff" / ".claude-plugin" / "plugin.json").is_file())
         self.assertTrue((home / ".claude" / "scripts" / "handoff-sessao.ps1").is_file())
         self.assertFalse((self.target / ".claude").exists())
@@ -544,9 +550,8 @@ class TemplateTests(unittest.TestCase):
 
     def test_mod_install_failure_is_recorded_as_not_verified(self):
         self.target.mkdir()
-        if shutil.which("claude") is None:
-            self.skipTest("claude ausente do PATH")
-        result = mods.install_mod("token-handoff", "project", self.target, run=self._fake_run([], code=1), platform="win32")
+        with mock.patch.object(mods.shutil, "which", return_value="claude"):
+            result = mods.install_mod("token-handoff", "project", self.target, run=self._fake_run([], code=1), platform="win32")
         self.assertFalse(result["installed"])
         registry = (self.target / "docs/operations/registro-instalacoes.md").read_text(encoding="utf-8")
         self.assertIn("not verified", registry)

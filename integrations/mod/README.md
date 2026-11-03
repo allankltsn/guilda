@@ -19,9 +19,9 @@ arquivos, instala o plugin pelo próprio Claude Code e acrescenta uma linha a
 
 Passo a passo interno, por mod:
 1. copia o mod para `<escopo>/.claude/mods/<nome>` (sem testes) e seus scripts para `<escopo>/.claude/scripts/`;
-2. grava `<escopo>/.claude/mods/.claude-plugin/marketplace.json` (marketplace local `engineering-template-mods`);
+2. grava `<escopo>/.claude/mods/.claude-plugin/marketplace.json` (marketplace local `guilda-mods`);
 3. roda `claude plugin marketplace add <escopo>/.claude/mods --scope project|user` e
-   `claude plugin install <nome>@engineering-template-mods --scope project|user`.
+   `claude plugin install <nome>@guilda-mods --scope project|user`.
 
 `<escopo>` é o projeto (`--mod-scope project`) ou o diretório do usuário (`--mod-scope global`, `~/.claude`).
 Se o `claude` não estiver no PATH ou o comando falhar, os arquivos ficam copiados, a linha do registro diz
@@ -30,7 +30,7 @@ Se o `claude` não estiver no PATH ou o comando falhar, os arquivos ficam copiad
 ## Remover
 
 ```bash
-claude plugin uninstall <nome>@engineering-template-mods --scope project   # ou: --scope user
+claude plugin uninstall <nome>@guilda-mods --scope project   # ou: --scope user
 ```
 
 Depois apague `<escopo>/.claude/mods/<nome>` e os scripts listados no registro de instalações.
