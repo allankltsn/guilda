@@ -46,7 +46,7 @@ def _analyze(source, target):
     if target == source or source in target.parents:
         raise ValueError("source and target must be separate, non-nested trees")
     manifest = engine.read_manifest(target)
-    engine.validate_manifest(source, manifest, allow_legacy=True)
+    strays = set(engine.validate_manifest(source, manifest, allow_legacy=True))
     if manifest.get("package", False):
         raise ValueError("package manifest is not a project install; nothing to upgrade")
     config, desired = engine.render(source, manifest["providers"], manifest["profiles"], False, manifest.get("tiers"))
@@ -73,7 +73,11 @@ def _analyze(source, target):
                 write.append(name)  # new in the template, or a managed file the user deleted
             continue
         local = dest.read_bytes()
-        if name not in new:  # retired by the template
+        if name in strays:
+            # Never shipped on purpose (1.3.0 from a dirty checkout): remove the intact copy; a
+            # changed one stays on disk, dropped from the manifest (no longer managed).
+            (remove if _unmodified(local, old[name]) else keep).append(name)
+        elif name not in new:  # retired by the template
             unmodified = _unmodified(local, old[name])
             (remove if unmodified else conflicts).append(name)
         elif name not in old:  # foreign file at a path the template now ships
@@ -102,6 +106,19 @@ def _unmodified(local: bytes, recorded: str) -> bool:
 
 def plan_upgrade(source, target) -> Plan:
     return _analyze(source, target)[0]
+
+
+def verify(source, target) -> Plan:
+    """After an upgrade nothing is left to write, remove or approve.
+
+    Unlike `engine.check`, files the upgrade deliberately kept (user edits on files the template
+    did not change; their manifest hash stays the installed one) are not drift.
+    """
+    plan = plan_upgrade(source, target)
+    pending = [*plan.write, *plan.remove, *plan.conflicts]
+    if pending or plan.migrate_name:
+        raise ValueError("post-upgrade verification failed: " + (", ".join(pending) or "legacy manifest name"))
+    return plan
 
 
 def _write(path: Path, data: bytes):
@@ -169,4 +186,17 @@ def apply_upgrade(source, target, plan: Plan, approved: bool) -> dict:
         raise
     finally:
         originals.clear()
+    _prune_empty_dirs(target, removals)
     return {"write": writes, "remove": removals, "kept": list(current.keep), "migrated": current.migrate_name}
+
+
+def _prune_empty_dirs(target: Path, removed) -> None:
+    """Best effort, after success: drop directories the removals left empty (never the target)."""
+    for name in removed:
+        for parent in (target / name).parents:
+            if parent == target or target not in parent.parents:
+                break
+            try:
+                parent.rmdir()  # fails (and stops) on the first non-empty directory
+            except OSError:
+                break

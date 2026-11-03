@@ -168,6 +168,23 @@ class CliTests(unittest.TestCase):
         self.assertEqual(code, 0, err)
         self.assertIn("Extra rule added", (self.target / CHANGED_OUT).read_text(encoding="utf-8"))
 
+    def test_upgrade_with_kept_local_edit_succeeds(self):
+        """A user edit on a file the template did not change is kept, and that is not an error."""
+        self.project()
+        edited = tu.OTHER_OUT
+        (self.target / edited).write_bytes(b"my local edit\n")
+        with mock.patch.object(engine, "SOURCE", self.new_src):
+            code, out, err = self.upgrade(stdin=io.StringIO())
+            self.assertEqual((code, err), (0, ""))
+            self.assertIn("1 mantidos", out)
+            self.assertIn("verificação (check): ok", out)
+            self.assertEqual((self.target / edited).read_bytes(), b"my local edit\n")
+            self.assertIn("Extra rule added", (self.target / CHANGED_OUT).read_text(encoding="utf-8"))
+            # Same template, nothing left to do: running it again is also a clean success.
+            code, out, err = self.upgrade(stdin=io.StringIO())
+            self.assertEqual((code, err), (0, ""))
+            self.assertIn("0 arquivos gravados, 0 removidos, 1 mantidos", out)
+
     def test_upgrade_dry_run_prints_plan_and_writes_nothing(self):
         with self.conflicting_project():
             before = snapshot(self.target)

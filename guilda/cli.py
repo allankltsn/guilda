@@ -133,7 +133,8 @@ def run_upgrade(args) -> int:
                 return 1
             approved = True
         result = upgrade.apply_upgrade(engine.SOURCE, target, plan, approved=approved or bool(args.yes))
-        engine.check(engine.SOURCE, target)
+        # Not engine.check: it treats the files kept on purpose (result["kept"]) as drift.
+        upgrade.verify(engine.SOURCE, target)
     except (ValueError, KeyError, OSError, TypeError, upgrade.UpgradeRefused) as exc:
         print(f"erro: {exc}", file=sys.stderr)
         return 1

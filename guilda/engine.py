@@ -296,8 +296,15 @@ def read_manifest(target):
 
 
 def validate_manifest(source, manifest, allow_legacy=False):
-    """Manifest metadata is untrusted and cannot expand managed ownership."""
+    """Manifest metadata is untrusted and cannot expand managed ownership.
+
+    Returns the legacy stray paths: only with `allow_legacy` and a legacy-named (1.x) manifest,
+    entries under `.engineering/` that this template does not own (a 1.3.0 install from a dirty
+    checkout recorded `core/graphify-out/` as `.engineering/graphify-out/`). The caller may only
+    retire them (`upgrade`); any other unowned path is still an ownership violation.
+    """
     name = manifest.get("name") if isinstance(manifest, dict) else None
+    legacy = allow_legacy and name in LEGACY_NAMES
     if not allow_legacy and name in LEGACY_NAMES:
         raise ValueError("legacy manifest name; run guilda upgrade")
     if not isinstance(manifest, dict) or name not in (TEMPLATE_NAME, *(LEGACY_NAMES if allow_legacy else ())):
@@ -323,16 +330,20 @@ def validate_manifest(source, manifest, allow_legacy=False):
     # Files this template used to ship (renamed/removed) stay claimable so sync can retire them.
     _, config, _ = load_source(source)
     allowed.update(config.get("retired_paths", []))
+    strays = []
     for name, value in files.items():
         if not isinstance(name, str):
             raise ValueError("invalid manifest path")
         relative(name)
         if name not in allowed:
-            raise ValueError(f"manifest ownership violation: {name}")
+            if not (legacy and name.startswith(".engineering/") and name != ".engineering/manifest.json"):
+                raise ValueError(f"manifest ownership violation: {name}")
+            strays.append(name)
         if not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value):
             raise ValueError(f"invalid manifest hash: {name}")
     # Validate selected provider/profile semantics before trusting metadata.
     render(source, manifest["providers"], manifest["profiles"], manifest.get("package", False), manifest.get("tiers"))
+    return sorted(strays)
 
 
 def check(source, target=None):
