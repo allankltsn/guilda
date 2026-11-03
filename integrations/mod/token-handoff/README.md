@@ -15,7 +15,9 @@ Também grava linhas em `docs/operations/diario-sessao-AAAA-MM-DD.mod.md` (arqui
 `.engineering/project.json`), no despacho e no fim de agentes e no marco.
 
 ## Instalar
-`python install.py <projeto> --mod token-handoff [--mod-scope global]`; veja [integrations/mod](../README.md).
+`guilda mod token-handoff --target <projeto> [--scope global]` ou `guilda install <projeto> --mod token-handoff
+[--mod-scope global]` (no checkout: `python install.py <projeto> --mod token-handoff`); veja
+[integrations/mod](../README.md). Fora do Windows o instalador recusa o mod.
 Desligar: `claude plugin disable token-handoff@guilda-mods`.
 
 ## Requisitos e permissões
