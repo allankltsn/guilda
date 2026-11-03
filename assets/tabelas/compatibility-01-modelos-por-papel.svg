@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 175" width="920" height="175" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" role="img" aria-label="Modelos por papel: 2 linhas, colunas Provedor, O que o adapter escreve, Origem">
+<rect width="920" height="175" rx="10" fill="#0b0f17"/>
+<rect x="0.5" y="0.5" width="919" height="174" rx="10" fill="#111827" stroke="#1f2937"/>
+<text x="16" y="24" font-size="14" font-weight="700" fill="#e6edf3">Modelos por papel</text>
+<rect x="16" y="31" width="28" height="2" rx="1" fill="#2dd4bf"/>
+<rect x="1" y="36" width="918" height="40" fill="#0b0f17"/>
+<text x="16" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">PROVEDOR</text>
+<text x="146" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">O QUE O ADAPTER ESCREVE</text>
+<text x="533.0" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">ORIGEM</text>
+<line x1="0" y1="76" x2="920" y2="76" stroke="#2dd4bf" stroke-opacity="0.5"/>
+<text x="16" y="100" xml:space="preserve"><tspan fill="#c9d4e3">Claude </tspan><tspan fill="#c9d4e3">Code</tspan></text>
+<text x="146" y="100" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">model: </tspan><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">opus</tspan><tspan fill="#c9d4e3">, </tspan><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">sonnet</tspan><tspan fill="#c9d4e3"> ou </tspan><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">haiku</tspan><tspan fill="#c9d4e3"> no </tspan><tspan fill="#c9d4e3">cabeçalho </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">cada </tspan></text>
+<text x="146" y="119" xml:space="preserve"><tspan fill="#c9d4e3">agente</tspan></text>
+<text x="533.0" y="100" xml:space="preserve"><tspan fill="#c9d4e3">Camada </tspan><tspan fill="#c9d4e3">do </tspan><tspan fill="#c9d4e3">papel </tspan><tspan fill="#c9d4e3">em </tspan><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">template.json</tspan><tspan fill="#c9d4e3"> (</tspan><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">model_tiers</tspan><tspan fill="#c9d4e3">)</tspan></text>
+<line x1="16" y1="132" x2="904" y2="132" stroke="#1f2937"/>
+<rect x="1" y="132" width="918" height="37" fill="#0f1623"/>
+<text x="16" y="156" xml:space="preserve"><tspan fill="#c9d4e3">Codex</tspan></text>
+<text x="146" y="156" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">model_reasoning_effort</tspan><tspan fill="#c9d4e3"> (high, </tspan><tspan fill="#c9d4e3">medium, </tspan><tspan fill="#c9d4e3">low)</tspan></text>
+<text x="533.0" y="156" xml:space="preserve"><tspan fill="#c9d4e3">Mesma </tspan><tspan fill="#c9d4e3">camada; </tspan><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">model</tspan><tspan fill="#c9d4e3"> omitido</tspan></text>
+</svg>

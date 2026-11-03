@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVG 14 — Continuidade de Sessão e Controle de Tokens</title>
+<style>
+  :root { color-scheme: dark }
+  body {
+    margin: 0; background: #0b0f17;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100%; padding: 40px 16px; box-sizing: border-box;
+  }
+  svg { width: 100%; max-width: 1800px; height: auto; display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-amber" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arr-red" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#ef4444"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#4ade80"/>
+    </marker>
+    <path id="p-bar1" d="M 100,400 L 400,400" fill="none"/>
+    <path id="p-bar2" d="M 400,400 L 700,400" fill="none"/>
+    <path id="p-bar3" d="M 700,400 L 1000,400" fill="none"/>
+    <path id="p-bar4" d="M 1000,400 L 1300,400" fill="none"/>
+  </defs>
+
+  <rect width="1800" height="800" fill="#0b0f17"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="1760" height="48" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="16" width="6" height="48" rx="3" fill="#f59e0b"/>
+  <text x="44" y="37" font-size="15" font-weight="700" fill="#e6edf3">14 — Continuidade de Sessão e Controle de Tokens</text>
+  <text x="44" y="55" font-size="11" fill="#8b96a8">milestones 100k · 200k · 300k · 400k · live-state.md · diário · crash recovery · nova sessão</text>
+  <text x="1760" y="37" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 14/17</text>
+  <text x="1760" y="52" font-size="9.5" fill="#f59e0b" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">orquestrador · sessão</text>
+
+  <!-- ══ LINHA DO TEMPO DE TOKENS ══ -->
+  <!-- Trilha base -->
+  <rect x="60" y="130" width="1350" height="8" rx="4" fill="#1f2937"/>
+  <rect x="60" y="130" width="1350" height="8" rx="4" fill="url(#grad-bar)"/>
+  <!-- gradiente simulado com retângulos -->
+  <rect x="60" y="130" width="337" height="8" rx="0" fill="#3b82f6" opacity="0.6"/>
+  <rect x="397" y="130" width="338" height="8" rx="0" fill="#f59e0b" opacity="0.6"/>
+  <rect x="735" y="130" width="337" height="8" rx="0" fill="#f59e0b" opacity="0.8"/>
+  <rect x="1072" y="130" width="338" height="8" rx="0" fill="#ef4444" opacity="0.9"/>
+
+  <!-- Animated dot along the bar -->
+  <circle cx="60" cy="134" r="5" fill="#2dd4bf">
+    <animate attributeName="cx" values="60;1410" dur="6s" repeatCount="indefinite" calcMode="linear"/>
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Milestone markers -->
+  <!-- 0k -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.3s" fill="freeze"/>
+    <line x1="60" y1="118" x2="60" y2="160" stroke="#4b5563" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <text x="60" y="116" font-size="9" fill="#4b5563" text-anchor="middle">0</text>
+    <text x="60" y="175" font-size="8" fill="#4b5563" text-anchor="middle">início</text>
+  </g>
+
+  <!-- 100k -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.2s" dur="0.4s" fill="freeze"/>
+    <line x1="397" y1="108" x2="397" y2="160" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="397" cy="134" r="8" fill="#0d1117" stroke="#3b82f6" stroke-width="2.5"/>
+    <text x="397" y="138" font-size="8" fill="#3b82f6" text-anchor="middle" font-weight="700">C</text>
+    <text x="397" y="106" font-size="9.5" fill="#3b82f6" text-anchor="middle" font-weight="700">100k</text>
+    <text x="397" y="175" font-size="9" fill="#3b82f6" text-anchor="middle">CHECKPOINT</text>
+    <text x="397" y="189" font-size="8" fill="#4b5563" text-anchor="middle">salva live-state.md</text>
+    <text x="397" y="203" font-size="8" fill="#4b5563" text-anchor="middle">commit no worktree</text>
+  </g>
+
+  <!-- 200k -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.4s" dur="0.4s" fill="freeze"/>
+    <line x1="735" y1="108" x2="735" y2="160" stroke="#f59e0b" stroke-width="2"/>
+    <circle cx="735" cy="134" r="8" fill="#0d1117" stroke="#f59e0b" stroke-width="2.5"/>
+    <text x="735" y="138" font-size="8" fill="#f59e0b" text-anchor="middle" font-weight="700">D</text>
+    <text x="735" y="106" font-size="9.5" fill="#f59e0b" text-anchor="middle" font-weight="700">200k</text>
+    <text x="735" y="175" font-size="9" fill="#f59e0b" text-anchor="middle">DIÁRIO</text>
+    <text x="735" y="189" font-size="8" fill="#4b5563" text-anchor="middle">relatório de progresso</text>
+    <text x="735" y="203" font-size="8" fill="#4b5563" text-anchor="middle">push diário obrigatório</text>
+  </g>
+
+  <!-- 300k -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.6s" dur="0.4s" fill="freeze"/>
+    <line x1="1072" y1="108" x2="1072" y2="160" stroke="#f59e0b" stroke-width="2"/>
+    <circle cx="1072" cy="134" r="8" fill="#0d1117" stroke="#f59e0b" stroke-width="2.5">
+      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="1072" y="138" font-size="8" fill="#f59e0b" text-anchor="middle" font-weight="700">A</text>
+    <text x="1072" y="106" font-size="9.5" fill="#f59e0b" text-anchor="middle" font-weight="700">300k</text>
+    <text x="1072" y="175" font-size="9" fill="#f59e0b" text-anchor="middle">ALERTA</text>
+    <text x="1072" y="189" font-size="8" fill="#f59e0b" text-anchor="middle">wrapper compacta</text>
+    <text x="1072" y="203" font-size="8" fill="#4b5563" text-anchor="middle">prefetch live-state.md</text>
+  </g>
+
+  <!-- 400k -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.8s" dur="0.4s" fill="freeze"/>
+    <line x1="1410" y1="108" x2="1410" y2="160" stroke="#ef4444" stroke-width="2.5"/>
+    <circle cx="1410" cy="134" r="9" fill="#0d1117" stroke="#ef4444" stroke-width="3">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+    </circle>
+    <text x="1410" y="138" font-size="8" fill="#ef4444" text-anchor="middle" font-weight="700">N</text>
+    <text x="1410" y="106" font-size="9.5" fill="#ef4444" text-anchor="middle" font-weight="700">400k</text>
+    <text x="1410" y="175" font-size="9.5" fill="#ef4444" text-anchor="middle" font-weight="700">NOVA SESSÃO</text>
+    <text x="1410" y="189" font-size="8" fill="#ef4444" text-anchor="middle">crash recovery</text>
+    <text x="1410" y="203" font-size="8" fill="#4b5563" text-anchor="middle">carrega live-state.md</text>
+  </g>
+
+  <!-- ══ LIVE-STATE.MD ANATOMY ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="222" width="560" height="280" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="38" y="242" font-size="10" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">live-state.md — ESTRUTURA</text>
+    <line x1="30" y1="248" x2="570" y2="248" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="266" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"># live-state.md</text>
+    <text x="38" y="284" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">## Sessão Atual</text>
+    <text x="38" y="300" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">data: 2025-11-14 · tokens: 187k/400k</text>
+    <text x="38" y="316" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">agente-atual: S-043 · task: #20</text>
+    <text x="38" y="334" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">## Contexto do Projeto</text>
+    <text x="38" y="350" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">stack: Next.js 14 + Supabase + OpenRouter</text>
+    <text x="38" y="366" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">sprint: Sprint-03 · objetivo: CRUD users</text>
+    <text x="38" y="384" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">## Tasks Abertas</text>
+    <text x="38" y="400" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">#19 POST /users — S-042 [worktree aberto]</text>
+    <text x="38" y="416" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">#20 GET /users/:id — S-043 [em revisão]</text>
+    <text x="38" y="434" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">## Bloqueadores</text>
+    <text x="38" y="450" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">nenhum no momento</text>
+    <text x="38" y="470" font-size="8" fill="#2dd4bf">Salvo no repo raiz: git commit -m "chore: live-state 100k"</text>
+    <text x="38" y="488" font-size="8" fill="#4b5563">Lido como PRIMEIRA ação de nova sessão (antes de qualquer tarefa)</text>
+  </g>
+
+  <!-- ══ CRASH RECOVERY PROTOCOL ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.2s" dur="0.4s" fill="freeze"/>
+    <rect x="590" y="222" width="620" height="280" rx="8" fill="#0d1117" stroke="#ef4444" stroke-width="1"/>
+    <text x="608" y="242" font-size="10" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">CRASH RECOVERY — NOVA SESSÃO</text>
+    <line x1="600" y1="248" x2="1200" y2="248" stroke="#1f2937" stroke-width="1"/>
+    <!-- steps numerados -->
+    <circle cx="618" cy="271" r="9" fill="#1a0a0a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="618" y="275" font-size="9" fill="#ef4444" text-anchor="middle" font-weight="700">1</text>
+    <text x="638" y="275" font-size="9.5" fill="#8b96a8">Ler live-state.md → contexto completo da sessão anterior</text>
+
+    <circle cx="618" cy="299" r="9" fill="#1a0a0a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="618" y="303" font-size="9" fill="#ef4444" text-anchor="middle" font-weight="700">2</text>
+    <text x="638" y="303" font-size="9.5" fill="#8b96a8">git status em todos os worktrees ativos</text>
+
+    <circle cx="618" cy="327" r="9" fill="#1a0a0a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="618" y="331" font-size="9" fill="#ef4444" text-anchor="middle" font-weight="700">3</text>
+    <text x="638" y="331" font-size="9.5" fill="#8b96a8">Checar GitHub Issues abertas → tasks pendentes</text>
+
+    <circle cx="618" cy="355" r="9" fill="#1a0a0a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="618" y="359" font-size="9" fill="#ef4444" text-anchor="middle" font-weight="700">4</text>
+    <text x="638" y="359" font-size="9.5" fill="#8b96a8">Revisar diário mais recente → decisões tomadas</text>
+
+    <circle cx="618" cy="383" r="9" fill="#1a0a0a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="618" y="387" font-size="9" fill="#ef4444" text-anchor="middle" font-weight="700">5</text>
+    <text x="638" y="387" font-size="9.5" fill="#8b96a8">Identificar tarefa interrompida → continuar ou reassign</text>
+
+    <circle cx="618" cy="411" r="9" fill="#1a0a0a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="618" y="415" font-size="9" fill="#ef4444" text-anchor="middle" font-weight="700">6</text>
+    <text x="638" y="415" font-size="9.5" fill="#8b96a8">Atualizar live-state.md com nova sessão + tokens resetados</text>
+
+    <circle cx="618" cy="435" r="9" fill="#1a0a0a" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="618" y="439" font-size="9" fill="#4ade80" text-anchor="middle" font-weight="700">✓</text>
+    <text x="638" y="439" font-size="9.5" fill="#4ade80">Sessão restaurada — retomar o trabalho sem perda de contexto</text>
+
+    <text x="608" y="466" font-size="8.5" fill="#4b5563">Tempo médio de recuperação após crash: &lt; 3 min se live-state.md estiver atualizado</text>
+    <text x="608" y="482" font-size="8.5" fill="#ef4444">400k sem live-state.md atualizado = retrabalho. Salvar é obrigatório.</text>
+    <text x="608" y="498" font-size="8.5" fill="#4b5563">worktrees: commits pendentes sobrevivem ao crash (branch local intacta)</text>
+  </g>
+
+  <!-- ══ RELATÓRIO DIÁRIO ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.4s" dur="0.4s" fill="freeze"/>
+    <rect x="1220" y="222" width="560" height="280" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="1238" y="242" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">RELATÓRIO DIÁRIO — 200k</text>
+    <line x1="1230" y1="248" x2="1770" y2="248" stroke="#1f2937" stroke-width="1"/>
+    <text x="1238" y="268" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"># diário/2025-11-14.md</text>
+    <text x="1238" y="286" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">## Progresso</text>
+    <text x="1238" y="302" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- Concluídas: #08, #10, #11</text>
+    <text x="1238" y="318" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- Em andamento: #19, #20</text>
+    <text x="1238" y="334" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- Bloqueadas: nenhuma</text>
+    <text x="1238" y="352" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">## Decisões Tomadas</text>
+    <text x="1238" y="368" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- Optou-se por JWT stateless (issue #DECISAO-03)</text>
+    <text x="1238" y="386" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">## Gates</text>
+    <text x="1238" y="402" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- #11 → PASSOU (tech + sec + privacy)</text>
+    <text x="1238" y="420" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">## Próximos Passos</text>
+    <text x="1238" y="436" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- Finalizar PR #89 para #19</text>
+    <text x="1238" y="452" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- Abrir worktree para #21</text>
+    <text x="1238" y="472" font-size="8" fill="#f59e0b">Arquivo commitado em diário/ no repo. Push obrigatório.</text>
+    <text x="1238" y="490" font-size="8" fill="#4b5563">Agente gera o diário automaticamente ao atingir 200k tokens.</text>
+  </g>
+
+  <!-- ══ BARRA DE PROGRESSO VISUAL ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.6s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="518" width="1760" height="72" rx="8" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="538" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">CONSUMO DE CONTEXTO — RÉGUA DE TOKENS</text>
+    <line x1="30" y1="544" x2="1770" y2="544" stroke="#1f2937" stroke-width="1"/>
+    <!-- barra de tokens -->
+    <rect x="38" y="552" width="1704" height="20" rx="4" fill="#111827"/>
+    <!-- zona azul: 0–100k -->
+    <rect x="38" y="552" width="426" height="20" rx="4" fill="#1a3a5c" opacity="0.8"/>
+    <!-- zona amarela clara: 100k–300k -->
+    <rect x="464" y="552" width="852" height="20" fill="#2a1f00" opacity="0.8"/>
+    <!-- zona vermelha: 300k–400k -->
+    <rect x="1316" y="552" width="426" height="20" rx="4" fill="#2a0a00" opacity="0.8"/>
+    <!-- marcações -->
+    <line x1="464" y1="548" x2="464" y2="576" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="464" y="587" font-size="8" fill="#3b82f6" text-anchor="middle">100k</text>
+    <line x1="890" y1="548" x2="890" y2="576" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="890" y="587" font-size="8" fill="#f59e0b" text-anchor="middle">200k</text>
+    <line x1="1316" y1="548" x2="1316" y2="576" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="1316" y="587" font-size="8" fill="#f59e0b" text-anchor="middle">300k</text>
+    <line x1="1742" y1="548" x2="1742" y2="576" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="1742" y="587" font-size="8" fill="#ef4444" text-anchor="middle">400k</text>
+    <!-- labels dentro da barra -->
+    <text x="251" y="566" font-size="8.5" fill="#3b82f6" text-anchor="middle">checkpoint</text>
+    <text x="680" y="566" font-size="8.5" fill="#f59e0b" text-anchor="middle">diário obrigatório</text>
+    <text x="1100" y="566" font-size="8.5" fill="#f59e0b" text-anchor="middle">⚠ alerta · compactar</text>
+    <text x="1525" y="566" font-size="8.5" fill="#ef4444" text-anchor="middle">🔴 nova sessão</text>
+  </g>
+
+  <!-- ══ STATUS BAR ══ -->
+  <rect x="20" y="606" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="617" r="4" fill="#f59e0b">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="621" font-size="9.5" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 14</text>
+  <text x="112" y="621" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="122" y="621" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">4 milestones de token · live-state.md obrigatório · crash recovery 6 passos · diário em 200k</text>
+  <text x="1770" y="621" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">TOKENS &amp; SESSÃO</text>
+
+  <!-- ══ LEGENDA ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.8s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="642" width="1760" height="140" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="660" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA</text>
+    <line x1="30" y1="664" x2="1770" y2="664" stroke="#1f2937" stroke-width="1"/>
+    <circle cx="45" cy="677" r="8" fill="#0d1117" stroke="#3b82f6" stroke-width="2"/>
+    <text x="45" y="681" font-size="8" fill="#3b82f6" text-anchor="middle">C</text>
+    <text x="62" y="681" font-size="9.5" fill="#8b96a8">Checkpoint (100k) — salva live-state.md + commit</text>
+    <circle cx="280" cy="677" r="8" fill="#0d1117" stroke="#f59e0b" stroke-width="2"/>
+    <text x="280" y="681" font-size="8" fill="#f59e0b" text-anchor="middle">D</text>
+    <text x="297" y="681" font-size="9.5" fill="#8b96a8">Diário (200k) — relatório de progresso commitado</text>
+    <circle cx="520" cy="677" r="8" fill="#0d1117" stroke="#f59e0b" stroke-width="2"/>
+    <text x="520" y="681" font-size="8" fill="#f59e0b" text-anchor="middle">A</text>
+    <text x="537" y="681" font-size="9.5" fill="#8b96a8">Alerta (300k) — compactação de contexto + prefetch</text>
+    <circle cx="770" cy="677" r="8" fill="#0d1117" stroke="#ef4444" stroke-width="2"/>
+    <text x="770" y="681" font-size="8" fill="#ef4444" text-anchor="middle">N</text>
+    <text x="787" y="681" font-size="9.5" fill="#8b96a8">Nova Sessão (400k) — crash recovery obrigatório</text>
+    <text x="38" y="701" font-size="9.5" fill="#4b5563">live-state.md = arquivo de continuidade, lido primeiro em toda nova sessão</text>
+    <text x="38" y="719" font-size="9.5" fill="#4b5563">diário/ = pasta com um arquivo por dia (YYYY-MM-DD.md), sempre commitado antes do push</text>
+    <text x="38" y="737" font-size="9.5" fill="#4b5563">worktrees sobrevivem a crash: branches locais ficam intactas até merge ou delete manual</text>
+    <text x="38" y="755" font-size="9.5" fill="#4b5563">Wrapper do orquestrador injeta live-state.md automaticamente ao iniciar nova sessão após 400k</text>
+    <text x="38" y="773" font-size="9.5" fill="#4b5563">Contagem de tokens: monitorada pelo orquestrador a cada resposta; threshold configurável por projeto</text>
+  </g>
+</svg>
+</body>
+</html>

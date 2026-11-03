@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 700"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <!-- Arrow markers -->
+    <marker id="arr-teal" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#2dd4bf" opacity="0.9"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#3b82f6" opacity="0.9"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#f59e0b" opacity="0.9"/>
+    </marker>
+    <marker id="arr-green" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#4ade80" opacity="0.9"/>
+    </marker>
+    <!-- Glow filter for pulsing nodes -->
+    <filter id="glow-teal" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Animated dot path definitions -->
+    <path id="p1" d="M 160,120 L 310,120" fill="none"/>
+    <path id="p2" d="M 460,120 L 610,120" fill="none"/>
+    <path id="p3" d="M 760,120 L 910,120" fill="none"/>
+    <path id="p4" d="M 1060,120 L 1210,120" fill="none"/>
+    <path id="p5" d="M 1360,120 L 1510,120" fill="none"/>
+    <path id="p6" d="M 310,180 L 310,340" fill="none"/>
+    <path id="p7" d="M 610,180 L 610,340" fill="none"/>
+    <path id="p8" d="M 910,180 L 910,340" fill="none"/>
+    <path id="p9" d="M 1210,180 L 1210,340" fill="none"/>
+    <path id="p10" d="M 1510,180 L 1510,340" fill="none"/>
+    <path id="p11" d="M 310,400 L 310,500" fill="none"/>
+    <path id="p12" d="M 610,400 L 610,500" fill="none"/>
+    <path id="p13" d="M 910,400 L 910,500" fill="none"/>
+    <path id="p14" d="M 1210,400 L 1210,500" fill="none"/>
+    <path id="p15" d="M 1510,400 L 1510,500" fill="none"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1800" height="700" fill="#0b0f17"/>
+
+  <!-- ═══════════════════ HEADER ═══════════════════ -->
+  <text x="30" y="38" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+        font-size="11" fill="#8b96a8" letter-spacing="1.2">
+    ENGINEERING TEMPLATE · MICRO FLOW · ETAPA 01 / 17
+  </text>
+  <text x="1770" y="38" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+        font-size="11" fill="#4b5563" letter-spacing="0.8" text-anchor="end">
+    template.py · perfis · multi-provider · diretórios
+  </text>
+
+  <!-- Title bar -->
+  <rect x="20" y="50" width="1760" height="44" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="50" width="6" height="44" rx="3" fill="#3b82f6"/>
+  <text x="44" y="70" font-size="15" font-weight="700" fill="#e6edf3">Instalação e Configuração Inicial</text>
+  <text x="44" y="86" font-size="11.5" fill="#8b96a8">
+    Pré-requisitos · template.py init · seleção de perfis base · configuração multi-provider · estrutura de pastas
+  </text>
+
+  <!-- ═══════════════════ PHASE LABELS (row 1 — top) ═══════════════════ -->
+  <!-- Phase dividers vertical -->
+  <line x1="230" y1="108" x2="230" y2="420" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="530" y1="108" x2="530" y2="420" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="830" y1="108" x2="830" y2="420" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="1130" y1="108" x2="1130" y2="420" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="1430" y1="108" x2="1430" y2="420" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <text x="125" y="112" font-size="9.5" fill="#4b5563" text-anchor="middle" letter-spacing="0.8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">PRÉ-REQUISITOS</text>
+  <text x="380" y="112" font-size="9.5" fill="#4b5563" text-anchor="middle" letter-spacing="0.8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">INIT</text>
+  <text x="680" y="112" font-size="9.5" fill="#4b5563" text-anchor="middle" letter-spacing="0.8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">PROVIDERS</text>
+  <text x="980" y="112" font-size="9.5" fill="#4b5563" text-anchor="middle" letter-spacing="0.8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">PERFIS</text>
+  <text x="1280" y="112" font-size="9.5" fill="#4b5563" text-anchor="middle" letter-spacing="0.8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ESTRUTURA</text>
+  <text x="1600" y="112" font-size="9.5" fill="#4b5563" text-anchor="middle" letter-spacing="0.8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">VALIDAÇÃO</text>
+
+  <!-- ═══════════════════ ROW 1 NODES (y=120 center, h=60, rx=8) ═══════════════════ -->
+
+  <!-- Node 1: Python + Node + Git -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="95" width="210" height="60" rx="8" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="125" y="119" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🐍 Python ≥ 3.11</text>
+    <text x="125" y="134" font-size="10" fill="#8b96a8" text-anchor="middle">+ Node.js + Git instalados</text>
+    <text x="125" y="148" font-size="9.5" fill="#3b82f6" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">python --version · git --version</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <line x1="230" y1="125" x2="308" y2="125" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr-blue)" opacity="0.7"/>
+
+  <!-- Node 2: pip install template -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.3s" dur="0.4s" fill="freeze"/>
+    <rect x="310" y="95" width="210" height="60" rx="8" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="415" y="119" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">📦 Instalar Template</text>
+    <text x="415" y="134" font-size="10" fill="#8b96a8" text-anchor="middle">pip install engineering-template</text>
+    <text x="415" y="148" font-size="9.5" fill="#3b82f6" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ou: git clone + pip install -e .</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <line x1="520" y1="125" x2="608" y2="125" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr-blue)" opacity="0.7"/>
+
+  <!-- Node 3: API Keys -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.5s" dur="0.4s" fill="freeze"/>
+    <rect x="610" y="95" width="210" height="60" rx="8" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="715" y="116" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🔑 API Keys</text>
+    <text x="715" y="131" font-size="9.5" fill="#f59e0b" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ANTHROPIC_API_KEY</text>
+    <text x="715" y="145" font-size="9.5" fill="#8b96a8" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">OPENAI_API_KEY · GEMINI_KEY</text>
+  </g>
+
+  <!-- Arrow 3→4 -->
+  <line x1="820" y1="125" x2="908" y2="125" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)" opacity="0.7"/>
+
+  <!-- Node 4: template.py init -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.7s" dur="0.4s" fill="freeze"/>
+    <rect x="910" y="95" width="210" height="60" rx="8" fill="#111827" stroke="#2dd4bf" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="1015" y="116" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">⚙️ template.py init</text>
+    <text x="1015" y="131" font-size="9.5" fill="#2dd4bf" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">python template.py init</text>
+    <text x="1015" y="147" font-size="9.5" fill="#8b96a8" text-anchor="middle">wizard interativo de setup</text>
+  </g>
+
+  <!-- Arrow 4→5 -->
+  <line x1="1120" y1="125" x2="1208" y2="125" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)" opacity="0.7"/>
+
+  <!-- Node 5: Selecionar Perfis -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.9s" dur="0.4s" fill="freeze"/>
+    <rect x="1210" y="95" width="210" height="60" rx="8" fill="#111827" stroke="#2dd4bf" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2.5s" begin="0.6s" repeatCount="indefinite"/>
+    </rect>
+    <text x="1315" y="116" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">🧩 Selecionar Perfis</text>
+    <text x="1315" y="131" font-size="9.5" fill="#2dd4bf" text-anchor="middle">base → github-projects</text>
+    <text x="1315" y="147" font-size="9.5" fill="#8b96a8" text-anchor="middle">→ product-team → stacks</text>
+  </g>
+
+  <!-- Arrow 5→6 -->
+  <line x1="1420" y1="125" x2="1508" y2="125" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)" opacity="0.7"/>
+
+  <!-- Node 6: Validar Setup -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.1s" dur="0.4s" fill="freeze"/>
+    <rect x="1510" y="95" width="260" height="60" rx="8" fill="#111827" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1640" y="116" font-size="11.5" font-weight="600" fill="#e6edf3" text-anchor="middle">✅ template.py validate</text>
+    <text x="1640" y="131" font-size="9.5" fill="#4ade80" text-anchor="middle">config ok · keys ok · providers ok</text>
+    <text x="1640" y="147" font-size="9.5" fill="#8b96a8" text-anchor="middle">pronto para uso</text>
+  </g>
+
+  <!-- ═══════════════════ ROW 2 — Details drop-down from nodes ═══════════════════ -->
+
+  <!-- Vertical drop from Node 1 -->
+  <line x1="125" y1="155" x2="125" y2="195" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.5"/>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.2s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="195" width="210" height="80" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="30" y="213" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">CHECKLIST PRÉ-INSTALL</text>
+    <text x="30" y="228" font-size="10" fill="#8b96a8">• pip ≥ 23 (pip install --upgrade pip)</text>
+    <text x="30" y="242" font-size="10" fill="#8b96a8">• virtualenv recomendado</text>
+    <text x="30" y="256" font-size="10" fill="#8b96a8">• SO: Linux / macOS / WSL2</text>
+    <text x="30" y="270" font-size="10" fill="#8b96a8">• RAM ≥ 8 GB recomendado</text>
+  </g>
+
+  <!-- Vertical drop from Node 2 -->
+  <line x1="415" y1="155" x2="415" y2="195" stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.5"/>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.4s" dur="0.4s" fill="freeze"/>
+    <rect x="310" y="195" width="210" height="80" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="320" y="213" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">DEPENDÊNCIAS INSTALADAS</text>
+    <text x="320" y="228" font-size="10" fill="#8b96a8">• anthropic · openai · google-genai</text>
+    <text x="320" y="242" font-size="10" fill="#8b96a8">• pydantic · rich · typer · httpx</text>
+    <text x="320" y="256" font-size="10" fill="#8b96a8">• gitpython · jinja2 · yaml</text>
+    <text x="320" y="270" font-size="10" fill="#8b96a8">• pytest · ruff · mypy (dev)</text>
+  </g>
+
+  <!-- Vertical drop from Node 3 -->
+  <line x1="715" y1="155" x2="715" y2="195" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.5"/>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.6s" dur="0.4s" fill="freeze"/>
+    <rect x="610" y="195" width="210" height="80" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="620" y="213" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">CONFIGURAÇÃO DE KEYS</text>
+    <text x="620" y="228" font-size="10" fill="#8b96a8">• .env na raiz do projeto</text>
+    <text x="620" y="242" font-size="10" fill="#8b96a8">• ou variáveis de ambiente</text>
+    <text x="620" y="256" font-size="10" fill="#f59e0b">• NUNCA comitar .env no git!</text>
+    <text x="620" y="270" font-size="10" fill="#8b96a8">• .gitignore automático</text>
+  </g>
+
+  <!-- Vertical drop from Node 4 -->
+  <line x1="1015" y1="155" x2="1015" y2="195" stroke="#2dd4bf" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.5"/>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.8s" dur="0.4s" fill="freeze"/>
+    <rect x="910" y="195" width="210" height="80" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="920" y="213" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">WIZARD INIT — PERGUNTAS</text>
+    <text x="920" y="228" font-size="10" fill="#8b96a8">1. Nome do projeto</text>
+    <text x="920" y="242" font-size="10" fill="#8b96a8">2. Perfis a ativar (multi-select)</text>
+    <text x="920" y="256" font-size="10" fill="#8b96a8">3. Providers prioritários</text>
+    <text x="920" y="270" font-size="10" fill="#8b96a8">4. GitHub org / repo</text>
+  </g>
+
+  <!-- Vertical drop from Node 5 -->
+  <line x1="1315" y1="155" x2="1315" y2="195" stroke="#2dd4bf" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.5"/>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.0s" dur="0.4s" fill="freeze"/>
+    <rect x="1210" y="195" width="210" height="80" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="1220" y="213" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">PERFIS DISPONÍVEIS</text>
+    <text x="1220" y="228" font-size="10" fill="#8b96a8">• base (sempre ativo)</text>
+    <text x="1220" y="242" font-size="10" fill="#2dd4bf">• github-projects (tracker)</text>
+    <text x="1220" y="256" font-size="10" fill="#8b96a8">• product-team (28 agentes)</text>
+    <text x="1220" y="270" font-size="10" fill="#8b96a8">• stacks (infra especialistas)</text>
+  </g>
+
+  <!-- Vertical drop from Node 6 -->
+  <line x1="1640" y1="155" x2="1640" y2="195" stroke="#4ade80" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.5"/>
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.2s" dur="0.4s" fill="freeze"/>
+    <rect x="1510" y="195" width="260" height="80" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="1520" y="213" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">SAÍDA ESPERADA</text>
+    <text x="1520" y="228" font-size="10" fill="#4ade80">✓ config.yaml gerado</text>
+    <text x="1520" y="242" font-size="10" fill="#4ade80">✓ /agents/ · /prompts/ criados</text>
+    <text x="1520" y="256" font-size="10" fill="#4ade80">✓ live-state.md inicializado</text>
+    <text x="1520" y="270" font-size="10" fill="#8b96a8">✓ .github/workflows/ prontos</text>
+  </g>
+
+  <!-- ═══════════════════ ROW 3 — Estrutura de Diretórios (full width) ═══════════════════ -->
+  <line x1="20" y1="298" x2="1780" y2="298" stroke="#1f2937" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="30" y="314" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="0.8">ESTRUTURA DE DIRETÓRIOS GERADA</text>
+
+  <!-- Directory tree nodes (full width band) -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.4s" dur="0.5s" fill="freeze"/>
+    <!-- Root -->
+    <rect x="20" y="322" width="140" height="42" rx="6" fill="#111827" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="90" y="339" font-size="10" font-weight="600" fill="#e6edf3" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">📁 projeto/</text>
+    <text x="90" y="355" font-size="9" fill="#7c3aed" text-anchor="middle">raiz do template</text>
+
+    <!-- /agents -->
+    <rect x="200" y="322" width="150" height="42" rx="6" fill="#111827" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="275" y="339" font-size="10" font-weight="600" fill="#e6edf3" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">📁 /agents</text>
+    <text x="275" y="355" font-size="9" fill="#8b96a8" text-anchor="middle">28 arquivos YAML de agentes</text>
+
+    <!-- /prompts -->
+    <rect x="390" y="322" width="150" height="42" rx="6" fill="#111827" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="465" y="339" font-size="10" font-weight="600" fill="#e6edf3" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">📁 /prompts</text>
+    <text x="465" y="355" font-size="9" fill="#8b96a8" text-anchor="middle">templates de system prompt</text>
+
+    <!-- /worktrees -->
+    <rect x="580" y="322" width="150" height="42" rx="6" fill="#111827" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="655" y="339" font-size="10" font-weight="600" fill="#e6edf3" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">📁 /worktrees</text>
+    <text x="655" y="355" font-size="9" fill="#8b96a8" text-anchor="middle">git worktrees por tarefa</text>
+
+    <!-- /docs -->
+    <rect x="770" y="322" width="150" height="42" rx="6" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="845" y="339" font-size="10" font-weight="600" fill="#e6edf3" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">📁 /docs</text>
+    <text x="845" y="355" font-size="9" fill="#8b96a8" text-anchor="middle">specs · ADRs · diagramas</text>
+
+    <!-- /sessions -->
+    <rect x="960" y="322" width="150" height="42" rx="6" fill="#111827" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="1035" y="339" font-size="10" font-weight="600" fill="#e6edf3" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">📁 /sessions</text>
+    <text x="1035" y="355" font-size="9" fill="#8b96a8" text-anchor="middle">diários · live-state.md</text>
+
+    <!-- config.yaml -->
+    <rect x="1150" y="322" width="150" height="42" rx="6" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="1225" y="339" font-size="10" font-weight="600" fill="#e6edf3" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">📄 config.yaml</text>
+    <text x="1225" y="355" font-size="9" fill="#f59e0b" text-anchor="middle">perfis · providers · limites</text>
+
+    <!-- template.py -->
+    <rect x="1340" y="322" width="150" height="42" rx="6" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="1415" y="339" font-size="10" font-weight="600" fill="#e6edf3" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">🐍 template.py</text>
+    <text x="1415" y="355" font-size="9" fill="#8b96a8" text-anchor="middle">ponto de entrada CLI</text>
+
+    <!-- .github -->
+    <rect x="1530" y="322" width="140" height="42" rx="6" fill="#111827" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="1600" y="339" font-size="10" font-weight="600" fill="#e6edf3" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">📁 .github/</text>
+    <text x="1600" y="355" font-size="9" fill="#4ade80" text-anchor="middle">workflows · templates</text>
+
+    <!-- .env -->
+    <rect x="1710" y="322" width="70" height="42" rx="6" fill="#111827" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="1745" y="339" font-size="10" font-weight="600" fill="#e6edf3" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">.env</text>
+    <text x="1745" y="355" font-size="9" fill="#ef4444" text-anchor="middle">gitignore!</text>
+  </g>
+
+  <!-- Connector lines from root to children -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.6s" dur="0.5s" fill="freeze"/>
+    <line x1="160" y1="343" x2="200" y2="343" stroke="#7c3aed" stroke-width="1" opacity="0.5"/>
+    <line x1="160" y1="343" x2="160" y2="343" stroke="#7c3aed" stroke-width="1" opacity="0.5"/>
+    <line x1="350" y1="343" x2="390" y2="343" stroke="#2dd4bf" stroke-width="1" opacity="0.4"/>
+    <line x1="540" y1="343" x2="580" y2="343" stroke="#2dd4bf" stroke-width="1" opacity="0.4"/>
+    <line x1="730" y1="343" x2="770" y2="343" stroke="#3b82f6" stroke-width="1" opacity="0.4"/>
+    <line x1="920" y1="343" x2="960" y2="343" stroke="#7c3aed" stroke-width="1" opacity="0.4"/>
+    <line x1="1110" y1="343" x2="1150" y2="343" stroke="#f59e0b" stroke-width="1" opacity="0.4"/>
+    <line x1="1300" y1="343" x2="1340" y2="343" stroke="#3b82f6" stroke-width="1" opacity="0.4"/>
+    <line x1="1490" y1="343" x2="1530" y2="343" stroke="#4ade80" stroke-width="1" opacity="0.4"/>
+    <line x1="1670" y1="343" x2="1710" y2="343" stroke="#ef4444" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- ═══════════════════ ROW 4 — Multi-Provider config ═══════════════════ -->
+  <line x1="20" y1="388" x2="1780" y2="388" stroke="#1f2937" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="30" y="404" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="0.8">CONFIGURAÇÃO MULTI-PROVIDER (config.yaml)</text>
+
+  <!-- Provider nodes -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.8s" dur="0.5s" fill="freeze"/>
+    <rect x="20" y="412" width="200" height="50" rx="6" fill="#111827" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="120" y="430" font-size="11" font-weight="600" fill="#e6edf3" text-anchor="middle">🟣 Anthropic</text>
+    <text x="120" y="446" font-size="9.5" fill="#8b96a8" text-anchor="middle">claude-opus-4 · sonnet · haiku</text>
+    <text x="120" y="458" font-size="9" fill="#2dd4bf" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">tier: deep · standard · light</text>
+
+    <rect x="240" y="412" width="200" height="50" rx="6" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="340" y="430" font-size="11" font-weight="600" fill="#e6edf3" text-anchor="middle">🟢 OpenAI</text>
+    <text x="340" y="446" font-size="9.5" fill="#8b96a8" text-anchor="middle">gpt-4o · gpt-4o-mini</text>
+    <text x="340" y="458" font-size="9" fill="#3b82f6" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">fallback provider</text>
+
+    <rect x="460" y="412" width="200" height="50" rx="6" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="560" y="430" font-size="11" font-weight="600" fill="#e6edf3" text-anchor="middle">🔵 Google Gemini</text>
+    <text x="560" y="446" font-size="9.5" fill="#8b96a8" text-anchor="middle">gemini-2.0-flash · pro</text>
+    <text x="560" y="458" font-size="9" fill="#3b82f6" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">fallback provider</text>
+
+    <!-- Priority arrow -->
+    <text x="700" y="432" font-size="10" fill="#4b5563" text-anchor="middle">prioridade:</text>
+    <text x="700" y="448" font-size="10" fill="#4b5563" text-anchor="middle">1 → 2 → 3</text>
+    <text x="760" y="440" font-size="18" fill="#4b5563">→</text>
+
+    <!-- Token budget section -->
+    <rect x="790" y="412" width="280" height="50" rx="6" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="930" y="428" font-size="11" font-weight="600" fill="#e6edf3" text-anchor="middle">💰 Budget por Wave</text>
+    <text x="930" y="443" font-size="9.5" fill="#8b96a8" text-anchor="middle">max_tokens_per_wave: 50_000</text>
+    <text x="930" y="457" font-size="9" fill="#f59e0b" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">token_economy: enabled = true</text>
+
+    <!-- Retry config -->
+    <rect x="1090" y="412" width="220" height="50" rx="6" fill="#111827" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="1200" y="428" font-size="11" font-weight="600" fill="#e6edf3" text-anchor="middle">🔄 Retry Config</text>
+    <text x="1200" y="443" font-size="9.5" fill="#8b96a8" text-anchor="middle">max_retries: 3 · backoff: exp</text>
+    <text x="1200" y="457" font-size="9" fill="#7c3aed" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">timeout: 120s</text>
+
+    <!-- Concurrency -->
+    <rect x="1330" y="412" width="220" height="50" rx="6" fill="#111827" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="1440" y="428" font-size="11" font-weight="600" fill="#e6edf3" text-anchor="middle">⚡ Concorrência</text>
+    <text x="1440" y="443" font-size="9.5" fill="#8b96a8" text-anchor="middle">max_parallel_agents: 4</text>
+    <text x="1440" y="457" font-size="9" fill="#2dd4bf" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">semaphore por provider</text>
+
+    <!-- Ready -->
+    <rect x="1570" y="412" width="210" height="50" rx="6" fill="#111827" stroke="#4ade80" stroke-width="2"/>
+    <text x="1675" y="428" font-size="11" font-weight="600" fill="#4ade80" text-anchor="middle">🚀 SETUP COMPLETO</text>
+    <text x="1675" y="443" font-size="9.5" fill="#8b96a8" text-anchor="middle">template.py validate → OK</text>
+    <text x="1675" y="457" font-size="9" fill="#4ade80" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">próxima etapa: Perfis</text>
+  </g>
+
+  <!-- ═══════════════════ ANIMATED DOTS ═══════════════════ -->
+  <!-- Row 1 horizontal dots -->
+  <circle r="3.5" fill="#2dd4bf" opacity="0.9">
+    <animateMotion dur="2s" begin="0.5s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+      <mpath href="#p1"/>
+    </animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="3.5" fill="#2dd4bf" opacity="0.9">
+    <animateMotion dur="2s" begin="1.0s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+      <mpath href="#p2"/>
+    </animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="1.0s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="3.5" fill="#f59e0b" opacity="0.9">
+    <animateMotion dur="2s" begin="1.5s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+      <mpath href="#p3"/>
+    </animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="3.5" fill="#2dd4bf" opacity="0.9">
+    <animateMotion dur="2s" begin="2.0s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+      <mpath href="#p4"/>
+    </animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="2.0s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="3.5" fill="#4ade80" opacity="0.9">
+    <animateMotion dur="2s" begin="2.5s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+      <mpath href="#p5"/>
+    </animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="2s" begin="2.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ═══════════════════ LEGEND ═══════════════════ -->
+  <rect x="20" y="480" width="1760" height="44" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+  <text x="40" y="498" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA</text>
+  <rect x="100" y="488" width="10" height="10" rx="2" fill="#111827" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="115" y="498" font-size="10" fill="#8b96a8">Pré-requisito / Setup</text>
+  <rect x="260" y="488" width="10" height="10" rx="2" fill="#111827" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="275" y="498" font-size="10" fill="#8b96a8">Configuração Crítica</text>
+  <rect x="420" y="488" width="10" height="10" rx="2" fill="#111827" stroke="#2dd4bf" stroke-width="2"/>
+  <text x="435" y="498" font-size="10" fill="#8b96a8">Execução Ativa</text>
+  <rect x="560" y="488" width="10" height="10" rx="2" fill="#111827" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="575" y="498" font-size="10" fill="#8b96a8">Completo / Validado</text>
+  <rect x="720" y="488" width="10" height="10" rx="2" fill="#111827" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="735" y="498" font-size="10" fill="#8b96a8">Sistema de Suporte</text>
+  <rect x="880" y="488" width="10" height="10" rx="2" fill="#111827" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="895" y="498" font-size="10" fill="#8b96a8">Atenção / Risco</text>
+
+  <text x="40" y="516" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">PRÓX.</text>
+  <text x="80" y="516" font-size="10" fill="#8b96a8">→  Etapa 02: Seleção de Perfis — 10 perfis empilháveis · base → github-projects → product-team → stacks → customizações</text>
+
+  <!-- ═══════════════════ STATUS BAR ═══════════════════ -->
+  <rect x="20" y="538" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="549" r="4" fill="#4ade80">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="553" font-size="9.5" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 01/17</text>
+  <text x="130" y="553" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="140" y="553" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Instalação e Configuração Inicial</text>
+  <text x="1770" y="553" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">template.py init · perfis · multi-provider · dirs</text>
+</svg>

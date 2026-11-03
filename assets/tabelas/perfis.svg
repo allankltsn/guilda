@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 889" width="920" height="889" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" role="img" aria-label="Perfis: 10 linhas, colunas Perfil, Para quê, Em linguagem simples">
+<rect width="920" height="889" rx="10" fill="#0b0f17"/>
+<rect x="0.5" y="0.5" width="919" height="888" rx="10" fill="#111827" stroke="#1f2937"/>
+<text x="16" y="24" font-size="14" font-weight="700" fill="#e6edf3">Perfis</text>
+<rect x="16" y="31" width="28" height="2" rx="1" fill="#2dd4bf"/>
+<rect x="1" y="36" width="918" height="40" fill="#0b0f17"/>
+<text x="16" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">PERFIL</text>
+<text x="190" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">PARA QUÊ</text>
+<text x="555.0" y="61" font-size="11" font-weight="700" letter-spacing="1" fill="#8b96a8">EM LINGUAGEM SIMPLES</text>
+<line x1="0" y1="76" x2="920" y2="76" stroke="#2dd4bf" stroke-opacity="0.5"/>
+<text x="16" y="100" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">base</tspan></text>
+<text x="190" y="100" xml:space="preserve"><tspan fill="#c9d4e3">Núcleo </tspan><tspan fill="#c9d4e3">neutro </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">stack: </tspan><tspan fill="#c9d4e3">orquestração, </tspan><tspan fill="#c9d4e3">gates </tspan></text>
+<text x="190" y="119" xml:space="preserve"><tspan fill="#c9d4e3">independentes, </tspan><tspan fill="#c9d4e3">evidência</tspan></text>
+<text x="555.0" y="100" xml:space="preserve"><tspan fill="#c9d4e3">As </tspan><tspan fill="#c9d4e3">regras </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">convivência </tspan><tspan fill="#c9d4e3">do </tspan><tspan fill="#c9d4e3">time </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">IA: </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">agente </tspan></text>
+<text x="555.0" y="119" xml:space="preserve"><tspan fill="#c9d4e3">principal </tspan><tspan fill="#c9d4e3">coordena, </tspan><tspan fill="#c9d4e3">quem </tspan><tspan fill="#c9d4e3">faz </tspan><tspan fill="#c9d4e3">não </tspan><tspan fill="#c9d4e3">aprova </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">próprio </tspan></text>
+<text x="555.0" y="138" xml:space="preserve"><tspan fill="#c9d4e3">trabalho, </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">tudo </tspan><tspan fill="#c9d4e3">precisa </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">prova. </tspan><tspan fill="#c9d4e3">Funciona </tspan><tspan fill="#c9d4e3">com </tspan></text>
+<text x="555.0" y="157" xml:space="preserve"><tspan fill="#c9d4e3">qualquer </tspan><tspan fill="#c9d4e3">tecnologia.</tspan></text>
+<line x1="16" y1="170" x2="904" y2="170" stroke="#1f2937"/>
+<rect x="1" y="170" width="918" height="94" fill="#0f1623"/>
+<text x="16" y="194" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">github-projects</tspan></text>
+<text x="190" y="194" xml:space="preserve"><tspan fill="#c9d4e3">GitHub </tspan><tspan fill="#c9d4e3">Projects </tspan><tspan fill="#c9d4e3">como </tspan><tspan fill="#c9d4e3">gerenciador: </tspan><tspan fill="#c9d4e3">nove </tspan><tspan fill="#c9d4e3">estados, </tspan></text>
+<text x="190" y="213" xml:space="preserve"><tspan fill="#c9d4e3">campos </tspan><tspan fill="#c9d4e3">Priority/Type/Estimate/Agent/Sprint, </tspan></text>
+<text x="190" y="232" xml:space="preserve"><tspan fill="#c9d4e3">histórias </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">sub-issues</tspan></text>
+<text x="555.0" y="194" xml:space="preserve"><tspan fill="#c9d4e3">O </tspan><tspan fill="#c9d4e3">quadro </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">tarefas </tspan><tspan fill="#c9d4e3">do </tspan><tspan fill="#c9d4e3">time </tspan><tspan fill="#c9d4e3">fica </tspan><tspan fill="#c9d4e3">no </tspan><tspan fill="#c9d4e3">GitHub: </tspan><tspan fill="#c9d4e3">cada </tspan></text>
+<text x="555.0" y="213" xml:space="preserve"><tspan fill="#c9d4e3">tarefa </tspan><tspan fill="#c9d4e3">é </tspan><tspan fill="#c9d4e3">uma </tspan><tspan fill="#c9d4e3">issue </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">estado </tspan><tspan fill="#c9d4e3">dela </tspan><tspan fill="#c9d4e3">(aberta, </tspan><tspan fill="#c9d4e3">em </tspan></text>
+<text x="555.0" y="232" xml:space="preserve"><tspan fill="#c9d4e3">andamento, </tspan><tspan fill="#c9d4e3">em </tspan><tspan fill="#c9d4e3">revisão, </tspan><tspan fill="#c9d4e3">concluída, </tspan><tspan fill="#c9d4e3">aceita…) </tspan><tspan fill="#c9d4e3">é </tspan></text>
+<text x="555.0" y="251" xml:space="preserve"><tspan fill="#c9d4e3">controlado </tspan><tspan fill="#c9d4e3">por </tspan><tspan fill="#c9d4e3">regras </tspan><tspan fill="#c9d4e3">claras.</tspan></text>
+<line x1="16" y1="264" x2="904" y2="264" stroke="#1f2937"/>
+<text x="16" y="288" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">product-team</tspan></text>
+<text x="190" y="288" xml:space="preserve"><tspan fill="#c9d4e3">Produto, </tspan><tspan fill="#c9d4e3">UX/UI, </tspan><tspan fill="#c9d4e3">marca, </tspan><tspan fill="#c9d4e3">marketing </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">frontend </tspan></text>
+<text x="190" y="307" xml:space="preserve"><tspan fill="#c9d4e3">sênior, </tspan><tspan fill="#c9d4e3">com </tspan><tspan fill="#c9d4e3">histórias </tspan><tspan fill="#c9d4e3">(DoR/DoD) </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">rodadas </tspan><tspan fill="#c9d4e3">de </tspan></text>
+<text x="190" y="326" xml:space="preserve"><tspan fill="#c9d4e3">usabilidade</tspan></text>
+<text x="555.0" y="288" xml:space="preserve"><tspan fill="#c9d4e3">Traz </tspan><tspan fill="#c9d4e3">especialistas </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">produto </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">design: </tspan><tspan fill="#c9d4e3">escrevem </tspan></text>
+<text x="555.0" y="307" xml:space="preserve"><tspan fill="#c9d4e3">as </tspan><tspan fill="#c9d4e3">histórias, </tspan><tspan fill="#c9d4e3">desenham </tspan><tspan fill="#c9d4e3">as </tspan><tspan fill="#c9d4e3">telas, </tspan><tspan fill="#c9d4e3">definem </tspan><tspan fill="#c9d4e3">a </tspan><tspan fill="#c9d4e3">marca, </tspan></text>
+<text x="555.0" y="326" xml:space="preserve"><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">duas </tspan><tspan fill="#c9d4e3">pessoas </tspan><tspan fill="#c9d4e3">leigas </tspan><tspan fill="#c9d4e3">simuladas </tspan><tspan fill="#c9d4e3">testam </tspan><tspan fill="#c9d4e3">antes </tspan><tspan fill="#c9d4e3">de </tspan></text>
+<text x="555.0" y="345" xml:space="preserve"><tspan fill="#c9d4e3">entregar.</tspan></text>
+<line x1="16" y1="358" x2="904" y2="358" stroke="#1f2937"/>
+<rect x="1" y="358" width="918" height="94" fill="#0f1623"/>
+<text x="16" y="382" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">polyrepo</tspan></text>
+<text x="190" y="382" xml:space="preserve"><tspan fill="#c9d4e3">Produto </tspan><tspan fill="#c9d4e3">em </tspan><tspan fill="#c9d4e3">vários </tspan><tspan fill="#c9d4e3">repositórios </tspan><tspan fill="#c9d4e3">gerenciado </tspan><tspan fill="#c9d4e3">a </tspan></text>
+<text x="190" y="401" xml:space="preserve"><tspan fill="#c9d4e3">partir </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">um </tspan><tspan fill="#c9d4e3">hub</tspan></text>
+<text x="555.0" y="382" xml:space="preserve"><tspan fill="#c9d4e3">Para </tspan><tspan fill="#c9d4e3">quando </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">produto </tspan><tspan fill="#c9d4e3">é </tspan><tspan fill="#c9d4e3">feito </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">vários </tspan></text>
+<text x="555.0" y="401" xml:space="preserve"><tspan fill="#c9d4e3">repositórios: </tspan><tspan fill="#c9d4e3">um </tspan><tspan fill="#c9d4e3">repositório </tspan><tspan fill="#c9d4e3">"central" </tspan><tspan fill="#c9d4e3">guarda </tspan></text>
+<text x="555.0" y="420" xml:space="preserve"><tspan fill="#c9d4e3">requisitos </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">decisões, </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">cada </tspan><tspan fill="#c9d4e3">repositório </tspan><tspan fill="#c9d4e3">de </tspan></text>
+<text x="555.0" y="439" xml:space="preserve"><tspan fill="#c9d4e3">código </tspan><tspan fill="#c9d4e3">recebe </tspan><tspan fill="#c9d4e3">as </tspan><tspan fill="#c9d4e3">tarefas </tspan><tspan fill="#c9d4e3">dele.</tspan></text>
+<line x1="16" y1="452" x2="904" y2="452" stroke="#1f2937"/>
+<text x="16" y="476" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">session-continuity</tspan></text>
+<text x="190" y="476" xml:space="preserve"><tspan fill="#c9d4e3">Opcional: </tspan><tspan fill="#c9d4e3">marcos </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">tokens </tspan><tspan fill="#c9d4e3">da </tspan><tspan fill="#c9d4e3">sessão </tspan><tspan fill="#c9d4e3">(perguntar </tspan><tspan fill="#c9d4e3">a </tspan></text>
+<text x="190" y="495" xml:space="preserve"><tspan fill="#c9d4e3">100k/200k/300k, </tspan><tspan fill="#c9d4e3">encerrar </tspan><tspan fill="#c9d4e3">a </tspan><tspan fill="#c9d4e3">400k), </tspan><tspan fill="#c9d4e3">diário </tspan><tspan fill="#c9d4e3">de </tspan></text>
+<text x="190" y="514" xml:space="preserve"><tspan fill="#c9d4e3">eventos </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">estado </tspan><tspan fill="#c9d4e3">vivo </tspan><tspan fill="#c9d4e3">para </tspan><tspan fill="#c9d4e3">retomar </tspan><tspan fill="#c9d4e3">após </tspan><tspan fill="#c9d4e3">queda</tspan></text>
+<text x="555.0" y="476" xml:space="preserve"><tspan fill="#c9d4e3">Para </tspan><tspan fill="#c9d4e3">sessões </tspan><tspan fill="#c9d4e3">longas: </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">agente </tspan><tspan fill="#c9d4e3">avisa </tspan><tspan fill="#c9d4e3">quando </tspan><tspan fill="#c9d4e3">já </tspan></text>
+<text x="555.0" y="495" xml:space="preserve"><tspan fill="#c9d4e3">gastou </tspan><tspan fill="#c9d4e3">muito, </tspan><tspan fill="#c9d4e3">mantém </tspan><tspan fill="#c9d4e3">um </tspan><tspan fill="#c9d4e3">diário </tspan><tspan fill="#c9d4e3">curto </tspan><tspan fill="#c9d4e3">do </tspan><tspan fill="#c9d4e3">que </tspan><tspan fill="#c9d4e3">fez </tspan><tspan fill="#c9d4e3">e </tspan></text>
+<text x="555.0" y="514" xml:space="preserve"><tspan fill="#c9d4e3">consegue </tspan><tspan fill="#c9d4e3">retomar </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">trabalho </tspan><tspan fill="#c9d4e3">se </tspan><tspan fill="#c9d4e3">a </tspan><tspan fill="#c9d4e3">sessão </tspan><tspan fill="#c9d4e3">cair.</tspan></text>
+<line x1="16" y1="527" x2="904" y2="527" stroke="#1f2937"/>
+<rect x="1" y="527" width="918" height="56" fill="#0f1623"/>
+<text x="16" y="551" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">nestjs-mikroorm</tspan></text>
+<text x="190" y="551" xml:space="preserve"><tspan fill="#c9d4e3">Conhecimento </tspan><tspan fill="#c9d4e3">de </tspan><tspan fill="#c9d4e3">NestJS/TypeScript/MikroORM </tspan><tspan fill="#c9d4e3">com </tspan></text>
+<text x="190" y="570" xml:space="preserve"><tspan fill="#c9d4e3">PostgreSQL</tspan></text>
+<text x="555.0" y="551" xml:space="preserve"><tspan fill="#c9d4e3">Ensina </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">time </tspan><tspan fill="#c9d4e3">as </tspan><tspan fill="#c9d4e3">boas </tspan><tspan fill="#c9d4e3">práticas </tspan><tspan fill="#c9d4e3">dessa </tspan><tspan fill="#c9d4e3">stack </tspan><tspan fill="#c9d4e3">de </tspan></text>
+<text x="555.0" y="570" xml:space="preserve"><tspan fill="#c9d4e3">backend. </tspan><tspan fill="#c9d4e3">Use </tspan><tspan fill="#c9d4e3">só </tspan><tspan fill="#c9d4e3">se </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">projeto </tspan><tspan fill="#c9d4e3">usa </tspan><tspan fill="#c9d4e3">isso.</tspan></text>
+<line x1="16" y1="583" x2="904" y2="583" stroke="#1f2937"/>
+<text x="16" y="607" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">python</tspan></text>
+<text x="190" y="607" xml:space="preserve"><tspan fill="#c9d4e3">Python </tspan><tspan fill="#c9d4e3">com </tspan><tspan fill="#c9d4e3">framework </tspan><tspan fill="#c9d4e3">detectado </tspan><tspan fill="#c9d4e3">(FastAPI, </tspan><tspan fill="#c9d4e3">Django, </tspan></text>
+<text x="190" y="626" xml:space="preserve"><tspan fill="#c9d4e3">Flask, </tspan><tspan fill="#c9d4e3">automação, </tspan><tspan fill="#c9d4e3">IA)</tspan></text>
+<text x="555.0" y="607" xml:space="preserve"><tspan fill="#c9d4e3">Ensina </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">time </tspan><tspan fill="#c9d4e3">a </tspan><tspan fill="#c9d4e3">respeitar </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">jeito </tspan><tspan fill="#c9d4e3">Python </tspan><tspan fill="#c9d4e3">do </tspan></text>
+<text x="555.0" y="626" xml:space="preserve"><tspan fill="#c9d4e3">projeto, </tspan><tspan fill="#c9d4e3">sem </tspan><tspan fill="#c9d4e3">escolher </tspan><tspan fill="#c9d4e3">framework </tspan><tspan fill="#c9d4e3">por </tspan><tspan fill="#c9d4e3">conta </tspan></text>
+<text x="555.0" y="645" xml:space="preserve"><tspan fill="#c9d4e3">própria.</tspan></text>
+<line x1="16" y1="658" x2="904" y2="658" stroke="#1f2937"/>
+<rect x="1" y="658" width="918" height="75" fill="#0f1623"/>
+<text x="16" y="682" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">aws-serverless</tspan></text>
+<text x="190" y="682" xml:space="preserve"><tspan fill="#c9d4e3">Serviços </tspan><tspan fill="#c9d4e3">AWS </tspan><tspan fill="#c9d4e3">(Lambda, </tspan><tspan fill="#c9d4e3">API </tspan><tspan fill="#c9d4e3">Gateway, </tspan><tspan fill="#c9d4e3">Cognito, </tspan><tspan fill="#c9d4e3">S3) </tspan><tspan fill="#c9d4e3">e </tspan></text>
+<text x="190" y="701" xml:space="preserve"><tspan fill="#c9d4e3">IaC </tspan><tspan fill="#c9d4e3">existente</tspan></text>
+<text x="555.0" y="682" xml:space="preserve"><tspan fill="#c9d4e3">Boas </tspan><tspan fill="#c9d4e3">práticas </tspan><tspan fill="#c9d4e3">para </tspan><tspan fill="#c9d4e3">quem </tspan><tspan fill="#c9d4e3">usa </tspan><tspan fill="#c9d4e3">nuvem </tspan><tspan fill="#c9d4e3">AWS </tspan><tspan fill="#c9d4e3">sem </tspan></text>
+<text x="555.0" y="701" xml:space="preserve"><tspan fill="#c9d4e3">servidor: </tspan><tspan fill="#c9d4e3">permissões </tspan><tspan fill="#c9d4e3">mínimas, </tspan><tspan fill="#c9d4e3">custos, </tspan><tspan fill="#c9d4e3">tolerância </tspan></text>
+<text x="555.0" y="720" xml:space="preserve"><tspan fill="#c9d4e3">a </tspan><tspan fill="#c9d4e3">falhas.</tspan></text>
+<line x1="16" y1="733" x2="904" y2="733" stroke="#1f2937"/>
+<text x="16" y="757" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">hosting-managed</tspan></text>
+<text x="190" y="757" xml:space="preserve"><tspan fill="#c9d4e3">Hospedagem </tspan><tspan fill="#c9d4e3">gerenciada </tspan><tspan fill="#c9d4e3">(por </tspan><tspan fill="#c9d4e3">exemplo </tspan><tspan fill="#c9d4e3">Hostinger) </tspan><tspan fill="#c9d4e3">com </tspan></text>
+<text x="190" y="776" xml:space="preserve"><tspan fill="#c9d4e3">plano </tspan><tspan fill="#c9d4e3">verificado</tspan></text>
+<text x="555.0" y="757" xml:space="preserve"><tspan fill="#c9d4e3">Para </tspan><tspan fill="#c9d4e3">sites </tspan><tspan fill="#c9d4e3">em </tspan><tspan fill="#c9d4e3">hospedagem </tspan></text>
+<text x="555.0" y="776" xml:space="preserve"><tspan fill="#c9d4e3">compartilhada/gerenciada, </tspan><tspan fill="#c9d4e3">onde </tspan><tspan fill="#c9d4e3">você </tspan><tspan fill="#c9d4e3">não </tspan><tspan fill="#c9d4e3">controla </tspan></text>
+<text x="555.0" y="795" xml:space="preserve"><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">servidor. </tspan><tspan fill="#e6edf3" font-weight="700">Conflita </tspan><tspan fill="#e6edf3" font-weight="700">com </tspan><tspan fill="#e6edf3" font-weight="700">`vps-k3s`.</tspan></text>
+<line x1="16" y1="808" x2="904" y2="808" stroke="#1f2937"/>
+<rect x="1" y="808" width="918" height="75" fill="#0f1623"/>
+<text x="16" y="832" xml:space="preserve"><tspan fill="#2dd4bf" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="12">vps-k3s</tspan></text>
+<text x="190" y="832" xml:space="preserve"><tspan fill="#c9d4e3">VPS, </tspan><tspan fill="#c9d4e3">containers </tspan><tspan fill="#c9d4e3">e </tspan><tspan fill="#c9d4e3">Kubernetes</tspan></text>
+<text x="555.0" y="832" xml:space="preserve"><tspan fill="#c9d4e3">Para </tspan><tspan fill="#c9d4e3">quem </tspan><tspan fill="#c9d4e3">administra </tspan><tspan fill="#c9d4e3">o </tspan><tspan fill="#c9d4e3">próprio </tspan><tspan fill="#c9d4e3">servidor </tspan><tspan fill="#c9d4e3">com </tspan></text>
+<text x="555.0" y="851" xml:space="preserve"><tspan fill="#c9d4e3">Docker/Kubernetes. </tspan><tspan fill="#e6edf3" font-weight="700">Conflita </tspan><tspan fill="#e6edf3" font-weight="700">com </tspan></text>
+<text x="555.0" y="870" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">`hosting-managed`.</tspan></text>
+</svg>

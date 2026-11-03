@@ -15,7 +15,7 @@ If a rule below conflicts with a gate, the gate wins and the cost is accepted.
 3. **Handoff in a file.** Every agent ends by writing a short summary (at most 40 lines: files
    touched, IDs handled, commands run and results, pending items; templates/handoff.md) to
    `docs/operations/handoffs/<task>-<date>.md` and returns to the principal only the path plus 5
-   to 10 lines. A rerun overwrites its own handoff (policies/quality-principles.md, idempotence).
+   to 10 lines. A rerun overwrites its own handoff (policies/quality-principles.md, idempotence). After writing the handoff, the principal reviews the board as in workflow/github-projects.md (board freshness).
 4. **Do not resume a heavy agent.** Resuming reloads the whole history. If an agent already used
    about 150k tokens (default; a project may override it in its project instructions), or was cut off by a session or rate limit, do not resume it: dispatch a NEW
    agent with a small, closed task that reads the handoff and the findings file. Resume only for a

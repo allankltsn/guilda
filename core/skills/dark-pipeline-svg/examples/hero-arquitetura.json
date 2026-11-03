@@ -1,0 +1,18 @@
+{
+  "title": "Rotas Saúde",
+  "tagline": ["Agendamento de consultas", {"text": "· serverless na AWS", "accent": true}],
+  "palette": {"accent": "#38bdf8", "accent2": "#2dd4bf"},
+  "stack": ["AWS Lambda", "API Gateway", "Cognito", "DynamoDB", "S3", "Terraform"],
+  "panel": {
+    "type": "architecture",
+    "title": "fluxo de requisição",
+    "nodes": [
+      {"label": "Cognito", "color": "#a78bfa"},
+      {"label": "API Gateway", "color": "#38bdf8", "active": true},
+      {"label": "Lambda", "color": "#f59e0b"},
+      {"label": "S3", "color": "#4ade80"},
+      {"label": "DynamoDB", "color": "#60a5fa"}
+    ],
+    "edges": [[0, 1], [1, 2], [2, 4], [2, 3]]
+  }
+}

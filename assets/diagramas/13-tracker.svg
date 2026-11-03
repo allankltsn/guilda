@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-teal" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#2dd4bf"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#4ade80"/>
+    </marker>
+    <path id="p-kanban" d="M 0,0 L 100,0" fill="none"/>
+  </defs>
+
+  <rect width="1800" height="800" fill="#0b0f17"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="1760" height="48" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="16" width="6" height="48" rx="3" fill="#f59e0b"/>
+  <text x="44" y="37" font-size="15" font-weight="700" fill="#e6edf3">13 — GitHub Projects como Tracker Oficial</text>
+  <text x="44" y="55" font-size="11" fill="#8b96a8">9 status · campos customizados · LOG de eventos · DECISAO issues · single source of truth</text>
+  <text x="1760" y="37" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 13/17</text>
+  <text x="1760" y="52" font-size="9.5" fill="#f59e0b" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">orquestração · projeto</text>
+
+  <!-- ══ BOARD KANBAN VISUAL ══ -->
+  <!-- Backlog -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="82" width="172" height="280" rx="6" fill="#0d1117" stroke="#4b5563" stroke-width="1"/>
+    <text x="106" y="102" font-size="9.5" fill="#6b7280" font-weight="700" text-anchor="middle">BACKLOG</text>
+    <rect x="30" y="110" width="152" height="44" rx="4" fill="#111827" stroke="#4b5563" stroke-width="1"/>
+    <text x="106" y="127" font-size="8.5" fill="#8b96a8" text-anchor="middle">#12 autenticação OAuth</text>
+    <text x="106" y="143" font-size="7.5" fill="#4b5563" text-anchor="middle">priority: P2 · pts: 5</text>
+    <rect x="30" y="160" width="152" height="44" rx="4" fill="#111827" stroke="#4b5563" stroke-width="1"/>
+    <text x="106" y="177" font-size="8.5" fill="#8b96a8" text-anchor="middle">#15 relatório PDF</text>
+    <text x="106" y="193" font-size="7.5" fill="#4b5563" text-anchor="middle">priority: P3 · pts: 3</text>
+    <rect x="30" y="210" width="152" height="44" rx="4" fill="#111827" stroke="#4b5563" stroke-width="1"/>
+    <text x="106" y="227" font-size="8.5" fill="#8b96a8" text-anchor="middle">#18 export CSV</text>
+    <text x="106" y="243" font-size="7.5" fill="#4b5563" text-anchor="middle">priority: P3 · pts: 2</text>
+  </g>
+
+  <!-- Ready -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.2s" dur="0.4s" fill="freeze"/>
+    <rect x="200" y="82" width="172" height="280" rx="6" fill="#0d1117" stroke="#3b82f6" stroke-width="1"/>
+    <text x="286" y="102" font-size="9.5" fill="#3b82f6" font-weight="700" text-anchor="middle">READY</text>
+    <rect x="210" y="110" width="152" height="44" rx="4" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1"/>
+    <text x="286" y="127" font-size="8.5" fill="#8b96a8" text-anchor="middle">#21 endpoint users</text>
+    <text x="286" y="143" font-size="7.5" fill="#3b82f6" text-anchor="middle">priority: P1 · pts: 8</text>
+    <rect x="210" y="160" width="152" height="44" rx="4" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1"/>
+    <text x="286" y="177" font-size="8.5" fill="#8b96a8" text-anchor="middle">#22 validação input</text>
+    <text x="286" y="193" font-size="7.5" fill="#3b82f6" text-anchor="middle">priority: P1 · pts: 3</text>
+  </g>
+
+  <!-- In Progress -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.3s" dur="0.4s" fill="freeze"/>
+    <rect x="380" y="82" width="172" height="280" rx="6" fill="#0d1117" stroke="#2dd4bf" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="466" y="102" font-size="9.5" fill="#2dd4bf" font-weight="700" text-anchor="middle">IN PROGRESS</text>
+    <rect x="390" y="110" width="152" height="44" rx="4" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="466" y="127" font-size="8.5" fill="#2dd4bf" text-anchor="middle">#19 POST /users</text>
+    <text x="466" y="143" font-size="7.5" fill="#4b5563" text-anchor="middle">S-042 · worktree aberto</text>
+    <rect x="390" y="160" width="152" height="44" rx="4" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="466" y="177" font-size="8.5" fill="#2dd4bf" text-anchor="middle">#20 GET /users/:id</text>
+    <text x="466" y="193" font-size="7.5" fill="#4b5563" text-anchor="middle">S-043 · em revisão</text>
+  </g>
+
+  <!-- In Review -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.4s" dur="0.4s" fill="freeze"/>
+    <rect x="560" y="82" width="172" height="280" rx="6" fill="#0d1117" stroke="#a78bfa" stroke-width="1"/>
+    <text x="646" y="102" font-size="9.5" fill="#a78bfa" font-weight="700" text-anchor="middle">IN REVIEW</text>
+    <rect x="570" y="110" width="152" height="44" rx="4" fill="#140d1f" stroke="#a78bfa" stroke-width="1"/>
+    <text x="646" y="127" font-size="8.5" fill="#a78bfa" text-anchor="middle">#17 schema DB</text>
+    <text x="646" y="143" font-size="7.5" fill="#4b5563" text-anchor="middle">PR #89 · aguard. revisor</text>
+  </g>
+
+  <!-- QA -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.5s" dur="0.4s" fill="freeze"/>
+    <rect x="740" y="82" width="172" height="280" rx="6" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="826" y="102" font-size="9.5" fill="#f59e0b" font-weight="700" text-anchor="middle">QA</text>
+    <rect x="750" y="110" width="152" height="44" rx="4" fill="#1a1000" stroke="#f59e0b" stroke-width="1"/>
+    <text x="826" y="127" font-size="8.5" fill="#f59e0b" text-anchor="middle">#14 login flow</text>
+    <text x="826" y="143" font-size="7.5" fill="#4b5563" text-anchor="middle">usability-agent testando</text>
+    <rect x="750" y="160" width="152" height="44" rx="4" fill="#1a1000" stroke="#f59e0b" stroke-width="1"/>
+    <text x="826" y="177" font-size="8.5" fill="#f59e0b" text-anchor="middle">#16 forgot password</text>
+    <text x="826" y="193" font-size="7.5" fill="#4b5563" text-anchor="middle">acessibilidade checando</text>
+  </g>
+
+  <!-- Done -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.6s" dur="0.4s" fill="freeze"/>
+    <rect x="920" y="82" width="172" height="280" rx="6" fill="#0d1117" stroke="#4ade80" stroke-width="1"/>
+    <text x="1006" y="102" font-size="9.5" fill="#4ade80" font-weight="700" text-anchor="middle">DONE</text>
+    <rect x="930" y="110" width="152" height="44" rx="4" fill="#0d1a0d" stroke="#4ade80" stroke-width="1"/>
+    <text x="1006" y="127" font-size="8.5" fill="#4ade80" text-anchor="middle">#08 setup projeto</text>
+    <text x="1006" y="143" font-size="7.5" fill="#4b5563" text-anchor="middle">merged · deploy staging</text>
+    <rect x="930" y="160" width="152" height="44" rx="4" fill="#0d1a0d" stroke="#4ade80" stroke-width="1"/>
+    <text x="1006" y="177" font-size="8.5" fill="#4ade80" text-anchor="middle">#10 env config</text>
+    <text x="1006" y="193" font-size="7.5" fill="#4b5563" text-anchor="middle">merged · em prod</text>
+    <rect x="930" y="210" width="152" height="44" rx="4" fill="#0d1a0d" stroke="#4ade80" stroke-width="1"/>
+    <text x="1006" y="227" font-size="8.5" fill="#4ade80" text-anchor="middle">#11 CI/CD pipeline</text>
+    <text x="1006" y="243" font-size="7.5" fill="#4b5563" text-anchor="middle">merged · automatizado</text>
+  </g>
+
+  <!-- ══ CAMPOS CUSTOMIZADOS + ISSUES ESPECIAIS ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.8s" dur="0.4s" fill="freeze"/>
+    <!-- Campos customizados -->
+    <rect x="1110" y="82" width="340" height="280" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="1128" y="102" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">CAMPOS DO PROJETO</text>
+    <line x1="1120" y1="108" x2="1440" y2="108" stroke="#1f2937" stroke-width="1"/>
+    <text x="1128" y="126" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Status         9 opções (ver abaixo)</text>
+    <text x="1128" y="144" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Priority       P0 · P1 · P2 · P3</text>
+    <text x="1128" y="162" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Story Points   1 · 2 · 3 · 5 · 8 · 13</text>
+    <text x="1128" y="180" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Sprint         Sprint 01 · 02 …</text>
+    <text x="1128" y="198" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Agent          S-042 · S-043 …</text>
+    <text x="1128" y="216" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Worktree       ../worktrees/…</text>
+    <text x="1128" y="234" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Reviewer       (não é o implementador)</text>
+    <text x="1128" y="252" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Gate Status    passed · rejected</text>
+    <text x="1128" y="270" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Linked PR      #89 · #91 …</text>
+    <text x="1128" y="292" font-size="8" fill="#f59e0b">Campos obrigatórios antes de mover para In Progress</text>
+    <text x="1128" y="308" font-size="8" fill="#4b5563">Automação: mudar status via PR label ou comment /status</text>
+    <text x="1128" y="326" font-size="8" fill="#4b5563">Vistas: Board (padrão) · Table · Roadmap · Backlog</text>
+    <text x="1128" y="344" font-size="8" fill="#4b5563">Milestone filter por sprint → velocity tracking automático</text>
+  </g>
+
+  <!-- DECISAO + LOG -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1s" dur="0.4s" fill="freeze"/>
+    <rect x="1460" y="82" width="320" height="136" rx="8" fill="#0d1117" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="1478" y="102" font-size="10" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">DECISAO issues</text>
+    <line x1="1470" y1="108" x2="1770" y2="108" stroke="#1f2937" stroke-width="1"/>
+    <text x="1478" y="126" font-size="9" fill="#8b96a8">label: decisao · status: Em decisão</text>
+    <text x="1478" y="144" font-size="9" fill="#8b96a8">Toda decisão arquitetural ou de produto</text>
+    <text x="1478" y="162" font-size="9" fill="#8b96a8">abre issue própria com contexto, opções</text>
+    <text x="1478" y="180" font-size="9" fill="#8b96a8">e rationale. Decisão é registrada no body.</text>
+    <text x="1478" y="198" font-size="8" fill="#ef4444">Nunca no chat. Sempre rastreável no histórico.</text>
+
+    <rect x="1460" y="226" width="320" height="136" rx="8" fill="#0d1117" stroke="#4b5563" stroke-width="1"/>
+    <text x="1478" y="246" font-size="10" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">LOG DE EVENTOS</text>
+    <line x1="1470" y1="252" x2="1770" y2="252" stroke="#1f2937" stroke-width="1"/>
+    <text x="1478" y="270" font-size="9" fill="#4b5563">issue LOG · sempre aberta · pinned no topo</text>
+    <text x="1478" y="288" font-size="9" fill="#8b96a8">Registra: gates passados/rejeitados,</text>
+    <text x="1478" y="306" font-size="9" fill="#8b96a8">escalações, mudanças de escopo,</text>
+    <text x="1478" y="324" font-size="9" fill="#8b96a8">milestones, crashes e recuperações.</text>
+    <text x="1478" y="342" font-size="8" fill="#4b5563">Formato: [ISO 8601] EVENTO: detalhe</text>
+    <text x="1478" y="356" font-size="8" fill="#4b5563">ex: [2025-11-14T10:23Z] GATE_PASSED: #19</text>
+  </g>
+
+  <!-- ══ 9 STATUS ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.2s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="378" width="1080" height="46" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="398" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">9 STATUS DO BOARD</text>
+    <!-- pills dos 9 status -->
+    <rect x="220" y="387" width="64" height="18" rx="9" fill="#1a1a1a"/>
+    <text x="252" y="400" font-size="8.5" fill="#6b7280" text-anchor="middle">Backlog</text>
+    <rect x="292" y="387" width="56" height="18" rx="9" fill="#0d1a2e"/>
+    <text x="320" y="400" font-size="8.5" fill="#3b82f6" text-anchor="middle">Ready</text>
+    <rect x="356" y="387" width="84" height="18" rx="9" fill="#0d1a1a"/>
+    <text x="398" y="400" font-size="8.5" fill="#2dd4bf" text-anchor="middle">In Progress</text>
+    <rect x="448" y="387" width="72" height="18" rx="9" fill="#140d1f"/>
+    <text x="484" y="400" font-size="8.5" fill="#a78bfa" text-anchor="middle">In Review</text>
+    <rect x="528" y="387" width="42" height="18" rx="9" fill="#1a1000"/>
+    <text x="549" y="400" font-size="8.5" fill="#f59e0b" text-anchor="middle">QA</text>
+    <rect x="578" y="387" width="98" height="18" rx="9" fill="#1a1000"/>
+    <text x="627" y="400" font-size="8.5" fill="#f59e0b" text-anchor="middle">Em Decisão</text>
+    <rect x="684" y="387" width="86" height="18" rx="9" fill="#1a0d0d"/>
+    <text x="727" y="400" font-size="8.5" fill="#ef4444" text-anchor="middle">Bloqueado</text>
+    <rect x="778" y="387" width="48" height="18" rx="9" fill="#0d1a0d"/>
+    <text x="802" y="400" font-size="8.5" fill="#4ade80" text-anchor="middle">Done</text>
+    <rect x="834" y="387" width="72" height="18" rx="9" fill="#0d1a0d"/>
+    <text x="870" y="400" font-size="8.5" fill="#4ade80" text-anchor="middle">Cancelado</text>
+  </g>
+
+  <!-- ══ PAINEL INFERIOR ══ -->
+  <!-- Convenções de label -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.4s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="440" width="540" height="218" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="38" y="460" font-size="10" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">CONVENÇÕES DE LABELS</text>
+    <line x1="30" y1="466" x2="550" y2="466" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="484" font-size="9.5" fill="#8b96a8">tipo:     feat · fix · refactor · docs · test · chore</text>
+    <text x="38" y="502" font-size="9.5" fill="#8b96a8">area:     backend · frontend · infra · security · ux</text>
+    <text x="38" y="520" font-size="9.5" fill="#8b96a8">priority: P0 (crítico) · P1 · P2 · P3 (nice-to-have)</text>
+    <text x="38" y="538" font-size="9.5" fill="#8b96a8">estado:   blocked · needs-decision · waiting-review</text>
+    <text x="38" y="556" font-size="9.5" fill="#8b96a8">especial: decisao · log · alerta-perigo · lgpd</text>
+    <text x="38" y="578" font-size="9.5" fill="#4b5563">Labels aplicados na criação da issue pelo orquestrador</text>
+    <text x="38" y="596" font-size="9.5" fill="#4b5563">Obrigatório: tipo + area + priority antes de Ready</text>
+    <text x="38" y="614" font-size="9.5" fill="#4b5563">blocked: issue deve referenciar o bloqueador (#id)</text>
+    <text x="38" y="632" font-size="9.5" fill="#2dd4bf">Automatizado: PR merge → label "done" + fecha issue</text>
+    <text x="38" y="650" font-size="8.5" fill="#4b5563">Busca: label:"P0" is:open → lista todos críticos abertos</text>
+  </g>
+
+  <!-- Estrutura de issue -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.6s" dur="0.4s" fill="freeze"/>
+    <rect x="570" y="440" width="640" height="218" rx="8" fill="#0d1117" stroke="#3b82f6" stroke-width="1"/>
+    <text x="588" y="460" font-size="10" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">ESTRUTURA DE ISSUE PADRÃO</text>
+    <line x1="580" y1="466" x2="1200" y2="466" stroke="#1f2937" stroke-width="1"/>
+    <text x="588" y="484" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">## Contexto</text>
+    <text x="588" y="500" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Por que esta task existe; qual problema resolve.</text>
+    <text x="588" y="518" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">## Critérios de Aceite</text>
+    <text x="588" y="534" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- [ ] Dado X quando Y então Z</text>
+    <text x="588" y="550" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- [ ] Testes cobrindo o happy path e edge cases</text>
+    <text x="588" y="566" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">## Referências</text>
+    <text x="588" y="582" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Links para doc, ADR, PR relacionado, issue pai.</text>
+    <text x="588" y="598" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">## Log de Progresso (agent preenche)</text>
+    <text x="588" y="614" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- 2025-11-14: criado S-042, worktree aberto</text>
+    <text x="588" y="630" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">- 2025-11-14: PR #89 aberto, aguardando QA</text>
+    <text x="588" y="648" font-size="8" fill="#3b82f6">Issues fechadas apenas por PR merge — nunca manualmente</text>
+  </g>
+
+  <!-- Fluxo de automação -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.8s" dur="0.4s" fill="freeze"/>
+    <rect x="1220" y="440" width="560" height="218" rx="8" fill="#0d1117" stroke="#4ade80" stroke-width="1"/>
+    <text x="1238" y="460" font-size="10" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">AUTOMAÇÕES DO BOARD</text>
+    <line x1="1230" y1="466" x2="1770" y2="466" stroke="#1f2937" stroke-width="1"/>
+    <text x="1238" y="484" font-size="9" fill="#8b96a8">PR opened        → issue muda para In Review</text>
+    <text x="1238" y="502" font-size="9" fill="#8b96a8">PR merged        → issue muda para Done</text>
+    <text x="1238" y="520" font-size="9" fill="#8b96a8">PR closed (no M) → issue volta para Ready</text>
+    <text x="1238" y="538" font-size="9" fill="#8b96a8">label: blocked   → status muda para Bloqueado</text>
+    <text x="1238" y="556" font-size="9" fill="#8b96a8">comment /status QA → move para QA</text>
+    <text x="1238" y="574" font-size="9" fill="#8b96a8">CI falha         → issue recebe label "ci-failed"</text>
+    <text x="1238" y="594" font-size="9.5" fill="#4b5563">Implementado via GitHub Actions + gh CLI</text>
+    <text x="1238" y="614" font-size="9.5" fill="#4b5563">Orquestrador atualiza campos (agent, worktree)</text>
+    <text x="1238" y="632" font-size="9.5" fill="#4b5563">via API: gh project item-edit --field-value</text>
+    <text x="1238" y="652" font-size="8.5" fill="#4ade80">Nenhum status é atualizado manualmente — sempre rastreado</text>
+  </g>
+
+  <!-- ══ STATUS BAR ══ -->
+  <rect x="20" y="672" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="683" r="4" fill="#f59e0b">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="687" font-size="9.5" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 13</text>
+  <text x="112" y="687" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="122" y="687" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">9 status · campos obrigatórios · DECISAO issues · LOG pinned · automações via GitHub Actions</text>
+  <text x="1770" y="687" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">GITHUB PROJECTS</text>
+
+  <!-- ══ LEGENDA ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="2s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="706" width="1760" height="76" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="724" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA</text>
+    <line x1="30" y1="728" x2="1770" y2="728" stroke="#1f2937" stroke-width="1"/>
+    <rect x="38" y="736" width="10" height="10" rx="2" fill="#1a1a1a" stroke="#4b5563" stroke-width="1"/>
+    <text x="55" y="746" font-size="9.5" fill="#8b96a8">Backlog / Cancelado</text>
+    <rect x="205" y="736" width="10" height="10" rx="2" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1"/>
+    <text x="222" y="746" font-size="9.5" fill="#8b96a8">Ready</text>
+    <rect x="288" y="736" width="10" height="10" rx="2" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="305" y="746" font-size="9.5" fill="#8b96a8">In Progress</text>
+    <rect x="405" y="736" width="10" height="10" rx="2" fill="#140d1f" stroke="#a78bfa" stroke-width="1"/>
+    <text x="422" y="746" font-size="9.5" fill="#8b96a8">In Review</text>
+    <rect x="510" y="736" width="10" height="10" rx="2" fill="#1a1000" stroke="#f59e0b" stroke-width="1"/>
+    <text x="527" y="746" font-size="9.5" fill="#8b96a8">QA / Em Decisão</text>
+    <rect x="660" y="736" width="10" height="10" rx="2" fill="#1a0d0d" stroke="#ef4444" stroke-width="1"/>
+    <text x="677" y="746" font-size="9.5" fill="#8b96a8">Bloqueado</text>
+    <rect x="765" y="736" width="10" height="10" rx="2" fill="#0d1a0d" stroke="#4ade80" stroke-width="1"/>
+    <text x="782" y="746" font-size="9.5" fill="#8b96a8">Done</text>
+    <text x="38" y="772" font-size="9.5" fill="#4b5563">DECISAO issue = registro permanente de decisão arquitetural · LOG issue = histórico de eventos do projeto · ADR = Architecture Decision Record</text>
+  </g>
+</svg>

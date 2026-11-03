@@ -1,0 +1,17 @@
+{
+  "title": "Sahil Ijaz",
+  "tagline": ["Software Engineer", {"text": "· DevOps focused", "accent": true}, "· CI/CD, containers, cloud"],
+  "stack": ["Docker", "Kubernetes", "GitHub Actions", "AWS", "Nginx", "Node.js", "Python"],
+  "panel": {
+    "type": "terminal",
+    "title": "deploy.sh",
+    "lines": [
+      {"cmd": "docker build -t api:1.4.2 ."},
+      {"out": "image built · 48 MB · 6.1s"},
+      {"cmd": "kubectl rollout status deploy/api"},
+      {"out": "3/3 replicas updated"},
+      {"cmd": "curl -s /health/ready"},
+      {"ok": "200 OK · ready"}
+    ]
+  }
+}

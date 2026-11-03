@@ -99,6 +99,33 @@ so the principal audits Status changes in the project history at verification.
 6. Accepted requires user identity/date/scope/decision in the body or a comment from
    the user. Closed is Sprint Review or explicit abandonment with label and reason.
 
+## Board freshness and dual validation
+A board that nobody updates is not a record. Because built-in workflows are off, Status moves only when
+an actor moves it, so freshness is a duty with owners. Defaults below; a project may override the windows
+in its instructions.
+
+- **Stale** means no Status change, comment, evidence link or LOG event within 24 hours for `in-progress`
+  and `in-review`, 7 days for `pending` and `blocked` (a card waiting on a user decision shows the date of
+  the question), and 30 days for `open`.
+- **Demand owner** (the `product-owner` for stories and epics, otherwise the principal) confirms the card
+  still represents a live request: outcome, priority and criteria are current. Otherwise rewrite it or
+  move it to `closed` with the `abandonado` label and a reason.
+- **Delivery owner** (the specialist instance assigned in the Agent field) confirms Status, evidence links
+  and next owner reflect the real work. The principal persisting an update for a read-only participant
+  does not count as the delivery owner's attestation.
+- **Independent cross-check by the principal.** It reads both attestations against the project history,
+  the handoffs and the evidence, flags every irregularity (stale, Status ahead of evidence, missing owner)
+  and records the result. A card is validated only when both owners attested inside its window.
+- **Review whenever a crash-safety record is written.** When the principal writes a handoff (every
+  project with this profile), a diary entry or the live state (when `session-continuity` is selected), it
+  reviews the board in the same step: (1) every `in-progress` and `in-review` card has a live agent or a
+  handoff file; a lost agent moves its card to `blocked` (prior status in the body, `LOG PROBLEMA`), or to
+  `pending` when a replacement will be dispatched; (2) Status and evidence match what was just recorded;
+  (3) stale cards are attested, moved or closed with a reason; (4) each move is a `LOG` event and follows
+  the authority table above.
+- **Also review** at session start or resume, at the end of each wave and before verification. Record one
+  line with the number of cards checked, stale, moved and waiting on a decision.
+
 ## Severity mapping
 Canonical findings: Critical / High / Medium / Low; retain source severity verbatim.
 Legacy Critical -> Critical. Legacy Important -> High unless documented impact

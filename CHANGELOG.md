@@ -1,6 +1,97 @@
-# Changelog
+# <img src="assets/icons/teal/file-text.svg" width="28" align="top"> Changelog
+
+<p align="center">
+  <img src="https://img.shields.io/badge/versão_atual-2.0.0-0ea5a4?style=flat-square" alt="Versão atual 2.0.0">
+  <img src="https://img.shields.io/badge/formato-Keep_a_Changelog-8b96a8?style=flat-square" alt="Formato Keep a Changelog">
+  <img src="https://img.shields.io/badge/versionamento-template.json-60a5fa?style=flat-square" alt="Versões seguem template.json">
+</p>
 
 Formato baseado em Keep a Changelog. Versões seguem `template.json`.
+
+[← Voltar ao README](README.md#sumario) · [Compatibilidade](docs/compatibility.md) · [Validação](docs/validation.md)
+
+| Versão | Data | Destaque |
+|---|---|---|
+| [2.0.0](#200---2026-11-03) | 2026-11-03 | Distribuída como pacote Python `guilda`, com `upgrade`, `promote`, `self-update` e `config`; instalação de mods (`--mod`), mod `token-handoff`, skills `dark-pipeline-svg` e `readme-styling`, guia dos diagramas e README estilizado |
+| [1.3.0](#130---2026-10-29) | 2026-10-29 | Instalador de um comando e README explicado |
+| [1.2.0](#120---2026-10-29) | 2026-10-29 | Economia, continuidade de sessão e comunicação |
+| [1.1.0](#110---2026-10-19) | 2026-10-19 | Generalização, 28 papéis e gestão de produto |
+| [1.0.0](#100) | n/d | Template portátil com 18 especialistas |
+
+## [2.0.0] - 2026-11-03
+
+Primeira versão distribuída como pacote Python `guilda` (`pip install guilda` ou `uv tool install guilda`, depois da
+publicação no PyPI).
+
+### Quebras de compatibilidade
+- **Nome do manifesto:** `.engineering/manifest.json` passa de `name: engineering-template` para `name: guilda`.
+  O nome antigo só é aceito pelo `guilda upgrade`, que o reescreve; `sync` e `check` o recusam. Migração:
+  `guilda upgrade <projeto> --dry-run` e depois `guilda upgrade <projeto>`. A pasta `.engineering/` não muda.
+- **Ponto de entrada:** o comando é `guilda` (`guilda init|sync|check|doctor|package|install|...`). `install.py` e
+  `scripts/template.py` continuam para uso a partir do checkout.
+- **Allowlist do payload:** o pacote distribuído leva só o conteúdo listado em `guilda/payload.txt`
+  (`python -m guilda.payload --check` confere); o que fica fora da lista não vai no pacote.
+- **Marketplace de mods:** novas instalações de mods usam o marketplace `guilda-mods`. Plugins já instalados
+  globalmente não são tocados.
+
+### Adicionado
+- **`guilda upgrade [projeto] [--dry-run] [--yes]`:** atualiza um projeto instalado arquivo por arquivo. Intocado e
+  igual: nada; intocado e alterado no template: atualiza; modificado por você com o template igual: mantém o seu;
+  modificado dos dois lados: conflito, sobrescrito só com aprovação explícita (sim na pergunta do terminal ou
+  `--yes`; sem terminal interativo, só `--yes`). Migra o manifesto do nome antigo, inclusive de instalações 1.3.0
+  feitas de um checkout com `core/graphify-out/`: as cópias intactas de `.engineering/graphify-out/` são removidas e
+  as alteradas ficam no disco, fora do manifesto. Não avisa de versão nova do `guilda`: esse aviso só existe com a
+  verificação opcional (`update-check`).
+- **`guilda promote <projeto> --title ... --description ...`:** propõe suas alterações locais como feature. Varre
+  segredos e caminhos pessoais, mostra o que será enviado, pede confirmação, sobe um gist secreto e abre uma issue.
+  Nunca envia `*.local.*`, `.claude/worktrees/` nem `.claude/projects/`. Contribuições de terceiros entram só por issue.
+- **`guilda self-update [--dry-run] [--yes]`:** atualiza o próprio `guilda` com `pip` ou `uv`. Opcional: só roda quando
+  você pede.
+- **`guilda config get` e `guilda config set update-check <off|notify|auto>`:** configuração do usuário. A verificação
+  de versão nova é opcional e vem desligada (`off`); `notify` avisa no máximo uma vez por dia e `auto` também instala.
+  A variável `GUILDA_CONFIG` aponta o arquivo de configuração e existe só para testes.
+- **Pacote e licença:** `pyproject.toml` (hatchling), publicação por tag `vX.Y.Z` com aprovação manual do mantenedor,
+  `LICENSE` Apache-2.0 e modelo de issue para propostas.
+- **Instalação de mods (`install.py --mod <nome> [--mod-scope project|global]`):** `integrations/mod/` guarda
+  mods do Claude Code; `scripts/mods.py` copia o mod e seus scripts para `.claude/` do projeto ou do usuário, registra
+  um marketplace local, instala o plugin pelo `claude plugin` e acrescenta a linha em
+  `docs/operations/registro-instalacoes.md`. Aceita `--dry-run`. Os mods ficam fora de `.engineering/`.
+- **Mod `token-handoff`:** só o marco de 400k (sem marcos de 100k/200k/300k e sem perguntas ao humano). Aos 400k
+  bloqueia novos agentes, faz o modelo gravar o prompt de continuação e, com o arquivo pronto e sem agente ativo,
+  abre a sessão nova com ele e encerra a atual. Windows apenas; testado por unidade, não verificado em sessão real.
+- **Skill `dark-pipeline-svg`:** gera diagramas SVG animados (SMIL) em HTML autocontido no
+  design system dark pipeline: paleta por grupo, cabeçalho, barra de status e legenda. Registrada
+  em `template.json` e instalada em `.claude/skills` e `.agents/skills`.
+  Inclui `scripts/chart.py` (gráficos animados `stacked`, `bars` e `donut` a partir de JSON, itens,
+  porcentagens e cores livres) e `scripts/hero.py` (banner de título de projeto com stack e painel animado: `terminal`, `editor`,
+  `pipeline`, `metrics`, `architecture` ou `custom`, com paleta do projeto); exemplos em `examples/`.
+- **Skill `readme-styling`:** escreve README e markdowns estilizados (banner SVG animado, badges, grids,
+  código com coloração, diagramas e gráficos via `dark-pipeline-svg`) com `scripts/lucide_icon.py`
+  para recolorir ícones, `scripts/code_card.py` (cartões de código e de árvore em SVG com realce por linguagem) e
+  `scripts/table_card.py` (cartões de tabela a partir de markdown), sempre acompanhados do texto copiável, e `templates/README.template.md` (modelo de README).
+- **`docs/diagramas.md`:** guia aprofundado dos 18 diagramas (macro e micro), cada um exibido na própria
+  página em SVG animado (`assets/diagramas/`, extraído dos HTML): fluxo de implementação,
+  regras dos agentes com link para o arquivo de origem e, em cada etapa, o que é só ilustração do
+  desenho e diverge do contrato real (por exemplo estados do quadro, tentativas de correção, DoD).
+- **`assets/icons/`:** biblioteca Lucide completa (2275 SVGs, ISC) e conjunto padrão por assunto.
+- **`assets/`:** galeria de 17 diagramas do passo a passo do template, mais o fluxo macro e um
+  exemplo avulso de fluxo de embedding, com índice em planilha.
+- **Quadro vivo (regra):** prazos de frescor, dois donos que atestam cada card (demanda e entrega),
+  conferência independente do principal e revisão do quadro a cada handoff, diário ou estado vivo gravado.
+  Em `core/workflow/github-projects.md`, `economy.md` e `session-continuity.md`.
+- **Varredura de segredos sem ler o valor (regra):** a busca usa só lista de arquivos ou contagem
+  (`files_with_matches`/`count`, `rg -l`/`-c`), nunca saída de conteúdo; confirmar um achado exige
+  mascarar o valor ou autorização explícita para o arquivo. Em `core/policies/safety.md`.
+- **Política `versioning`:** toda mudança que entra na `main` recebe antes uma tag SemVer, publicada
+  antes do código, pelo principal; não concede autorização de push (`core/policies/versioning.md`).
+
+### Alterado
+- **README:** refeito com a skill `readme-styling` (banner, badges, grids, gráficos, cartões de código); nova seção sobre os diagramas, skills atualizadas (três) e estrutura com `assets/`. Ganhou um **Sumário** no início, com redirecionamento para as seções e para os documentos de `docs/`, e as tabelas do glossário (ações, políticas, fluxos e integrações) passaram a cartões SVG com o texto copiável em `<details>`.
+- **`docs/compatibility.md`, `docs/validation.md` e este changelog:** estilizados no mesmo padrão (cabeçalhos com ícone, badges, tabelas e destaques), com links de volta ao Sumário do README. Todas as tabelas de conteúdo de `docs/` viraram cartões SVG (`assets/tabelas/`) com o texto copiável em `<details>`; só as tabelas de navegação, em que o link é o ponto, ficam em markdown.
+- **Documentação:** contagens e menções de skills nos adapters e em `docs/` alinhadas com o catálogo (11 ações, 3 skills, 18 diagramas).
+
+### Corrigido
+- `assets/svg-03-brainstorm.html`: tag `</brief>` perdida dentro de um `<text>`, que invalidava o SVG fora do navegador.
 
 ## [1.3.0] - 2026-10-29
 

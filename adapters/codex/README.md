@@ -12,7 +12,7 @@ Project trust and provider support must be verified in the consuming environment
 `AGENTS.md` explicitly loads shared contracts; each native agent also receives
 the common policy instead of relying on inheritance.
 
-Eight action skills plus drawio are emitted into `.agents/skills/`; no identical
+Eleven action skills plus the catalog skills (drawio-diagram, dark-pipeline-svg, readme-styling) are emitted into `.agents/skills/`; no identical
 Claude slash-command interface is promised. No global settings are changed.
 
 Sources: https://learn.chatgpt.com/docs/agent-configuration/subagents and

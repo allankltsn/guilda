@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-teal" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#2dd4bf"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arr-red" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#ef4444"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#4ade80"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#3b82f6"/>
+    </marker>
+
+    <path id="p-in-tech" d="M260,330 L360,330" fill="none"/>
+    <path id="p-in-sec"  d="M260,430 L360,430" fill="none"/>
+    <path id="p-in-priv" d="M260,530 L360,530" fill="none"/>
+    <path id="p-tech-qa" d="M580,330 L700,430" fill="none"/>
+    <path id="p-sec-qa"  d="M580,430 L700,430" fill="none"/>
+    <path id="p-priv-qa" d="M580,530 L700,430" fill="none"/>
+    <path id="p-qa-out"  d="M900,430 L1020,430" fill="none"/>
+  </defs>
+
+  <rect width="1800" height="800" fill="#0b0f17"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="1760" height="48" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="16" width="6" height="48" rx="3" fill="#f59e0b"/>
+  <text x="44" y="37" font-size="15" font-weight="700" fill="#e6edf3">08 — Gates de Validação Independentes</text>
+  <text x="44" y="55" font-size="11" fill="#8b96a8">tech-review + security + privacy em paralelo → QA final · 4-eyes rule · rejeição explícita com evidência</text>
+  <text x="1760" y="37" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 08/17</text>
+  <text x="1760" y="52" font-size="9.5" fill="#f59e0b" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">gates · validação · 4-eyes</text>
+
+  <!-- ══ ENTRADA ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.4s" fill="freeze"/>
+    <rect x="30" y="360" width="230" height="130" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="2"/>
+    <text x="145" y="383" font-size="10" fill="#2dd4bf" font-weight="700" text-anchor="middle">HANDOFF</text>
+    <text x="145" y="399" font-size="8.5" fill="#8b96a8" text-anchor="middle">agente entrega o diff</text>
+    <line x1="40" y1="406" x2="250" y2="406" stroke="#1f2937" stroke-width="1"/>
+    <text x="42" y="422" font-size="8.5" fill="#4b5563">· diff compacto do worktree</text>
+    <text x="42" y="436" font-size="8.5" fill="#4b5563">· evidências de testes</text>
+    <text x="42" y="450" font-size="8.5" fill="#4b5563">· notas de decisão</text>
+    <text x="42" y="464" font-size="8.5" fill="#4b5563">· checklist DoD preenchido</text>
+    <text x="42" y="480" font-size="8.5" fill="#2dd4bf">→ encaminhado a 3 gates</text>
+  </g>
+
+  <!-- Setas fan-out (entrada → gates) -->
+  <line x1="260" y1="425" x2="360" y2="330" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <line x1="260" y1="425" x2="360" y2="425" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <line x1="260" y1="425" x2="360" y2="530" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+
+  <!-- Dots animados nas 3 setas -->
+  <circle r="3.5" fill="#2dd4bf" opacity="0">
+    <animateMotion dur="1.4s" repeatCount="indefinite" begin="0.2s"><mpath href="#p-in-tech"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="0.2s"/>
+  </circle>
+  <circle r="3.5" fill="#2dd4bf" opacity="0">
+    <animateMotion dur="1.4s" repeatCount="indefinite" begin="0.6s"><mpath href="#p-in-sec"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="0.6s"/>
+  </circle>
+  <circle r="3.5" fill="#2dd4bf" opacity="0">
+    <animateMotion dur="1.4s" repeatCount="indefinite" begin="1.0s"><mpath href="#p-in-priv"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="1.0s"/>
+  </circle>
+
+  <!-- ══ GATE 1: TECH-REVIEW ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.3s" dur="0.4s" fill="freeze"/>
+    <rect x="360" y="280" width="220" height="100" rx="8" fill="#0d1117" stroke="#3b82f6" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="470" y="302" font-size="10" fill="#3b82f6" font-weight="700" text-anchor="middle">TECH-REVIEW</text>
+    <text x="470" y="318" font-size="8.5" fill="#8b96a8" text-anchor="middle">agente independente</text>
+    <line x1="370" y1="324" x2="570" y2="324" stroke="#1f2937" stroke-width="1"/>
+    <text x="372" y="338" font-size="8.5" fill="#4b5563">· qualidade do código</text>
+    <text x="372" y="352" font-size="8.5" fill="#4b5563">· cobertura de testes (≥80%)</text>
+    <text x="372" y="366" font-size="8.5" fill="#4b5563">· boas práticas / lint</text>
+  </g>
+
+  <!-- ══ GATE 2: SECURITY ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.5s" dur="0.4s" fill="freeze"/>
+    <rect x="360" y="380" width="220" height="100" rx="8" fill="#0d1117" stroke="#ef4444" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2.2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="470" y="402" font-size="10" fill="#ef4444" font-weight="700" text-anchor="middle">SECURITY-GATE</text>
+    <text x="470" y="418" font-size="8.5" fill="#8b96a8" text-anchor="middle">owasp + secrets + pentest</text>
+    <line x1="370" y1="424" x2="570" y2="424" stroke="#1f2937" stroke-width="1"/>
+    <text x="372" y="438" font-size="8.5" fill="#4b5563">· OWASP Top-10 scan</text>
+    <text x="372" y="452" font-size="8.5" fill="#4b5563">· secrets leak detection</text>
+    <text x="372" y="466" font-size="8.5" fill="#4b5563">· injection / auth analysis</text>
+  </g>
+
+  <!-- ══ GATE 3: PRIVACY ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.7s" dur="0.4s" fill="freeze"/>
+    <rect x="360" y="480" width="220" height="100" rx="8" fill="#0d1117" stroke="#7c3aed" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+    </rect>
+    <text x="470" y="502" font-size="10" fill="#a78bfa" font-weight="700" text-anchor="middle">PRIVACY-GATE</text>
+    <text x="470" y="518" font-size="8.5" fill="#8b96a8" text-anchor="middle">lgpd + gdpr + dados pessoais</text>
+    <line x1="370" y1="524" x2="570" y2="524" stroke="#1f2937" stroke-width="1"/>
+    <text x="372" y="538" font-size="8.5" fill="#4b5563">· base legal definida</text>
+    <text x="372" y="552" font-size="8.5" fill="#4b5563">· finalidade de dados clara</text>
+    <text x="372" y="566" font-size="8.5" fill="#4b5563">· retenção configurada</text>
+  </g>
+
+  <!-- Setas gates → QA (fan-in) -->
+  <line x1="580" y1="330" x2="700" y2="430" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+  <line x1="580" y1="430" x2="700" y2="430" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+  <line x1="580" y1="530" x2="700" y2="430" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+
+  <!-- Dots nas setas para QA -->
+  <circle r="3.5" fill="#f59e0b" opacity="0">
+    <animateMotion dur="1.4s" repeatCount="indefinite" begin="0.4s"><mpath href="#p-tech-qa"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="0.4s"/>
+  </circle>
+  <circle r="3.5" fill="#f59e0b" opacity="0">
+    <animateMotion dur="1.4s" repeatCount="indefinite" begin="0.8s"><mpath href="#p-sec-qa"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="0.8s"/>
+  </circle>
+  <circle r="3.5" fill="#f59e0b" opacity="0">
+    <animateMotion dur="1.4s" repeatCount="indefinite" begin="1.2s"><mpath href="#p-priv-qa"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="1.2s"/>
+  </circle>
+
+  <!-- ══ QA GATE (central) ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.9s" dur="0.4s" fill="freeze"/>
+    <rect x="700" y="374" width="200" height="112" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="2.5">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="800" y="398" font-size="10" fill="#f59e0b" font-weight="800" text-anchor="middle">QA-GATE</text>
+    <text x="800" y="414" font-size="8.5" fill="#8b96a8" text-anchor="middle">agregação dos 3 reports</text>
+    <line x1="710" y1="420" x2="890" y2="420" stroke="#1f2937" stroke-width="1"/>
+    <text x="712" y="435" font-size="8.5" fill="#f59e0b">todos APROVADOS?</text>
+    <text x="712" y="449" font-size="8.5" fill="#4b5563">→ SIM: segue para PR</text>
+    <text x="712" y="463" font-size="8.5" fill="#ef4444">→ NÃO: rejeição com causa</text>
+    <text x="712" y="478" font-size="8.5" fill="#4b5563">→ report consolidado</text>
+  </g>
+
+  <!-- Seta QA → Saída (aprovado) -->
+  <line x1="900" y1="420" x2="1018" y2="390" stroke="#4ade80" stroke-width="2" marker-end="url(#arr-green)"/>
+  <!-- Seta QA → Rejeição -->
+  <line x1="900" y1="440" x2="1018" y2="500" stroke="#ef4444" stroke-width="2" marker-end="url(#arr-red)"/>
+
+  <!-- Dots -->
+  <circle r="3.5" fill="#4ade80" opacity="0">
+    <animateMotion dur="1.5s" repeatCount="indefinite" begin="1.0s"><mpath href="#p-qa-out"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="1.0s"/>
+  </circle>
+
+  <!-- ══ SAÍDA: APROVADO ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.1s" dur="0.4s" fill="freeze"/>
+    <rect x="1020" y="344" width="230" height="100" rx="8" fill="#0d1a0d" stroke="#4ade80" stroke-width="2"/>
+    <text x="1135" y="366" font-size="10" fill="#4ade80" font-weight="700" text-anchor="middle">✓ APROVADO</text>
+    <text x="1135" y="382" font-size="8.5" fill="#8b96a8" text-anchor="middle">PR aberto + merge</text>
+    <line x1="1030" y1="388" x2="1240" y2="388" stroke="#1f2937" stroke-width="1"/>
+    <text x="1032" y="403" font-size="8.5" fill="#4b5563">· PR aberto para main</text>
+    <text x="1032" y="417" font-size="8.5" fill="#4b5563">· aprovação humana (4-eyes)</text>
+    <text x="1032" y="431" font-size="8.5" fill="#4b5563">· CI/CD verde → merge</text>
+  </g>
+
+  <!-- ══ SAÍDA: REJEITADO ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.3s" dur="0.4s" fill="freeze"/>
+    <rect x="1020" y="458" width="230" height="100" rx="8" fill="#1a0a0a" stroke="#ef4444" stroke-width="2"/>
+    <text x="1135" y="480" font-size="10" fill="#ef4444" font-weight="700" text-anchor="middle">✗ REJEITADO</text>
+    <text x="1135" y="496" font-size="8.5" fill="#8b96a8" text-anchor="middle">report com causa explícita</text>
+    <line x1="1030" y1="502" x2="1240" y2="502" stroke="#1f2937" stroke-width="1"/>
+    <text x="1032" y="517" font-size="8.5" fill="#4b5563">· falha identificada e descrita</text>
+    <text x="1032" y="531" font-size="8.5" fill="#4b5563">· novo agente despachado</text>
+    <text x="1032" y="545" font-size="8.5" fill="#ef4444">· ver SVG 09 (retropropagação)</text>
+  </g>
+
+  <!-- ══ 4-EYES RULE ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.5s" dur="0.4s" fill="freeze"/>
+    <rect x="1270" y="344" width="510" height="214" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="1288" y="365" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">REGRA DOS 4 OLHOS (4-EYES RULE)</text>
+    <line x1="1280" y1="372" x2="1770" y2="372" stroke="#1f2937" stroke-width="1"/>
+
+    <text x="1288" y="390" font-size="9.5" fill="#e6edf3" font-weight="600">Nenhum agente valida seu próprio trabalho.</text>
+    <text x="1288" y="408" font-size="9.5" fill="#8b96a8">O agente que implementou a tarefa NÃO pode ser o mesmo</text>
+    <text x="1288" y="424" font-size="9.5" fill="#8b96a8">que aprova o tech-review, security ou privacy gate.</text>
+
+    <line x1="1280" y1="433" x2="1770" y2="433" stroke="#1f2937" stroke-width="1"/>
+
+    <text x="1288" y="450" font-size="9.5" fill="#f59e0b" font-weight="600">Exemplos de separação:</text>
+    <text x="1288" y="466" font-size="9.5" fill="#8b96a8">backend-agent implementa  →  qa-agent revisa o código</text>
+    <text x="1288" y="482" font-size="9.5" fill="#8b96a8">security-agent analisa     →  outro agente (owasp) confirma</text>
+    <text x="1288" y="498" font-size="9.5" fill="#8b96a8">frontend-agent entrega     →  ux-agent valida acessibilidade</text>
+
+    <line x1="1280" y1="507" x2="1770" y2="507" stroke="#1f2937" stroke-width="1"/>
+    <text x="1288" y="523" font-size="9.5" fill="#4b5563">Aprovação humana final sempre necessária para merge em main (GitHub PR).</text>
+    <text x="1288" y="539" font-size="9.5" fill="#4b5563">O orchestrator NUNCA aprova — apenas coordena quem revisa quem.</text>
+  </g>
+
+  <!-- ══ LABEL PARALELO ══ -->
+  <text x="470" y="272" font-size="9" fill="#4b5563" text-anchor="middle" font-style="italic">executados em paralelo, de forma independente</text>
+  <line x1="362" y1="268" x2="430" y2="268" stroke="#1f2937" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="510" y1="268" x2="578" y2="268" stroke="#1f2937" stroke-width="1" stroke-dasharray="3,3"/>
+  <rect x="362" y="272" width="216" height="310" rx="4" fill="none" stroke="#1f2937" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- ══ STATUS BAR ══ -->
+  <rect x="20" y="700" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="711" r="4" fill="#f59e0b">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="715" font-size="9.5" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 08</text>
+  <text x="108" y="715" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="118" y="715" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">3 gates independentes em paralelo · QA agregador · aprovado → PR · rejeitado → retropropagação</text>
+  <text x="1770" y="715" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">GATES DE VALIDAÇÃO</text>
+
+  <!-- ══ LEGENDA ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.7s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="736" width="1760" height="50" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="752" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA</text>
+    <line x1="30" y1="756" x2="1770" y2="756" stroke="#1f2937" stroke-width="1"/>
+    <rect x="38" y="762" width="10" height="10" rx="2" fill="#0d1117" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="55" y="772" font-size="9.5" fill="#8b96a8">tech-review: qualidade e cobertura de código</text>
+    <rect x="280" y="762" width="10" height="10" rx="2" fill="#0d1117" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="297" y="772" font-size="9.5" fill="#8b96a8">security-gate: OWASP + secrets + autenticação</text>
+    <rect x="540" y="762" width="10" height="10" rx="2" fill="#0d1117" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="557" y="772" font-size="9.5" fill="#8b96a8">privacy-gate: LGPD/GDPR + finalidade + retenção</text>
+    <rect x="800" y="762" width="10" height="10" rx="2" fill="#0d1117" stroke="#f59e0b" stroke-width="2"/>
+    <text x="817" y="772" font-size="9.5" fill="#8b96a8">QA-gate: agrega os 3 relatórios e decide aprovação</text>
+    <text x="1060" y="772" font-size="9.5" fill="#4b5563">4-eyes: implementador ≠ revisor em todos os gates</text>
+  </g>
+</svg>

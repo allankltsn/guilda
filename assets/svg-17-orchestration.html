@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVG 17 — Orquestração e Multiagentes</title>
+<style>
+  :root { color-scheme: dark }
+  body {
+    margin: 0; background: #0b0f17;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100%; padding: 40px 16px; box-sizing: border-box;
+  }
+  svg { width: 100%; max-width: 1800px; height: auto; display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 830"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-amber" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arr-teal" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#2dd4bf"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arr-violet" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#a78bfa"/>
+    </marker>
+    <marker id="arr-pink" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f472b6"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#4ade80"/>
+    </marker>
+  </defs>
+
+  <rect width="1800" height="830" fill="#0b0f17"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="1760" height="48" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="16" width="6" height="48" rx="3" fill="#f59e0b"/>
+  <text x="44" y="37" font-size="15" font-weight="700" fill="#e6edf3">17 — Orquestração e Multiagentes</text>
+  <text x="44" y="55" font-size="11" fill="#8b96a8">principal nunca implementa · regras de dispatch · 28 agentes em 4 grupos · integrações entre grupos</text>
+  <text x="1760" y="37" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 17/17</text>
+  <text x="1760" y="52" font-size="9.5" fill="#f59e0b" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">FINAL — ORQUESTRADOR</text>
+
+  <!-- ══ ORCHESTRATOR — CENTRO ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.5s" fill="freeze"/>
+    <!-- Orchestrator box (grande, central) -->
+    <rect x="640" y="82" width="520" height="130" rx="10" fill="#1a0f00" stroke="#f59e0b" stroke-width="2.5">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="900" y="108" font-size="13" font-weight="700" fill="#f59e0b" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">⚙ ORQUESTRADOR</text>
+    <text x="900" y="126" font-size="10" fill="#8b96a8" text-anchor="middle">orchestrator-agent — modelo DEEP (Opus / alta razão)</text>
+    <line x1="660" y1="134" x2="1140" y2="134" stroke="#1f2937" stroke-width="1"/>
+    <text x="900" y="150" font-size="9.5" fill="#f59e0b" font-weight="700" text-anchor="middle">NUNCA IMPLEMENTA — APENAS COORDENA</text>
+    <text x="900" y="166" font-size="9" fill="#4b5563" text-anchor="middle">planeja · decompõe tarefas · faz dispatch · monitora · resolve conflitos · decide escalations</text>
+    <text x="900" y="183" font-size="9" fill="#4b5563" text-anchor="middle">lê live-state.md ao iniciar · commita a cada 100k tokens · nunca escreve código de produção</text>
+    <text x="900" y="200" font-size="9" fill="#4b5563" text-anchor="middle">mantém GitHub Projects atualizado · aprova DECISAO issues · ativa ALERTA_PERIGO se necessário</text>
+  </g>
+
+  <!-- ══ REGRA CARDINAL ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.3s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="82" width="600" height="130" rx="8" fill="#0d1117" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="320" y="106" font-size="11" font-weight="700" fill="#ef4444" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">⛔ REGRA CARDINAL</text>
+    <line x1="30" y1="112" x2="610" y2="112" stroke="#ef4444" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="320" y="130" font-size="10" fill="#e6edf3" text-anchor="middle" font-weight="600">O orquestrador NUNCA implementa</text>
+    <text x="320" y="148" font-size="9" fill="#4b5563" text-anchor="middle">Qualquer linha de código em produção vinda do orquestrador</text>
+    <text x="320" y="164" font-size="9" fill="#4b5563" text-anchor="middle">é uma falha de design. Ele apenas decompõe, delega e valida.</text>
+    <text x="320" y="182" font-size="9" fill="#ef4444" text-anchor="middle">Violação → parar sessão · registrar DECISAO issue · revisão humana</text>
+    <text x="36" y="205" font-size="8.5" fill="#4b5563">Agente implementador ≠ agente revisor (4-eyes rule em todos os gates)</text>
+  </g>
+
+  <!-- ══ REGRAS DE DISPATCH ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.3s" dur="0.4s" fill="freeze"/>
+    <rect x="1180" y="82" width="600" height="130" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="1480" y="106" font-size="10" font-weight="700" fill="#f59e0b" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">REGRAS DE DISPATCH</text>
+    <line x1="1190" y1="112" x2="1770" y2="112" stroke="#1f2937" stroke-width="1"/>
+    <text x="1196" y="130" font-size="9" fill="#8b96a8">1. Tarefa decomposta → issue no GitHub Projects</text>
+    <text x="1196" y="146" font-size="9" fill="#8b96a8">2. Agente disponível com tier correto = dispatch</text>
+    <text x="1196" y="162" font-size="9" fill="#8b96a8">3. Worktree criado: feat/agent-S-NNN isolado</text>
+    <text x="1196" y="178" font-size="9" fill="#8b96a8">4. Paralelo máx = recursos de contexto disponíveis</text>
+    <text x="1196" y="194" font-size="9" fill="#8b96a8">5. Após PR: gate pipeline (tech→sec→privacy→QA)</text>
+    <text x="1196" y="210" font-size="9" fill="#f59e0b">6. Conflito entre agentes → orquestrador decide</text>
+  </g>
+
+  <!-- ══ 4 GRUPOS DE AGENTES ══ -->
+
+  <!-- GRUPO 1: Arquitetura & Engenharia (azul) -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.5s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="230" width="420" height="256" rx="8" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="230" y="252" font-size="10" fill="#3b82f6" font-weight="700" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">GRUPO 1 — ARQUITETURA &amp; ENGENHARIA</text>
+    <line x1="30" y1="258" x2="430" y2="258" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
+    <!-- agentes -->
+    <rect x="32" y="264" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="40" y="278" font-size="8.5" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">backend-agent</text>
+    <text x="220" y="278" font-size="8" fill="#4b5563">API REST · Node/Go/Python</text>
+    <rect x="32" y="288" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="40" y="302" font-size="8.5" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">frontend-agent</text>
+    <text x="220" y="302" font-size="8" fill="#4b5563">React/Next.js · SSR</text>
+    <rect x="32" y="312" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="40" y="326" font-size="8.5" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">database-agent</text>
+    <text x="220" y="326" font-size="8" fill="#4b5563">schema · migrations · índices</text>
+    <rect x="32" y="336" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="40" y="350" font-size="8.5" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">mobile-agent</text>
+    <text x="220" y="350" font-size="8" fill="#4b5563">RN · iOS/Android</text>
+    <rect x="32" y="360" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="40" y="374" font-size="8.5" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">integration-agent</text>
+    <text x="220" y="374" font-size="8" fill="#4b5563">webhooks · OAuth · 3rd-party</text>
+    <rect x="32" y="384" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="40" y="398" font-size="8.5" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">testing-agent</text>
+    <text x="220" y="398" font-size="8" fill="#4b5563">unit · integration · e2e</text>
+    <rect x="32" y="408" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="40" y="422" font-size="8.5" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">performance-agent</text>
+    <text x="220" y="422" font-size="8" fill="#4b5563">profiling · otimização · cache</text>
+    <text x="32" y="447" font-size="8" fill="#8b96a8">+ arch-agent · api-docs-agent · data-agent</text>
+    <text x="32" y="462" font-size="8" fill="#4b5563">Tier: Standard (Sonnet) → Deep (Opus) se complexo</text>
+    <text x="32" y="476" font-size="8" fill="#4b5563">9 agentes total</text>
+  </g>
+
+  <!-- GRUPO 2: Infraestrutura & DevOps (teal) -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.6s" dur="0.4s" fill="freeze"/>
+    <rect x="450" y="230" width="420" height="256" rx="8" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="660" y="252" font-size="10" fill="#2dd4bf" font-weight="700" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">GRUPO 2 — INFRAESTRUTURA &amp; DEVOPS</text>
+    <line x1="460" y1="258" x2="860" y2="258" stroke="#2dd4bf" stroke-width="1" stroke-opacity="0.4"/>
+    <rect x="462" y="264" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="470" y="278" font-size="8.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">aws-agent</text>
+    <text x="650" y="278" font-size="8" fill="#4b5563">EC2 · RDS · S3 · Lambda</text>
+    <rect x="462" y="288" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="470" y="302" font-size="8.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">kubernetes-agent</text>
+    <text x="650" y="302" font-size="8" fill="#4b5563">k8s · Helm · service mesh</text>
+    <rect x="462" y="312" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="470" y="326" font-size="8.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">cicd-agent</text>
+    <text x="650" y="326" font-size="8" fill="#4b5563">GitHub Actions · pipeline</text>
+    <rect x="462" y="336" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="470" y="350" font-size="8.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">sre-agent</text>
+    <text x="650" y="350" font-size="8" fill="#4b5563">SLO · error budget · canary</text>
+    <rect x="462" y="360" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="470" y="374" font-size="8.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">observability-agent</text>
+    <text x="650" y="374" font-size="8" fill="#4b5563">Datadog · logs · alertas</text>
+    <rect x="462" y="384" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="470" y="398" font-size="8.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">hosting-agent</text>
+    <text x="650" y="398" font-size="8" fill="#4b5563">Vercel · Netlify · CDN</text>
+    <text x="462" y="447" font-size="8" fill="#8b96a8">+ devsecops-infra-agent · iac-agent</text>
+    <text x="462" y="462" font-size="8" fill="#4b5563">Tier: Standard (Sonnet) com devsecops em Amber</text>
+    <text x="462" y="476" font-size="8" fill="#4b5563">8 agentes total</text>
+  </g>
+
+  <!-- GRUPO 3: Segurança & Privacidade (violet) -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.7s" dur="0.4s" fill="freeze"/>
+    <rect x="880" y="230" width="420" height="256" rx="8" fill="#120a1e" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="1090" y="252" font-size="10" fill="#a78bfa" font-weight="700" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">GRUPO 3 — SEGURANÇA &amp; PRIVACIDADE</text>
+    <line x1="890" y1="258" x2="1290" y2="258" stroke="#a78bfa" stroke-width="1" stroke-opacity="0.4"/>
+    <rect x="892" y="264" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="900" y="278" font-size="8.5" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">security-agent</text>
+    <text x="1080" y="278" font-size="8" fill="#4b5563">SAST · secrets · OWASP</text>
+    <rect x="892" y="288" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="900" y="302" font-size="8.5" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">privacy-agent</text>
+    <text x="1080" y="302" font-size="8" fill="#4b5563">LGPD · GDPR · DSAR</text>
+    <rect x="892" y="312" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="900" y="326" font-size="8.5" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">devsecops-agent</text>
+    <text x="1080" y="326" font-size="8" fill="#4b5563">CVSS · pentest · hardening</text>
+    <rect x="892" y="336" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="900" y="350" font-size="8.5" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">compliance-agent</text>
+    <text x="1080" y="350" font-size="8" fill="#4b5563">SOC2 · ISO27001 · audit</text>
+    <rect x="892" y="360" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="900" y="374" font-size="8.5" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">iam-agent</text>
+    <text x="1080" y="374" font-size="8" fill="#4b5563">roles · políticas · zero-trust</text>
+    <text x="892" y="420" font-size="8" fill="#8b96a8">+ threat-model-agent · incident-agent</text>
+    <text x="892" y="436" font-size="8" fill="#4b5563">Tier: Amber (orquestrador do grupo) + Standard</text>
+    <text x="892" y="452" font-size="8" fill="#4b5563">7 agentes total</text>
+    <!-- ALERTA_PERIGO badge -->
+    <rect x="892" y="460" width="398" height="22" rx="4" fill="#1a0505" stroke="#ef4444" stroke-width="1">
+      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="1.8s" repeatCount="indefinite"/>
+    </rect>
+    <text x="1090" y="475" font-size="8.5" fill="#ef4444" text-anchor="middle" font-weight="700">⚠ ALERTA_PERIGO: decisão humana obrigatória — agent para tudo</text>
+  </g>
+
+  <!-- GRUPO 4: Produto & UX (pink) -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.8s" dur="0.4s" fill="freeze"/>
+    <rect x="1310" y="230" width="470" height="256" rx="8" fill="#1a0918" stroke="#f472b6" stroke-width="1.5"/>
+    <text x="1545" y="252" font-size="10" fill="#f472b6" font-weight="700" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">GRUPO 4 — PRODUTO &amp; UX</text>
+    <line x1="1320" y1="258" x2="1770" y2="258" stroke="#f472b6" stroke-width="1" stroke-opacity="0.4"/>
+    <rect x="1322" y="264" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="1330" y="278" font-size="8.5" fill="#f472b6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ux-agent</text>
+    <text x="1510" y="278" font-size="8" fill="#4b5563">wireframes · fluxos · IA</text>
+    <rect x="1322" y="288" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="1330" y="302" font-size="8.5" fill="#f472b6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">brand-agent</text>
+    <text x="1510" y="302" font-size="8" fill="#4b5563">identidade visual · tokens</text>
+    <rect x="1322" y="312" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="1330" y="326" font-size="8.5" fill="#f472b6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">accessibility-agent</text>
+    <text x="1510" y="326" font-size="8" fill="#4b5563">WCAG 2.1 AA · aria · a11y</text>
+    <rect x="1322" y="336" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="1330" y="350" font-size="8.5" fill="#f472b6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">design-system-agent</text>
+    <text x="1510" y="350" font-size="8" fill="#4b5563">componentes · Storybook</text>
+    <rect x="1322" y="360" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="1330" y="374" font-size="8.5" fill="#f472b6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">copywriting-agent</text>
+    <text x="1510" y="374" font-size="8" fill="#4b5563">copy · microcopy · i18n</text>
+    <rect x="1322" y="384" width="190" height="20" rx="3" fill="#0d1117"/>
+    <text x="1330" y="398" font-size="8.5" fill="#f472b6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">usability-agent</text>
+    <text x="1510" y="398" font-size="8" fill="#4b5563">testes com usuários leigos</text>
+    <text x="1322" y="447" font-size="8" fill="#8b96a8">+ ia-agent (IA/info architecture) · pm-agent</text>
+    <text x="1322" y="462" font-size="8" fill="#4b5563">Tier: Standard (Sonnet) · usability → Light (Haiku)</text>
+    <text x="1322" y="476" font-size="8" fill="#4b5563">8 agentes total  (4 grupos = 28 agentes + orquestrador)</text>
+  </g>
+
+  <!-- ══ SETAS DO ORQUESTRADOR PARA OS GRUPOS ══ -->
+  <!-- para grupo 1 -->
+  <line x1="640" y1="165" x2="230" y2="230" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arr-amber)" opacity="0.7"/>
+  <!-- para grupo 2 -->
+  <line x1="730" y1="212" x2="660" y2="230" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arr-amber)" opacity="0.7"/>
+  <!-- para grupo 3 -->
+  <line x1="1070" y1="212" x2="1090" y2="230" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arr-amber)" opacity="0.7"/>
+  <!-- para grupo 4 -->
+  <line x1="1160" y1="165" x2="1545" y2="230" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arr-amber)" opacity="0.7"/>
+
+  <!-- dot no orquestrador -->
+  <circle r="4" fill="#f59e0b" opacity="0.9">
+    <animateMotion dur="3s" repeatCount="indefinite">
+      <mpath href="#dispatch-path"/>
+    </animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <path id="dispatch-path" d="M900,212 C900,212 230,212 230,230" fill="none"/>
+
+  <!-- ══ FLOW COMPLETO DO SISTEMA ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="500" width="1760" height="190" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="900" y="522" font-size="10" fill="#f59e0b" font-weight="700" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">FLUXO COMPLETO — CICLO DE VIDA DE UMA TAREFA</text>
+    <line x1="30" y1="528" x2="1770" y2="528" stroke="#1f2937" stroke-width="1"/>
+
+    <!-- Etapas do fluxo -->
+    <!-- 1: Briefing -->
+    <rect x="38" y="538" width="150" height="52" rx="6" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1"/>
+    <text x="113" y="557" font-size="9" fill="#3b82f6" text-anchor="middle" font-weight="700">1. BRIEFING</text>
+    <text x="113" y="571" font-size="8" fill="#4b5563" text-anchor="middle">humano define</text>
+    <text x="113" y="583" font-size="8" fill="#4b5563" text-anchor="middle">o objetivo</text>
+
+    <line x1="188" y1="564" x2="208" y2="564" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+
+    <!-- 2: Orq. planeja -->
+    <rect x="208" y="538" width="155" height="52" rx="6" fill="#1a0f00" stroke="#f59e0b" stroke-width="1"/>
+    <text x="285" y="557" font-size="9" fill="#f59e0b" text-anchor="middle" font-weight="700">2. PLANEJAMENTO</text>
+    <text x="285" y="571" font-size="8" fill="#4b5563" text-anchor="middle">orq. decompõe</text>
+    <text x="285" y="583" font-size="8" fill="#4b5563" text-anchor="middle">cria issues · sprints</text>
+
+    <line x1="363" y1="564" x2="383" y2="564" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+
+    <!-- 3: Dispatch -->
+    <rect x="383" y="538" width="150" height="52" rx="6" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="458" y="557" font-size="9" fill="#2dd4bf" text-anchor="middle" font-weight="700">3. DISPATCH</text>
+    <text x="458" y="571" font-size="8" fill="#4b5563" text-anchor="middle">worktree · agent</text>
+    <text x="458" y="583" font-size="8" fill="#4b5563" text-anchor="middle">modelo tier certo</text>
+
+    <line x1="533" y1="564" x2="553" y2="564" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+
+    <!-- 4: Implementação -->
+    <rect x="553" y="538" width="155" height="52" rx="6" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1.5">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="630" y="557" font-size="9" fill="#3b82f6" text-anchor="middle" font-weight="700">4. IMPLEMENTAÇÃO</text>
+    <text x="630" y="571" font-size="8" fill="#4b5563" text-anchor="middle">agente especialista</text>
+    <text x="630" y="583" font-size="8" fill="#4b5563" text-anchor="middle">escreve código</text>
+
+    <line x1="708" y1="564" x2="728" y2="564" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+
+    <!-- 5: Handoff -->
+    <rect x="728" y="538" width="140" height="52" rx="6" fill="#1a0f00" stroke="#f59e0b" stroke-width="1"/>
+    <text x="798" y="557" font-size="9" fill="#f59e0b" text-anchor="middle" font-weight="700">5. PR + HANDOFF</text>
+    <text x="798" y="571" font-size="8" fill="#4b5563" text-anchor="middle">pull request aberto</text>
+    <text x="798" y="583" font-size="8" fill="#4b5563" text-anchor="middle">orq. notificado</text>
+
+    <line x1="868" y1="564" x2="888" y2="564" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+
+    <!-- 6: Gate pipeline -->
+    <rect x="888" y="528" width="190" height="72" rx="6" fill="#120a1e" stroke="#a78bfa" stroke-width="1"/>
+    <text x="983" y="547" font-size="9" fill="#a78bfa" text-anchor="middle" font-weight="700">6. GATE PIPELINE</text>
+    <text x="983" y="561" font-size="8" fill="#4b5563" text-anchor="middle">tech-review paralelo</text>
+    <text x="983" y="575" font-size="8" fill="#4b5563" text-anchor="middle">+ security + privacy</text>
+    <text x="983" y="589" font-size="8" fill="#4b5563" text-anchor="middle">→ QA agregador</text>
+
+    <line x1="1078" y1="564" x2="1098" y2="564" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr-violet)"/>
+
+    <!-- 7: Decisão -->
+    <rect x="1098" y="538" width="140" height="52" rx="6" fill="#0d1a0d" stroke="#4ade80" stroke-width="1"/>
+    <text x="1168" y="557" font-size="9" fill="#4ade80" text-anchor="middle" font-weight="700">7. APROVAÇÃO</text>
+    <text x="1168" y="571" font-size="8" fill="#4b5563" text-anchor="middle">orq. aprova</text>
+    <text x="1168" y="583" font-size="8" fill="#4b5563" text-anchor="middle">merge → main</text>
+
+    <line x1="1238" y1="564" x2="1258" y2="564" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-green)"/>
+
+    <!-- 8: Deploy -->
+    <rect x="1258" y="538" width="140" height="52" rx="6" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="1328" y="557" font-size="9" fill="#2dd4bf" text-anchor="middle" font-weight="700">8. DEPLOY</text>
+    <text x="1328" y="571" font-size="8" fill="#4b5563" text-anchor="middle">canary 10→50→100%</text>
+    <text x="1328" y="583" font-size="8" fill="#4b5563" text-anchor="middle">rollback automático</text>
+
+    <line x1="1398" y1="564" x2="1418" y2="564" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+
+    <!-- 9: Observabilidade -->
+    <rect x="1418" y="538" width="145" height="52" rx="6" fill="#0d1a0d" stroke="#4ade80" stroke-width="1"/>
+    <text x="1490" y="557" font-size="9" fill="#4ade80" text-anchor="middle" font-weight="700">9. OBSERVAB.</text>
+    <text x="1490" y="571" font-size="8" fill="#4b5563" text-anchor="middle">métricas · logs</text>
+    <text x="1490" y="583" font-size="8" fill="#4b5563" text-anchor="middle">SLO check</text>
+
+    <line x1="1563" y1="564" x2="1583" y2="564" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-green)"/>
+
+    <!-- 10: Done -->
+    <rect x="1583" y="538" width="175" height="52" rx="6" fill="#0d1a0d" stroke="#4ade80" stroke-width="2"/>
+    <text x="1670" y="557" font-size="9" fill="#4ade80" text-anchor="middle" font-weight="700">10. DONE ✓</text>
+    <text x="1670" y="571" font-size="8" fill="#4b5563" text-anchor="middle">issue fechada</text>
+    <text x="1670" y="583" font-size="8" fill="#4b5563" text-anchor="middle">velocity +pts · próx task</text>
+
+    <!-- Loop de rejeição -->
+    <path d="M983,600 C983,640 630,640 630,590" stroke="#ef4444" stroke-width="1.2" fill="none" stroke-dasharray="4 3" marker-end="url(#arr-blue)"/>
+    <text x="806" y="656" font-size="8" fill="#ef4444" text-anchor="middle">rejected → retry (escalation table: std → std novo → DEEP → DEEP+HUMANO)</text>
+  </g>
+
+  <!-- ══ STATUS BAR ══ -->
+  <rect x="20" y="704" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="715" r="4" fill="#f59e0b">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="719" font-size="9.5" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 17 — FINAL</text>
+  <text x="158" y="719" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="168" y="719" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">orquestrador nunca implementa · 28 agentes + 1 orq. · 4 grupos · 10 etapas do ciclo de vida</text>
+  <text x="1770" y="719" font-size="9.5" fill="#f59e0b" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ORQUESTRAÇÃO</text>
+
+  <!-- ══ LEGENDA FINAL ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.4s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="738" width="1760" height="76" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="756" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA SISTEMA COMPLETO</text>
+    <line x1="30" y1="760" x2="1770" y2="760" stroke="#1f2937" stroke-width="1"/>
+    <!-- cores dos grupos -->
+    <rect x="38" y="768" width="10" height="10" rx="2" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="55" y="778" font-size="9" fill="#8b96a8">Grupo 1 — Eng (9 agents)</text>
+    <rect x="230" y="768" width="10" height="10" rx="2" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="247" y="778" font-size="9" fill="#8b96a8">Grupo 2 — Infra (8 agents)</text>
+    <rect x="430" y="768" width="10" height="10" rx="2" fill="#120a1e" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="447" y="778" font-size="9" fill="#8b96a8">Grupo 3 — Sec (7 agents)</text>
+    <rect x="630" y="768" width="10" height="10" rx="2" fill="#1a0918" stroke="#f472b6" stroke-width="1.5"/>
+    <text x="647" y="778" font-size="9" fill="#8b96a8">Grupo 4 — UX (8 agents)</text>
+    <rect x="830" y="768" width="10" height="10" rx="2" fill="#1a0f00" stroke="#f59e0b" stroke-width="2"/>
+    <text x="847" y="778" font-size="9" fill="#f59e0b">Orquestrador DEEP</text>
+    <!-- tiers -->
+    <text x="38" y="800" font-size="9" fill="#4b5563">
+      DEEP (🔴 Opus) = alta razão · Amber = orchestrador de grupo · Standard (🔵 Sonnet) = implementação padrão · Light (🟢 Haiku) = tarefas simples
+    </text>
+    <text x="930" y="800" font-size="9" fill="#4b5563">4-eyes: implementador ≠ revisor em todos os gates</text>
+  </g>
+</svg>
+</body>
+</html>

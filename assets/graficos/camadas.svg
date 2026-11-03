@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 239" width="460" height="239" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" role="img" aria-label="Camada de modelo padrão">
+<style>.t{fill:#e6edf3;font-size:12px}.v{fill:#8b96a8;font-size:12px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}</style>
+<rect width="460" height="239" rx="6" fill="#0b0f17" stroke="#1f2937"/>
+<text x="25" y="35" font-size="18" font-weight="600" fill="#2dd4bf">Camada de modelo padrão</text>
+<circle cx="107" cy="137" r="60" fill="none" stroke="#1f2937" stroke-width="22"/>
+<circle cx="107" cy="137" r="60" fill="none" stroke="#60a5fa" stroke-width="22" pathLength="100" stroke-dasharray="0 100" stroke-dashoffset="-0" transform="rotate(-90 107 137)"><animate attributeName="stroke-dasharray" to="74.6 25.4" begin="0.2s" dur="0.6s" fill="freeze"/></circle>
+<circle cx="107" cy="137" r="60" fill="none" stroke="#f59e0b" stroke-width="22" pathLength="100" stroke-dasharray="0 100" stroke-dashoffset="-75" transform="rotate(-90 107 137)"><animate attributeName="stroke-dasharray" to="17.46 82.54" begin="0.45s" dur="0.6s" fill="freeze"/></circle>
+<circle cx="107" cy="137" r="60" fill="none" stroke="#4ade80" stroke-width="22" pathLength="100" stroke-dasharray="0 100" stroke-dashoffset="-92.86" transform="rotate(-90 107 137)"><animate attributeName="stroke-dasharray" to="6.74 93.26" begin="0.7s" dur="0.6s" fill="freeze"/></circle>
+<g opacity="0"><animate attributeName="opacity" to="1" begin="0.4s" dur="0.4s" fill="freeze"/><circle cx="224" cy="67" r="5" fill="#60a5fa"/><text class="t" x="234" y="71">standard (Sonnet):<tspan class="v" dx="6">75.00%</tspan></text></g>
+<g opacity="0"><animate attributeName="opacity" to="1" begin="0.55s" dur="0.4s" fill="freeze"/><circle cx="224" cy="92" r="5" fill="#f59e0b"/><text class="t" x="234" y="96">deep (Opus):<tspan class="v" dx="6">17.86%</tspan></text></g>
+<g opacity="0"><animate attributeName="opacity" to="1" begin="0.7s" dur="0.4s" fill="freeze"/><circle cx="224" cy="117" r="5" fill="#4ade80"/><text class="t" x="234" y="121">light (Haiku):<tspan class="v" dx="6">7.14%</tspan></text></g>
+</svg>

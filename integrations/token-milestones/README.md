@@ -1,7 +1,10 @@
 # Token milestones: optional automatic mechanism (specification)
 
-Status: **not verified in this template.** This is a specification only. No code is shipped, no
-reference implementation has been validated here, and nothing is installed by the template.
+Status: **not verified in this template.** A reference implementation exists as the optional mod
+[token-handoff](../mod/token-handoff/README.md) (`python install.py <project> --mod token-handoff`). It is
+unit-tested but has not been verified in a real session, and it simplifies this specification: a single
+mandatory milestone at 400k tokens, no ask milestones and no question to the user, and it opens the new
+session and ends the old one by itself. The text below remains the original specification.
 
 Purpose: automate what workflow/session-continuity.md asks the agent to do by estimation, without
 spending model tokens until a milestone is crossed.
@@ -26,10 +29,10 @@ functions:
    user-home paths); never prompt text, tool results, secrets or personal data. The live state file stays a
    manual artifact of the principal.
 
-Honest limit: the mechanism cannot close the session. It only blocks new dispatches and reminds.
+Honest limit of this specification: the mechanism cannot close the session. It only blocks new dispatches and reminds. (The token-handoff mod goes further and does close it; see its README.)
 
 ## Minimum permissions
-No network, no process execution, no secret reads; file access only to append to the diary.
+No network, no process execution, no secret reads; file access only to append to the diary. (token-handoff is the exception: it executes one PowerShell script and ends the session process, which is why it installs only on explicit request.)
 
 ## Installing it
 Installation of any kind needs a proposal, security review, explicit user approval and a row in

@@ -25,6 +25,15 @@ authorization; never trust client-supplied owner/team identity. Avoid diagnostic
 commands that dump secret-bearing environment/configuration and decrypted secrets.
 Do not copy local permissions, credentials, private transcripts or personal paths.
 
+Scanning for secrets reports where, never what. Search with file-list or count output only
+(Grep `files_with_matches`/`count`; `rg -l`/`rg -c`, `grep -rl`) and never with content, line
+or context output (`output_mode: content`, `-n`, `-A/-B/-C`), so a matched value never enters
+the transcript. Report path, pattern class and count. To confirm a hit, mask the value
+(`-o` on a short prefix, or the key name only); reading the full line or file needs explicit
+user authorization for that file, and the value is never copied into briefs, logs or commits.
+Ignore rules hide files such as `.env` from the scan: say so, and widen the scan
+(`--no-ignore`) only within the authorized read paths.
+
 Unethical or harmful action is not executed. Record CRITICIDADE ALTA/CRITICA with
 action, concrete risk, assessment/decision and notify principal immediately;
 principal notifies user and logs ALERTA_PERIGO. An unexplained hypothetical risk is

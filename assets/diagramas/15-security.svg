@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-red" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#ef4444"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#4ade80"/>
+    </marker>
+
+    <path id="p1" d="M 280,220 L 400,220" fill="none"/>
+    <path id="p2" d="M 580,220 L 700,220" fill="none"/>
+    <path id="p3" d="M 880,220 L 1000,220" fill="none"/>
+    <path id="p4" d="M 1180,220 L 1300,220" fill="none"/>
+  </defs>
+
+  <rect width="1800" height="800" fill="#0b0f17"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="1760" height="48" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="16" width="6" height="48" rx="3" fill="#ef4444"/>
+  <text x="44" y="37" font-size="15" font-weight="700" fill="#e6edf3">15 — Segurança e Auto-análise</text>
+  <text x="44" y="55" font-size="11" fill="#8b96a8">OWASP Top 10 · secrets scan · ALERTA_PERIGO · decisão humana obrigatória · security-agent</text>
+  <text x="1760" y="37" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 15/17</text>
+  <text x="1760" y="52" font-size="9.5" fill="#ef4444" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">security · critical</text>
+
+  <!-- ══ PIPELINE DE ANÁLISE DE SEGURANÇA ══ -->
+  <!-- Step 1 -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="178" width="260" height="102" rx="8" fill="#0d1117" stroke="#ef4444" stroke-width="2"/>
+    <text x="150" y="201" font-size="10" fill="#ef4444" font-weight="700" text-anchor="middle">CÓDIGO NOVO</text>
+    <text x="150" y="217" font-size="8.5" fill="#8b96a8" text-anchor="middle">PR aberto por agente</text>
+    <line x1="30" y1="224" x2="270" y2="224" stroke="#1f2937" stroke-width="1"/>
+    <text x="32" y="239" font-size="8.5" fill="#4b5563">qualquer implementação</text>
+    <text x="32" y="253" font-size="8.5" fill="#4b5563">que afete segurança</text>
+    <text x="32" y="267" font-size="8.5" fill="#ef4444">→ security-agent obrigatório</text>
+    <text x="32" y="275" font-size="8.5" fill="#4b5563">em revisão paralela</text>
+  </g>
+
+  <line x1="280" y1="229" x2="398" y2="229" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr-red)"/>
+  <circle r="3.5" fill="#ef4444" opacity="0">
+    <animateMotion dur="1.4s" repeatCount="indefinite" begin="0.3s"><mpath href="#p1"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="0.3s"/>
+  </circle>
+
+  <!-- Step 2 -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.3s" dur="0.4s" fill="freeze"/>
+    <rect x="400" y="178" width="180" height="102" rx="8" fill="#0d1117" stroke="#ef4444" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="490" y="201" font-size="10" fill="#ef4444" font-weight="700" text-anchor="middle">SAST</text>
+    <text x="490" y="217" font-size="8.5" fill="#8b96a8" text-anchor="middle">análise estática</text>
+    <line x1="410" y1="224" x2="570" y2="224" stroke="#1f2937" stroke-width="1"/>
+    <text x="412" y="239" font-size="8.5" fill="#4b5563">Semgrep / CodeQL</text>
+    <text x="412" y="253" font-size="8.5" fill="#4b5563">SQL injection</text>
+    <text x="412" y="267" font-size="8.5" fill="#4b5563">XSS patterns</text>
+    <text x="412" y="279" font-size="8.5" fill="#4b5563">auth bypass</text>
+  </g>
+
+  <line x1="580" y1="229" x2="698" y2="229" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr-red)"/>
+  <circle r="3.5" fill="#ef4444" opacity="0">
+    <animateMotion dur="1.4s" repeatCount="indefinite" begin="0.6s"><mpath href="#p2"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="0.6s"/>
+  </circle>
+
+  <!-- Step 3 -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.5s" dur="0.4s" fill="freeze"/>
+    <rect x="700" y="178" width="180" height="102" rx="8" fill="#0d1117" stroke="#ef4444" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="1.8s" repeatCount="indefinite"/>
+    </rect>
+    <text x="790" y="201" font-size="10" fill="#ef4444" font-weight="700" text-anchor="middle">SECRETS</text>
+    <text x="790" y="217" font-size="8.5" fill="#8b96a8" text-anchor="middle">varredura de credenciais</text>
+    <line x1="710" y1="224" x2="870" y2="224" stroke="#1f2937" stroke-width="1"/>
+    <text x="712" y="239" font-size="8.5" fill="#4b5563">Gitleaks / TruffleHog</text>
+    <text x="712" y="253" font-size="8.5" fill="#4b5563">API keys, tokens</text>
+    <text x="712" y="267" font-size="8.5" fill="#4b5563">passwords em código</text>
+    <text x="712" y="279" font-size="8.5" fill="#4b5563">env vars commitadas</text>
+  </g>
+
+  <line x1="880" y1="229" x2="998" y2="229" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr-red)"/>
+  <circle r="3.5" fill="#ef4444" opacity="0">
+    <animateMotion dur="1.4s" repeatCount="indefinite" begin="0.9s"><mpath href="#p3"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="0.9s"/>
+  </circle>
+
+  <!-- Step 4: OWASP -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.7s" dur="0.4s" fill="freeze"/>
+    <rect x="1000" y="178" width="180" height="102" rx="8" fill="#0d1117" stroke="#ef4444" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2.2s" repeatCount="indefinite"/>
+    </rect>
+    <text x="1090" y="201" font-size="10" fill="#ef4444" font-weight="700" text-anchor="middle">OWASP</text>
+    <text x="1090" y="217" font-size="8.5" fill="#8b96a8" text-anchor="middle">Top 10 checklist</text>
+    <line x1="1010" y1="224" x2="1170" y2="224" stroke="#1f2937" stroke-width="1"/>
+    <text x="1012" y="239" font-size="8.5" fill="#4b5563">A01 Broken Access</text>
+    <text x="1012" y="253" font-size="8.5" fill="#4b5563">A02 Cryptographic</text>
+    <text x="1012" y="267" font-size="8.5" fill="#4b5563">A03 Injection</text>
+    <text x="1012" y="279" font-size="8.5" fill="#4b5563">A04–A10 ...</text>
+  </g>
+
+  <line x1="1180" y1="229" x2="1298" y2="229" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr-red)"/>
+  <circle r="3.5" fill="#ef4444" opacity="0">
+    <animateMotion dur="1.4s" repeatCount="indefinite" begin="1.2s"><mpath href="#p4"/></animateMotion>
+    <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="1.2s"/>
+  </circle>
+
+  <!-- Step 5: Resultado -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.9s" dur="0.4s" fill="freeze"/>
+    <rect x="1300" y="178" width="480" height="102" rx="8" fill="#0d1117" stroke="#ef4444" stroke-width="2.5"/>
+    <text x="1540" y="201" font-size="10" fill="#ef4444" font-weight="700" text-anchor="middle">RESULTADO</text>
+    <text x="1540" y="217" font-size="8.5" fill="#8b96a8" text-anchor="middle">security-agent classifica</text>
+    <line x1="1310" y1="224" x2="1770" y2="224" stroke="#1f2937" stroke-width="1"/>
+    <!-- 3 outcomes -->
+    <rect x="1315" y="232" width="130" height="36" rx="4" fill="#0d1a0d" stroke="#4ade80" stroke-width="1"/>
+    <text x="1380" y="252" font-size="9" fill="#4ade80" text-anchor="middle">APROVADO</text>
+    <text x="1380" y="264" font-size="7.5" fill="#4b5563" text-anchor="middle">sem achados</text>
+    <rect x="1460" y="232" width="140" height="36" rx="4" fill="#1a1000" stroke="#f59e0b" stroke-width="1"/>
+    <text x="1530" y="252" font-size="9" fill="#f59e0b" text-anchor="middle">REVISÃO</text>
+    <text x="1530" y="264" font-size="7.5" fill="#4b5563" text-anchor="middle">low/medium</text>
+    <rect x="1615" y="232" width="145" height="36" rx="4" fill="#1a0a0a" stroke="#ef4444" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="1s" repeatCount="indefinite"/>
+    </rect>
+    <text x="1687" y="252" font-size="9" fill="#ef4444" text-anchor="middle" font-weight="700">ALERTA_PERIGO</text>
+    <text x="1687" y="264" font-size="7.5" fill="#ef4444" text-anchor="middle">critical / high</text>
+  </g>
+
+  <!-- ══ ALERTA_PERIGO PROTOCOL ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.1s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="296" width="860" height="210" rx="8" fill="#0d0608" stroke="#ef4444" stroke-width="2">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+    </rect>
+    <text x="38" y="316" font-size="11" fill="#ef4444" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="2">⚠ ALERTA_PERIGO — PROTOCOLO</text>
+    <line x1="30" y1="322" x2="870" y2="322" stroke="#ef4444" stroke-width="1" stroke-dasharray="4 2"/>
+    <text x="38" y="340" font-size="9.5" fill="#ef4444" font-weight="700">QUANDO É ATIVADO:</text>
+    <text x="38" y="358" font-size="9.5" fill="#8b96a8">· Vulnerabilidade crítica (CVSS ≥ 9.0) ou High (CVSS 7.0–8.9)</text>
+    <text x="38" y="374" font-size="9.5" fill="#8b96a8">· Secret exposto em commit (API key, senha, token de produção)</text>
+    <text x="38" y="390" font-size="9.5" fill="#8b96a8">· Injeção de SQL, RCE ou bypass de autenticação detectado</text>
+    <text x="38" y="406" font-size="9.5" fill="#8b96a8">· Qualquer achado que possa comprometer dados de usuários</text>
+    <line x1="30" y1="414" x2="870" y2="414" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="432" font-size="9.5" fill="#ef4444" font-weight="700">O QUE ACONTECE:</text>
+    <text x="38" y="450" font-size="9.5" fill="#8b96a8">1. Agente para IMEDIATAMENTE — nenhuma ação adicional</text>
+    <text x="38" y="468" font-size="9.5" fill="#8b96a8">2. Emite ALERTA_PERIGO no LOG issue com evidência detalhada</text>
+    <text x="38" y="486" font-size="9.5" fill="#ef4444" font-weight="700">3. DECISÃO HUMANA OBRIGATÓRIA — agente não resolve sozinho</text>
+    <text x="38" y="498" font-size="8.5" fill="#4b5563">   → humano decide: aceitar risco, corrigir, revogar credencial</text>
+  </g>
+
+  <!-- ══ OWASP TOP 10 ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.3s" dur="0.4s" fill="freeze"/>
+    <rect x="890" y="296" width="890" height="210" rx="8" fill="#0d1117" stroke="#ef4444" stroke-width="1"/>
+    <text x="908" y="316" font-size="10" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">OWASP TOP 10 — CHECKLIST OBRIGATÓRIO</text>
+    <line x1="900" y1="322" x2="1770" y2="322" stroke="#1f2937" stroke-width="1"/>
+    <!-- 10 items em 2 colunas -->
+    <text x="908" y="340" font-size="9" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">A01</text>
+    <text x="940" y="340" font-size="9" fill="#8b96a8">Broken Access Control — verificar RBAC e auth em cada endpoint</text>
+    <text x="908" y="356" font-size="9" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">A02</text>
+    <text x="940" y="356" font-size="9" fill="#8b96a8">Cryptographic Failures — HTTPS, bcrypt/argon2 em senhas, dados em repouso</text>
+    <text x="908" y="372" font-size="9" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">A03</text>
+    <text x="940" y="372" font-size="9" fill="#8b96a8">Injection — prepared statements, parameterized queries, ORMs seguros</text>
+    <text x="908" y="388" font-size="9" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">A04</text>
+    <text x="940" y="388" font-size="9" fill="#8b96a8">Insecure Design — threat modeling antes do desenvolvimento</text>
+    <text x="908" y="404" font-size="9" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">A05</text>
+    <text x="940" y="404" font-size="9" fill="#8b96a8">Security Misconfiguration — headers, CORS, CSP, debug desligado em prod</text>
+    <text x="908" y="422" font-size="9" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">A06</text>
+    <text x="940" y="422" font-size="9" fill="#8b96a8">Vulnerable Components — Snyk/Trivy em deps, patching contínuo</text>
+    <text x="908" y="438" font-size="9" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">A07</text>
+    <text x="940" y="438" font-size="9" fill="#8b96a8">Authentication Failures — rate limit, MFA, session management</text>
+    <text x="908" y="454" font-size="9" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">A08</text>
+    <text x="940" y="454" font-size="9" fill="#8b96a8">Integrity Failures — assinar builds, validar webhooks, supply chain</text>
+    <text x="908" y="470" font-size="9" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">A09</text>
+    <text x="940" y="470" font-size="9" fill="#8b96a8">Logging Failures — logs de acesso, auditoria, sem dados sensíveis no log</text>
+    <text x="908" y="488" font-size="9" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">A10</text>
+    <text x="940" y="488" font-size="9" fill="#8b96a8">SSRF — validar URLs, block interno, allowlist de domínios externos</text>
+  </g>
+
+  <!-- ══ ESCALATION TABLE ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.5s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="522" width="1760" height="148" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="38" y="542" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">TABELA DE ESCALAÇÃO — VULNERABILIDADES IDENTIFICADAS</text>
+    <line x1="30" y1="548" x2="1770" y2="548" stroke="#1f2937" stroke-width="1"/>
+    <!-- Header -->
+    <text x="38" y="566" font-size="9" fill="#6b7280" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">SEVERIDADE       CVSS        AÇÃO DO SECURITY-AGENT              DECISÃO HUMANA    PRAZO</text>
+    <line x1="30" y1="570" x2="1770" y2="570" stroke="#1f2937" stroke-width="1" stroke-dasharray="2 2"/>
+    <!-- linhas -->
+    <text x="38" y="586" font-size="9" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Low              0.1–3.9     registra no gate report               não              próxima sprint</text>
+    <text x="38" y="602" font-size="9" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Medium           4.0–6.9     bloqueia gate, pede correção          não              sprint atual</text>
+    <text x="38" y="618" font-size="9" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">High             7.0–8.9     ALERTA_PERIGO + para tudo            SIM obrigatório   imediato (24h)</text>
+    <text x="38" y="634" font-size="9" fill="#ef4444" font-weight="700" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Critical         9.0–10.0    ALERTA_PERIGO + revogar credencial   SIM obrigatório   agora (0h)</text>
+    <line x1="30" y1="642" x2="1770" y2="642" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="658" font-size="8.5" fill="#4b5563">Nota: "para tudo" = agente suspende qualquer ação implementadora até que humano decida · PR bloqueado · worktree congelado</text>
+    <text x="38" y="674" font-size="8.5" fill="#ef4444">Secret exposto em histórico Git: revogar ANTES de corrigir (credencial comprometida mesmo após remoção do commit)</text>
+  </g>
+
+  <!-- ══ STATUS BAR ══ -->
+  <rect x="20" y="682" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="693" r="4" fill="#ef4444">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="1s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="697" font-size="9.5" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 15</text>
+  <text x="112" y="697" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="122" y="697" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">SAST · secrets scan · OWASP Top 10 · ALERTA_PERIGO · escalação por CVSS · decisão humana obrigatória</text>
+  <text x="1770" y="697" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">SEGURANÇA</text>
+
+  <!-- ══ LEGENDA ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.7s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="718" width="1760" height="70" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="736" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA</text>
+    <line x1="30" y1="740" x2="1770" y2="740" stroke="#1f2937" stroke-width="1"/>
+    <rect x="38" y="747" width="10" height="10" rx="2" fill="#0d0608" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="55" y="757" font-size="9.5" fill="#8b96a8">Crítico / ALERTA_PERIGO — pausa total, humano decide</text>
+    <rect x="370" y="747" width="10" height="10" rx="2" fill="#1a1000" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="387" y="757" font-size="9.5" fill="#8b96a8">Médio/Alto — gate bloqueado até correção</text>
+    <rect x="620" y="747" width="10" height="10" rx="2" fill="#0d1a0d" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="637" y="757" font-size="9.5" fill="#8b96a8">Baixo — registrado, sprint seguinte</text>
+    <text x="38" y="777" font-size="9.5" fill="#4b5563">CVSS = Common Vulnerability Scoring System (0–10) · SAST = Static Application Security Testing · RCE = Remote Code Execution</text>
+    <text x="38" y="777" font-size="9.5" fill="#4b5563" dy="0">  </text>
+    <text x="820" y="777" font-size="9.5" fill="#4b5563">SSRF = Server-Side Request Forgery · RBAC = Role-Based Access Control · CSP = Content Security Policy</text>
+  </g>
+</svg>

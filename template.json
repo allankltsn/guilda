@@ -1,6 +1,6 @@
 {
-  "name": "engineering-template",
-  "version": "1.3.0",
+  "name": "guilda",
+  "version": "2.0.0",
   "roles": [
     {
       "id": "architect",
@@ -229,7 +229,9 @@
     }
   ],
   "skills": [
-    "drawio-diagram"
+    "drawio-diagram",
+    "dark-pipeline-svg",
+    "readme-styling"
   ],
   "model_tiers": {
     "deep": {

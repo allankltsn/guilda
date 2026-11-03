@@ -8,12 +8,19 @@ import shutil
 import time
 import uuid
 import unittest
+from unittest import mock
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("template", ROOT / "scripts/template.py")
-template = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(template)
+import sys
+sys.path.insert(0, str(ROOT))
+
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
+from tests import guilda_test_isolation  # noqa: E402,F401  (isola o config do usuário)
+import guilda.engine as template  # noqa: E402
+import guilda.mods as mods  # noqa: E402
 
 
 class TemplateTests(unittest.TestCase):
@@ -237,7 +244,7 @@ class TemplateTests(unittest.TestCase):
                 for required in (".engineering/project.json", ".engineering/catalog.json", ".engineering/profiles/<id>.json", "Do not rely on inherited context"):
                     self.assertIn(required, text, path)
             for path, data in output.items():
-                if path in ("AGENTS.md", "CLAUDE.md", "BOOTSTRAP.md") or path.startswith(("commands/", ".claude/commands/")) or (path.startswith(".agents/skills/") and "drawio" not in path):
+                if path in ("AGENTS.md", "CLAUDE.md", "BOOTSTRAP.md") or path.startswith(("commands/", ".claude/commands/")) or (path.startswith(".agents/skills/") and not path.startswith((".agents/skills/drawio-diagram/", ".agents/skills/dark-pipeline-svg/", ".agents/skills/readme-styling/"))):
                     self.assertIn(".engineering/catalog.json", data.decode(), path)
                     self.assertIn(".engineering/project.json", data.decode(), path)
 
@@ -396,9 +403,9 @@ class TemplateTests(unittest.TestCase):
         offenders = []
         for path in ROOT.rglob("*"):
             rel = path.relative_to(ROOT)
-            if ".git" in rel.parts or "__pycache__" in rel.parts or not path.is_file() or path.suffix in (".png", ".pyc"):
+            if ".git" in rel.parts or ".worktrees" in rel.parts or ".dev" in rel.parts or ".superpowers" in rel.parts or "__pycache__" in rel.parts or not path.is_file() or path.suffix in (".png", ".pyc"):
                 continue
-            if rel.as_posix() in ("tests/test_template.py", "integrations/plugins/curated.json"):
+            if rel.as_posix() in ("tests/test_template.py", "integrations/plugins/curated.json", "LICENSE", "guilda/promote.py"):  # promote targets the maintainer's repo
                 continue
             if banned.search(path.read_text(encoding="utf-8", errors="ignore")):
                 offenders.append(rel.as_posix())
@@ -410,9 +417,22 @@ class TemplateTests(unittest.TestCase):
         "integrations/token-milestones/README.md",
     )
 
+    def test_board_freshness_and_versioning_rules_are_rendered(self):
+        _, output = template.render(ROOT, ["claude", "codex"], ["base"])
+        board = output[".engineering/workflow/github-projects.md"].decode()
+        for needle in ("Board freshness and dual validation", "Demand owner", "Delivery owner", "Independent cross-check", "Review whenever a crash-safety record is written"):
+            self.assertIn(needle, board)
+        versioning = output[".engineering/policies/versioning.md"].decode()
+        for needle in ("Tag first, code second", "SemVer 2.0.0", "Always.", "never tags their own delivery"):
+            self.assertIn(needle, versioning)
+        self.assertIn("board freshness", output[".engineering/workflow/economy.md"].decode().lower())
+        self.assertIn("board", output[".engineering/workflow/session-continuity.md"].decode().lower())
+        for name in ("CLAUDE.md", "AGENTS.md", ".claude/agents/backend.md", ".codex/agents/qa.toml"):
+            self.assertIn("policies/versioning.md", output[name].decode(), name)
+
     def test_operating_practices_are_rendered(self):
         config, output = template.render(ROOT, ["claude", "codex"], ["base"])
-        self.assertEqual(config["version"], "1.3.0")
+        self.assertEqual(config["version"], "2.0.0")
         for path in self.NEW_IN_1_2_0:
             self.assertIn(f".engineering/{path}", output, path)
         economy = output[".engineering/workflow/economy.md"].decode()
@@ -469,6 +489,72 @@ class TemplateTests(unittest.TestCase):
                 self.assertTrue(plugin["install"].startswith("claude plugin install "))
         _, output = template.render(ROOT, ["claude", "codex"], ["base"])
         self.assertFalse(any(p.startswith(".claude/plugins") or "node_modules" in p for p in output))
+
+    def _fake_run(self, calls, code=0):
+        class Done:
+            returncode = code
+            stdout = ""
+            stderr = "falhou" if code else ""
+
+        def run(command, **_kw):
+            calls.append(command)
+            return Done()
+
+        return run
+
+    def test_mod_sources_stay_out_of_the_engineering_tree(self):
+        _, output = template.render(ROOT, ["claude", "codex"], ["base"])
+        self.assertFalse(any("integrations/mod" in p for p in output))
+
+    def test_mod_install_project_scope_copies_registers_and_records(self):
+        calls = []
+        self.target.mkdir()
+        home = self.root / "home"
+        with mock.patch.object(mods.shutil, "which", return_value="claude"):
+            result = mods.install_mod("token-handoff", "project", self.target, home=home, run=self._fake_run(calls), platform="win32")
+        mods_root = self.target / ".claude" / "mods"
+        self.assertTrue((mods_root / "token-handoff" / ".claude-plugin" / "plugin.json").is_file())
+        self.assertTrue((mods_root / "token-handoff" / "hooks" / "register.ts").is_file())
+        self.assertFalse(list((mods_root / "token-handoff").rglob("*.test.ts")))
+        self.assertTrue((self.target / ".claude" / "scripts" / "handoff-sessao.ps1").is_file())
+        self.assertFalse(home.exists())
+        market = json.loads((mods_root / ".claude-plugin" / "marketplace.json").read_text(encoding="utf-8"))
+        self.assertEqual([p["name"] for p in market["plugins"]], ["token-handoff"])
+        self.assertEqual(calls[0][:4], ["claude", "plugin", "marketplace", "add"])
+        self.assertEqual(calls[1][-2:], ["--scope", "project"])
+        registry = (self.target / "docs/operations/registro-instalacoes.md").read_text(encoding="utf-8")
+        self.assertIn("mod token-handoff", registry)
+        self.assertIn("install.py --mod token-handoff", registry)
+        self.assertTrue(result["installed"])
+
+    def test_mod_install_global_scope_writes_only_under_home(self):
+        self.target.mkdir()
+        home = self.root / "home"
+        with mock.patch.object(mods.shutil, "which", return_value="claude"):
+            mods.install_mod("token-handoff", "global", self.target, home=home, run=self._fake_run([]), platform="win32")
+        self.assertTrue((home / ".claude" / "mods" / "token-handoff" / ".claude-plugin" / "plugin.json").is_file())
+        self.assertTrue((home / ".claude" / "scripts" / "handoff-sessao.ps1").is_file())
+        self.assertFalse((self.target / ".claude").exists())
+
+    def test_mod_dry_run_writes_nothing_and_unknown_or_unsupported_is_refused(self):
+        self.target.mkdir()
+        result = mods.install_mod("token-handoff", "project", self.target, dry_run=True, platform="win32")
+        self.assertTrue(result["dry_run"])
+        self.assertEqual(list(self.target.iterdir()), [])
+        with self.assertRaises(ValueError):
+            mods.install_mod("nao-existe", "project", self.target)
+        with self.assertRaises(ValueError):
+            mods.install_mod("token-handoff", "project", self.target, platform="linux")
+        with self.assertRaises(ValueError):
+            mods.install_mod("token-handoff", "galaxia", self.target, platform="win32")
+
+    def test_mod_install_failure_is_recorded_as_not_verified(self):
+        self.target.mkdir()
+        with mock.patch.object(mods.shutil, "which", return_value="claude"):
+            result = mods.install_mod("token-handoff", "project", self.target, run=self._fake_run([], code=1), platform="win32")
+        self.assertFalse(result["installed"])
+        registry = (self.target / "docs/operations/registro-instalacoes.md").read_text(encoding="utf-8")
+        self.assertIn("not verified", registry)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,7 @@
+{
+  "name": "token-handoff",
+  "version": "0.2.0",
+  "description": "Aos 400k tokens bloqueia novos agentes, faz o modelo gravar o prompt de continuacao, abre a sessao nova com ele e encerra a atual. Sem perguntas ao humano.",
+  "license": "UNLICENSED",
+  "types": "./types/index.d.ts"
+}

@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVG 16 — Metodologias Ágeis e Git</title>
+<style>
+  :root { color-scheme: dark }
+  body {
+    margin: 0; background: #0b0f17;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100%; padding: 40px 16px; box-sizing: border-box;
+  }
+  svg { width: 100%; max-width: 1800px; height: auto; display: block; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 800"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-teal" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#2dd4bf"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L8,3.5 L0,7 Z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <rect width="1800" height="800" fill="#0b0f17"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="1760" height="48" rx="6" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="20" y="16" width="6" height="48" rx="3" fill="#2dd4bf"/>
+  <text x="44" y="37" font-size="15" font-weight="700" fill="#e6edf3">16 — Metodologias Ágeis e Git</text>
+  <text x="44" y="55" font-size="11" fill="#8b96a8">Scrum/Kanban · hierarquia de issues · git worktree · polyrepo · labels · conventional commits</text>
+  <text x="1760" y="37" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 16/17</text>
+  <text x="1760" y="52" font-size="9.5" fill="#2dd4bf" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">metodologia · git</text>
+
+  <!-- ══ SCRUM LOOP ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.1s" dur="0.4s" fill="freeze"/>
+    <!-- Sprint loop -->
+    <rect x="20" y="82" width="460" height="270" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="250" y="102" font-size="10" fill="#2dd4bf" font-weight="700" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">CICLO SCRUM — SPRINT 2 SEMANAS</text>
+
+    <!-- Sprint planning -->
+    <rect x="32" y="112" width="130" height="48" rx="6" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1"/>
+    <text x="97" y="131" font-size="9" fill="#3b82f6" text-anchor="middle" font-weight="700">PLANNING</text>
+    <text x="97" y="147" font-size="7.5" fill="#4b5563" text-anchor="middle">define sprint backlog</text>
+    <text x="97" y="158" font-size="7.5" fill="#4b5563" text-anchor="middle">story points</text>
+
+    <!-- Daily -->
+    <rect x="175" y="112" width="130" height="48" rx="6" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="240" y="131" font-size="9" fill="#2dd4bf" text-anchor="middle" font-weight="700">DAILY</text>
+    <text x="240" y="147" font-size="7.5" fill="#4b5563" text-anchor="middle">status agentes</text>
+    <text x="240" y="158" font-size="7.5" fill="#4b5563" text-anchor="middle">bloqueios</text>
+
+    <!-- Review -->
+    <rect x="318" y="112" width="130" height="48" rx="6" fill="#0d1a0d" stroke="#4ade80" stroke-width="1"/>
+    <text x="383" y="131" font-size="9" fill="#4ade80" text-anchor="middle" font-weight="700">REVIEW</text>
+    <text x="383" y="147" font-size="7.5" fill="#4b5563" text-anchor="middle">demo entregues</text>
+    <text x="383" y="158" font-size="7.5" fill="#4b5563" text-anchor="middle">aceite do orq.</text>
+
+    <!-- Setas do loop -->
+    <path d="M162,136 L175,136" stroke="#2dd4bf" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+    <path d="M305,136 L318,136" stroke="#4ade80" stroke-width="1.5" fill="none"/>
+    <line x1="305" y1="136" x2="316" y2="136" stroke="#4ade80" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+    <!-- volta para planning -->
+    <path d="M448,136 C448,80 97,80 97,112" stroke="#2dd4bf" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#arr-teal)"/>
+
+    <!-- Retro -->
+    <rect x="60" y="184" width="360" height="52" rx="6" fill="#1a1000" stroke="#f59e0b" stroke-width="1"/>
+    <text x="240" y="203" font-size="9" fill="#f59e0b" text-anchor="middle" font-weight="700">RETROSPECTIVA</text>
+    <text x="240" y="220" font-size="8" fill="#4b5563" text-anchor="middle">o que funcionou · o que melhorar · action items</text>
+    <text x="240" y="232" font-size="8" fill="#4b5563" text-anchor="middle">velocity do sprint → ajuste de pts próximo sprint</text>
+
+    <!-- Definição de done -->
+    <rect x="32" y="252" width="436" height="82" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="250" y="270" font-size="9" fill="#8b96a8" font-weight="700" text-anchor="middle">DEFINIÇÃO DE DONE (DoD)</text>
+    <text x="42" y="286" font-size="8.5" fill="#4b5563">· Código implementado + testes passando (≥ 80% coverage)</text>
+    <text x="42" y="300" font-size="8.5" fill="#4b5563">· Gates de revisão (tech + sec + privacy) aprovados</text>
+    <text x="42" y="314" font-size="8.5" fill="#4b5563">· PR merged em main + deploy em staging sem erros</text>
+    <text x="42" y="328" font-size="8.5" fill="#4b5563">· Issue fechada no GitHub Projects com evidência</text>
+  </g>
+
+  <!-- ══ HIERARQUIA DE ISSUES ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.4s" dur="0.4s" fill="freeze"/>
+    <rect x="490" y="82" width="420" height="270" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="700" y="102" font-size="10" fill="#f59e0b" font-weight="700" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">HIERARQUIA DE ISSUES</text>
+
+    <!-- Epic -->
+    <rect x="582" y="112" width="236" height="34" rx="6" fill="#1a0f00" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="700" y="134" font-size="9.5" fill="#f59e0b" text-anchor="middle" font-weight="700">EPIC — objetivo maior</text>
+
+    <line x1="700" y1="146" x2="700" y2="158" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 2"/>
+
+    <!-- Stories -->
+    <rect x="502" y="158" width="190" height="32" rx="6" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1"/>
+    <text x="597" y="178" font-size="9" fill="#3b82f6" text-anchor="middle">USER STORY</text>
+    <rect x="708" y="158" width="190" height="32" rx="6" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1"/>
+    <text x="803" y="178" font-size="9" fill="#3b82f6" text-anchor="middle">USER STORY</text>
+
+    <line x1="597" y1="190" x2="597" y2="204" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3 2"/>
+    <line x1="803" y1="190" x2="803" y2="204" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3 2"/>
+
+    <!-- Tasks -->
+    <rect x="502" y="204" width="86" height="28" rx="4" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="545" y="221" font-size="8" fill="#2dd4bf" text-anchor="middle">TASK #A</text>
+    <rect x="600" y="204" width="86" height="28" rx="4" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="643" y="221" font-size="8" fill="#2dd4bf" text-anchor="middle">TASK #B</text>
+    <rect x="708" y="204" width="86" height="28" rx="4" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="751" y="221" font-size="8" fill="#2dd4bf" text-anchor="middle">TASK #C</text>
+    <rect x="806" y="204" width="86" height="28" rx="4" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="849" y="221" font-size="8" fill="#2dd4bf" text-anchor="middle">TASK #D</text>
+
+    <line x1="700" y1="232" x2="700" y2="244" stroke="#2dd4bf" stroke-width="1" stroke-dasharray="3 2"/>
+
+    <!-- Bug -->
+    <rect x="630" y="244" width="140" height="28" rx="4" fill="#1a0a0a" stroke="#ef4444" stroke-width="1"/>
+    <text x="700" y="261" font-size="8" fill="#ef4444" text-anchor="middle">BUG (deriva de task)</text>
+
+    <!-- legenda hierarquia -->
+    <text x="502" y="294" font-size="8.5" fill="#4b5563">Epic →  "Implementar autenticação"</text>
+    <text x="502" y="310" font-size="8.5" fill="#4b5563">Story → "Como usuário, quero fazer login"</text>
+    <text x="502" y="326" font-size="8.5" fill="#4b5563">Task  → POST /auth/login (agente S-042)</text>
+    <text x="502" y="342" font-size="8.5" fill="#4b5563">Bug   → login falha com email maiúsculo</text>
+  </g>
+
+  <!-- ══ GIT WORKTREE + POLYREPO ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.6s" dur="0.4s" fill="freeze"/>
+    <rect x="920" y="82" width="860" height="270" rx="8" fill="#0d1117" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="1350" y="102" font-size="10" fill="#2dd4bf" font-weight="700" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">GIT WORKTREE + ESTRUTURA POLYREPO</text>
+
+    <!-- Worktree commands -->
+    <text x="938" y="120" font-size="9" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">CRIAR:</text>
+    <rect x="990" y="108" width="770" height="18" rx="3" fill="#060c14"/>
+    <text x="998" y="121" font-size="9" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">git worktree add ../worktrees/agent-S-042 -b feat/agent-S-042</text>
+
+    <text x="938" y="146" font-size="9" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LISTAR:</text>
+    <rect x="990" y="134" width="770" height="18" rx="3" fill="#060c14"/>
+    <text x="998" y="147" font-size="9" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">git worktree list</text>
+
+    <text x="938" y="172" font-size="9" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">REMOVER:</text>
+    <rect x="990" y="160" width="770" height="18" rx="3" fill="#060c14"/>
+    <text x="998" y="173" font-size="9" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">git worktree remove ../worktrees/agent-S-042 --force</text>
+
+    <!-- Estrutura de diretórios -->
+    <text x="938" y="198" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ESTRUTURA DE PASTAS (polyrepo):</text>
+    <rect x="930" y="204" width="460" height="134" rx="4" fill="#060c14" stroke="#1f2937" stroke-width="1"/>
+    <text x="944" y="222" font-size="8.5" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">~/projects/</text>
+    <text x="944" y="238" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  ├── my-app/            ← repo principal (main)</text>
+    <text x="944" y="254" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  ├── worktrees/</text>
+    <text x="944" y="270" font-size="8.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  │   ├── agent-S-042/   ← feat/agent-S-042</text>
+    <text x="944" y="286" font-size="8.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  │   ├── agent-S-043/   ← feat/agent-S-043</text>
+    <text x="944" y="302" font-size="8.5" fill="#f472b6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  │   └── agent-S-044/   ← feat/agent-S-044</text>
+    <text x="944" y="318" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">  └── diário/ live-state.md</text>
+
+    <!-- Benefícios worktree -->
+    <rect x="1404" y="204" width="366" height="134" rx="4" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1"/>
+    <text x="1420" y="222" font-size="9.5" fill="#2dd4bf" font-weight="700">VANTAGENS DO WORKTREE</text>
+    <text x="1420" y="240" font-size="8.5" fill="#8b96a8">· Sem stash entre agents</text>
+    <text x="1420" y="256" font-size="8.5" fill="#8b96a8">· Isolamento total de branches</text>
+    <text x="1420" y="272" font-size="8.5" fill="#8b96a8">· Paralelo real (2+ agentes)</text>
+    <text x="1420" y="288" font-size="8.5" fill="#8b96a8">· Contexto de diretório isolado</text>
+    <text x="1420" y="304" font-size="8.5" fill="#8b96a8">· .env por worktree (opcional)</text>
+    <text x="1420" y="320" font-size="8.5" fill="#2dd4bf">· Crash não afeta outros agents</text>
+  </g>
+
+  <!-- ══ CONVENTIONAL COMMITS ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="0.8s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="368" width="740" height="290" rx="8" fill="#0d1117" stroke="#3b82f6" stroke-width="1"/>
+    <text x="38" y="388" font-size="10" fill="#3b82f6" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">CONVENTIONAL COMMITS — PADRÃO OBRIGATÓRIO</text>
+    <line x1="30" y1="394" x2="750" y2="394" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="410" font-size="9" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">FORMATO: &lt;tipo&gt;(&lt;escopo&gt;): &lt;descrição curta&gt; — &lt;AGENT-ID&gt;</text>
+    <line x1="30" y1="416" x2="750" y2="416" stroke="#1f2937" stroke-width="1" stroke-dasharray="2 2"/>
+    <!-- exemplos -->
+    <text x="38" y="434" font-size="8.5" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">feat(api): POST /api/users endpoint — S-042</text>
+    <text x="38" y="450" font-size="8.5" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">fix(auth): handle expired JWT tokens — S-043</text>
+    <text x="38" y="466" font-size="8.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">refactor(db): extract query helpers — S-044</text>
+    <text x="38" y="482" font-size="8.5" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">test(users): add integration tests — S-042</text>
+    <text x="38" y="498" font-size="8.5" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">chore(ci): add cache for node_modules — S-045</text>
+    <text x="38" y="514" font-size="8.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">docs(api): update OpenAPI spec — S-046</text>
+    <line x1="30" y1="520" x2="750" y2="520" stroke="#1f2937" stroke-width="1"/>
+    <!-- tabela de tipos -->
+    <text x="38" y="536" font-size="9" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">tipo      descrição                           gera release?</text>
+    <text x="38" y="552" font-size="8.5" fill="#4ade80" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">feat      nova funcionalidade                  minor (1.x.0)</text>
+    <text x="38" y="568" font-size="8.5" fill="#ef4444" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">fix       correção de bug                      patch (1.0.x)</text>
+    <text x="38" y="584" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">refactor  sem funcionalidade nova/bug         não</text>
+    <text x="38" y="600" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">test      adiciona/melhora testes             não</text>
+    <text x="38" y="616" font-size="8.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">chore     manutenção, deps, CI                não</text>
+    <text x="38" y="632" font-size="8.5" fill="#a78bfa" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">BREAKING  ! após tipo: breaking change        major (x.0.0)</text>
+    <text x="38" y="650" font-size="8" fill="#3b82f6">Changelog gerado automaticamente em releases semânticos</text>
+  </g>
+
+  <!-- ══ KANBAN ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1s" dur="0.4s" fill="freeze"/>
+    <rect x="770" y="368" width="1010" height="290" rx="8" fill="#0d1117" stroke="#f59e0b" stroke-width="1"/>
+    <text x="788" y="388" font-size="10" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" letter-spacing="1">KANBAN × SCRUM — QUANDO USAR CADA UM</text>
+    <line x1="780" y1="394" x2="1770" y2="394" stroke="#1f2937" stroke-width="1"/>
+
+    <!-- Scrum column -->
+    <rect x="782" y="402" width="468" height="240" rx="6" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1"/>
+    <text x="1016" y="422" font-size="9.5" fill="#3b82f6" font-weight="700" text-anchor="middle">SCRUM (padrão)</text>
+    <text x="790" y="440" font-size="9" fill="#8b96a8">· Sprints de 2 semanas com escopo fixo</text>
+    <text x="790" y="456" font-size="9" fill="#8b96a8">· Backlog refinado antes de cada sprint</text>
+    <text x="790" y="472" font-size="9" fill="#8b96a8">· Velocity tracking para previsibilidade</text>
+    <text x="790" y="488" font-size="9" fill="#8b96a8">· Planning + Review + Retro obrigatórios</text>
+    <text x="790" y="504" font-size="9" fill="#8b96a8">· Story points por item de backlog</text>
+    <text x="790" y="520" font-size="9" fill="#8b96a8">· Ideal para: features novas, projetos com</text>
+    <text x="790" y="536" font-size="9" fill="#8b96a8">  escopo definido e equipe estável</text>
+    <text x="790" y="556" font-size="9.5" fill="#3b82f6" font-weight="700">QUANDO USAR:</text>
+    <text x="790" y="572" font-size="9" fill="#4b5563">Sprint 1: setup + infra + auth</text>
+    <text x="790" y="588" font-size="9" fill="#4b5563">Sprint 2: CRUD principal</text>
+    <text x="790" y="604" font-size="9" fill="#4b5563">Sprint 3: integrações + UX</text>
+    <text x="790" y="620" font-size="9" fill="#4b5563">Sprint 4: segurança + launch</text>
+
+    <!-- Kanban column -->
+    <rect x="1264" y="402" width="500" height="240" rx="6" fill="#1a1000" stroke="#f59e0b" stroke-width="1"/>
+    <text x="1514" y="422" font-size="9.5" fill="#f59e0b" font-weight="700" text-anchor="middle">KANBAN (operacional)</text>
+    <text x="1272" y="440" font-size="9" fill="#8b96a8">· Fluxo contínuo sem sprints fixos</text>
+    <text x="1272" y="456" font-size="9" fill="#8b96a8">· WIP limits por coluna (ex: máx 3 in-progress)</text>
+    <text x="1272" y="472" font-size="9" fill="#8b96a8">· Cicle time como métrica principal</text>
+    <text x="1272" y="488" font-size="9" fill="#8b96a8">· Pull system: pega item quando livre</text>
+    <text x="1272" y="504" font-size="9" fill="#8b96a8">· Sem planning formal — prioridade no topo</text>
+    <text x="1272" y="520" font-size="9" fill="#8b96a8">· Ideal para: bugs, suporte, manutenção</text>
+    <text x="1272" y="536" font-size="9" fill="#8b96a8">  e operações contínuas pós-launch</text>
+    <text x="1272" y="556" font-size="9.5" fill="#f59e0b" font-weight="700">QUANDO USAR:</text>
+    <text x="1272" y="572" font-size="9" fill="#4b5563">Hotfixes urgentes em produção</text>
+    <text x="1272" y="588" font-size="9" fill="#4b5563">Time de suporte / SRE on-call</text>
+    <text x="1272" y="604" font-size="9" fill="#4b5563">Melhorias incrementais pós-MVP</text>
+    <text x="1272" y="620" font-size="9" fill="#4b5563">Projetos exploratórios / research</text>
+  </g>
+
+  <!-- ══ STATUS BAR ══ -->
+  <rect x="20" y="672" width="1760" height="22" rx="4" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="38" cy="683" r="4" fill="#2dd4bf">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="50" y="687" font-size="9.5" fill="#2dd4bf" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ETAPA 16</text>
+  <text x="112" y="687" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">·</text>
+  <text x="122" y="687" font-size="9.5" fill="#8b96a8" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">Scrum 2 semanas · hierarquia Epic→Story→Task · git worktree · polyrepo · conventional commits</text>
+  <text x="1770" y="687" font-size="9.5" fill="#4b5563" text-anchor="end" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ÁGIL &amp; GIT</text>
+
+  <!-- ══ LEGENDA ══ -->
+  <g opacity="0"><animate attributeName="opacity" to="1" begin="1.2s" dur="0.4s" fill="freeze"/>
+    <rect x="20" y="706" width="1760" height="78" rx="6" fill="#0d1117" stroke="#1f2937" stroke-width="1"/>
+    <text x="38" y="724" font-size="9.5" fill="#4b5563" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">LEGENDA</text>
+    <line x1="30" y1="728" x2="1770" y2="728" stroke="#1f2937" stroke-width="1"/>
+    <rect x="38" y="736" width="10" height="10" rx="2" fill="#0d1a2e" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="55" y="746" font-size="9.5" fill="#8b96a8">Scrum/Sprint (features novas)</text>
+    <rect x="260" y="736" width="10" height="10" rx="2" fill="#0d1a1a" stroke="#2dd4bf" stroke-width="1.5"/>
+    <text x="277" y="746" font-size="9.5" fill="#8b96a8">Git Worktree / isolamento</text>
+    <rect x="460" y="736" width="10" height="10" rx="2" fill="#1a1000" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="477" y="746" font-size="9.5" fill="#8b96a8">Kanban (operações)</text>
+    <rect x="635" y="736" width="10" height="10" rx="2" fill="#1a0a0a" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="652" y="746" font-size="9.5" fill="#8b96a8">Bug / bloqueio</text>
+    <text x="38" y="772" font-size="9.5" fill="#4b5563">WIP = Work in Progress · DoD = Definition of Done · Velocity = story points entregues/sprint · Cycle time = tempo médio de conclusão de um item</text>
+    <text x="38" y="773" font-size="9.5" fill="#4b5563" dy="0">   </text>
+    <text x="840" y="773" font-size="9.5" fill="#4b5563">BREAKING CHANGE (!) = incrementa major version no semver</text>
+  </g>
+</svg>
+</body>
+</html>

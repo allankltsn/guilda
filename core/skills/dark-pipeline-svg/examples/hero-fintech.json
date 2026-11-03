@@ -1,0 +1,23 @@
+{
+  "title": "Pagamentos Aurora",
+  "tagline": ["Plataforma de pagamentos", {"text": "· PIX e boletos", "accent": true}, "· conciliação em tempo real"],
+  "palette": {"accent": "#7c3aed", "accent2": "#a78bfa", "ok": "#22c55e"},
+  "stack": [
+    {"label": "NestJS", "color": "#e0234e"},
+    {"label": "PostgreSQL", "color": "#60a5fa"},
+    {"label": "Redis", "color": "#ef4444"},
+    {"label": "AWS SQS", "color": "#f59e0b"},
+    {"label": "Stripe", "color": "#a78bfa"}
+  ],
+  "panel": {
+    "type": "metrics",
+    "title": "painel · hoje",
+    "kpis": [
+      {"value": "R$ 1,2M", "label": "volume"},
+      {"value": "99,98%", "label": "aprovação", "color": "#22c55e"},
+      {"value": "184 ms", "label": "p95"}
+    ],
+    "series": [12, 18, 15, 22, 30, 26, 34, 29, 41, 38, 46, 52],
+    "series_color": "#a78bfa"
+  }
+}
