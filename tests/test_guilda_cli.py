@@ -228,7 +228,13 @@ class CliTests(unittest.TestCase):
             self.assertEqual(cli.confirm("ok? ", stdin=FakeTTY(answer + "\n"), stdout=out), expected, answer)
 
     def test_mod_command_dry_run(self):
-        code, out, err = run(["mod", "token-handoff", "--dry-run", "--target", str(self.work)])
+        real_install = cli.mods.install_mod
+
+        def as_windows(*args, **kwargs):
+            return real_install(*args, platform="win32", **kwargs)
+
+        with mock.patch.object(cli.mods, "install_mod", side_effect=as_windows):
+            code, out, err = run(["mod", "token-handoff", "--dry-run", "--target", str(self.work)])
         self.assertEqual((code, err), (0, ""))
         self.assertIn("mod token-handoff", out)
         self.assertIn("(project)", out)
@@ -238,6 +244,18 @@ class CliTests(unittest.TestCase):
         code, out, err = run(["mod", "nao-existe", "--target", str(self.work)])
         self.assertEqual(code, 1)
         self.assertTrue(err.startswith("erro: mod nao-existe: "))
+
+    def test_mod_command_refuses_windows_only_mod_on_other_platforms(self):
+        real_install = cli.mods.install_mod
+
+        def as_linux(*args, **kwargs):
+            return real_install(*args, platform="linux", **kwargs)
+
+        with mock.patch.object(cli.mods, "install_mod", side_effect=as_linux):
+            code, out, err = run(["mod", "token-handoff", "--dry-run", "--target", str(self.work)])
+        self.assertEqual(code, 1)
+        self.assertIn("só instala no Windows", err)
+        self.assertEqual(list(self.work.iterdir()), [])
 
     def test_legacy_project_install_points_to_upgrade_and_upgrade_migrates(self):
         self.project()

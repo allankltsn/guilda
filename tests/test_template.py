@@ -8,6 +8,7 @@ import shutil
 import time
 import uuid
 import unittest
+from unittest import mock
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -509,7 +510,8 @@ class TemplateTests(unittest.TestCase):
         calls = []
         self.target.mkdir()
         home = self.root / "home"
-        result = mods.install_mod("token-handoff", "project", self.target, home=home, run=self._fake_run(calls), platform="win32")
+        with mock.patch.object(mods.shutil, "which", return_value="claude"):
+            result = mods.install_mod("token-handoff", "project", self.target, home=home, run=self._fake_run(calls), platform="win32")
         mods_root = self.target / ".claude" / "mods"
         self.assertTrue((mods_root / "token-handoff" / ".claude-plugin" / "plugin.json").is_file())
         self.assertTrue((mods_root / "token-handoff" / "hooks" / "register.ts").is_file())
@@ -523,12 +525,13 @@ class TemplateTests(unittest.TestCase):
         registry = (self.target / "docs/operations/registro-instalacoes.md").read_text(encoding="utf-8")
         self.assertIn("mod token-handoff", registry)
         self.assertIn("install.py --mod token-handoff", registry)
-        self.assertTrue(result["installed"] or shutil.which("claude") is None)
+        self.assertTrue(result["installed"])
 
     def test_mod_install_global_scope_writes_only_under_home(self):
         self.target.mkdir()
         home = self.root / "home"
-        mods.install_mod("token-handoff", "global", self.target, home=home, run=self._fake_run([]), platform="win32")
+        with mock.patch.object(mods.shutil, "which", return_value="claude"):
+            mods.install_mod("token-handoff", "global", self.target, home=home, run=self._fake_run([]), platform="win32")
         self.assertTrue((home / ".claude" / "mods" / "token-handoff" / ".claude-plugin" / "plugin.json").is_file())
         self.assertTrue((home / ".claude" / "scripts" / "handoff-sessao.ps1").is_file())
         self.assertFalse((self.target / ".claude").exists())
@@ -547,9 +550,8 @@ class TemplateTests(unittest.TestCase):
 
     def test_mod_install_failure_is_recorded_as_not_verified(self):
         self.target.mkdir()
-        if shutil.which("claude") is None:
-            self.skipTest("claude ausente do PATH")
-        result = mods.install_mod("token-handoff", "project", self.target, run=self._fake_run([], code=1), platform="win32")
+        with mock.patch.object(mods.shutil, "which", return_value="claude"):
+            result = mods.install_mod("token-handoff", "project", self.target, run=self._fake_run([], code=1), platform="win32")
         self.assertFalse(result["installed"])
         registry = (self.target / "docs/operations/registro-instalacoes.md").read_text(encoding="utf-8")
         self.assertIn("not verified", registry)
