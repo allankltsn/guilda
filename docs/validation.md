@@ -36,6 +36,14 @@ A versão 1.2.0 acrescentou economia, continuidade de sessão e comunicação (t
 > [!NOTE]
 > As skills de diagrama e README e o guia [diagramas.md](diagramas.md) (versão não lançada) são verificados só por presença e pelo teste de neutralidade. Os scripts das skills não têm testes automatizados.
 
+## <img src="../assets/icons/teal/package.svg" width="24" align="top"> Pacote guilda (2.0.0)
+
+- **Versão:** `template.json` e `guilda/__version__.py` em 2.0.0; um teste confere que as duas coincidem.
+- **Allowlist do payload:** `python -m guilda.payload --check` passa; o teste de neutralidade vale também para o pacote.
+- **Smoke test do comando:** `check` do template e `init --dry-run` num diretório temporário, com `GUILDA_CONFIG` apontando para um arquivo descartável (verificação de versão desligada).
+- **Migração e contribuição:** `upgrade` (classificação por arquivo e migração do nome do manifesto), `promote` (varredura de segredos, gist e issue), `self-update` e `config` são cobertos por testes de unidade com executores simulados.
+- **Não executado:** `python -m build`, instalação do wheel em ambiente virtual limpo, publicação no PyPI, a matriz de CI e uma promoção ou atualização real contra o GitHub.
+
 ## <img src="../assets/icons/teal/terminal.svg" width="24" align="top"> Evidências executadas
 
 - **CLI:** `check`, `doctor`, `init`, `sync` e `package` exercitados em fixtures locais.

@@ -1,7 +1,7 @@
 # <img src="assets/icons/teal/file-text.svg" width="28" align="top"> Changelog
 
 <p align="center">
-  <img src="https://img.shields.io/badge/versão_atual-1.3.0-0ea5a4?style=flat-square" alt="Versão atual 1.3.0">
+  <img src="https://img.shields.io/badge/versão_atual-2.0.0-0ea5a4?style=flat-square" alt="Versão atual 2.0.0">
   <img src="https://img.shields.io/badge/formato-Keep_a_Changelog-8b96a8?style=flat-square" alt="Formato Keep a Changelog">
   <img src="https://img.shields.io/badge/versionamento-template.json-60a5fa?style=flat-square" alt="Versões seguem template.json">
 </p>
@@ -12,13 +12,42 @@ Formato baseado em Keep a Changelog. Versões seguem `template.json`.
 
 | Versão | Data | Destaque |
 |---|---|---|
-| [Não lançado](#não-lançado) | n/d | Instalação de mods (`--mod`), mod `token-handoff`, skills `dark-pipeline-svg` e `readme-styling`, guia dos diagramas, README estilizado com sumário |
+| [2.0.0](#200---2026-11-03) | 2026-11-03 | Pacote `guilda` (PyPI) com `upgrade`, `promote`, `self-update` e `config`; instalação de mods (`--mod`), mod `token-handoff`, skills `dark-pipeline-svg` e `readme-styling`, guia dos diagramas e README estilizado |
 | [1.3.0](#130---2026-10-29) | 2026-10-29 | Instalador de um comando e README explicado |
 | [1.2.0](#120---2026-10-29) | 2026-10-29 | Economia, continuidade de sessão e comunicação |
 | [1.1.0](#110---2026-10-19) | 2026-10-19 | Generalização, 28 papéis e gestão de produto |
 | [1.0.0](#100) | n/d | Template portátil com 18 especialistas |
 
-## [Não lançado]
+## [2.0.0] - 2026-11-03
+
+Primeira versão publicada como pacote Python `guilda` (`pip install guilda` ou `uv tool install guilda`).
+
+### Quebras de compatibilidade
+- **Nome do manifesto:** `.engineering/manifest.json` passa de `name: engineering-template` para `name: guilda`.
+  O nome antigo só é aceito pelo `guilda upgrade`, que o reescreve; `sync` e `check` o recusam. Migração:
+  `guilda upgrade <projeto> --dry-run` e depois `guilda upgrade <projeto>`. A pasta `.engineering/` não muda.
+- **Ponto de entrada:** o comando é `guilda` (`guilda init|sync|check|doctor|package|install|...`). `install.py` e
+  `scripts/template.py` continuam para uso a partir do checkout.
+- **Allowlist do payload:** o pacote distribuído leva só o conteúdo listado em `guilda/payload.txt`
+  (`python -m guilda.payload --check` confere); o que fica fora da lista não vai no pacote.
+- **Marketplace de mods:** novas instalações de mods usam o marketplace `guilda-mods`. Plugins já instalados
+  globalmente não são tocados.
+
+### Adicionado (pacote)
+- **`guilda upgrade [projeto] [--dry-run] [--yes]`:** atualiza um projeto instalado arquivo por arquivo. Intocado e
+  igual: nada; intocado e alterado no template: atualiza; modificado por você com o template igual: mantém o seu;
+  modificado dos dois lados: conflito (só sobrescreve com `--yes`). Migra o manifesto do nome antigo.
+- **`guilda promote <projeto> --title ... --description ...`:** propõe suas alterações locais como feature. Varre
+  segredos e caminhos pessoais, mostra o que será enviado, pede confirmação, sobe um gist secreto e abre uma issue.
+  Contribuições de terceiros entram só por issue.
+- **`guilda self-update [--dry-run] [--yes]`:** atualiza o próprio `guilda` com `pip` ou `uv`. Opcional: só roda quando
+  você pede.
+- **`guilda config get` e `guilda config set update-check <off|notify|auto>`:** configuração do usuário. A verificação
+  de versão nova é opcional e vem desligada (`off`); `notify` avisa no máximo uma vez por dia e `auto` também instala.
+  A variável `GUILDA_CONFIG` aponta o arquivo de configuração e existe só para testes.
+- **Pacote e licença:** `pyproject.toml` (hatchling), publicação por tag `vX.Y.Z` com aprovação manual do mantenedor,
+  `LICENSE` Apache-2.0 e modelo de issue para propostas.
+
 
 ### Adicionado
 - **Instalação de mods (`install.py --mod <nome> [--mod-scope project|global]`):** `integrations/mod/` guarda
