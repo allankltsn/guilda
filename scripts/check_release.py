@@ -5,7 +5,7 @@ import re
 import sys
 from pathlib import Path
 
-TAG_RE = re.compile(r"^v\d+\.\d+\.\d+$")
+TAG_RE = re.compile(r"v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)", re.ASCII)
 VERSAO_RE = re.compile(r"""^__version__\s*=\s*["']([^"']+)["']""", re.MULTILINE)
 
 
@@ -14,9 +14,9 @@ def check(tag: str, root: Path) -> list[str]:
     problemas: list[str] = []
     root = Path(root)
 
-    if not TAG_RE.match(tag):
+    if not TAG_RE.fullmatch(tag):
         problemas.append(f"A tag '{tag}' não tem o formato vMAJOR.MINOR.PATCH (ex.: v2.0.0).")
-    versao_tag = tag[1:] if TAG_RE.match(tag) else None
+    versao_tag = tag[1:] if TAG_RE.fullmatch(tag) else None
 
     template = None
     try:
