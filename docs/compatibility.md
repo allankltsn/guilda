@@ -10,7 +10,7 @@
 > [!NOTE]
 > As versões acima são contexto de compatibilidade informado na preparação; **não representam uma matriz de runtime integralmente validada.**
 
-[← Voltar ao README](../README.md#sumario) · [Validação](validation.md) · [Guia dos diagramas](diagramas.md)
+[← Voltar ao README](../README.md#sumario) · [Comando guilda](cli.md) · [Validação](validation.md) · [Guia dos diagramas](diagramas.md)
 
 ## Sumário
 
@@ -20,7 +20,7 @@
 | [Claude Code](#claude-code) | Agentes do projeto, plugin e limites de paridade |
 | [Modelos por papel](#modelos-por-papel) | Campo `model` por camada e o que ele não prova |
 | [Marcos de tokens](#marcos-de-tokens-120) | Especificação sem código validado |
-| [Pacote guilda](#pacote-guilda-200) | Python, sistemas e o que o pacote 2.0.0 não comprova |
+| [Pacote guilda](#pacote-guilda-200) | Python, sistemas, distribuição (wheel, sdist, CI e release) e o que o pacote 2.0.0 não comprova |
 | [Integrações e escopo](#integrações-e-escopo-da-verificação) | Serena, RTK, Superpowers, Voltagent e GitHub Projects |
 
 ---
@@ -83,15 +83,22 @@ O principal pode sobrescrever o modelo por despacho. Nos agentes de plugin o cam
 
 ## <img src="../assets/icons/teal/package.svg" width="24" align="top"> Pacote guilda (2.0.0)
 
-- **Requisitos:** Python 3.11 ou superior, só biblioteca padrão. Instalação por `pip install guilda` ou `uv tool install guilda`; a partir do checkout, `install.py` e `scripts/template.py` seguem válidos.
-- **Matriz de CI:** Python 3.11, 3.12 e 3.13, em Windows e Linux, definida nos fluxos `ci` e `release`. A matriz foi **configurada**; os resultados dela só existem depois que o fluxo roda no GitHub.
-- **Executado localmente:** a suíte (`python -m unittest discover -s tests`) e a conferência da allowlist (`python -m guilda.payload --check`) em um único ambiente (Windows, Python 3.13).
-- **Contrato com projetos instalados:** o manifesto passa a se chamar `guilda`; projetos antigos migram com `guilda upgrade --dry-run` e depois `guilda upgrade`, inclusive instalações 1.3.0 feitas de um checkout com `core/graphify-out/` (testado com o instalador real da tag `v1.3.0` quando a tag está disponível). Mods novos usam o marketplace `guilda-mods`.
-- **Comandos que dependem de terceiros:** `promote` exige o `gh` autenticado e `self-update` exige `pip` ou `uv`. Nos testes esses comandos usam executores simulados; **nenhuma issue, gist ou atualização real foi criada**.
+- **Requisitos:** Python 3.11 ou superior, só biblioteca padrão (o `pyproject.toml` não declara dependências). Instalação por `pip install guilda` ou `uv tool install guilda`; a partir do checkout, `install.py` e `scripts/template.py` são atalhos finos para o mesmo código. Comandos e limitações em [cli.md](cli.md).
+- **Sistemas:** a CI roda em Linux e Windows, com Python 3.11, 3.12 e 3.13. macOS e Python 3.14 não estão na matriz. O mod `token-handoff` só instala no Windows.
+- **Contrato com projetos instalados:** o manifesto passa a se chamar `guilda`; projetos antigos migram com `guilda upgrade --dry-run` e depois `guilda upgrade`, inclusive instalações 1.3.0 feitas de um checkout com `core/graphify-out/`. Mods novos usam o marketplace `guilda-mods`.
+- **Comandos que dependem de terceiros:** `promote` exige o `gh` autenticado, `self-update` roda `pip` ou `uv` e `mod` roda `claude plugin`. Nos testes esses comandos usam executores simulados; **nenhuma issue, gist, atualização ou instalação de plugin real foi feita** nessa verificação.
 - **Verificação automática de versão:** opcional e desligada por padrão (`guilda config set update-check off|notify|auto`). É o único aviso de versão nova: o `upgrade` não consulta o PyPI e, com a verificação desligada, atualiza o projeto para o template da versão instalada sem avisar que existe outra.
 
-> [!WARNING]
-> Não foram executados: construção do wheel e do sdist, instalação em ambiente virtual limpo, publicação no PyPI e a matriz de CI. A publicação depende de aprovação manual do mantenedor no GitHub.
+<a id="distribuicao"></a>
+
+### Distribuição e publicação
+
+- **Wheel:** leva o pacote `guilda/` (código e `payload.txt`) e, em `guilda/_data/`, só os arquivos listados em `guilda/payload.txt` (hoje 138, entre eles `template.json`). O hook `hatch_build.py` faz essa inclusão. `install.py`, `scripts/`, `docs/`, `assets/`, `tests/` e `.github/` não entram no wheel.
+- **Allowlist:** `payload.txt` é gerado a partir dos arquivos versionados em `core/`, `profiles/`, `adapters/`, `integrations/` e `template.json` (`python -m guilda.payload --write`) e conferido por `python -m guilda.payload --check`. Caminhos com segmentos internos (`graphify-out`, `docs/superpowers`, `plans`, `specs`, `.worktrees`, `.dev`, `__pycache__`) são recusados. No uso, o motor só lê arquivos da lista; arquivo solto na pasta (por exemplo uma saída de ferramenta não versionada) é ignorado.
+- **sdist:** o `pyproject.toml` não filtra o sdist, então ele segue o padrão do hatchling (os arquivos do projeto, menos o que o `.gitignore` exclui). `scripts/check_dist.py` recusa material interno no sdist e confere no wheel o `template.json`, o `core/`, a licença em `*.dist-info/licenses/` e a ausência de `docs/`, `assets/`, `tests/` e `.github/`.
+- **CI (`ci.yml`):** em pull request para `develop` ou `main` e em push de `feature/**` e `release/**`: a suíte na matriz Linux e Windows × Python 3.11 a 3.13; a conferência do payload e a busca de material interno versionado; e a construção do sdist e do wheel com `python -m build`, seguida de `tests.test_guilda_wheel`.
+- **Release (`release.yml`):** disparado por tag `v*`. `verify` (matriz completa) confere que a tag bate com `template.json` e `guilda/__version__.py` (`scripts/check_release.py`), que o commit da tag já está na `main`, o payload e a suíte; `build` gera e inspeciona `dist/`; `publish` roda no ambiente `pypi` do GitHub, que exige aprovação manual do mantenedor, e publica por *trusted publishing* (OIDC, sem token guardado). Todas as actions estão fixadas por SHA.
+- **Versão:** `template.json` e `guilda/__version__.py` têm de coincidir (teste e `check_release.py`). A política de versionamento do template ([versioning.md](../core/policies/versioning.md)) pede a tag SemVer antes do código na `main`; o fluxo de release, por sua vez, exige que o commit da tag já esteja na `main` antes de publicar.
 
 <a id="integrações-e-escopo-da-verificação"></a>
 
