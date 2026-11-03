@@ -6,14 +6,18 @@ from pathlib import Path
 
 # Segmentos de caminho proibidos (casamento por segmento, nunca por substring).
 PROIBIDOS_WHEEL = ("docs", "assets", "tests", ".github", "graphify-out", ".dev", ".worktrees", "plans", "specs")
-PROIBIDOS_SDIST = ("superpowers", "plans", "specs", "graphify-out", ".worktrees", ".dev")
+# Sequências de segmentos (como guilda/payload.py:FORBIDDEN); "superpowers" sozinho é legítimo
+# (integrations/superpowers), só a sequência docs/superpowers é proibida.
+PROIBIDOS_SDIST = ("docs/superpowers", "plans", "specs", "graphify-out", ".worktrees", ".dev")
 
 
 def _proibidos(nomes, proibidos, rotulo):
     problemas = []
     for nome in nomes:
-        for seg in nome.split("/"):
-            if seg in proibidos:
+        partes = [p for p in nome.split("/") if p]
+        for item in proibidos:
+            seq = item.split("/")
+            if any(partes[i:i + len(seq)] == seq for i in range(len(partes) - len(seq) + 1)):
                 problemas.append(f"{rotulo} contém caminho proibido: {nome}")
                 break
     return problemas

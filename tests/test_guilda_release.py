@@ -85,7 +85,7 @@ class CheckDistTest(unittest.TestCase):
     def test_dist_ok(self):
         cd = _carrega("check_dist")
         with tempfile.TemporaryDirectory() as tmp:
-            d = self._dist(tmp, self.BOM_WHEEL, ["guilda-1.0.0/PKG-INFO", "guilda-1.0.0/tests/t.py"])
+            d = self._dist(tmp, self.BOM_WHEEL, ["guilda-1.0.0/PKG-INFO", "guilda-1.0.0/tests/t.py", "guilda-1.0.0/integrations/superpowers/README.md"])
             self.assertEqual(cd.check(d), [])
 
     def test_dist_rejeita_proibidos_e_faltantes(self):
@@ -102,6 +102,14 @@ class CheckDistTest(unittest.TestCase):
             self.assertTrue(any("sdist" in p and ".dev" in p for p in problemas))
             self.assertTrue(any("core" in p for p in problemas))
             self.assertTrue(any("LICENSE" in p for p in problemas))
+
+    def test_sdist_rejeita_docs_superpowers(self):
+        cd = _carrega("check_dist")
+        with tempfile.TemporaryDirectory() as tmp:
+            d = self._dist(tmp, self.BOM_WHEEL, ["guilda-1.0.0/docs/superpowers/x.md"])
+            problemas = cd.check(d)
+            self.assertEqual(len(problemas), 1)
+            self.assertIn("docs/superpowers/x.md", problemas[0])
 
     def test_dist_vazio(self):
         cd = _carrega("check_dist")
